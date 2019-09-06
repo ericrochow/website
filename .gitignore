@@ -8,6 +8,8 @@ output/*
 # virtualenv
 env/*
 
-
 # pelican guts
 __pycache__/*
+
+# compiled pyc
+*.pyc
