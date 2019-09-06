@@ -29,7 +29,7 @@ LINKS = (
     # ("Python.org", "http://python.org/"),
     # ("Jinja2", "http://jinja.pocoo.org/"),
     # ("You can modify those links in your config file", "#"),
-    ("Find Me on the Tubes!", "#"),
+    # ("Find Me on the Tubes!", "#"),
 )
 
 # Social widget
@@ -54,5 +54,6 @@ GITHUB_URL = "https://github.com/ericrochow"
 
 DEFAULT_PAGINATION = False
 
+IGNORE_FILES = [".#*", ".swp", ".tmpl"]
 # Uncomment following line if you want document-relative URLs when developing
 # RELATIVE_URLS = True
