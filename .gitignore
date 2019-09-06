@@ -3,7 +3,7 @@ tags
 *.swp
 
 # static files
-output/*
+# output/*
 
 # virtualenv
 env/*
