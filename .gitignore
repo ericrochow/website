@@ -1,0 +1,13 @@
+# vim files
+tags
+*.swp
+
+# static files
+output/*
+
+# virtualenv
+env/*
+
+
+# pelican guts
+__pycache__/*
