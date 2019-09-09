@@ -2,9 +2,6 @@
 tags
 *.swp
 
-# static files
-output/*
-
 # virtualenv
 env/*
 
