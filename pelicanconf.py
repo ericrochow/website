@@ -19,10 +19,7 @@ CATEGORY_FEED_ATOM = None
 TRANSLATION_FEED_ATOM = None
 AUTHOR_FEED_ATOM = None
 AUTHOR_FEED_RSS = None
-THEME = (
-    "/home/erochow/Scripts/landing-page/env/lib/python3.6/site-packages"
-    "/pelican/themes/Flex"
-)
+THEME = "Flex"
 
 # Blogroll
 LINKS = (
