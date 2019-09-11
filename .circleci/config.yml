@@ -32,6 +32,7 @@ commands:
     steps:
       - run:
           command: |
+            pelican-themes -i themes/Flex/
             pelican content -o output -s pelicanconf.py
   commit-site:
     steps:
