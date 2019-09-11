@@ -41,7 +41,6 @@ commands:
             git commit -am "circleci cd push {{ .Branch }}"
             git push
 
-
 jobs:
   build:
     executor: pelican-executor
@@ -56,10 +55,8 @@ jobs:
       - build-site
       - commit-site
 
-
 workflows:
   commit:
     jobs:
       - build
 
-        # End example
