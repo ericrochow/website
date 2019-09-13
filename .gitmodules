@@ -4,6 +4,3 @@
 [submodule "output"]
 	path = output
 	url = git@github.com:ericrochow/ericrochow.github.io.git
-[submodule "plugins"]
-	path = plugins
-	url = https://github.com/getpelican/pelican-plugins.git
