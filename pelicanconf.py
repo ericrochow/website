@@ -39,7 +39,7 @@ THEME = "Flex"
 # "video_privacy_enhancer",
 # "goodreads_activity",
 # ]
-JINJA_EXTENSIONS = []
+# JINJA_ENVIRONMENT = []
 
 ROBOTS = "index, follow"
 STATIC_PATHS = ["images", "extra/robots.txt", "extra/favicon.ico"]
