@@ -1,4 +1,4 @@
-Title: Post Template
+Title: NX-OS Upgrades
 Date: 2017-03-24 12:26
 Category: Network
 Tags: network, nx-os, upgrade

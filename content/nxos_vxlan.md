@@ -1,8 +1,16 @@
-Title: Post Template
-Date: 2019-09-06 14:34
-Category: Template
-Tags: template
+Title: VXLAN on NX-OS
+Date: 2017-02-24 12:11
+Category: Network
+Tags: network, nx-os, vxlan
 Authors: Eric Rochow
-Summary: Just a template for future use
+Summary: Overview of VXLAN on NX-OS
 
-# THIS IS A TEMPLATE
+# VXLAN
+
+
+
+
+
+
+
+## EVPN

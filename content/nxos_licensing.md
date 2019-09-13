@@ -1,4 +1,4 @@
-Title: Post Template
+Title: NX-OS Licensing
 Date: 2017-02-24 12:11
 Category: Network
 Tags: network, nx-os, licensing
