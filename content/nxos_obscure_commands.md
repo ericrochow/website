@@ -11,7 +11,7 @@ Summary: Obscure commands for my future reference
 
 Find the total number of STP Virtual Ports currently in use:
 
-    show spanning-tree internal info global | grep -a 3 "STP Port Count Summary"
+    router# show spanning-tree internal info global | grep -a 3 "STP Port Count Summary"
     ------- STP Port Count Summary ---------------
     Total stp_ports*instances:      498
     Total ports*vlans        :    41799
@@ -21,10 +21,10 @@ Find the total number of STP Virtual Ports currently in use:
 
 ### FIB Exception State
 
-    show system internal forwarding route summary [module #]
+    router# show system internal forwarding route summary [module #]
 
 ## RAID
 
-    lw-dc2-dist1-nexus# show system internal raid
+    router# show system internal raid
 
 This command does not tab complete nor question mark complete. It must also be typed out completely.
