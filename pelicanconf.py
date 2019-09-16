@@ -88,6 +88,6 @@ TWITTER_USERNAME = "eric_rochow"
 
 DEFAULT_PAGINATION = 10
 
-IGNORE_FILES = [".#*", ".swp", ".tmpl"]
+IGNORE_FILES = [".#*", ".swp", ".tmpl", ".pre"]
 # Uncomment following line if you want document-relative URLs when developing
 # RELATIVE_URLS = True
