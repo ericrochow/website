@@ -1,0 +1,108 @@
+Title: Post Template
+Date: 2019-09-06 14:34
+Category: Template
+Tags: template
+Authors: Eric Rochow
+Summary: Just a template for future use
+
+# THIS IS A TEMPLATE
+# LXD Networking
+
+LXD 2.3 added quite a bit of network functionality to LXD.
+
+## Interface Bridging
+
+### Create a Bridge
+
+To create an autoconfigured bridge named testbr0:
+
+    root@host# lxc network create testbr0
+
+To configure the bridge by hand:
+
+    root@host# lxc network create testbr0 ipv6.address=none ipv4.address=10.0.3.1/24 ipv4.nat=true
+
+### Attach to a Bridge
+
+To bridge container c1's eth0 to the hosts bridge br0:
+
+    root@host# lxc network attach br0 c1 eth0
+
+### Set Static IP
+
+To set 10.0.3.111 as a static IP address on container c1's eth0 interface:
+
+    root@host# lxc config device set c1 eth0 ipv4.address 10.0.3.111
+
+This also works for IPv6 with the `ipv6.address` flag.
+
+### Port Security
+
+To prevent containers from forwarding for other containers (nesting) or changing their MAC addresses:
+
+    root@host# lxc config device set c1 eth0 security.mac_filtering true
+
+## Tunnelling
+
+### VXLAN Tunnelling
+
+#### Multicast
+
+In this example, we can configure host1 to route all of the traffic and allow containers to communicate between hosts, then configure host2 to tunnel all traffic to host1. Since this is multicast, it is dependent on L2 connectivity between the hosts.
+
+First create the bridge on host1:
+
+    root@host1# lxc network create br0 tunnel.lan.protocol=vxlan
+
+Now attach the bridge to eth0 in the default profile:
+
+    root@host1# lxc network attach-profile br0 default eth0
+
+Then create the bridge on host2:
+
+    root@host2# lxc network create br0 tunnel.lan.protocol=vxlan ipv4.address=none ipv4.address=none tunnel.lan.protocol=vxlan
+
+Attach the bridge to eth0 in the default profile:
+
+    root@host2# lxc network attach-profile br0 default eth0
+
+#### Unicast
+
+If the hosts do not have L2 connectivity between them, it is possible to create the tunnel in unicast mode.
+
+On host1:
+
+    root@host1# lxc network set br0 tunnel.host2.protocol vxlan
+    root@host1# lxc network set br0 tunnel.host2.id 10
+    root@host1# lxc network set br0 tunnel.local 11.11.11.11
+    root@host1# lxc network set br0 tunnel.remote 99.99.99.99
+
+On host2:
+
+    root@host2# lxc network set br0 tunnel.host1.protocol=vxlan tunnel.host1.id=10 tunnel.host1.local=99.99.99.99 tunnel.host2.remote=11.11.11.11
+    root@host2# lxc network attach-profile br0 default eth0
+
+### GRE Tunnelling
+
+Same as unicast VXLAN, except for the following:
+
+On host1:
+
+    root@host1# lxc network set br0 tunnel.host2.protocol gre
+
+On host2:
+
+    root@host2# lxc network set br0 tunnel.host1.protocol gre
+
+
+## Fan Networking
+
+## DNS
+
+LXD runs a DNS server on the bridge, which allows the domain to be set via the ``dns.domain`` network property, and supports 3 different modes (via ``dns.mode``):
+
+* "managed" - one DNS record per container, matching its name and known IP addresses. This record cannot alter this record through DHCP.
+* "dynamic" - containers can self-register through DHCP; the current hostname during DHCP negotiation is the domain name
+* "none" - simple recursive DNS server with no local DNS records
+
+The default mode is "managed"

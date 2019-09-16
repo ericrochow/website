@@ -1,0 +1,41 @@
+Title: Post Template
+Date: 2019-09-06 14:34
+Category: Template
+Tags: template
+Authors: Eric Rochow
+Summary: Just a template for future use
+
+NETCONF
+*******
+
+NETCONF provides mechanisms to install, manipulate, and delete device configuration. It uses XML-based data encoding for the configuration data, as well as the protocol messages. Operations are run as remote procedure calls (RPCs) over SSH.
+
+NETCONF Methods
+===============
+
+Four groups of methods are available through NETCONF: Retrieve, Configure, Copy, and Delete. Additional user-defined methods can be added as well.
+
+Retrieve
+--------
+
+
+
+Configure
+---------
+
+
+
+Copy
+----
+
+
+
+Delete
+------
+
+
+
+Programmatic Interface
+======================
+
+When configuring a device via NETCONF, an SSH tunnel is formed with the XR programmatic interface. An SSH proxy then forwards the traffic to the NETCONF agent, at which point the change is pushed to the configuration manager and the SysDB client library translates the YANG model to store changes in the SysDB.

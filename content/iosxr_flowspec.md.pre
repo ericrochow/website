@@ -1,0 +1,245 @@
+Title: Post Template
+Date: 2019-09-06 14:34
+Category: Template
+Tags: template
+Authors: Eric Rochow
+Summary: Just a template for future use
+
+# Flow Specification (FlowSpec)
+
+## Overview
+
+BGP flowspec allows for a granular BGP advertisement with instructions to match a flow with source, destination, L4 parameters as well as packet specifics such as length, fragment, and so on. Flowspec advertisements can dynamically install actions at the border such as:
+
+* Drop the traffic
+* Inject it in a different VRF for analysis
+* Allow it, but police it at a specific rate
+
+A flow specification is an n-tuple consisteing of several matching criteria that can be applied to IP traffic.
+
+### Supported Matching Criteria and Actions
+
+
++------------------------+-----------------------------------+---------------------------------------+--------------------------------------------------------+---------------------+
+| BGP Flowspec NLRI type |  QoS match fields                 |  Description                          |  Syntax                                                |  Value input method |
++========================+===================================+=======================================+========================================================+=====================+
+| Type 1                 |  IPv4 or IPv6 destination address |  Defines destination prefix to        |  match destination-address ipv[46] address/mask length |  Prefix length      |
+|                        |                                   |  match. Prefixes encoded in the       |                                                        |                     |
+|                        |                                   |  BGP UPDATE messages as a length      |                                                        |                     |
+|                        |                                   |  in bits followed by enough           |                                                        |                     |
+|                        |                                   |  octets to contain the prefix         |                                                        |                     |
+|                        |                                   |  information.                         |                                                        |                     |
+|                        |                                   |                                       |                                                        |                     |
++------------------------+-----------------------------------+---------------------------------------+--------------------------------------------------------+---------------------+
+| Type 2                 |  IPv4 or IPv6 source address      |  Defines the source prefix to         |  match source-address ipv[46] address/mask length      |  Prefix length      |
+|                        |                                   |  match.                               |                                                        |                     |
++------------------------+-----------------------------------+---------------------------------------+--------------------------------------------------------+---------------------+
+| Type 3                 |  IPv4 or IPv6 last next header    |  Contains a set of {operator,         |  match protocol {protocol value /                      |  Multi value range  |
+|                        |  or IPv6 protocol                 |  value} pairs that are used to        |   min-value - max-value }                              |                     |
+|                        |                                   |  match the IP protocol value          |                                                        |                     |
+|                        |                                   |  byte in IP packets.                  |                                                        |                     |
++------------------------+-----------------------------------+---------------------------------------+--------------------------------------------------------+---------------------+
+| Type 4                 |  IPv4 or IPv6 source or           |  Defines a list of {operation,        |  match source-port {source-port-value / min-value -    |  Multi value range  |
+|                        |  destination port                 |  value} pairs used to match the       |     max-value                                          |                     |
+|                        |                                   |  source or destination port of a      |  match destination-port {destination-port-value /      |                     |
+|                        |                                   |  TCP or UDP packet. Values are        |     min-value - max-value}                             |                     |
+|                        |                                   |  encoded as 1- or 2-byte quantities.  |                                                        |                     |
++------------------------+-----------------------------------+---------------------------------------+--------------------------------------------------------+---------------------+
+| Type 5                 |  IPv4 or IPv6 destination port    |  Defines a list of {operation,        |  match destination-port {destination-port-value /      |  Multi value range  |
+|                        |                                   |  value} pairs used to match the       |     min-value - max-value}                             |                     |
+|                        |                                   |  destination port of a TCP or UDP     |                                                        |                     |
+|                        |                                   |  packet. Values are encoded as 1-     |                                                        |                     |
+|                        |                                   |  or 2-byte quantities.                |                                                        |                     |
++------------------------+-----------------------------------+---------------------------------------+--------------------------------------------------------+---------------------+
+| Type 6                 |  IPv4 or IPv6 Source Port         |  Defines a list of {operation,        |  match source-port {source-port-value / min-value -    |  Multi value range  |
+|                        |                                   |  value} pairs used to match the       |    max-value}                                          |                     |
+|                        |                                   |  source port of a TCP or UDP packet.  |                                                        |                     |
+|                        |                                   |  Values are encoded as 1- or 2-byte   |                                                        |                     |
+|                        |                                   |  quantities.                          |                                                        |                     |
++------------------------+-----------------------------------+---------------------------------------+--------------------------------------------------------+---------------------+
+| Type 7                 |  IPv4 or IPv6 ICMP Type           |  Defines a list of {operation,        |  match ipv[46] icmp-type { value / min-value -         |  Single value       |
+|                        |                                   |  value} pairs used to match the type  |    max-value}                                          |                     |
+|                        |                                   |  field of an ICMP packet. Values are  |                                                        |                     |
+|                        |                                   |  encoded using a single byte.         |                                                        |                     |
+|                        |                                   |                                       |                                                        |                     |
++------------------------+-----------------------------------+---------------------------------------+--------------------------------------------------------+---------------------+
+| Type 8                 |  IPv4 or IPv6 ICMP code           |  Defines a list of {operation,        |  match ipv[46] icmp-code { value / min-value -         |  Single value       |
+|                        |                                   |  value} pairs used to match the code  |    max-value}                                          |                     |
+|                        |                                   |  field of an ICMP packet. Values are  |                                                        |                     |
+|                        |                                   |  encoded using a single byte.         |                                                        |                     |
+|                        |                                   |                                       |                                                        |                     |
++------------------------+-----------------------------------+---------------------------------------+--------------------------------------------------------+---------------------+
+| Type 9                 |  IPv4 or IPv6 TCP flags           |  Bitmask values can be encoded as a   |  match tcp-flag value bit-mask mask-value              |  Bitmask            |
+|                        |                                   |  1- or 2-byte bitmask. When a single  |                                                        |                     |
+|                        |                                   |  byte is specified, it matches byte   |                                                        |                     |
+|                        |                                   |  13 of the TCP header, which contains |                                                        |                     |
+|                        |                                   |  bits 8 through 15 of the 4th 32-bit  |                                                        |                     |
+|                        |                                   |  word. When a 2-byte encoding is      |                                                        |                     |
+|                        |                                   |  used, it matches bytes 12 and 13 of  |                                                        |                     |
+|                        |                                   |  the TCP header with the data offset  |                                                        |                     |
+|                        |                                   |  field having a "don't care" value.   |                                                        |                     |
+|                        |                                   |  As with the port specifier, this     |                                                        |                     |
+|                        |                                   |  component evaluates to FALSE with    |                                                        |                     |
+|                        |                                   |  non-TCP packets.                     |                                                        |                     |
+|                        |                                   |                                       |                                                        |                     |
++------------------------+-----------------------------------+---------------------------------------+--------------------------------------------------------+---------------------+
+| Type 10                |  IPv4 or IPv6 Packet length       |  Match on the total IP packet length  |  match packet length { packet-length-value /           |  Multi value range  |
+|                        |                                   |  (excluding Layer 2, but including    |     min-value - max-value                              |                     |
+|                        |                                   |  the IP header). Values are encoded   |                                                        |                     |
+|                        |                                   |  using 1- or 2-byte quantities.       |                                                        |                     |
+|                        |                                   |                                       |                                                        |                     |
++------------------------+-----------------------------------+---------------------------------------+--------------------------------------------------------+---------------------+
+| Type 11                |  IPv4 or IPv6 DSCP                |  Defines a list of {operation,        |  match dscp {dscp-value / min-value - max-value}       |  Multi value range  |
+|                        |                                   |  value} pairs used to match the 6-bit |                                                        |                     |
+|                        |                                   |  DSCP field. Values are encoded using |                                                        |                     |
+|                        |                                   |  a single byte, where the two most    |                                                        |                     |
+|                        |                                   |  significant bits are zero and the    |                                                        |                     |
+|                        |                                   |  six least significant bits are the   |                                                        |                     |
+|                        |                                   |  DSCP value.                          |                                                        |                     |
+|                        |                                   |                                       |                                                        |                     |
++------------------------+-----------------------------------+---------------------------------------+--------------------------------------------------------+---------------------+
+| Type 12                |  IPv4 or IPv6 Fragmentation bits  |  Identifies a fragment-type as the    |  match fragment type [is-fragment]                     | Bit mask            |
+|                        |                                   |  match criterion for a class map.     |                                                        |                     |
+|                        |                                   |                                       |                                                        |                     |
++------------------------+-----------------------------------+---------------------------------------+--------------------------------------------------------+---------------------+
+
+
+### Traffic Filtering Actions
+
+
++--------+---------------------+-------------------------------+----------------------------------------------------------------------------------------------------------+
+| Type   |  Extended Community | PBR Action                    | Description                                                                                              |
++========+=====================+===============================+==========================================================================================================+
+| 0x8006 | traffic-rate 0      | Drop                          | The traffic-rate extended community is a non-transitive extended community across the autonomous-system  |
+|        | traffic-rate <rate> | Police                        | boundary and uses the following extended community encoding:                                             |
+|        |                     |                               |                                                                                                          |
+|        |                     |                               | The first two octets carry the 2-octet id, which can be assigned from a 2-byte AS number. When a 4-byte  |
+|        |                     |                               | AS number is locally present, the 2 least significant bytes of such an AS number can be used. The value  |
+|        |                     |                               | is purely informational. The remaining 4 octets carry the rate information in IEEE floating point        |
+|        |                     |                               | [IEEE.754.1985] format, units being bytes per second. A traffic-rate of 0 should result on all traffic   |
+|        |                     |                               | for the particular flow to be discarded.                                                                 |
+|        |                     |                               |                                                                                                          |
++--------+---------------------+-------------------------------+----------------------------------------------------------------------------------------------------------+
+| 0x8007 | traffic-action      | Terminal Action               | The traffic-action extended community consists of 6 bytes of which only the 2 least significant bits of  |
+|        |                     | + Sampling                    | of the 6th byte (from left to right) are currently defined.                                              |
+|        |                     |                               |                                                                                                          |
+|        |                     |                               | Terminal Action (bit 47): When this bit is set, the traffic filtering engine will apply any subsequent   |
+|        |                     |                               | filtering rules (as defined by the ordering procedure). If not set, the evaluation of the traffic filter |
+|        |                     |                               | stops when this rule is applied.                                                                         |
+|        |                     |                               | Sample (bit 46): Enables traffic sampling and logging for this flow specification.                       |
+|        |                     |                               |                                                                                                          |
++--------+---------------------+-------------------------------+----------------------------------------------------------------------------------------------------------+
+| 0x8008 | redirect-vrf        | Redirect VRF                  | The redirect extended community allows the traffic to be redirected to a VRF routing instance that lists |
+|        |                     |                               | the specified route-target in its import policy. If several local instances match this criteria, the     |
+|        |                     |                               | choice between them is a local matter (e.g. the instance with the lowest RD value can be elected). This  |
+|        |                     |                               | extended community uses the same encoding as the Route Target extended community (RFC4360).              |
+|        |                     |                               |                                                                                                          |
++--------+---------------------+-------------------------------+----------------------------------------------------------------------------------------------------------+
+| 0x8009 | traffic-marking     | Set DSCP                      | The traffic marking extended community instructs a system to modify the differentiated service code      |
+|        |                     |                               | point (DSCP) bits of a transiting IP packet to the corresponding value. This extended community is       |
+|        |                     |                               | encoded as a sequence of 5 zero bytes followed by the DSCP value encoded in the 6 least-significant bits |
+|        |                     |                               | of the 6th byte.                                                                                         |
++--------+---------------------+-------------------------------+----------------------------------------------------------------------------------------------------------+
+| 0x0800 | Redirect IP NH      | Redirect IPv4 or IPv6 Nexthop | Announces the reachability of one or more flowspec NLRI. When a BGP speaker receives an UPDATE message   |
+|        |                     |                               | with the redirect-to-IP extended community, it is expected to create a traffic filtering rule for every  |
+|        |                     |                               | flowspec NLRI in the message that has this path as its best path. The filter entry matches the IP        |
+|        |                     |                               | packets described in the NLRI field and redirects them or copies them toward the IPv4 or IPv6 address    |
+|        |                     |                               | specified in the 'Network Address of Next-Hop' field of the associated MP_REACH_NLRI.                    |
+|        |                     |                               |                                                                                                          |
++--------+---------------------+-------------------------------+----------------------------------------------------------------------------------------------------------+
+
+
+### BGP Flowspec Client-Server (Controller) Model
+
+
+
+
+## Configuration
+
+### Enable Flowspec on BGP Side
+
+Before sending NRLIs, both the client and server side must have the address family configured for flowspec::
+
+   RP/0/0/CPU0:router(config)#router bgp as-number
+   RP/0/0/CPU0:router(config-bgp)#address-family [(ip)(vpn)]v[46] flowspec ! initialize the global address family
+   RP/0/0/CPU0:router(config-bgp-af)#exit
+   RP/0/0/CPU0:router(config-bgp)#neighbor ip-address
+   RP/0/0/CPU0:router(config-bgp-nbr)#remote-as asn
+   RP/0/0/CPU0:router(config-bgp-nbr)#address-family [(ip)(vpn)]v[46] flowspec ! tie it to a neighbor configuration
+
+### Define Class
+
+In order to associate the ePBR configuration to BGP flowspec, a class must be defined and the class must be associated to the desired action::
+
+   RP/0/0/CPU0:router(config)#class-map [type traffic] [match-all] class-map-name
+   RP/0/0/CPU0:router(config-cmap)#match match-statement ! see criteria and actions table
+   RP/0/0/CPU0:router(config-cmap)#end-class-map
+
+### Define Policy Map
+
+   RP/0/0/CPU0:router(config)#policy-map type pbr policy-map
+   RP/0/0/CPU0:router(config-pmap)#class class-name
+   RP/0/0/CPU0:router(config-pmap)#class type traffic class-name
+   RP/0/0/CPU0:router(config-pmap-c)#<action> ! see traffic filtering actions table
+   RP/0/0/CPU0:router(config-pmap-c)#exit
+   RP/0/0/CPU0:router(config-pmap)#end-policy-map
+
+### Link Flowspec to PBR Policies
+
+   RP/0/0/CPU0:router(config)#flowspec
+   RP/0/0/CPU0:router(config-flowspec)#local-install interface-all !optional - installs flowspec policy on all interfaces
+   RP/0/0/CPU0:router(config-flowspec)#address-family ipv4
+   RP/0/0/CPU0:router(config-flowspec-af)#local-install interface-all !optional - installs flowspec policy on all interfaces under the subaddress family
+   RP/0/0/CPU0:router(config-flowspec-af)#service-policy type pbr policy-name
+   RP/0/0/CPU0:router(config-flowspec-af)#exit
+   RP/0/0/CPU0:router(config-flowspec)#address-family ipv6
+   RP/0/0/CPU0:router(config-flowspec-af)#local-install interface-all !optional - installs flowspec policy on all interfaces under the subaddress family
+   RP/0/0/CPU0:router(config-flowspec-af)#service-policy type pbr policy-name
+   RP/0/0/CPU0:router(config-flowspec-af)#exit
+   RP/0/0/CPU0:router(config-flowspec)#vrf vrf-name !optional - configures a VRF instance and enters VRF flowspec config mode
+   RP/0/0/CPU0:router(config-flowspec-vrf)#address-family ipv4
+   RP/0/0/CPU0:router(config-flowspec-vrf-af)#service-policy type bgp policy-name
+   RP/0/0/CPU0:router(config-flowspec-vrf-af)#exit
+
+### Preserving Redirect Nexthop
+
+   RP/0/0/CPU0:router(config)#router bgp as-number address-family [(ip)(vpn)]v[46] flowspec next-hop unchanged
+
+### Disable BGP Flowspec
+
+   RP/0/0/CPU:router(config)#interface gigabitEthernet 0/0/0/0
+   RP/0/0/CPU:router(config-if)#ipv[46] flowspec disable
+
+## Verification
+
+Specify whether the flowspec process is running on the system or not
+
+   show processes flowspec_mgr location all
+
+View summary of flowspec rules present on the entire node
+
+   show flowspec summary
+
+View summary of flowspec rules in all VRFs
+
+   show flowspec vrf all ipv[46] summary
+   
+View summary of flowspec rules in the GRT
+   
+   show flowspec vrf default ipv[46] summary
+
+View summary of flowspec rules for a specified VRF
+
+   show flowspec vrf vrf-name ipv[46] summary
+
+View summary of flowspec rules for all VRFs and address families
+
+   show flowspec vrf all afi-all summary
+
+VIew
+
+   show flowspec vrf default ipv4 Dest:8.8.8.0/24
+
+Verify a flowspec rule configured on the controller router is available on the BGP side
+   
+   show flowspec ipv4 flowspec Dest:8.8.8.0/24, Source:8.8.4.0/24, DPort:>=1&<=1024, SPort:>1024, DSCP:=30/208
