@@ -30,15 +30,17 @@ AUTHOR_FEED_ATOM = None
 AUTHOR_FEED_RSS = None
 THEME = "Flex"
 
-# PLUGINS = [
-# "liquid_tags",
-# "pin_to_top",
-# "related_posts",
-# "similar_posts",
-# "pelican-githubprojects",
-# "video_privacy_enhancer",
-# "goodreads_activity",
-# ]
+PLUGIN_PATHS = ["plugins/"]
+PLUGINS = [
+    "liquid_tags",
+    # "pin_to_top",
+    # "related_posts",
+    # "similar_posts",
+    # "pelican-githubprojects",
+    # "video_privacy_enhancer",
+    # "jinja2.ext.i18n",
+    "goodreads_activity",
+]
 # JINJA_ENVIRONMENT = []
 
 ROBOTS = "index, follow"
@@ -85,6 +87,19 @@ GOOGLE_ANALYTICS = "UA-135617138-1"
 GITHUB_URL = "https://github.com/ericrochow"
 GITHUB_USERNAME = "ericrochow"
 TWITTER_USERNAME = "eric_rochow"
+# GOODREADS_ACTIVITY_FEED_BASE = (
+# "https://www.goodreads.com/review/list_rss/18841479?key="
+# "KyT3ziOY47qSj-aDbM-SDOa3uJn9UkKP6osSP-O42Dd1G4RL&shelf="
+# )
+GOODREADS_ACTIVITY_FEED = (
+    "https://www.goodreads.com/review/list_rss/18841479?key="
+    "KyT3ziOY47qSj-aDbM-SDOa3uJn9UkKP6osSP-O42Dd1G4RL&shelf=read"
+)
+
+TEMPLATE_PAGES = {"templates/goodreads.html": "pages/read-with-me.html"}
+TEMPLATE_EXTENSIONS = [".html", ".j2"]
+THEME_TEMPLATES_OVERRIDES = ["content/templates/"]
+READERS = {"html": None}
 
 DEFAULT_PAGINATION = 10
 
