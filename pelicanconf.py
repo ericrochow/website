@@ -33,7 +33,7 @@ THEME = "Flex"
 PLUGIN_PATHS = ["plugins/"]
 PLUGINS = [
     "liquid_tags",
-    "pin_to_top",
+    # "pin_to_top",
     # "related_posts",
     # "similar_posts",
     # "pelican-githubprojects",
@@ -87,9 +87,9 @@ GOOGLE_ANALYTICS = "UA-135617138-1"
 GITHUB_URL = "https://github.com/ericrochow"
 GITHUB_USERNAME = "ericrochow"
 TWITTER_USERNAME = "eric_rochow"
-# GOODREADS_ACTIVITY_FEED_BASE = (
+# GOODREADS_ACTIVITY_FEED = (
 # "https://www.goodreads.com/review/list_rss/18841479?key="
-# "KyT3ziOY47qSj-aDbM-SDOa3uJn9UkKP6osSP-O42Dd1G4RL&shelf="
+# "KyT3ziOY47qSj-aDbM-SDOa3uJn9UkKP6osSP-O42Dd1G4RL"
 # )
 GOODREADS_ACTIVITY_FEED = (
     "https://www.goodreads.com/review/list_rss/18841479?key="
