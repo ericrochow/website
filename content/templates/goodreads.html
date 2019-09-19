@@ -1,0 +1,30 @@
+{% extends "!theme/base.html" %}
+
+{% block content %}
+  {{ super() }}
+{% if GOODREADS_ACTIVITY_FEED %}
+  <h2>{{ goodreads_activity.shelf_title }}</h2>
+  {% for book in goodreads_activity.books %}
+    <img src="{{ book.s_cover }}"/>
+    <header>{{ book.title }}<small> by {{ book.author }}</small></header>
+    <article>{{ book.description|truncate(end='') }}
+    <a href={{ book.link }} target="_blank">...more</a></article>
+  {% endfor %}
+{% endif %}
+<!--{#
+{% if GOODREADS_ACTIVITY_FEED_BASE %}
+  {{ GOODREADS_ACTIVITY_FEED_BASE }}
+  {% for shelf in ["currently-reading", "read", "want-to-read"] %}
+    {% set GOODREADS_ACTIVITY_FEED = GOODREADS_ACTIVITY_FEED_BASE + shelf %}
+    {{ GOODREADS_ACTIVITY_FEED }}
+    <h2>{{ goodreads_activity.shelf_title }}</h2>
+    {% for book in goodreads_activity.books %}
+      <img src="{{ book.s_cover }}"/>
+      <header>{{ book.title }}<small> by {{ book.author }}</small></header>
+      <article>{{ book.description|truncate(end='') }}
+      <a href={{ book.link }} target="_blank">...more</a></article>
+    {% endfor %}
+  {% endfor %}
+{% endif %}
+#}-->
+{% endblock content %}
