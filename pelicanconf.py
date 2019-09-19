@@ -33,7 +33,7 @@ THEME = "Flex"
 PLUGIN_PATHS = ["plugins/"]
 PLUGINS = [
     "liquid_tags",
-    # "pin_to_top",
+    "pin_to_top",
     # "related_posts",
     # "similar_posts",
     # "pelican-githubprojects",
