@@ -28,7 +28,7 @@ CATEGORY_FEED_ATOM = None
 TRANSLATION_FEED_ATOM = None
 AUTHOR_FEED_ATOM = None
 AUTHOR_FEED_RSS = None
-THEME = "Flex"
+THEME = "themes/Flex"
 
 PLUGIN_PATHS = ["plugins/"]
 PLUGINS = [
@@ -57,6 +57,7 @@ LINKS = (
     # ("Jinja2", "http://jinja.pocoo.org/"),
     # ("You can modify those links in your config file", "#"),
     # ("Find Me on the Tubes!", "#"),
+    ("Resume", "http://resume.ericroc.how"),
 )
 
 # Social widget
