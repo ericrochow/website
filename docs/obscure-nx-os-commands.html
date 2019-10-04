@@ -1,0 +1,215 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="index, follow" />
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://ericroc.how/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="https://ericroc.how/theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="https://ericroc.how/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="https://ericroc.how/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="https://ericroc.how/theme/font-awesome/css/solid.css">
+
+
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-135617138-1', 'auto');
+  ga('send', 'pageview');
+</script>
+<!-- End Google Analytics -->
+
+<meta name="author" content="Eric Rochow" />
+<meta name="description" content="Obscure commands for my future reference" />
+<meta name="keywords" content="network, nx-os, cli">
+
+<meta property="og:site_name" content="Eric Rochow"/>
+<meta property="og:title" content="Obscure NX-OS Commands"/>
+<meta property="og:description" content="Obscure commands for my future reference"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="https://ericroc.how/obscure-nx-os-commands.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2017-04-28 13:05:00-04:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://ericroc.how/author/eric-rochow.html">
+<meta property="article:section" content="Network"/>
+<meta property="article:tag" content="network"/>
+<meta property="article:tag" content="nx-os"/>
+<meta property="article:tag" content="cli"/>
+<meta property="og:image" content="https://ericroc.how/images/face.png">
+
+  <title>Eric Rochow &ndash; Obscure NX-OS Commands</title>
+
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="https://ericroc.how">
+        <img src="https://ericroc.how/images/face.png" alt="Eric Rochow" title="Eric Rochow">
+      </a>
+      <h1><a href="https://ericroc.how">Eric Rochow</a></h1>
+
+
+      <nav>
+        <ul class="list">
+          <li><a href="https://ericroc.how/pages/about-me.html#about-me">About Me</a></li>
+          <li><a href="https://ericroc.how/pages/read-with-me.html#read-with-me">Read With Me</a></li>
+
+        </ul>
+      </nav>
+
+      <ul class="social">
+          <li>
+            <a  class="sc-globe fa-lg" href="#" target="_blank">
+            <i class="fab fa-globe fa-lg">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-envelope-o fa-lg" href="mailto:ericrochow@gmail.com" target="_blank">
+            <i class="fab fa-envelope-o fa-lg">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-rss fa-lg" href="#" target="_blank">
+            <i class="fab fa-rss fa-lg">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-linkedin fa-lg" href="https://www.linkedin.com/in/erochow/" target="_blank">
+            <i class="fab fa-linkedin fa-lg">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-github fa-lg" href="https://github.com/ericrochow" target="_blank">
+            <i class="fab fa-github fa-lg">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-reddit fa-lg" href="#" target="_blank">
+            <i class="fab fa-reddit fa-lg">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-twitter fa-lg" href="https://twitter.com/eric_rochow" target="_blank">
+            <i class="fab fa-twitter fa-lg">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-lastfm fa-lg" href="https://www.last.fm/user/ericrochow" target="_blank">
+            <i class="fab fa-lastfm fa-lg">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-spotify fa-lg" href="https://open.spotify.com/user/ericrochow?si=KEmxAAk8QZy31L82MMge4g" target="_blank">
+            <i class="fab fa-spotify fa-lg">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-book fa-lg" href="https://www.goodreads.com/user/show/18841479-eric-rochow" target="_blank">
+            <i class="fab fa-book fa-lg">
+            </i>
+          </a></li>
+      </ul>
+    </div>
+
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href="https://ericroc.how">    Home
+</a>
+
+      <a href="/archives.html">Archives</a>
+      <a href="/categories.html">Categories</a>
+      <a href="/tags.html">Tags</a>
+
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="obscure-nx-os-commands">Obscure NX-OS Commands</h1>
+    <p>
+          Posted on Fri 28 April 2017 in <a href="https://ericroc.how/category/network.html">Network</a>
+
+
+    </p>
+  </header>
+
+
+  <div>
+    <h1>Obscure Commands</h1>
+<h2>STP</h2>
+<p>Find the total number of STP Virtual Ports currently in use:</p>
+<div class="highlight"><pre><span></span><span class="nv">router</span># <span class="k">show</span> <span class="nv">spanning</span><span class="o">-</span><span class="nv">tree</span> <span class="nv">internal</span> <span class="nv">info</span> <span class="nv">global</span> <span class="o">|</span> <span class="nv">grep</span> <span class="o">-</span><span class="nv">a</span> <span class="mi">3</span> <span class="s2">&quot;</span><span class="s">STP Port Count Summary</span><span class="s2">&quot;</span>
+<span class="o">-------</span> <span class="nv">STP</span> <span class="nv">Port</span> <span class="nv">Count</span> <span class="nv">Summary</span> <span class="o">---------------</span>
+<span class="nv">Total</span> <span class="nv">stp_ports</span><span class="o">*</span><span class="nv">instances</span>:      <span class="mi">498</span>
+<span class="nv">Total</span> <span class="nv">ports</span><span class="o">*</span><span class="nv">vlans</span>        :    <span class="mi">41799</span>
+<span class="nv">Total</span> <span class="nv">phy_ports</span><span class="o">*</span><span class="nv">vlans</span>    :    <span class="mi">42051</span>
+</pre></div>
+
+
+<h2>TCAM</h2>
+<h3>FIB Exception State</h3>
+<div class="highlight"><pre><span></span><span class="nv">router</span># <span class="k">show</span> <span class="nv">system</span> <span class="nv">internal</span> <span class="nv">forwarding</span> <span class="nv">route</span> <span class="nv">summary</span> [<span class="nv">module</span> #]
+</pre></div>
+
+
+<h2>RAID</h2>
+<div class="highlight"><pre><span></span><span class="nv">router</span># <span class="k">show</span> <span class="nv">system</span> <span class="nv">internal</span> <span class="nv">raid</span>
+</pre></div>
+
+
+<p>This command does not tab complete nor question mark complete. It must also be typed out completely.</p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://ericroc.how/tag/network.html">network</a>
+      <a href="https://ericroc.how/tag/nx-os.html">nx-os</a>
+      <a href="https://ericroc.how/tag/cli.html">cli</a>
+    </p>
+  </div>
+
+
+
+
+
+</article>
+
+    <footer>
+<p>&copy; Eric Rochow 2019</p>
+    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Eric Rochow ",
+  "url" : "https://ericroc.how",
+  "image": "https://ericroc.how/images/face.png",
+  "description": ""
+}
+</script>
+
+</body>
+</html>

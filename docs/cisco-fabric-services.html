@@ -1,0 +1,475 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="index, follow" />
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://ericroc.how/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="https://ericroc.how/theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="https://ericroc.how/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="https://ericroc.how/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="https://ericroc.how/theme/font-awesome/css/solid.css">
+
+
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-135617138-1', 'auto');
+  ga('send', 'pageview');
+</script>
+<!-- End Google Analytics -->
+
+<meta name="author" content="Eric Rochow" />
+<meta name="description" content="Overview of Cisco Fabric Services" />
+<meta name="keywords" content="network, nx-os">
+
+<meta property="og:site_name" content="Eric Rochow"/>
+<meta property="og:title" content="Cisco Fabric Services"/>
+<meta property="og:description" content="Overview of Cisco Fabric Services"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="https://ericroc.how/cisco-fabric-services.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2017-02-24 12:11:00-05:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://ericroc.how/author/eric-rochow.html">
+<meta property="article:section" content="Network"/>
+<meta property="article:tag" content="network"/>
+<meta property="article:tag" content="nx-os"/>
+<meta property="og:image" content="https://ericroc.how/images/face.png">
+
+  <title>Eric Rochow &ndash; Cisco Fabric Services</title>
+
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="https://ericroc.how">
+        <img src="https://ericroc.how/images/face.png" alt="Eric Rochow" title="Eric Rochow">
+      </a>
+      <h1><a href="https://ericroc.how">Eric Rochow</a></h1>
+
+
+      <nav>
+        <ul class="list">
+          <li><a href="https://ericroc.how/pages/about-me.html#about-me">About Me</a></li>
+          <li><a href="https://ericroc.how/pages/read-with-me.html#read-with-me">Read With Me</a></li>
+
+        </ul>
+      </nav>
+
+      <ul class="social">
+          <li>
+            <a  class="sc-globe fa-lg" href="#" target="_blank">
+            <i class="fab fa-globe fa-lg">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-envelope-o fa-lg" href="mailto:ericrochow@gmail.com" target="_blank">
+            <i class="fab fa-envelope-o fa-lg">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-rss fa-lg" href="#" target="_blank">
+            <i class="fab fa-rss fa-lg">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-linkedin fa-lg" href="https://www.linkedin.com/in/erochow/" target="_blank">
+            <i class="fab fa-linkedin fa-lg">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-github fa-lg" href="https://github.com/ericrochow" target="_blank">
+            <i class="fab fa-github fa-lg">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-reddit fa-lg" href="#" target="_blank">
+            <i class="fab fa-reddit fa-lg">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-twitter fa-lg" href="https://twitter.com/eric_rochow" target="_blank">
+            <i class="fab fa-twitter fa-lg">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-lastfm fa-lg" href="https://www.last.fm/user/ericrochow" target="_blank">
+            <i class="fab fa-lastfm fa-lg">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-spotify fa-lg" href="https://open.spotify.com/user/ericrochow?si=KEmxAAk8QZy31L82MMge4g" target="_blank">
+            <i class="fab fa-spotify fa-lg">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-book fa-lg" href="https://www.goodreads.com/user/show/18841479-eric-rochow" target="_blank">
+            <i class="fab fa-book fa-lg">
+            </i>
+          </a></li>
+      </ul>
+    </div>
+
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href="https://ericroc.how">    Home
+</a>
+
+      <a href="/archives.html">Archives</a>
+      <a href="/categories.html">Categories</a>
+      <a href="/tags.html">Tags</a>
+
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="cisco-fabric-services">Cisco Fabric Services</h1>
+    <p>
+          Posted on Fri 24 February 2017 in <a href="https://ericroc.how/category/network.html">Network</a>
+
+
+    </p>
+  </header>
+
+
+  <div>
+    <h1>Cisco Fabric Services (CFS)</h1>
+<h2>Overview</h2>
+<p>Cisco Fabric Services (CFS) is used to distribute information such as configuration changes to Cisco Nexus devices.</p>
+<h3>CFS-Supported Applications</h3>
+<table>
+<thead>
+<tr>
+<th align="left">Application</th>
+<th align="right">Default State</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Call Home</td>
+<td align="right">Disabled</td>
+</tr>
+<tr>
+<td align="left">Device Alias</td>
+<td align="right">Enabled</td>
+</tr>
+<tr>
+<td align="left">DPVM</td>
+<td align="right">Enabled</td>
+</tr>
+<tr>
+<td align="left">FC domain</td>
+<td align="right">Disabled</td>
+</tr>
+<tr>
+<td align="left">FC port security</td>
+<td align="right">Disabled</td>
+</tr>
+<tr>
+<td align="left">FC timer</td>
+<td align="right">Disabled</td>
+</tr>
+<tr>
+<td align="left">IVR</td>
+<td align="right">Disabled</td>
+</tr>
+<tr>
+<td align="left">NTP</td>
+<td align="right">Disabled</td>
+</tr>
+<tr>
+<td align="left">RADIUS</td>
+<td align="right">Disabled</td>
+</tr>
+<tr>
+<td align="left">RSCN</td>
+<td align="right">Disabled</td>
+</tr>
+<tr>
+<td align="left">TACACS+</td>
+<td align="right">Disabled</td>
+</tr>
+<tr>
+<td align="left">User roles</td>
+<td align="right">Disabled</td>
+</tr>
+</tbody>
+</table>
+<h3>CFS Distribution Methods</h3>
+<ul>
+<li>CFS over Ethernet (CFSoE) - Distributes over an Ethernet network</li>
+<li>CFS over IP (CFSoIP) - Distributes over an IPv4 network</li>
+<li>CFS over Fibre Channel (CFSoFC) - Distributes over a Fibre Channel, such as a virtual storage area network (VSAN). This is the default method if the device has been provisioned with Fibre Channel interfaces.</li>
+</ul>
+<h3>CFS Distribution Modes</h3>
+<p>CFS supports three distribution modes; however only one mode can be configured at any given time. The following modes are supported:</p>
+<ul>
+<li>
+<p>Uncoordinated distributions</p>
+</li>
+<li>
+<p>Distribute information that is not expected to conflict with that from a peer</p>
+</li>
+<li>
+<p>Parallel uncoordinated distributions are allowed for an application</p>
+</li>
+<li>
+<p>Coordinated distributions</p>
+</li>
+<li>
+<p>Distribute information that can be manipulated and distributed from multiple devices (e.g. port security configuration)</p>
+</li>
+<li>Only one application distribution allowed at any given time</li>
+<li>
+<p>Consists of three stages:</p>
+</li>
+<li>
+<p>Network lock is acquired</p>
+</li>
+<li>Configuration is distributed and committed</li>
+<li>
+<p>Network lock is released</p>
+</li>
+<li>
+<p>Unrestricted uncoordinated distributions</p>
+</li>
+<li>
+<p>Allow multiple parallel distributions in the network in the presence of an existing coordinated distribution</p>
+</li>
+</ul>
+<h3>CFS In a Mixed Fabric</h3>
+<p>CFS is available on the Nexus 5000, Nexus 7000, and MDS 9000 platforms. A mixed fabric can interact with each other using CFSoIP or CFSoFC (assuming the approriate FC of FCoE plugins installed and configured). It is worth noting that not all applications are compatible with the version of the same application running on a different platform.</p>
+<h3>CFS Merge Support</h3>
+<h3>CFS Network Locks</h3>
+<p>When an application is configured for coordinated distributions using the CFS infrastructure, the application starts a CFS session and locks the network. While the network is locked, the software allows configuration only from the device holding the lock. An error message will occur if a change is attempted from another device; however the changes will be held in a pending database by the application.</p>
+<p>If a CFS session that requires a network lock is opened but never closed, it is possible to clear the session. Network locks and the associated username are persistent across reboots and supervisor switchovers. Configuration attempts from other users will be rejected during a network lock.</p>
+<h3>CFS Regions</h3>
+<p>CFS regions are user-defined subsets of devices for a given feature or application. Regions allow for localization or restriction of distribution based on devices that are close to one another. CFS regions are identified by numbers ranging from 0 to 200. Region 0 is reserved as the default region that contains every device in the network.</p>
+<h3>High-availability CFS</h3>
+<p>CFS supports stateless restarts. The running configuration is applied after a reboot or supervisor switchover.</p>
+<h3>CFS Virtualization Support</h3>
+<p>CFS is configured per-VDC; therefor it is important to make sure to <code>switchto</code> the appropriate VDC prior to configuration.</p>
+<h2>Configuring CFS Distribution</h2>
+<h3>Enabling CFS By Application</h3>
+<p>Callhome:</p>
+<div class="highlight"><pre><span></span><span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">#</span> <span class="n">callhome</span>
+<span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="o">-</span><span class="n">callhome</span><span class="p">)</span><span class="o">#</span> <span class="n">distribute</span>
+</pre></div>
+
+
+<p>Device Alias:</p>
+<div class="highlight"><pre><span></span><span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">#</span> <span class="n">device</span><span class="o">-</span><span class="k">alias</span> <span class="n">distribute</span>
+</pre></div>
+
+
+<p>DPVM:</p>
+<div class="highlight"><pre><span></span><span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">#</span> <span class="n">dpvm</span> <span class="n">distribute</span>
+</pre></div>
+
+
+<p>Fibre Channel Domain:</p>
+<div class="highlight"><pre><span></span><span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">#</span> <span class="n">fcdomain</span> <span class="n">distribute</span>
+</pre></div>
+
+
+<p>Fibre Channel Port Security:</p>
+<div class="highlight"><pre><span></span><span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">#</span> <span class="n">fc</span><span class="o">-</span><span class="n">port</span><span class="o">-</span><span class="k">security</span> <span class="n">distribute</span>
+</pre></div>
+
+
+<p>Fibre Channel Timers:</p>
+<div class="highlight"><pre><span></span><span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">#</span> <span class="n">fctimer</span> <span class="n">distribute</span>
+</pre></div>
+
+
+<p>Inter-VSAN Routing:</p>
+<div class="highlight"><pre><span></span><span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">#</span> <span class="n">ivr</span> <span class="n">distribute</span>
+</pre></div>
+
+
+<p>NTP:</p>
+<div class="highlight"><pre><span></span><span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">#</span> <span class="n">ntp</span> <span class="n">distribute</span>
+</pre></div>
+
+
+<p>RADIUS:</p>
+<div class="highlight"><pre><span></span><span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">#</span> <span class="n">radius</span> <span class="n">distribute</span>
+</pre></div>
+
+
+<p>RSCN:</p>
+<div class="highlight"><pre><span></span><span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">#</span> <span class="n">rscn</span> <span class="n">distribute</span>
+</pre></div>
+
+
+<p>TACACS+:</p>
+<div class="highlight"><pre><span></span><span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">#</span> <span class="n">tacacs</span><span class="o">+</span> <span class="n">distribute</span>
+</pre></div>
+
+
+<p>User Roles:</p>
+<div class="highlight"><pre><span></span><span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">#</span> <span class="k">role</span> <span class="n">distribute</span>
+</pre></div>
+
+
+<h3>Specify CFS Distribution Mode</h3>
+<p>CFSoE:</p>
+<div class="highlight"><pre><span></span><span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">#</span> <span class="n">cfs</span> <span class="n">eth</span> <span class="n">distribute</span>
+</pre></div>
+
+
+<p>CFSoIP:</p>
+<div class="highlight"><pre><span></span><span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">#</span> <span class="n">cfs</span> <span class="n">ipv4</span> <span class="n">distribute</span>
+</pre></div>
+
+
+<h3>Configure an IP Multicast Address (CFSoIP)</h3>
+<p>The default multicast address for CFSoIP is 239.255.70.83. To change user another multicast address (e.g. 225.0.1.1):</p>
+<div class="highlight"><pre><span></span><span class="nv">switch1</span><span class="ss">(</span><span class="nv">config</span><span class="ss">)</span># <span class="nv">no</span> <span class="nv">cfs</span> <span class="nv">ipvr</span> <span class="nv">distribute</span>
+<span class="nv">switch1</span><span class="ss">(</span><span class="nv">config</span><span class="ss">)</span># <span class="nv">cfs</span> <span class="nv">ipv4</span> <span class="nv">mcast</span><span class="o">-</span><span class="nv">address</span> <span class="mi">225</span>.<span class="mi">0</span>.<span class="mi">1</span>.<span class="mi">1</span>
+<span class="nv">Distribution</span> <span class="nv">over</span> <span class="nv">this</span> <span class="nv">IP</span> <span class="nv">type</span> <span class="nv">will</span> <span class="nv">be</span> <span class="nv">affected</span>
+<span class="nv">Change</span> <span class="nv">multicast</span> <span class="nv">address</span> <span class="k">for</span> <span class="nv">CFS</span><span class="o">-</span><span class="nv">IP</span> ?
+<span class="nv">Are</span> <span class="nv">you</span> <span class="nv">sure</span>? <span class="ss">(</span><span class="nv">y</span><span class="o">/</span><span class="nv">n</span><span class="ss">)</span> [<span class="nv">n</span>] <span class="nv">y</span>
+<span class="nv">cfs</span> <span class="nv">ipv4</span> <span class="nv">distribute</span>
+</pre></div>
+
+
+<p>Note that CFSoIP must be disabled globally before the multicast address can be changed.</p>
+<h3>Configuring CFS Regions</h3>
+<h4>Creating a CFS Region</h4>
+<p>To configure the switch for Call Home in region 4:</p>
+<div class="highlight"><pre><span></span><span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">#</span> <span class="n">cfs</span> <span class="n">region</span> <span class="mi">4</span>
+<span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="o">-</span><span class="n">cfs</span><span class="o">-</span><span class="n">region</span><span class="p">)</span><span class="o">#</span> <span class="n">callhome</span>
+</pre></div>
+
+
+<h4>Moving an Application to a Different Region</h4>
+<p>To move the previously configured Call Home application to region 2:</p>
+<div class="highlight"><pre><span></span><span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">#</span> <span class="n">cfs</span> <span class="n">region</span> <span class="mi">2</span>
+<span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="o">-</span><span class="n">cfs</span><span class="o">-</span><span class="n">region</span><span class="p">)</span><span class="o">#</span> <span class="n">callhome</span>
+</pre></div>
+
+
+<h4>Removing an Application from a Region</h4>
+<p>To remove Call Home from region 2:</p>
+<div class="highlight"><pre><span></span><span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">#</span> <span class="n">cfs</span> <span class="n">region</span> <span class="mi">2</span>
+<span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="o">-</span><span class="n">cfs</span><span class="o">-</span><span class="n">region</span><span class="p">)</span><span class="o">#</span> <span class="k">no</span> <span class="n">callhome</span>
+</pre></div>
+
+
+<h4>Deleting a CFS Region</h4>
+<p>To delete CFS region 2:</p>
+<div class="highlight"><pre><span></span><span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">#</span> <span class="k">no</span> <span class="n">cfs</span> <span class="n">region</span> <span class="mi">2</span>
+</pre></div>
+
+
+<h3>Creating and Distributing a CFS Configuration</h3>
+<h3>Clearing a Locked Session</h3>
+<p>To clear an open session for NTP:</p>
+<div class="highlight"><pre><span></span><span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">#</span> <span class="n">clear</span> <span class="n">ntp</span> <span class="k">session</span>
+</pre></div>
+
+
+<h3>Discarding a Configuration</h3>
+<p>To discard any configuration changes and release the lock for ntp:</p>
+<div class="highlight"><pre><span></span><span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="err">#</span><span class="w"> </span><span class="n">ntp</span><span class="w"> </span><span class="n">abort</span><span class="w"></span>
+<span class="n">This</span><span class="w"> </span><span class="n">will</span><span class="w"> </span><span class="n">prevent</span><span class="w"> </span><span class="n">CFS</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">distributing</span><span class="w"> </span><span class="n">the</span><span class="w"> </span>
+<span class="n">configuration</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">other</span><span class="w"> </span><span class="n">switches</span><span class="p">.</span><span class="w"></span>
+<span class="k">Are</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">sure</span><span class="vm">?</span><span class="w"> </span><span class="p">(</span><span class="n">y</span><span class="o">/</span><span class="n">n</span><span class="p">)</span><span class="w">  </span><span class="o">[</span><span class="n">n</span><span class="o">]</span><span class="w"> </span><span class="n">y</span><span class="w"></span>
+</pre></div>
+
+
+<h3>Disabling CFS Globally</h3>
+<div class="highlight"><pre><span></span><span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">#</span> <span class="k">no</span> <span class="n">cfs</span> <span class="n">distribute</span>
+</pre></div>
+
+
+<h2>Troubleshooting CFS Distribution</h2>
+<p>Display status of CFS distribution on the device and IP distribution information:</p>
+<div class="highlight"><pre><span></span><span class="nv">switch1</span># <span class="k">show</span> <span class="nv">cfs</span> <span class="nv">status</span>
+</pre></div>
+
+
+<p>Display all applications that are currently CFS-enabled:</p>
+<div class="highlight"><pre><span></span><span class="nv">switch1</span># <span class="k">show</span> <span class="nv">cfs</span> <span class="nv">application</span>
+</pre></div>
+
+
+<p>Display CFS distribution status for a specified application (e.g. NTP):</p>
+<div class="highlight"><pre><span></span><span class="nv">switch1</span># <span class="k">show</span> <span class="nv">ntp</span> <span class="nv">status</span>
+</pre></div>
+
+
+<p>Display active locks:</p>
+<div class="highlight"><pre><span></span><span class="nv">switch1</span># <span class="k">show</span> <span class="nv">cfs</span> <span class="nv">lock</span>
+</pre></div>
+
+
+<p>Display all CFS peers in the physical fabric:</p>
+<div class="highlight"><pre><span></span><span class="nv">switch1</span># <span class="k">show</span> <span class="nv">cfs</span> <span class="nv">peers</span>
+</pre></div>
+
+
+<p>Display all applications with peers and region information:</p>
+<div class="highlight"><pre><span></span><span class="nv">switch1</span># <span class="k">show</span> <span class="nv">cfs</span> <span class="nv">regions</span>
+</pre></div>
+
+
+<p>Display merge status for a given application (e.g. NTP):</p>
+<div class="highlight"><pre><span></span><span class="nv">switch1</span># <span class="k">show</span> <span class="nv">cfs</span> <span class="nv">merge</span> <span class="nv">status</span> <span class="nv">name</span> <span class="nv">ntp</span>
+</pre></div>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://ericroc.how/tag/network.html">network</a>
+      <a href="https://ericroc.how/tag/nx-os.html">nx-os</a>
+    </p>
+  </div>
+
+
+
+
+
+</article>
+
+    <footer>
+<p>&copy; Eric Rochow 2019</p>
+    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Eric Rochow ",
+  "url" : "https://ericroc.how",
+  "image": "https://ericroc.how/images/face.png",
+  "description": ""
+}
+</script>
+
+</body>
+</html>

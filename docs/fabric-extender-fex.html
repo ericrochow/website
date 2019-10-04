@@ -1,0 +1,286 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="index, follow" />
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://ericroc.how/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="https://ericroc.how/theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="https://ericroc.how/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="https://ericroc.how/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="https://ericroc.how/theme/font-awesome/css/solid.css">
+
+
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-135617138-1', 'auto');
+  ga('send', 'pageview');
+</script>
+<!-- End Google Analytics -->
+
+<meta name="author" content="Eric Rochow" />
+<meta name="description" content="An overview of fabric extenders" />
+<meta name="keywords" content="network, nx-os, fex">
+
+<meta property="og:site_name" content="Eric Rochow"/>
+<meta property="og:title" content="Fabric Extender (FEX)"/>
+<meta property="og:description" content="An overview of fabric extenders"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="https://ericroc.how/fabric-extender-fex.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2017-02-24 12:11:00-05:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://ericroc.how/author/eric-rochow.html">
+<meta property="article:section" content="Network"/>
+<meta property="article:tag" content="network"/>
+<meta property="article:tag" content="nx-os"/>
+<meta property="article:tag" content="fex"/>
+<meta property="og:image" content="https://ericroc.how/images/face.png">
+
+  <title>Eric Rochow &ndash; Fabric Extender (FEX)</title>
+
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="https://ericroc.how">
+        <img src="https://ericroc.how/images/face.png" alt="Eric Rochow" title="Eric Rochow">
+      </a>
+      <h1><a href="https://ericroc.how">Eric Rochow</a></h1>
+
+
+      <nav>
+        <ul class="list">
+          <li><a href="https://ericroc.how/pages/about-me.html#about-me">About Me</a></li>
+          <li><a href="https://ericroc.how/pages/read-with-me.html#read-with-me">Read With Me</a></li>
+
+        </ul>
+      </nav>
+
+      <ul class="social">
+          <li>
+            <a  class="sc-globe fa-lg" href="#" target="_blank">
+            <i class="fab fa-globe fa-lg">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-envelope-o fa-lg" href="mailto:ericrochow@gmail.com" target="_blank">
+            <i class="fab fa-envelope-o fa-lg">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-rss fa-lg" href="#" target="_blank">
+            <i class="fab fa-rss fa-lg">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-linkedin fa-lg" href="https://www.linkedin.com/in/erochow/" target="_blank">
+            <i class="fab fa-linkedin fa-lg">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-github fa-lg" href="https://github.com/ericrochow" target="_blank">
+            <i class="fab fa-github fa-lg">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-reddit fa-lg" href="#" target="_blank">
+            <i class="fab fa-reddit fa-lg">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-twitter fa-lg" href="https://twitter.com/eric_rochow" target="_blank">
+            <i class="fab fa-twitter fa-lg">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-lastfm fa-lg" href="https://www.last.fm/user/ericrochow" target="_blank">
+            <i class="fab fa-lastfm fa-lg">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-spotify fa-lg" href="https://open.spotify.com/user/ericrochow?si=KEmxAAk8QZy31L82MMge4g" target="_blank">
+            <i class="fab fa-spotify fa-lg">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-book fa-lg" href="https://www.goodreads.com/user/show/18841479-eric-rochow" target="_blank">
+            <i class="fab fa-book fa-lg">
+            </i>
+          </a></li>
+      </ul>
+    </div>
+
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href="https://ericroc.how">    Home
+</a>
+
+      <a href="/archives.html">Archives</a>
+      <a href="/categories.html">Categories</a>
+      <a href="/tags.html">Tags</a>
+
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="fabric-extender-fex">Fabric Extender (FEX)</h1>
+    <p>
+          Posted on Fri 24 February 2017 in <a href="https://ericroc.how/category/network.html">Network</a>
+
+
+    </p>
+  </header>
+
+
+  <div>
+    <h1>Fabric Extender (FEX)</h1>
+<h2>Overview</h2>
+<p>The Cisco Nexus 2000 line of switches are known as Fabic Extenders (or FEXes). Fabric extenders act as remote line cards that are controlled by aggregation switches. The FEX is assigned an ID betweeen 100 and 199 and the FEX shows up as being in that slot. As of writing the Nexus 5000-, 6000-, 7000-, and 9000-series switches are capable of aggregating FEXes.</p>
+<p>It is possible to dual-home a FEX to a pair of aggregation switches and have the configuration of the FEX synchronized between the two aggregation switches.</p>
+<h2>Base Configuration</h2>
+<p>On the aggregation switch, enter the following configuration:</p>
+<div class="highlight"><pre><span></span><span class="nv">agg</span><span class="o">-</span><span class="nv">sw01</span><span class="ss">(</span><span class="nv">config</span><span class="ss">)</span># <span class="nv">feature</span> <span class="nv">fex</span>
+<span class="nv">agg</span><span class="o">-</span><span class="nv">sw01</span><span class="ss">(</span><span class="nv">config</span><span class="ss">)</span># <span class="nv">interface</span> <span class="nv">e1</span><span class="o">/</span><span class="mi">1</span>
+<span class="nv">agg</span><span class="o">-</span><span class="nv">sw01</span><span class="ss">(</span><span class="nv">config</span><span class="o">-</span><span class="k">if</span><span class="ss">)</span># <span class="nv">channel</span><span class="o">-</span><span class="nv">group</span> <span class="mi">101</span>
+<span class="nv">agg</span><span class="o">-</span><span class="nv">sw01</span><span class="ss">(</span><span class="nv">config</span><span class="ss">)</span># <span class="nv">interface</span> <span class="nv">po101</span>
+<span class="nv">agg</span><span class="o">-</span><span class="nv">sw01</span><span class="ss">(</span><span class="nv">config</span><span class="o">-</span><span class="k">if</span><span class="ss">)</span># <span class="nv">switchport</span> <span class="nv">mode</span> <span class="nv">fex</span><span class="o">-</span><span class="nv">fabric</span>
+<span class="nv">agg</span><span class="o">-</span><span class="nv">sw01</span><span class="ss">(</span><span class="nv">config</span><span class="o">-</span><span class="k">if</span><span class="ss">)</span># <span class="nv">fex</span> <span class="nv">associate</span> <span class="mi">101</span>
+</pre></div>
+
+
+<p>At this point the connected FEX should upgrade its software to match that of the aggregation switch and reboot. The interfaces on the FEX should show up on the aggregation switch as soon as the reboot completes.</p>
+<h2>Dual-Homing Configuration</h2>
+<h3>Configure CFS for FEX Config Sync</h3>
+<p>Since we will be using multiple aggregation switches to manage a single device, we will need to configure CFS distribution to distribute the config changes to the sister device:</p>
+<div class="highlight"><pre><span></span><span class="nv">agg</span><span class="o">-</span><span class="nv">sw01</span><span class="ss">(</span><span class="nv">config</span><span class="ss">)</span># <span class="nv">cfs</span> <span class="nv">ipv4</span> <span class="nv">distribute</span>
+<span class="nv">agg</span><span class="o">-</span><span class="nv">sw01</span><span class="ss">(</span><span class="nv">config</span><span class="ss">)</span># <span class="k">end</span>
+<span class="nv">agg</span><span class="o">-</span><span class="nv">sw01</span># <span class="nv">configure</span> <span class="nv">sync</span>
+<span class="nv">agg</span><span class="o">-</span><span class="nv">sw01</span><span class="ss">(</span><span class="nv">config</span><span class="o">-</span><span class="nv">sync</span><span class="ss">)</span># <span class="nv">switch</span><span class="o">-</span><span class="nv">profile</span> <span class="nv">PROFILE</span>
+<span class="nv">agg</span><span class="o">-</span><span class="nv">sw01</span><span class="ss">(</span><span class="nv">config</span><span class="o">-</span><span class="nv">sync</span><span class="ss">)</span># <span class="nv">sync</span><span class="o">-</span><span class="nv">peers</span> <span class="nv">destination</span> <span class="mi">10</span>.<span class="nv">x</span>.<span class="nv">y</span>.<span class="mi">2</span>
+<span class="nv">agg</span><span class="o">-</span><span class="nv">sw01</span><span class="ss">(</span><span class="nv">config</span><span class="o">-</span><span class="nv">sync</span><span class="ss">)</span># <span class="k">end</span>
+
+<span class="nv">agg</span><span class="o">-</span><span class="nv">sw02</span><span class="ss">(</span><span class="nv">config</span><span class="ss">)</span># <span class="nv">cfs</span> <span class="nv">ipv4</span> <span class="nv">distribute</span>
+<span class="nv">agg</span><span class="o">-</span><span class="nv">sw02</span><span class="ss">(</span><span class="nv">config</span><span class="ss">)</span># <span class="k">end</span>
+<span class="nv">agg</span><span class="o">-</span><span class="nv">sw02</span># <span class="nv">configure</span> <span class="nv">sync</span>
+<span class="nv">agg</span><span class="o">-</span><span class="nv">sw02</span><span class="ss">(</span><span class="nv">config</span><span class="o">-</span><span class="nv">sync</span><span class="ss">)</span># <span class="nv">switch</span><span class="o">-</span><span class="nv">profile</span> <span class="nv">PROFILE</span>
+<span class="nv">agg</span><span class="o">-</span><span class="nv">sw02</span><span class="ss">(</span><span class="nv">config</span><span class="o">-</span><span class="nv">sync</span><span class="ss">)</span># <span class="nv">sync</span><span class="o">-</span><span class="nv">peers</span> <span class="nv">destination</span> <span class="mi">10</span>.<span class="nv">x</span>.<span class="nv">y</span>.<span class="mi">1</span>
+<span class="nv">agg</span><span class="o">-</span><span class="nv">sw02</span><span class="ss">(</span><span class="nv">config</span><span class="o">-</span><span class="nv">sync</span><span class="ss">)</span># <span class="k">end</span>
+</pre></div>
+
+
+<h3>Configure FEX Fabric Interfaces</h3>
+<p>Configuration of dual-homed FEXes is similar to single-homed FEXes with a few extra steps. Assuming the two aggregation switches have been configured as a vPC pair, the following configuration is required on the first aggregation switch:</p>
+<div class="highlight"><pre><span></span><span class="nv">agg</span><span class="o">-</span><span class="nv">sw01</span><span class="ss">(</span><span class="nv">config</span><span class="ss">)</span># <span class="nv">feature</span> <span class="nv">fex</span>
+<span class="nv">agg</span><span class="o">-</span><span class="nv">sw01</span><span class="ss">(</span><span class="nv">config</span><span class="ss">)</span># <span class="nv">interface</span> <span class="nv">e1</span><span class="o">/</span><span class="mi">1</span>
+<span class="nv">agg</span><span class="o">-</span><span class="nv">sw01</span><span class="ss">(</span><span class="nv">config</span><span class="o">-</span><span class="k">if</span><span class="ss">)</span># <span class="nv">channel</span><span class="o">-</span><span class="nv">group</span> <span class="mi">101</span>
+<span class="nv">agg</span><span class="o">-</span><span class="nv">sw01</span><span class="ss">(</span><span class="nv">config</span><span class="ss">)</span># <span class="nv">interface</span> <span class="nv">po101</span>
+<span class="nv">agg</span><span class="o">-</span><span class="nv">sw01</span><span class="ss">(</span><span class="nv">config</span><span class="o">-</span><span class="k">if</span><span class="ss">)</span># <span class="nv">vpc</span> <span class="mi">101</span>
+<span class="nv">agg</span><span class="o">-</span><span class="nv">sw01</span><span class="ss">(</span><span class="nv">config</span><span class="o">-</span><span class="k">if</span><span class="ss">)</span># <span class="nv">switchport</span> <span class="nv">mode</span> <span class="nv">fex</span><span class="o">-</span><span class="nv">fabric</span>
+<span class="nv">agg</span><span class="o">-</span><span class="nv">sw01</span><span class="ss">(</span><span class="nv">config</span><span class="o">-</span><span class="k">if</span><span class="ss">)</span># <span class="nv">fex</span> <span class="nv">associate</span> <span class="mi">101</span>
+</pre></div>
+
+
+<p>Next, configure the following on the second aggregation switch:</p>
+<div class="highlight"><pre><span></span><span class="nv">agg</span><span class="o">-</span><span class="nv">sw02</span><span class="ss">(</span><span class="nv">config</span><span class="ss">)</span># <span class="nv">feature</span> <span class="nv">fex</span>
+<span class="nv">agg</span><span class="o">-</span><span class="nv">sw02</span><span class="ss">(</span><span class="nv">config</span><span class="ss">)</span># <span class="nv">interface</span> <span class="nv">e1</span><span class="o">/</span><span class="mi">1</span>
+<span class="nv">agg</span><span class="o">-</span><span class="nv">sw02</span><span class="ss">(</span><span class="nv">config</span><span class="o">-</span><span class="k">if</span><span class="ss">)</span># <span class="nv">channel</span><span class="o">-</span><span class="nv">group</span> <span class="mi">101</span>
+<span class="nv">agg</span><span class="o">-</span><span class="nv">sw02</span><span class="ss">(</span><span class="nv">config</span><span class="ss">)</span># <span class="nv">interface</span> <span class="nv">po101</span>
+<span class="nv">agg</span><span class="o">-</span><span class="nv">sw02</span><span class="ss">(</span><span class="nv">config</span><span class="o">-</span><span class="k">if</span><span class="ss">)</span># <span class="nv">vpc</span> <span class="mi">101</span>
+<span class="nv">agg</span><span class="o">-</span><span class="nv">sw02</span><span class="ss">(</span><span class="nv">config</span><span class="o">-</span><span class="k">if</span><span class="ss">)</span># <span class="nv">switchport</span> <span class="nv">mode</span> <span class="nv">fex</span><span class="o">-</span><span class="nv">fabric</span>
+<span class="nv">agg</span><span class="o">-</span><span class="nv">sw02</span><span class="ss">(</span><span class="nv">config</span><span class="o">-</span><span class="k">if</span><span class="ss">)</span># <span class="nv">fex</span> <span class="nv">associate</span> <span class="mi">101</span>
+</pre></div>
+
+
+<p>Before connecting the FEX to either aggregation switch, we will want to pre-provision the slot as the FEX configuration cannot be synced to the other switch if the configuration does not already exist.</p>
+<h3>Preprovisioning Fabric Extenders</h3>
+<div class="highlight"><pre><span></span><span class="n">agg</span><span class="o">-</span><span class="n">sw01</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">#</span> <span class="n">slot</span> <span class="mi">101</span>
+<span class="n">agg</span><span class="o">-</span><span class="n">sw01</span><span class="p">(</span><span class="n">config</span><span class="o">-</span><span class="n">slot</span><span class="p">)</span><span class="o">#</span> <span class="n">provision</span> <span class="n">model</span> <span class="n">n2k</span><span class="o">-</span><span class="n">n2348tq</span>
+
+<span class="n">agg</span><span class="o">-</span><span class="n">sw02</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">#</span> <span class="n">slot</span> <span class="mi">101</span>
+<span class="n">agg</span><span class="o">-</span><span class="n">sw02</span><span class="p">(</span><span class="n">config</span><span class="o">-</span><span class="n">slot</span><span class="p">)</span><span class="o">#</span> <span class="n">provision</span> <span class="n">model</span> <span class="n">n2k</span><span class="o">-</span><span class="n">n2348tq</span>
+</pre></div>
+
+
+<h3>Distributing Config Changes</h3>
+<p>To keep changes consistent between the pair of aggregation switches, make sure that changes are configured using the CFS profile configured ealier rather than in standard config mode:</p>
+<div class="highlight"><pre><span></span><span class="nv">agg</span><span class="o">-</span><span class="nv">sw01</span># <span class="nv">config</span> <span class="nv">sync</span>
+<span class="nv">agg</span><span class="o">-</span><span class="nv">sw01</span><span class="ss">(</span><span class="nv">config</span><span class="o">-</span><span class="nv">sync</span><span class="ss">)</span># <span class="nv">switch</span><span class="o">-</span><span class="nv">profile</span> <span class="nv">PROFILE</span>
+<span class="nv">agg</span><span class="o">-</span><span class="nv">sw01</span><span class="ss">(</span><span class="nv">config</span><span class="o">-</span><span class="nv">sync</span><span class="o">-</span><span class="nv">sp</span><span class="ss">)</span># <span class="nv">interface</span> <span class="nv">e101</span><span class="o">/</span><span class="mi">1</span><span class="o">/</span><span class="mi">1</span>
+<span class="nv">agg</span><span class="o">-</span><span class="nv">sw01</span><span class="ss">(</span><span class="nv">config</span><span class="o">-</span><span class="nv">sync</span><span class="o">-</span><span class="nv">sp</span><span class="o">-</span><span class="k">if</span><span class="ss">)</span># <span class="nv">desc</span> <span class="nv">Server1</span>
+<span class="nv">agg</span><span class="o">-</span><span class="nv">sw01</span><span class="ss">(</span><span class="nv">config</span><span class="o">-</span><span class="nv">sync</span><span class="o">-</span><span class="nv">sp</span><span class="o">-</span><span class="k">if</span><span class="ss">)</span># <span class="nv">switchport</span> <span class="nv">mode</span> <span class="nv">access</span>
+<span class="nv">agg</span><span class="o">-</span><span class="nv">sw01</span><span class="ss">(</span><span class="nv">config</span><span class="o">-</span><span class="nv">sync</span><span class="o">-</span><span class="nv">sp</span><span class="o">-</span><span class="k">if</span><span class="ss">)</span># <span class="nv">switchport</span> <span class="nv">access</span> <span class="nv">vlan</span> <span class="mi">55</span>
+<span class="nv">agg</span><span class="o">-</span><span class="nv">sw01</span><span class="ss">(</span><span class="nv">config</span><span class="o">-</span><span class="nv">sync</span><span class="o">-</span><span class="nv">sp</span><span class="o">-</span><span class="k">if</span><span class="ss">)</span># <span class="nv">no</span> <span class="nv">shutdown</span>
+<span class="nv">agg</span><span class="o">-</span><span class="nv">sw01</span><span class="ss">(</span><span class="nv">config</span><span class="o">-</span><span class="nv">sync</span><span class="o">-</span><span class="nv">sp</span><span class="o">-</span><span class="k">if</span><span class="ss">)</span># <span class="k">exit</span>
+</pre></div>
+
+
+<p>The configuration has not taken effect yet, but before the configuration is configured, it should be verified to make sure there are not inconsistencies:</p>
+<div class="highlight"><pre><span></span><span class="n">agg</span><span class="o">-</span><span class="n">sw01</span><span class="p">(</span><span class="n">config</span><span class="o">-</span><span class="n">sync</span><span class="o">-</span><span class="n">sp</span><span class="p">)</span><span class="o">#</span> <span class="n">verify</span>
+<span class="n">Verification</span> <span class="n">Successful</span>
+</pre></div>
+
+
+<p>If the verification is not successful, then some troubleshooting steps will need to be taken. Otherwise, it is time to commit the changes.</p>
+<div class="highlight"><pre><span></span><span class="nv">agg</span><span class="o">-</span><span class="nv">sw01</span><span class="ss">(</span><span class="nv">config</span><span class="o">-</span><span class="nv">sync</span><span class="o">-</span><span class="nv">sp</span><span class="ss">)</span># <span class="nv">commit</span>
+<span class="nv">Verification</span> <span class="nv">successful</span>...
+<span class="nv">Proceeding</span> <span class="nv">to</span> <span class="nv">apply</span> <span class="nv">configuration</span>. <span class="nv">This</span> <span class="nv">might</span> <span class="nv">take</span> <span class="nv">a</span> <span class="k">while</span> <span class="nv">depending</span> <span class="nv">on</span> <span class="nv">amount</span> <span class="nv">of</span> <span class="nv">configuration</span> <span class="nv">in</span> <span class="nv">buffer</span>.
+<span class="nv">Please</span> <span class="nv">avoid</span> <span class="nv">other</span> <span class="nv">configuration</span> <span class="nv">changes</span> <span class="nv">during</span> <span class="nv">this</span> <span class="nv">time</span>.
+<span class="nv">Commit</span> <span class="nv">Successful</span>
+</pre></div>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://ericroc.how/tag/network.html">network</a>
+      <a href="https://ericroc.how/tag/nx-os.html">nx-os</a>
+      <a href="https://ericroc.how/tag/fex.html">fex</a>
+    </p>
+  </div>
+
+
+
+
+
+</article>
+
+    <footer>
+<p>&copy; Eric Rochow 2019</p>
+    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Eric Rochow ",
+  "url" : "https://ericroc.how",
+  "image": "https://ericroc.how/images/face.png",
+  "description": ""
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,221 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="index, follow" />
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://ericroc.how/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="https://ericroc.how/theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="https://ericroc.how/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="https://ericroc.how/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="https://ericroc.how/theme/font-awesome/css/solid.css">
+
+
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-135617138-1', 'auto');
+  ga('send', 'pageview');
+</script>
+<!-- End Google Analytics -->
+
+<meta name="author" content="Eric Rochow" />
+<meta name="description" content="Upgrade Procedures for Nexus devices" />
+<meta name="keywords" content="network, nx-os, upgrade">
+
+<meta property="og:site_name" content="Eric Rochow"/>
+<meta property="og:title" content="NX-OS Upgrades"/>
+<meta property="og:description" content="Upgrade Procedures for Nexus devices"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="https://ericroc.how/nx-os-upgrades.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2017-03-24 12:26:00-04:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://ericroc.how/author/eric-rochow.html">
+<meta property="article:section" content="Network"/>
+<meta property="article:tag" content="network"/>
+<meta property="article:tag" content="nx-os"/>
+<meta property="article:tag" content="upgrade"/>
+<meta property="og:image" content="https://ericroc.how/images/face.png">
+
+  <title>Eric Rochow &ndash; NX-OS Upgrades</title>
+
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="https://ericroc.how">
+        <img src="https://ericroc.how/images/face.png" alt="Eric Rochow" title="Eric Rochow">
+      </a>
+      <h1><a href="https://ericroc.how">Eric Rochow</a></h1>
+
+
+      <nav>
+        <ul class="list">
+          <li><a href="https://ericroc.how/pages/about-me.html#about-me">About Me</a></li>
+          <li><a href="https://ericroc.how/pages/read-with-me.html#read-with-me">Read With Me</a></li>
+
+        </ul>
+      </nav>
+
+      <ul class="social">
+          <li>
+            <a  class="sc-globe fa-lg" href="#" target="_blank">
+            <i class="fab fa-globe fa-lg">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-envelope-o fa-lg" href="mailto:ericrochow@gmail.com" target="_blank">
+            <i class="fab fa-envelope-o fa-lg">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-rss fa-lg" href="#" target="_blank">
+            <i class="fab fa-rss fa-lg">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-linkedin fa-lg" href="https://www.linkedin.com/in/erochow/" target="_blank">
+            <i class="fab fa-linkedin fa-lg">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-github fa-lg" href="https://github.com/ericrochow" target="_blank">
+            <i class="fab fa-github fa-lg">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-reddit fa-lg" href="#" target="_blank">
+            <i class="fab fa-reddit fa-lg">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-twitter fa-lg" href="https://twitter.com/eric_rochow" target="_blank">
+            <i class="fab fa-twitter fa-lg">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-lastfm fa-lg" href="https://www.last.fm/user/ericrochow" target="_blank">
+            <i class="fab fa-lastfm fa-lg">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-spotify fa-lg" href="https://open.spotify.com/user/ericrochow?si=KEmxAAk8QZy31L82MMge4g" target="_blank">
+            <i class="fab fa-spotify fa-lg">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-book fa-lg" href="https://www.goodreads.com/user/show/18841479-eric-rochow" target="_blank">
+            <i class="fab fa-book fa-lg">
+            </i>
+          </a></li>
+      </ul>
+    </div>
+
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href="https://ericroc.how">    Home
+</a>
+
+      <a href="/archives.html">Archives</a>
+      <a href="/categories.html">Categories</a>
+      <a href="/tags.html">Tags</a>
+
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="nx-os-upgrades">NX-OS Upgrades</h1>
+    <p>
+          Posted on Fri 24 March 2017 in <a href="https://ericroc.how/category/network.html">Network</a>
+
+
+    </p>
+  </header>
+
+
+  <div>
+    <h1>Nexus 3k/9k Upgrades</h1>
+<p>Upgrades from NX-OS 6 to 7 require an incremental upgrade due to BIOS incompatibilities. First install a compatible version of 6 that allows standalone BIOS upgrades:</p>
+<div class="highlight"><pre><span></span><span class="n">copy</span><span class="w"> </span><span class="nl">scp</span><span class="p">:</span><span class="o">//</span><span class="k">user</span><span class="nv">@server</span><span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">n3000</span><span class="o">-</span><span class="n">uk9</span><span class="mf">.6.0.2</span><span class="p">.</span><span class="n">U6</span><span class="mf">.9</span><span class="p">.</span><span class="n">bin</span><span class="w"> </span><span class="nl">bootflash</span><span class="p">:</span><span class="w"> </span><span class="n">vrf</span><span class="w"> </span><span class="k">default</span><span class="w"></span>
+<span class="n">copy</span><span class="w"> </span><span class="nl">scp</span><span class="p">:</span><span class="o">//</span><span class="k">user</span><span class="nv">@server</span><span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">n3000</span><span class="o">-</span><span class="n">uk9</span><span class="o">-</span><span class="n">kickstart</span><span class="mf">.6.0.2</span><span class="p">.</span><span class="n">U6</span><span class="mf">.9</span><span class="p">.</span><span class="n">bin</span><span class="w"> </span><span class="nl">bootflash</span><span class="p">:</span><span class="w"> </span><span class="n">vrf</span><span class="w"> </span><span class="k">default</span><span class="w"></span>
+<span class="n">install</span><span class="w"> </span><span class="ow">all</span><span class="w"> </span><span class="n">kickstart</span><span class="w"> </span><span class="nl">bootflash</span><span class="p">:</span><span class="o">///</span><span class="n">n3000</span><span class="o">-</span><span class="n">uk9</span><span class="o">-</span><span class="n">kickstart</span><span class="mf">.6.0.2</span><span class="p">.</span><span class="n">U6</span><span class="mf">.9</span><span class="p">.</span><span class="n">bin</span><span class="w"> </span><span class="k">system</span><span class="w"> </span><span class="nl">bootflash</span><span class="p">:</span><span class="n">n3000</span><span class="o">-</span><span class="n">uk9</span><span class="mf">.6.0.2</span><span class="p">.</span><span class="n">U6</span><span class="mf">.9</span><span class="p">.</span><span class="n">bin</span><span class="w"></span>
+</pre></div>
+
+
+<p>This will take a long time and require a reboot. After the reboot, delete the old image to make room for the new images:</p>
+<div class="highlight"><pre><span></span><span class="k">delete</span> <span class="n">bootflash</span><span class="p">:</span><span class="o">///</span><span class="n">n3000</span><span class="o">-</span><span class="n">uk9</span><span class="o">-</span><span class="n">kickstart</span><span class="p">.</span><span class="mi">6</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">2</span><span class="p">.</span><span class="n">U3</span><span class="p">.</span><span class="mi">1</span><span class="p">.</span><span class="n">bin</span>
+<span class="k">delete</span> <span class="n">bootflash</span><span class="p">:</span><span class="o">///</span><span class="n">n3000</span><span class="o">-</span><span class="n">uk9</span><span class="p">.</span><span class="mi">6</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">2</span><span class="p">.</span><span class="n">U3</span><span class="p">.</span><span class="mi">1</span><span class="p">.</span><span class="n">bin</span>
+</pre></div>
+
+
+<p>Now it's time to install the BIOS upgrade to enable the upgrade to 7:</p>
+<div class="highlight"><pre><span></span><span class="n">copy</span><span class="w"> </span><span class="nl">scp</span><span class="p">:</span><span class="o">//</span><span class="k">user</span><span class="nv">@server</span><span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">nxos</span><span class="o">-</span><span class="n">n3kbios</span><span class="p">.</span><span class="n">bin</span><span class="w"> </span><span class="nl">bootflash</span><span class="p">:</span><span class="w"> </span><span class="n">vrf</span><span class="w"> </span><span class="k">default</span><span class="w"></span>
+<span class="n">install</span><span class="w"> </span><span class="ow">all</span><span class="w"> </span><span class="n">nxos</span><span class="w"> </span><span class="nl">bootflash</span><span class="p">:</span><span class="o">///</span><span class="n">nxos</span><span class="o">-</span><span class="n">n3kbios</span><span class="p">.</span><span class="n">bin</span><span class="w"> </span><span class="n">bios</span><span class="w"></span>
+</pre></div>
+
+
+<p>It will say that a reboot is required, but it's not. Delete the BIOS bin file and do the final upgrade:</p>
+<div class="highlight"><pre><span></span><span class="k">delete</span><span class="w"> </span><span class="nl">bootflash</span><span class="p">:</span><span class="o">///</span><span class="n">nxos</span><span class="o">-</span><span class="n">n3kbios</span><span class="p">.</span><span class="n">bin</span><span class="w"></span>
+<span class="n">copy</span><span class="w"> </span><span class="nl">scp</span><span class="p">:</span><span class="o">//</span><span class="k">user</span><span class="nv">@server</span><span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">nxos</span><span class="mf">.7.0.3</span><span class="p">.</span><span class="n">I4</span><span class="mf">.4</span><span class="p">.</span><span class="n">bin</span><span class="w"> </span><span class="nl">bootflash</span><span class="p">:</span><span class="w"> </span><span class="n">vrf</span><span class="w"> </span><span class="k">default</span><span class="w"></span>
+<span class="n">install</span><span class="w"> </span><span class="ow">all</span><span class="w"> </span><span class="n">nxos</span><span class="w"> </span><span class="nl">bootflash</span><span class="p">:</span><span class="o">///</span><span class="n">nxos</span><span class="mf">.7.0.3</span><span class="p">.</span><span class="n">I4</span><span class="mf">.4</span><span class="p">.</span><span class="n">bin</span><span class="w"></span>
+</pre></div>
+
+
+<p>After the reboot, you will be on 7. You will not need to jump through all these hoops for future upgrades.</p>
+<h1>Nexus 7k Upgrades</h1>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://ericroc.how/tag/network.html">network</a>
+      <a href="https://ericroc.how/tag/nx-os.html">nx-os</a>
+      <a href="https://ericroc.how/tag/upgrade.html">upgrade</a>
+    </p>
+  </div>
+
+
+
+
+
+</article>
+
+    <footer>
+<p>&copy; Eric Rochow 2019</p>
+    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Eric Rochow ",
+  "url" : "https://ericroc.how",
+  "image": "https://ericroc.how/images/face.png",
+  "description": ""
+}
+</script>
+
+</body>
+</html>
