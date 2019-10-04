@@ -32,14 +32,12 @@ commands:
     steps:
       - run:
           command: |
-            pelican-themes -i themes/Flex/
-            pelican content -o output -s pelicanconf.py
+            pelican content -o docs -s pelicanconf.py
   commit-site:
     steps:
       - run:
           command: |
-            cd output
-            git commit -am "circleci cd push {{ .Branch }}"
+            git commit -am "circleci cd push {{ .Branch }}" docs/
             git push
 
 jobs:
