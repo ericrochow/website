@@ -1,0 +1,14 @@
+Title: OpenSSH Command Reference
+Date: 2019-10-12 07:05
+Category: Linux
+Tags: linux, ssh, cli
+Authors: Eric Rochow
+Summary: A list of commands I need on a regular basis but infrequently enough not to commit to memory
+
+# Generate a new keypair
+
+
+# Copy Public Key
+
+
+# Configure SSH Client to Specify Private Key
