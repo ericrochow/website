@@ -46,13 +46,13 @@ jobs:
     working-directory: ""
     steps:
       - install-pelican
-      - add_ssh_keys
-      - run:
-          name: "Add Host Fingerprints"
-          command: |
-          echo "$known_hosts" > ~/.ssh/known_hosts
+        # - add_ssh_keys
+        # - run:
+        # name: "Add Host Fingerprints"
+        # command: |
+        # echo "$known_hosts" > ~/.ssh/known_hosts
       - build-site
-      - commit-site
+        # - commit-site
 
 workflows:
   commit:
