@@ -24,13 +24,13 @@ commands:
           command: |
             sudo pip install pipenv
             pipenv install --dev
-            pipenv shell
       - save_cache:
           key: pelican-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
           paths:
             - "venv"
             - "/usr/local/bin"
             - "/usr/local/lib/python3.6/site-packages"
+      - run: pipenv shell
   build-site:
     steps:
       - run:
