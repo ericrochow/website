@@ -30,12 +30,14 @@ commands:
             - "venv"
             - "/usr/local/bin"
             - "/usr/local/lib/python3.6/site-packages"
-      - run: pipenv shell
   build-site:
     steps:
-      - run:
-          command: |
-            pelican content -o docs -s pelicanconf.py
+      # - run : pipenv run pelican content -o docs -s pelicanconf.py
+      - run: pipenv shell
+        # - run:
+        # command: |
+        # pelican content -o docs -s pelicanconf.py
+      - run: pelican content -o docs -s pelicanconf.py
   commit-site:
     steps:
       - run:
