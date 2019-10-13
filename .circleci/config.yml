@@ -34,11 +34,6 @@ commands:
   build-site:
     steps:
       - run : pipenv run pelican content -o docs -s pelicanconf.py
-        # - run: pipenv shell
-        # - run:
-        # command: |
-        # pelican content -o docs -s pelicanconf.py
-        # - run: pelican content -o docs -s pelicanconf.py
   commit-site:
     steps:
       - run:
@@ -52,11 +47,6 @@ jobs:
     working_directory: "~/website"
     steps:
       - install-pelican
-        # - add_ssh_keys
-        # - run:
-        # name: "Add Host Fingerprints"
-        # command: |
-        # echo "$known_hosts" > ~/.ssh/known_hosts
       - build-site
         # - commit-site
 
