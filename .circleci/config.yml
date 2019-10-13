@@ -42,7 +42,7 @@ commands:
             git config credential.helper "cache --timeout=120"
             git config user.email "ericroc.how@gmail.com"
             git config user.name "DeployTron 9000"
-            git commit --allow-empty -am "circleci content push"
+            git commit --allow-empty -am "circleci content push [skip ci]"
             git push -q https://${DOCS_GITHUB_TOKEN}@github.com/ericrochow/website.git master
 
 jobs:
