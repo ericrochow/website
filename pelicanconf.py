@@ -20,7 +20,7 @@ TIMEZONE = "America/Detroit"
 
 DEFAULT_LANG = "en"
 OG_LOCALE = "en_US"
-LOCALE = "en_US"
+LOCALE = "en_US.utf8"
 
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = None
