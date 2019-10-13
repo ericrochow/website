@@ -32,12 +32,12 @@ commands:
             - "/usr/local/lib/python3.6/site-packages"
   build-site:
     steps:
-      # - run : pipenv run pelican content -o docs -s pelicanconf.py
-      - run: pipenv shell
+      - run : pipenv run pelican content -o docs -s pelicanconf.py
+        # - run: pipenv shell
         # - run:
         # command: |
         # pelican content -o docs -s pelicanconf.py
-      - run: pelican content -o docs -s pelicanconf.py
+        # - run: pelican content -o docs -s pelicanconf.py
   commit-site:
     steps:
       - run:
