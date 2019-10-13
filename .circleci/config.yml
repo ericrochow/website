@@ -43,7 +43,7 @@ commands:
 jobs:
   build:
     executor: pelican-executor
-    working_directory: ""
+    working_directory: "~/website"
     steps:
       - install-pelican
         # - add_ssh_keys
