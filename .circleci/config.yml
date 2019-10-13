@@ -34,7 +34,8 @@ commands:
     steps:
       - run:
           command: |
-            pipenv run pelican content -o docs -s pelicanconf.py
+            pipenv shell
+            pelican content -o docs -s pelicanconf.py
   commit-site:
     steps:
       - run:
