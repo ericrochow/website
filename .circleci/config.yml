@@ -4,6 +4,8 @@ executors:
   pelican-executor:
     docker:
       - image: circleci/python:3.6
+    environment:
+      LOCALE: en_US.utf8
 
 commands:
   install-pelican:
