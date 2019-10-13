@@ -36,7 +36,9 @@ commands:
       - run : pipenv run pelican content -o docs -s pelicanconf.py
   commit-site:
     steps:
-      - run:
+      - deploy:
+          name: "Trigger content deployment"
+          working_directory: "~/website"
           command: |
             git config credential.helper
             git config user.email "ericroc.how@gmail.com"
