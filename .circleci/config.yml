@@ -38,8 +38,11 @@ commands:
     steps:
       - run:
           command: |
-            git commit -am "circleci cd push {{ .Branch }}" docs/
-            git push
+            git config credential.helper
+            git config user.email "ericroc.how@gmail.com"
+            git config user.name "DeployTron 9000"
+            git commit --allow-empty -am "circleci cd push {{ .Branch }}" docs/
+            git push -q https://${DOCS_GITHUB_TOKEN}@github.com/ericrochow/website.git master
 
 jobs:
   build:
@@ -48,7 +51,7 @@ jobs:
     steps:
       - install-pelican
       - build-site
-        # - commit-site
+      - commit-site
 
 workflows:
   commit:
