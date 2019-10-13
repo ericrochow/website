@@ -38,12 +38,11 @@ commands:
     steps:
       - deploy:
           name: "Trigger content deployment"
-          working_directory: "~/website"
           command: |
-            git config credential.helper
+            git config credential.helper "cache --timeout=120"
             git config user.email "ericroc.how@gmail.com"
             git config user.name "DeployTron 9000"
-            git commit --allow-empty -am "circleci cd push {{ .Branch }}" docs/
+            git commit --allow-empty -am "circleci content push"
             git push -q https://${DOCS_GITHUB_TOKEN}@github.com/ericrochow/website.git master
 
 jobs:
