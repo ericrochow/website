@@ -20,6 +20,7 @@ commands:
             git submodule update --remote
       - restore_cache:
           key: pelican-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+      - run: head -71 plugins/goodreads_activity/goodreads_activity.py | tail -1
       - run:
           command: |
             sudo pip install pipenv
