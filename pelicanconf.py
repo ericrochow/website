@@ -1,7 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*- #
 from __future__ import unicode_literals
+
+import math
 from datetime import datetime
+
+import arrow
 
 AUTHOR = "Eric Rochow"
 SITEURL = "https://ericroc.how"
@@ -13,6 +17,20 @@ SITELOGO = SITEURL + "/images/face.png"
 # FAVICON = SITEURL + ""
 COPYRIGHT_NAME = AUTHOR
 COPYRIGHT_YEAR = datetime.now().year
+
+
+class Career(object):
+    def __init__(self):
+        self.career_start = arrow.get("2011-10-25T09:00:00.00-4:00")
+        self.todayh_date = arrow.utcnow()
+
+    def career_years(self):
+        """
+        """
+        tdelta = self.career_start - self.today_date
+        ydelta = math.ceil(tdelta.days / 365.25)
+        return ydelta
+
 
 PATH = "content"
 
