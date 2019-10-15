@@ -30,6 +30,16 @@ commands:
             - "venv"
             - "/usr/local/bin"
             - "/usr/local/lib/python3.6/site-packages"
+  run-test-suite:
+    steps:
+      - run:
+          name: "Run flake8"
+          commands: |
+            "flake8 *.py tests/*"
+      - run:
+          name: "Run tests"
+          commands: |
+            "pipenv run py.test"
   build-site:
     steps:
       - run : pipenv run pelican content -o docs -s pelicanconf.py

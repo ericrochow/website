@@ -6,6 +6,19 @@ verify_ssl = true
 [dev-packages]
 flake8 = "*"
 pyflakes = "*"
+flake8-markdown = "*"
+flake8-unused-arguments = "*"
+flake8-blind-except = "*"
+flake8-import-order = "*"
+flake8-bugbear = "*"
+flake8-imports = "*"
+flake8-commas = "*"
+flake8-polyfill = "*"
+flake8-black = "*"
+flake8-bandit = "*"
+flake8-absolute-import = "*"
+flake8-comprehensions = "*"
+ipython = "*"
 
 [packages]
 markdown = "*"
@@ -14,6 +27,10 @@ ghp-import = "*"
 markup = "*"
 invoke = "*"
 feedparser = "*"
+arrow = "*"
 
 [requires]
 python_version = "3.6"
+
+[pipenv]
+allow_prereleases = true
