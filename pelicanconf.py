@@ -70,7 +70,7 @@ SOCIAL = (
     ("fab fa-github", "https://github.com/ericrochow"),
     # ("reddit fa-lg", "#"),
     ("fab fa-twitter", "https://twitter.com/eric_rochow"),
-    ("fab fa-lastfm://www.last.fm/user/ericrochow"),
+    ("fab fa-lastfm", "https://www.last.fm/user/ericrochow"),
     (
         "fab fa-spotify",
         "https://open.spotify.com/user/ericrochow?si=KEmxAAk8QZy31L82MMge4g",
