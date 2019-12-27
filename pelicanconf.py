@@ -39,7 +39,7 @@ PLUGINS = [
     # "pelican-githubprojects",
     # "video_privacy_enhancer",
     # "jinja2.ext.i18n",
-    "goodreads_activity",
+    # "goodreads_activity",
 ]
 # JINJA_ENVIRONMENT = []
 
@@ -62,12 +62,12 @@ LINKS = (
 
 # Social widget
 SOCIAL = (
-    ("globe fa-lg", "#"),
+    ("globe fa-lg", "https://ericroc.how"),
     ("envelope-o fa-lg", "mailto:ericrochow@gmail.com"),
-    ("rss fa-lg", "#"),
+    ("rss fa-lg", "https://ericroc.how"),
     ("linkedin fa-lg", "https://www.linkedin.com/in/erochow/"),
     ("github fa-lg", "https://github.com/ericrochow"),
-    ("reddit fa-lg", "#"),
+    # ("reddit fa-lg", "#"),
     ("twitter fa-lg", "https://twitter.com/eric_rochow"),
     ("lastfm fa-lg", "https://www.last.fm/user/ericrochow"),
     (
@@ -97,7 +97,7 @@ GOODREADS_ACTIVITY_FEED = (
     "KyT3ziOY47qSj-aDbM-SDOa3uJn9UkKP6osSP-O42Dd1G4RL&shelf=read"
 )
 
-TEMPLATE_PAGES = {"templates/goodreads.html": "pages/read-with-me.html"}
+# TEMPLATE_PAGES = {"templates/goodreads.html": "pages/read-with-me.html"}
 TEMPLATE_EXTENSIONS = [".html", ".j2"]
 THEME_TEMPLATES_OVERRIDES = ["content/templates/"]
 READERS = {"html": None}
