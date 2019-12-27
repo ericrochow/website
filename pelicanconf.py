@@ -89,13 +89,9 @@ GITHUB_URL = "https://github.com/ericrochow"
 GITHUB_USERNAME = "ericrochow"
 TWITTER_USERNAME = "eric_rochow"
 # GOODREADS_ACTIVITY_FEED = (
-# "https://www.goodreads.com/review/list_rss/18841479?key="
-# "KyT3ziOY47qSj-aDbM-SDOa3uJn9UkKP6osSP-O42Dd1G4RL"
+    # "https://www.goodreads.com/review/list_rss/18841479?key="
+    # "KyT3ziOY47qSj-aDbM-SDOa3uJn9UkKP6osSP-O42Dd1G4RL&shelf=read"
 # )
-GOODREADS_ACTIVITY_FEED = (
-    "https://www.goodreads.com/review/list_rss/18841479?key="
-    "KyT3ziOY47qSj-aDbM-SDOa3uJn9UkKP6osSP-O42Dd1G4RL&shelf=read"
-)
 
 # TEMPLATE_PAGES = {"templates/goodreads.html": "pages/read-with-me.html"}
 TEMPLATE_EXTENSIONS = [".html", ".j2"]
