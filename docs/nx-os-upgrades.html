@@ -75,7 +75,7 @@
 
       <ul class="social">
           <li>
-            <a  class="sc-globe fa-lg" href="#" target="_blank">
+            <a  class="sc-globe fa-lg" href="https://ericroc.how" target="_blank">
             <i class="fab fa-globe fa-lg">
             </i>
           </a></li>
@@ -85,7 +85,7 @@
             </i>
           </a></li>
           <li>
-            <a  class="sc-rss fa-lg" href="#" target="_blank">
+            <a  class="sc-rss fa-lg" href="https://ericroc.how" target="_blank">
             <i class="fab fa-rss fa-lg">
             </i>
           </a></li>
@@ -97,11 +97,6 @@
           <li>
             <a  class="sc-github fa-lg" href="https://github.com/ericrochow" target="_blank">
             <i class="fab fa-github fa-lg">
-            </i>
-          </a></li>
-          <li>
-            <a  class="sc-reddit fa-lg" href="#" target="_blank">
-            <i class="fab fa-reddit fa-lg">
             </i>
           </a></li>
           <li>
@@ -157,28 +152,28 @@
   <div>
     <h1>Nexus 3k/9k Upgrades</h1>
 <p>Upgrades from NX-OS 6 to 7 require an incremental upgrade due to BIOS incompatibilities. First install a compatible version of 6 that allows standalone BIOS upgrades:</p>
-<div class="highlight"><pre><span></span><span class="n">copy</span><span class="w"> </span><span class="nl">scp</span><span class="p">:</span><span class="o">//</span><span class="k">user</span><span class="nv">@server</span><span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">n3000</span><span class="o">-</span><span class="n">uk9</span><span class="mf">.6.0.2</span><span class="p">.</span><span class="n">U6</span><span class="mf">.9</span><span class="p">.</span><span class="n">bin</span><span class="w"> </span><span class="nl">bootflash</span><span class="p">:</span><span class="w"> </span><span class="n">vrf</span><span class="w"> </span><span class="k">default</span><span class="w"></span>
-<span class="n">copy</span><span class="w"> </span><span class="nl">scp</span><span class="p">:</span><span class="o">//</span><span class="k">user</span><span class="nv">@server</span><span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">n3000</span><span class="o">-</span><span class="n">uk9</span><span class="o">-</span><span class="n">kickstart</span><span class="mf">.6.0.2</span><span class="p">.</span><span class="n">U6</span><span class="mf">.9</span><span class="p">.</span><span class="n">bin</span><span class="w"> </span><span class="nl">bootflash</span><span class="p">:</span><span class="w"> </span><span class="n">vrf</span><span class="w"> </span><span class="k">default</span><span class="w"></span>
-<span class="n">install</span><span class="w"> </span><span class="ow">all</span><span class="w"> </span><span class="n">kickstart</span><span class="w"> </span><span class="nl">bootflash</span><span class="p">:</span><span class="o">///</span><span class="n">n3000</span><span class="o">-</span><span class="n">uk9</span><span class="o">-</span><span class="n">kickstart</span><span class="mf">.6.0.2</span><span class="p">.</span><span class="n">U6</span><span class="mf">.9</span><span class="p">.</span><span class="n">bin</span><span class="w"> </span><span class="k">system</span><span class="w"> </span><span class="nl">bootflash</span><span class="p">:</span><span class="n">n3000</span><span class="o">-</span><span class="n">uk9</span><span class="mf">.6.0.2</span><span class="p">.</span><span class="n">U6</span><span class="mf">.9</span><span class="p">.</span><span class="n">bin</span><span class="w"></span>
+<div class="highlight"><pre><span></span><span class="err">copy scp://user@server/root/n3000-uk9.6.0.2.U6.9.bin bootflash: vrf default</span>
+<span class="err">copy scp://user@server/root/n3000-uk9-kickstart.6.0.2.U6.9.bin bootflash: vrf default</span>
+<span class="err">install all kickstart bootflash:///n3000-uk9-kickstart.6.0.2.U6.9.bin system bootflash:n3000-uk9.6.0.2.U6.9.bin</span>
 </pre></div>
 
 
 <p>This will take a long time and require a reboot. After the reboot, delete the old image to make room for the new images:</p>
-<div class="highlight"><pre><span></span><span class="k">delete</span> <span class="n">bootflash</span><span class="p">:</span><span class="o">///</span><span class="n">n3000</span><span class="o">-</span><span class="n">uk9</span><span class="o">-</span><span class="n">kickstart</span><span class="p">.</span><span class="mi">6</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">2</span><span class="p">.</span><span class="n">U3</span><span class="p">.</span><span class="mi">1</span><span class="p">.</span><span class="n">bin</span>
-<span class="k">delete</span> <span class="n">bootflash</span><span class="p">:</span><span class="o">///</span><span class="n">n3000</span><span class="o">-</span><span class="n">uk9</span><span class="p">.</span><span class="mi">6</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">2</span><span class="p">.</span><span class="n">U3</span><span class="p">.</span><span class="mi">1</span><span class="p">.</span><span class="n">bin</span>
+<div class="highlight"><pre><span></span><span class="err">delete bootflash:///n3000-uk9-kickstart.6.0.2.U3.1.bin</span>
+<span class="err">delete bootflash:///n3000-uk9.6.0.2.U3.1.bin</span>
 </pre></div>
 
 
 <p>Now it's time to install the BIOS upgrade to enable the upgrade to 7:</p>
-<div class="highlight"><pre><span></span><span class="n">copy</span><span class="w"> </span><span class="nl">scp</span><span class="p">:</span><span class="o">//</span><span class="k">user</span><span class="nv">@server</span><span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">nxos</span><span class="o">-</span><span class="n">n3kbios</span><span class="p">.</span><span class="n">bin</span><span class="w"> </span><span class="nl">bootflash</span><span class="p">:</span><span class="w"> </span><span class="n">vrf</span><span class="w"> </span><span class="k">default</span><span class="w"></span>
-<span class="n">install</span><span class="w"> </span><span class="ow">all</span><span class="w"> </span><span class="n">nxos</span><span class="w"> </span><span class="nl">bootflash</span><span class="p">:</span><span class="o">///</span><span class="n">nxos</span><span class="o">-</span><span class="n">n3kbios</span><span class="p">.</span><span class="n">bin</span><span class="w"> </span><span class="n">bios</span><span class="w"></span>
+<div class="highlight"><pre><span></span><span class="err">copy scp://user@server/root/nxos-n3kbios.bin bootflash: vrf default</span>
+<span class="err">install all nxos bootflash:///nxos-n3kbios.bin bios</span>
 </pre></div>
 
 
 <p>It will say that a reboot is required, but it's not. Delete the BIOS bin file and do the final upgrade:</p>
-<div class="highlight"><pre><span></span><span class="k">delete</span><span class="w"> </span><span class="nl">bootflash</span><span class="p">:</span><span class="o">///</span><span class="n">nxos</span><span class="o">-</span><span class="n">n3kbios</span><span class="p">.</span><span class="n">bin</span><span class="w"></span>
-<span class="n">copy</span><span class="w"> </span><span class="nl">scp</span><span class="p">:</span><span class="o">//</span><span class="k">user</span><span class="nv">@server</span><span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">nxos</span><span class="mf">.7.0.3</span><span class="p">.</span><span class="n">I4</span><span class="mf">.4</span><span class="p">.</span><span class="n">bin</span><span class="w"> </span><span class="nl">bootflash</span><span class="p">:</span><span class="w"> </span><span class="n">vrf</span><span class="w"> </span><span class="k">default</span><span class="w"></span>
-<span class="n">install</span><span class="w"> </span><span class="ow">all</span><span class="w"> </span><span class="n">nxos</span><span class="w"> </span><span class="nl">bootflash</span><span class="p">:</span><span class="o">///</span><span class="n">nxos</span><span class="mf">.7.0.3</span><span class="p">.</span><span class="n">I4</span><span class="mf">.4</span><span class="p">.</span><span class="n">bin</span><span class="w"></span>
+<div class="highlight"><pre><span></span><span class="err">delete bootflash:///nxos-n3kbios.bin</span>
+<span class="err">copy scp://user@server/root/nxos.7.0.3.I4.4.bin bootflash: vrf default</span>
+<span class="err">install all nxos bootflash:///nxos.7.0.3.I4.4.bin</span>
 </pre></div>
 
 

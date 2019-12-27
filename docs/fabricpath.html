@@ -76,7 +76,7 @@
 
       <ul class="social">
           <li>
-            <a  class="sc-globe fa-lg" href="#" target="_blank">
+            <a  class="sc-globe fa-lg" href="https://ericroc.how" target="_blank">
             <i class="fab fa-globe fa-lg">
             </i>
           </a></li>
@@ -86,7 +86,7 @@
             </i>
           </a></li>
           <li>
-            <a  class="sc-rss fa-lg" href="#" target="_blank">
+            <a  class="sc-rss fa-lg" href="https://ericroc.how" target="_blank">
             <i class="fab fa-rss fa-lg">
             </i>
           </a></li>
@@ -98,11 +98,6 @@
           <li>
             <a  class="sc-github fa-lg" href="https://github.com/ericrochow" target="_blank">
             <i class="fab fa-github fa-lg">
-            </i>
-          </a></li>
-          <li>
-            <a  class="sc-reddit fa-lg" href="#" target="_blank">
-            <i class="fab fa-reddit fa-lg">
             </i>
           </a></li>
           <li>
@@ -170,28 +165,28 @@
 <h2>FabricPath Configuration</h2>
 <h3>Easy Mode</h3>
 <p>The base FabricPath configuration is actually pretty basic. First, install and add the the feature-set:</p>
-<div class="highlight"><pre><span></span><span class="n">switch</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">#</span> <span class="n">install</span> <span class="n">feature</span><span class="o">-</span><span class="k">set</span> <span class="n">fabricpath</span>
-<span class="n">switch</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">#</span> <span class="n">feature</span><span class="o">-</span><span class="k">set</span> <span class="n">fabricpath</span>
+<div class="highlight"><pre><span></span><span class="err">switch(config)# install feature-set fabricpath</span>
+<span class="err">switch(config)# feature-set fabricpath</span>
 </pre></div>
 
 
 <p>Next, configure the FabricPath switch-id and basic domain settings:</p>
-<div class="highlight"><pre><span></span><span class="n">switch</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">#</span> <span class="n">fabricpath</span> <span class="n">switch</span><span class="o">-</span><span class="n">id</span> <span class="mi">101</span>
-<span class="n">switch</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">#</span> <span class="n">fabricpath</span> <span class="k">domain</span> <span class="k">default</span>
-<span class="n">switch</span><span class="p">(</span><span class="n">config</span><span class="o">-</span><span class="n">fabricpath</span><span class="o">-</span><span class="n">isis</span><span class="p">)</span><span class="o">#</span> <span class="n">root</span><span class="o">-</span><span class="n">priority</span> <span class="mi">64</span>
+<div class="highlight"><pre><span></span><span class="err">switch(config)# fabricpath switch-id 101</span>
+<span class="err">switch(config)# fabricpath domain default</span>
+<span class="err">switch(config-fabricpath-isis)# root-priority 64</span>
 </pre></div>
 
 
 <p>Even though FabricPath is a layer 2 technology, higher priority wins <sup id="fnref:priority"><a class="footnote-ref" href="#fn:priority">3</a></sup>. (If I had to venture a guess, I would say it's because FabricPath is using IS-IS, which is a layer 3 routing protocol.) You will want to make sure that your leafs have a lower priority than your spines.</p>
 <p>After doing the same on the other leafs and the spines, configure your links as <code>switchport mode fabricpath</code> and allow them to come up and form IS-IS adjacencies:</p>
-<div class="highlight"><pre><span></span><span class="nv">switch</span><span class="ss">(</span><span class="nv">config</span><span class="ss">)</span># <span class="nv">interface</span> <span class="nv">ethernet1</span><span class="o">/</span><span class="mi">1</span>
-<span class="nv">switch</span><span class="ss">(</span><span class="nv">config</span><span class="o">-</span><span class="k">if</span><span class="ss">)</span># <span class="nv">switchport</span> <span class="nv">mode</span> <span class="nv">fabricpath</span>
+<div class="highlight"><pre><span></span><span class="err">switch(config)# interface ethernet1/1</span>
+<span class="err">switch(config-if)# switchport mode fabricpath</span>
 </pre></div>
 
 
 <p>After the adjancies have formed, convert the VLAN(s) that will be utilizing FabricPath to be FabricPath-enabled:</p>
-<div class="highlight"><pre><span></span><span class="n">switch</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">#</span> <span class="n">vlan</span> <span class="mi">15</span><span class="o">-</span><span class="mi">17</span> <span class="p">,</span> <span class="mi">20</span> <span class="p">,</span> <span class="mi">22</span> <span class="o">-</span> <span class="mi">27</span>
-<span class="n">switch</span><span class="p">(</span><span class="n">config</span><span class="o">-</span><span class="n">vlan</span><span class="p">)</span><span class="o">#</span> <span class="k">mode</span> <span class="n">fabricpath</span>
+<div class="highlight"><pre><span></span><span class="err">switch(config)# vlan 15-17 , 20 , 22 - 27</span>
+<span class="err">switch(config-vlan)# mode fabricpath</span>
 </pre></div>
 
 
@@ -200,27 +195,27 @@
 <h4>Spanning-Tree</h4>
 <p>I know, "eww". The fact remains that FabricPath is not the first protocol to come up and form adjacencies, so to avoid problems it is best to configure all edge switches as the spanning-tree root. </p>
 <p>If using MSTP:</p>
-<div class="highlight"><pre><span></span><span class="n">switch</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">#</span> <span class="n">spanning</span><span class="o">-</span><span class="n">tree</span> <span class="n">mst</span> <span class="mi">1</span> <span class="n">priority</span> <span class="mi">8192</span>
-<span class="n">switch</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">#</span> <span class="n">spanning</span><span class="o">-</span><span class="n">tree</span> <span class="n">pseudo</span><span class="o">-</span><span class="n">information</span>
-<span class="n">switch</span><span class="p">(</span><span class="n">config</span><span class="o">-</span><span class="n">pseudo</span><span class="p">)</span><span class="o">#</span> <span class="n">mst</span> <span class="mi">1</span> <span class="n">root</span> <span class="n">priority</span> <span class="mi">4096</span>
+<div class="highlight"><pre><span></span><span class="err">switch(config)# spanning-tree mst 1 priority 8192</span>
+<span class="err">switch(config)# spanning-tree pseudo-information</span>
+<span class="err">switch(config-pseudo)# mst 1 root priority 4096</span>
 </pre></div>
 
 
 <p>If using PVST (or any varient thereof):</p>
-<div class="highlight"><pre><span></span><span class="n">switch</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">#</span> <span class="n">spanning</span><span class="o">-</span><span class="n">tree</span> <span class="n">vlan</span> <span class="mi">15</span><span class="o">-</span><span class="mi">17</span> <span class="p">,</span> <span class="mi">20</span> <span class="p">,</span> <span class="mi">22</span> <span class="o">-</span> <span class="mi">27</span> <span class="n">priority</span> <span class="mi">8192</span>
-<span class="n">switch</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">#</span> <span class="n">spanning</span><span class="o">-</span><span class="n">tree</span> <span class="n">pseudo</span><span class="o">-</span><span class="n">information</span>
-<span class="n">switch</span><span class="p">(</span><span class="n">config</span><span class="o">-</span><span class="n">pseudo</span><span class="p">)</span><span class="o">#</span> <span class="n">vlan</span> <span class="mi">15</span><span class="o">-</span><span class="mi">17</span> <span class="p">,</span> <span class="mi">20</span> <span class="p">,</span> <span class="mi">22</span> <span class="o">-</span> <span class="mi">27</span> <span class="n">root</span> <span class="n">priority</span> <span class="mi">4096</span>
+<div class="highlight"><pre><span></span><span class="err">switch(config)# spanning-tree vlan 15-17 , 20 , 22 - 27 priority 8192</span>
+<span class="err">switch(config)# spanning-tree pseudo-information</span>
+<span class="err">switch(config-pseudo)# vlan 15-17 , 20 , 22 - 27 root priority 4096</span>
 </pre></div>
 
 
 <p>In either case, make sure that the "pseudo" root priority is lower than the value in the traditional spanning-tree configuration to avoid superior BPDUs from being sent by devices that have not started the FabricPath process.</p>
 <h4>vPC+</h4>
 <p>If you were already running vPC, it is possible to migrate to vPC+ (vPC with extensions to use along with FabricPath). All this migration requires is to specify a virtual switch id to be shared between the vPC pair and to change the port-channel that is being used as the vPC peer-link from <code>switchport mode trunk</code> to <code>switchport mode fabricpath</code>:</p>
-<div class="highlight"><pre><span></span><span class="nv">switch</span><span class="ss">(</span><span class="nv">config</span><span class="ss">)</span># <span class="nv">vpc</span> <span class="nv">domain</span> <span class="mi">1</span>
-<span class="nv">switch</span><span class="ss">(</span><span class="nv">config</span><span class="o">-</span><span class="ss">)</span># <span class="nv">fabricpath</span> <span class="nv">switch</span><span class="o">-</span><span class="nv">id</span> <span class="mi">1001</span>
-<span class="nv">switch</span><span class="ss">(</span><span class="nv">config</span><span class="ss">)</span># <span class="nv">interface</span> <span class="nv">po1</span>
-<span class="nv">switch</span><span class="ss">(</span><span class="nv">config</span><span class="o">-</span><span class="k">if</span><span class="ss">)</span># <span class="nv">vpc</span> <span class="nv">peer</span><span class="o">-</span><span class="nv">link</span>
-<span class="nv">switch</span><span class="ss">(</span><span class="nv">config</span><span class="o">-</span><span class="k">if</span><span class="ss">)</span># <span class="nv">switchport</span> <span class="nv">mode</span> <span class="nv">fabricpath</span>
+<div class="highlight"><pre><span></span><span class="err">switch(config)# vpc domain 1</span>
+<span class="err">switch(config-)# fabricpath switch-id 1001</span>
+<span class="err">switch(config)# interface po1</span>
+<span class="err">switch(config-if)# vpc peer-link</span>
+<span class="err">switch(config-if)# switchport mode fabricpath</span>
 </pre></div>
 
 
@@ -228,28 +223,28 @@
 <h4>Anycast HSRP</h4>
 <p>One of the design considerations of a FabricPath network is where to place the layer 3 gateways. In smaller networks, SVIs can be placed on the spines, in others a dedicated pair of leafs can be used to connect the FabricPath network to the rest of the network (i.e. border leafs), or the SVIs can be placed on the leafs. The first option can lead to scalability issues as the spines would need to learn the MAC addresses of every device on the FabircPath network due to ARP (IPv4) and ND (IPv6) In addition, to gain access to the dual-active HSRP functionality, vPC+ will need to be enabled <em>regarless of whether there are any vPC ports on the spines</em> (which there almost certainly would not be if designed properly). In the last option, once of the concerns could be traffic tromboning due to the SVIs only being Active in HSRP on one pair of leafs. Enter Anycast HSRP!</p>
 <p>Anycast HSRP will allow you to run essentially dual-dual-active HSRP on two sets of leafs. Like with vPC+, an emulated switch ID (known as an Ancast Switch ID or ASID) is specified to be shared by all switches participating in Anycast HSRP. The ASID will be advertised like a normal switch ID and IS-IS calculates the shortest path to the gateway. The configuration looks something like this:</p>
-<div class="highlight"><pre><span></span><span class="n">hsrp</span> <span class="n">anycast</span> <span class="mi">4</span> <span class="n">ipv4</span>
-<span class="n">switch</span><span class="o">-</span><span class="n">id</span> <span class="mi">2001</span>
-<span class="n">vlan</span> <span class="mi">15</span> <span class="o">-</span> <span class="mi">17</span> <span class="p">,</span> <span class="mi">20</span> <span class="p">,</span> <span class="mi">22</span> <span class="o">-</span> <span class="mi">27</span>
-<span class="n">priority</span> <span class="mi">110</span>
-<span class="k">no</span> <span class="n">shutdown</span>
-<span class="o">!</span>
-<span class="n">hsrp</span> <span class="n">anycast</span> <span class="mi">6</span> <span class="n">ipv6</span>
-<span class="n">switch</span><span class="o">-</span><span class="n">id</span> <span class="mi">2001</span>
-<span class="n">vlan</span> <span class="mi">15</span> <span class="o">-</span> <span class="mi">17</span> <span class="p">,</span> <span class="mi">20</span> <span class="p">,</span> <span class="mi">22</span> <span class="o">-</span> <span class="mi">27</span>
-<span class="n">priority</span> <span class="mi">110</span>
-<span class="k">no</span> <span class="n">shutdown</span>
+<div class="highlight"><pre><span></span><span class="err">hsrp anycast 4 ipv4</span>
+<span class="err">switch-id 2001</span>
+<span class="err">vlan 15 - 17 , 20 , 22 - 27</span>
+<span class="err">priority 110</span>
+<span class="err">no shutdown</span>
+<span class="err">!</span>
+<span class="err">hsrp anycast 6 ipv6</span>
+<span class="err">switch-id 2001</span>
+<span class="err">vlan 15 - 17 , 20 , 22 - 27</span>
+<span class="err">priority 110</span>
+<span class="err">no shutdown</span>
 </pre></div>
 
 
 <p>In the above example, the <code>4</code> and <code>6</code> are the names of the HSRP bundles. They are arbitrary, but give them names that make sense. In this case 4 is used for IPv4 and 6 is used for IPv6.</p>
 <p>The rest of the HSRP configuration is a bit more stripped down as part of the configuration is already done and because of the dual-active nature which does not necessitate things like preemption:</p>
-<div class="highlight"><pre><span></span><span class="n">interface</span> <span class="n">Vlan</span> <span class="mi">15</span>
-<span class="n">hsrp</span> <span class="k">version</span> <span class="mi">2</span>
-<span class="n">hsrp</span> <span class="mi">4</span>
-<span class="n">ip</span> <span class="mi">10</span><span class="p">.</span><span class="mi">1</span><span class="p">.</span><span class="mi">2</span><span class="p">.</span><span class="mi">3</span><span class="o">/</span><span class="mi">24</span>
-<span class="n">hsrp</span> <span class="mi">6</span>
-<span class="n">ipv6</span> <span class="mi">2601</span><span class="p">::</span><span class="mi">1</span><span class="o">/</span><span class="mi">64</span>
+<div class="highlight"><pre><span></span><span class="err">interface Vlan 15</span>
+<span class="err">hsrp version 2</span>
+<span class="err">hsrp 4</span>
+<span class="err">ip 10.1.2.3/24</span>
+<span class="err">hsrp 6</span>
+<span class="err">ipv6 2601::1/64</span>
 </pre></div>
 
 
@@ -257,37 +252,37 @@
 <p><strong>Important caveats</strong>: In order to run Anycast HSRP, all switches participating in the FabricPath network must be running Anycast HSRP-capable software - on the Nexus 7k platform this would mean 6.2(2)+. For this reason, it is important to keep NX-OS images consistent. In NX-OS the limit of forwarders is 4 switches <sup id="fnref:ahsrp"><a class="footnote-ref" href="#fn:ahsrp">6</a></sup>, though this limit may be raised with future NS-OS releases. Prior to NX-OS 6.2(8), the ASID will be advertised even if the overload bit is set, which could incur a longer convergence times.</p>
 <h4>Overload Bit</h4>
 <p>As FabricPath rides on top of IS-IS, it can use the the <code>overload bit</code> feature of IS-IS <sup id="fnref:overload_add"><a class="footnote-ref" href="#fn:overload_add">4</a></sup>, which allows the router (or switch in this case) to alert other routers that it has run out of system resources (i.e. memory and/or CPU) and therefore route transit traffic around this switch but still send route traffic to networks directly connected to the switch <sup id="fnref:overload_traffic"><a class="footnote-ref" href="#fn:overload_traffic">7</a></sup>. It is possible to configure this manually in an emergency like so:</p>
-<div class="highlight"><pre><span></span><span class="n">fabricpath</span> <span class="k">domain</span> <span class="k">default</span>
-<span class="k">set</span><span class="o">-</span><span class="n">overload</span><span class="o">-</span><span class="nb">bit</span> <span class="n">always</span>
+<div class="highlight"><pre><span></span><span class="err">fabricpath domain default</span>
+<span class="err">set-overload-bit always</span>
 </pre></div>
 
 
 <p>This is not a feature you would want to leave set. To delay convergence after the switch boots, a delay timer can be set as follows:</p>
-<div class="highlight"><pre><span></span><span class="n">fabricpatch</span> <span class="k">domain</span> <span class="k">default</span>
-<span class="k">set</span><span class="o">-</span><span class="n">overload</span><span class="o">-</span><span class="nb">bit</span> <span class="k">on</span><span class="o">-</span><span class="n">startup</span> <span class="mi">20</span>
+<div class="highlight"><pre><span></span><span class="err">fabricpatch domain default</span>
+<span class="err">set-overload-bit on-startup 20</span>
 </pre></div>
 
 
 <p>In the previous example, configuring <code>20</code> sets the delay to 20 seconds after boot time. IS-IS allows 5-86400 seconds for this field.</p>
 <h4>Authentication</h4>
 <p>As with most routing protocols, it is possible to require authentication on FabricPath links. To do this, first configure a key-chain like you would with EIGRP:</p>
-<div class="highlight"><pre><span></span><span class="nv">key</span> <span class="nv">chain</span> <span class="nv">fabricpathkeys</span>
-<span class="nv">key</span> <span class="mi">1</span>
-<span class="nv">key</span><span class="o">-</span><span class="nv">string</span> <span class="nv">iamatotallysecurekey</span>
-<span class="nv">accept</span><span class="o">-</span><span class="nv">lifetime</span> <span class="mi">01</span>:<span class="mi">00</span>:<span class="mi">00</span> <span class="nv">April</span> <span class="mi">1</span> <span class="mi">2014</span> <span class="mi">01</span>:<span class="mi">00</span>:<span class="mi">00</span> <span class="nv">May</span> <span class="mi">2</span> <span class="mi">2014</span>
-<span class="k">send</span><span class="o">-</span><span class="nv">lifetime</span> <span class="mi">01</span>:<span class="mi">00</span>:<span class="mi">00</span> <span class="nv">April</span> <span class="mi">1</span> <span class="mi">2014</span> <span class="mi">01</span>:<span class="mi">00</span>:<span class="mi">00</span> <span class="nv">May</span> <span class="mi">2</span> <span class="mi">2014</span>
-<span class="nv">key</span> <span class="mi">2</span>
-<span class="nv">key</span><span class="o">-</span><span class="nv">string</span> <span class="nv">lastkeynotsosecureheresanewkey</span>
-<span class="nv">accept</span><span class="o">-</span><span class="nv">lifetime</span> <span class="mi">01</span>:<span class="mi">00</span>:<span class="mi">00</span> <span class="nv">May</span> <span class="mi">1</span> <span class="mi">2014</span> <span class="nv">infinite</span>
-<span class="k">send</span><span class="o">-</span><span class="nv">lifetime</span> <span class="mi">01</span>:<span class="mi">00</span>:<span class="mi">00</span> <span class="nv">May</span> <span class="mi">1</span> <span class="mi">2014</span> <span class="nv">infinite</span>
+<div class="highlight"><pre><span></span><span class="err">key chain fabricpathkeys</span>
+<span class="err">key 1</span>
+<span class="err">key-string iamatotallysecurekey</span>
+<span class="err">accept-lifetime 01:00:00 April 1 2014 01:00:00 May 2 2014</span>
+<span class="err">send-lifetime 01:00:00 April 1 2014 01:00:00 May 2 2014</span>
+<span class="err">key 2</span>
+<span class="err">key-string lastkeynotsosecureheresanewkey</span>
+<span class="err">accept-lifetime 01:00:00 May 1 2014 infinite</span>
+<span class="err">send-lifetime 01:00:00 May 1 2014 infinite</span>
 </pre></div>
 
 
 <p>Next configure FabricPath to use the keychain:</p>
-<div class="highlight"><pre><span></span><span class="n">fabricpath</span> <span class="k">domain</span> <span class="k">default</span>
-<span class="n">authentication</span><span class="o">-</span><span class="k">check</span>
-<span class="n">authenticaiton</span> <span class="k">key</span><span class="o">-</span><span class="k">chain</span> <span class="n">fabricpathkeys</span>
-<span class="n">authentication</span> <span class="k">type</span> <span class="n">md5</span>
+<div class="highlight"><pre><span></span><span class="err">fabricpath domain default</span>
+<span class="err">authentication-check</span>
+<span class="err">authenticaiton key-chain fabricpathkeys</span>
+<span class="err">authentication type md5</span>
 </pre></div>
 
 
@@ -320,29 +315,29 @@
 </ul>
 <h3>FabricPath Troubleshooting</h3>
 <p>Verify that your FabricPath interfaces are up:</p>
-<div class="highlight"><pre><span></span><span class="nv">switch</span># <span class="k">show</span> <span class="nv">fabricpath</span> <span class="nv">topology</span> <span class="nv">interface</span> 
-<span class="nv">Interface</span>           <span class="nv">Topo</span><span class="o">-</span><span class="nv">Description</span>                 <span class="nv">Topo</span><span class="o">-</span><span class="nv">ID</span>    <span class="nv">Topo</span><span class="o">-</span><span class="k">IF</span><span class="o">-</span><span class="nv">State</span>
-<span class="o">-------------------</span> <span class="o">--------------------------------</span> <span class="o">----------</span> <span class="o">-------------</span>
-<span class="nv">port</span><span class="o">-</span><span class="nv">channel1</span>       <span class="mi">0</span>                                <span class="mi">0</span>               <span class="nv">Up</span>   
-<span class="nv">port</span><span class="o">-</span><span class="nv">channel2</span>       <span class="mi">0</span>                                <span class="mi">0</span>               <span class="nv">Up</span>   
-<span class="nv">port</span><span class="o">-</span><span class="nv">channel3</span>       <span class="mi">0</span>                                <span class="mi">0</span>               <span class="nv">Up</span>
+<div class="highlight"><pre><span></span><span class="err">switch# show fabricpath topology interface </span>
+<span class="err">Interface           Topo-Description                 Topo-ID    Topo-IF-State</span>
+<span class="err">------------------- -------------------------------- ---------- -------------</span>
+<span class="err">port-channel1       0                                0               Up   </span>
+<span class="err">port-channel2       0                                0               Up   </span>
+<span class="err">port-channel3       0                                0               Up</span>
 </pre></div>
 
 
 <p>Verify that the switch-ids are viewable:</p>
-<div class="highlight"><pre><span></span><span class="nv">switch</span># <span class="k">show</span> <span class="nv">fabricpath</span> <span class="nv">isis</span> <span class="nv">route</span> 
-<span class="nv">Fabricpath</span> <span class="nv">IS</span><span class="o">-</span><span class="nv">IS</span> <span class="nv">domain</span>: <span class="nv">default</span> <span class="nv">MT</span><span class="o">-</span><span class="mi">0</span>
-<span class="nv">Topology</span> <span class="mi">0</span>, <span class="nv">Tree</span> <span class="mi">0</span>, <span class="nv">Swid</span> <span class="nv">routing</span> <span class="nv">table</span>
-<span class="mi">11</span>, <span class="nv">L1</span>
- <span class="nv">via</span> <span class="nv">port</span><span class="o">-</span><span class="nv">channel2</span>, <span class="nv">metric</span> <span class="mi">5</span>
-<span class="mi">12</span>, <span class="nv">L1</span>
- <span class="nv">via</span> <span class="nv">port</span><span class="o">-</span><span class="nv">channel3</span>, <span class="nv">metric</span> <span class="mi">5</span>
-<span class="mi">101</span>, <span class="nv">L1</span>
- <span class="nv">via</span> <span class="nv">port</span><span class="o">-</span><span class="nv">channel2</span>, <span class="nv">metric</span> <span class="mi">10</span>
- <span class="nv">via</span> <span class="nv">port</span><span class="o">-</span><span class="nv">channel3</span>, <span class="nv">metric</span> <span class="mi">10</span>
-<span class="mi">1001</span>, <span class="nv">L1</span>
- <span class="nv">via</span> <span class="nv">port</span><span class="o">-</span><span class="nv">channel2</span>, <span class="nv">metric</span> <span class="mi">10</span>
- <span class="nv">via</span> <span class="nv">port</span><span class="o">-</span><span class="nv">channel3</span>, <span class="nv">metric</span> <span class="mi">10</span>
+<div class="highlight"><pre><span></span><span class="err">switch# show fabricpath isis route </span>
+<span class="err">Fabricpath IS-IS domain: default MT-0</span>
+<span class="err">Topology 0, Tree 0, Swid routing table</span>
+<span class="err">11, L1</span>
+<span class="err"> via port-channel2, metric 5</span>
+<span class="err">12, L1</span>
+<span class="err"> via port-channel3, metric 5</span>
+<span class="err">101, L1</span>
+<span class="err"> via port-channel2, metric 10</span>
+<span class="err"> via port-channel3, metric 10</span>
+<span class="err">1001, L1</span>
+<span class="err"> via port-channel2, metric 10</span>
+<span class="err"> via port-channel3, metric 10</span>
 </pre></div>
 
 

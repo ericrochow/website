@@ -75,7 +75,7 @@
 
       <ul class="social">
           <li>
-            <a  class="sc-globe fa-lg" href="#" target="_blank">
+            <a  class="sc-globe fa-lg" href="https://ericroc.how" target="_blank">
             <i class="fab fa-globe fa-lg">
             </i>
           </a></li>
@@ -85,7 +85,7 @@
             </i>
           </a></li>
           <li>
-            <a  class="sc-rss fa-lg" href="#" target="_blank">
+            <a  class="sc-rss fa-lg" href="https://ericroc.how" target="_blank">
             <i class="fab fa-rss fa-lg">
             </i>
           </a></li>
@@ -97,11 +97,6 @@
           <li>
             <a  class="sc-github fa-lg" href="https://github.com/ericrochow" target="_blank">
             <i class="fab fa-github fa-lg">
-            </i>
-          </a></li>
-          <li>
-            <a  class="sc-reddit fa-lg" href="#" target="_blank">
-            <i class="fab fa-reddit fa-lg">
             </i>
           </a></li>
           <li>
@@ -161,12 +156,12 @@
 <p>It is possible to dual-home a FEX to a pair of aggregation switches and have the configuration of the FEX synchronized between the two aggregation switches.</p>
 <h2>Base Configuration</h2>
 <p>On the aggregation switch, enter the following configuration:</p>
-<div class="highlight"><pre><span></span><span class="nv">agg</span><span class="o">-</span><span class="nv">sw01</span><span class="ss">(</span><span class="nv">config</span><span class="ss">)</span># <span class="nv">feature</span> <span class="nv">fex</span>
-<span class="nv">agg</span><span class="o">-</span><span class="nv">sw01</span><span class="ss">(</span><span class="nv">config</span><span class="ss">)</span># <span class="nv">interface</span> <span class="nv">e1</span><span class="o">/</span><span class="mi">1</span>
-<span class="nv">agg</span><span class="o">-</span><span class="nv">sw01</span><span class="ss">(</span><span class="nv">config</span><span class="o">-</span><span class="k">if</span><span class="ss">)</span># <span class="nv">channel</span><span class="o">-</span><span class="nv">group</span> <span class="mi">101</span>
-<span class="nv">agg</span><span class="o">-</span><span class="nv">sw01</span><span class="ss">(</span><span class="nv">config</span><span class="ss">)</span># <span class="nv">interface</span> <span class="nv">po101</span>
-<span class="nv">agg</span><span class="o">-</span><span class="nv">sw01</span><span class="ss">(</span><span class="nv">config</span><span class="o">-</span><span class="k">if</span><span class="ss">)</span># <span class="nv">switchport</span> <span class="nv">mode</span> <span class="nv">fex</span><span class="o">-</span><span class="nv">fabric</span>
-<span class="nv">agg</span><span class="o">-</span><span class="nv">sw01</span><span class="ss">(</span><span class="nv">config</span><span class="o">-</span><span class="k">if</span><span class="ss">)</span># <span class="nv">fex</span> <span class="nv">associate</span> <span class="mi">101</span>
+<div class="highlight"><pre><span></span><span class="err">agg-sw01(config)# feature fex</span>
+<span class="err">agg-sw01(config)# interface e1/1</span>
+<span class="err">agg-sw01(config-if)# channel-group 101</span>
+<span class="err">agg-sw01(config)# interface po101</span>
+<span class="err">agg-sw01(config-if)# switchport mode fex-fabric</span>
+<span class="err">agg-sw01(config-if)# fex associate 101</span>
 </pre></div>
 
 
@@ -174,42 +169,42 @@
 <h2>Dual-Homing Configuration</h2>
 <h3>Configure CFS for FEX Config Sync</h3>
 <p>Since we will be using multiple aggregation switches to manage a single device, we will need to configure CFS distribution to distribute the config changes to the sister device:</p>
-<div class="highlight"><pre><span></span><span class="nv">agg</span><span class="o">-</span><span class="nv">sw01</span><span class="ss">(</span><span class="nv">config</span><span class="ss">)</span># <span class="nv">cfs</span> <span class="nv">ipv4</span> <span class="nv">distribute</span>
-<span class="nv">agg</span><span class="o">-</span><span class="nv">sw01</span><span class="ss">(</span><span class="nv">config</span><span class="ss">)</span># <span class="k">end</span>
-<span class="nv">agg</span><span class="o">-</span><span class="nv">sw01</span># <span class="nv">configure</span> <span class="nv">sync</span>
-<span class="nv">agg</span><span class="o">-</span><span class="nv">sw01</span><span class="ss">(</span><span class="nv">config</span><span class="o">-</span><span class="nv">sync</span><span class="ss">)</span># <span class="nv">switch</span><span class="o">-</span><span class="nv">profile</span> <span class="nv">PROFILE</span>
-<span class="nv">agg</span><span class="o">-</span><span class="nv">sw01</span><span class="ss">(</span><span class="nv">config</span><span class="o">-</span><span class="nv">sync</span><span class="ss">)</span># <span class="nv">sync</span><span class="o">-</span><span class="nv">peers</span> <span class="nv">destination</span> <span class="mi">10</span>.<span class="nv">x</span>.<span class="nv">y</span>.<span class="mi">2</span>
-<span class="nv">agg</span><span class="o">-</span><span class="nv">sw01</span><span class="ss">(</span><span class="nv">config</span><span class="o">-</span><span class="nv">sync</span><span class="ss">)</span># <span class="k">end</span>
+<div class="highlight"><pre><span></span><span class="n">agg</span><span class="o">-</span><span class="n">sw01</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">#</span> <span class="n">cfs</span> <span class="n">ipv4</span> <span class="n">distribute</span>
+<span class="n">agg</span><span class="o">-</span><span class="n">sw01</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">#</span> <span class="k">end</span>
+<span class="n">agg</span><span class="o">-</span><span class="n">sw01</span><span class="o">#</span> <span class="n">configure</span> <span class="n">sync</span>
+<span class="n">agg</span><span class="o">-</span><span class="n">sw01</span><span class="p">(</span><span class="n">config</span><span class="o">-</span><span class="n">sync</span><span class="p">)</span><span class="o">#</span> <span class="n">switch</span><span class="o">-</span><span class="n">profile</span> <span class="n">PROFILE</span>
+<span class="n">agg</span><span class="o">-</span><span class="n">sw01</span><span class="p">(</span><span class="n">config</span><span class="o">-</span><span class="n">sync</span><span class="p">)</span><span class="o">#</span> <span class="n">sync</span><span class="o">-</span><span class="n">peers</span> <span class="n">destination</span> <span class="mi">10</span><span class="p">.</span><span class="n">x</span><span class="p">.</span><span class="n">y</span><span class="p">.</span><span class="mi">2</span>
+<span class="n">agg</span><span class="o">-</span><span class="n">sw01</span><span class="p">(</span><span class="n">config</span><span class="o">-</span><span class="n">sync</span><span class="p">)</span><span class="o">#</span> <span class="k">end</span>
 
-<span class="nv">agg</span><span class="o">-</span><span class="nv">sw02</span><span class="ss">(</span><span class="nv">config</span><span class="ss">)</span># <span class="nv">cfs</span> <span class="nv">ipv4</span> <span class="nv">distribute</span>
-<span class="nv">agg</span><span class="o">-</span><span class="nv">sw02</span><span class="ss">(</span><span class="nv">config</span><span class="ss">)</span># <span class="k">end</span>
-<span class="nv">agg</span><span class="o">-</span><span class="nv">sw02</span># <span class="nv">configure</span> <span class="nv">sync</span>
-<span class="nv">agg</span><span class="o">-</span><span class="nv">sw02</span><span class="ss">(</span><span class="nv">config</span><span class="o">-</span><span class="nv">sync</span><span class="ss">)</span># <span class="nv">switch</span><span class="o">-</span><span class="nv">profile</span> <span class="nv">PROFILE</span>
-<span class="nv">agg</span><span class="o">-</span><span class="nv">sw02</span><span class="ss">(</span><span class="nv">config</span><span class="o">-</span><span class="nv">sync</span><span class="ss">)</span># <span class="nv">sync</span><span class="o">-</span><span class="nv">peers</span> <span class="nv">destination</span> <span class="mi">10</span>.<span class="nv">x</span>.<span class="nv">y</span>.<span class="mi">1</span>
-<span class="nv">agg</span><span class="o">-</span><span class="nv">sw02</span><span class="ss">(</span><span class="nv">config</span><span class="o">-</span><span class="nv">sync</span><span class="ss">)</span># <span class="k">end</span>
+<span class="n">agg</span><span class="o">-</span><span class="n">sw02</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">#</span> <span class="n">cfs</span> <span class="n">ipv4</span> <span class="n">distribute</span>
+<span class="n">agg</span><span class="o">-</span><span class="n">sw02</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">#</span> <span class="k">end</span>
+<span class="n">agg</span><span class="o">-</span><span class="n">sw02</span><span class="o">#</span> <span class="n">configure</span> <span class="n">sync</span>
+<span class="n">agg</span><span class="o">-</span><span class="n">sw02</span><span class="p">(</span><span class="n">config</span><span class="o">-</span><span class="n">sync</span><span class="p">)</span><span class="o">#</span> <span class="n">switch</span><span class="o">-</span><span class="n">profile</span> <span class="n">PROFILE</span>
+<span class="n">agg</span><span class="o">-</span><span class="n">sw02</span><span class="p">(</span><span class="n">config</span><span class="o">-</span><span class="n">sync</span><span class="p">)</span><span class="o">#</span> <span class="n">sync</span><span class="o">-</span><span class="n">peers</span> <span class="n">destination</span> <span class="mi">10</span><span class="p">.</span><span class="n">x</span><span class="p">.</span><span class="n">y</span><span class="p">.</span><span class="mi">1</span>
+<span class="n">agg</span><span class="o">-</span><span class="n">sw02</span><span class="p">(</span><span class="n">config</span><span class="o">-</span><span class="n">sync</span><span class="p">)</span><span class="o">#</span> <span class="k">end</span>
 </pre></div>
 
 
 <h3>Configure FEX Fabric Interfaces</h3>
 <p>Configuration of dual-homed FEXes is similar to single-homed FEXes with a few extra steps. Assuming the two aggregation switches have been configured as a vPC pair, the following configuration is required on the first aggregation switch:</p>
-<div class="highlight"><pre><span></span><span class="nv">agg</span><span class="o">-</span><span class="nv">sw01</span><span class="ss">(</span><span class="nv">config</span><span class="ss">)</span># <span class="nv">feature</span> <span class="nv">fex</span>
-<span class="nv">agg</span><span class="o">-</span><span class="nv">sw01</span><span class="ss">(</span><span class="nv">config</span><span class="ss">)</span># <span class="nv">interface</span> <span class="nv">e1</span><span class="o">/</span><span class="mi">1</span>
-<span class="nv">agg</span><span class="o">-</span><span class="nv">sw01</span><span class="ss">(</span><span class="nv">config</span><span class="o">-</span><span class="k">if</span><span class="ss">)</span># <span class="nv">channel</span><span class="o">-</span><span class="nv">group</span> <span class="mi">101</span>
-<span class="nv">agg</span><span class="o">-</span><span class="nv">sw01</span><span class="ss">(</span><span class="nv">config</span><span class="ss">)</span># <span class="nv">interface</span> <span class="nv">po101</span>
-<span class="nv">agg</span><span class="o">-</span><span class="nv">sw01</span><span class="ss">(</span><span class="nv">config</span><span class="o">-</span><span class="k">if</span><span class="ss">)</span># <span class="nv">vpc</span> <span class="mi">101</span>
-<span class="nv">agg</span><span class="o">-</span><span class="nv">sw01</span><span class="ss">(</span><span class="nv">config</span><span class="o">-</span><span class="k">if</span><span class="ss">)</span># <span class="nv">switchport</span> <span class="nv">mode</span> <span class="nv">fex</span><span class="o">-</span><span class="nv">fabric</span>
-<span class="nv">agg</span><span class="o">-</span><span class="nv">sw01</span><span class="ss">(</span><span class="nv">config</span><span class="o">-</span><span class="k">if</span><span class="ss">)</span># <span class="nv">fex</span> <span class="nv">associate</span> <span class="mi">101</span>
+<div class="highlight"><pre><span></span><span class="err">agg-sw01(config)# feature fex</span>
+<span class="err">agg-sw01(config)# interface e1/1</span>
+<span class="err">agg-sw01(config-if)# channel-group 101</span>
+<span class="err">agg-sw01(config)# interface po101</span>
+<span class="err">agg-sw01(config-if)# vpc 101</span>
+<span class="err">agg-sw01(config-if)# switchport mode fex-fabric</span>
+<span class="err">agg-sw01(config-if)# fex associate 101</span>
 </pre></div>
 
 
 <p>Next, configure the following on the second aggregation switch:</p>
-<div class="highlight"><pre><span></span><span class="nv">agg</span><span class="o">-</span><span class="nv">sw02</span><span class="ss">(</span><span class="nv">config</span><span class="ss">)</span># <span class="nv">feature</span> <span class="nv">fex</span>
-<span class="nv">agg</span><span class="o">-</span><span class="nv">sw02</span><span class="ss">(</span><span class="nv">config</span><span class="ss">)</span># <span class="nv">interface</span> <span class="nv">e1</span><span class="o">/</span><span class="mi">1</span>
-<span class="nv">agg</span><span class="o">-</span><span class="nv">sw02</span><span class="ss">(</span><span class="nv">config</span><span class="o">-</span><span class="k">if</span><span class="ss">)</span># <span class="nv">channel</span><span class="o">-</span><span class="nv">group</span> <span class="mi">101</span>
-<span class="nv">agg</span><span class="o">-</span><span class="nv">sw02</span><span class="ss">(</span><span class="nv">config</span><span class="ss">)</span># <span class="nv">interface</span> <span class="nv">po101</span>
-<span class="nv">agg</span><span class="o">-</span><span class="nv">sw02</span><span class="ss">(</span><span class="nv">config</span><span class="o">-</span><span class="k">if</span><span class="ss">)</span># <span class="nv">vpc</span> <span class="mi">101</span>
-<span class="nv">agg</span><span class="o">-</span><span class="nv">sw02</span><span class="ss">(</span><span class="nv">config</span><span class="o">-</span><span class="k">if</span><span class="ss">)</span># <span class="nv">switchport</span> <span class="nv">mode</span> <span class="nv">fex</span><span class="o">-</span><span class="nv">fabric</span>
-<span class="nv">agg</span><span class="o">-</span><span class="nv">sw02</span><span class="ss">(</span><span class="nv">config</span><span class="o">-</span><span class="k">if</span><span class="ss">)</span># <span class="nv">fex</span> <span class="nv">associate</span> <span class="mi">101</span>
+<div class="highlight"><pre><span></span><span class="err">agg-sw02(config)# feature fex</span>
+<span class="err">agg-sw02(config)# interface e1/1</span>
+<span class="err">agg-sw02(config-if)# channel-group 101</span>
+<span class="err">agg-sw02(config)# interface po101</span>
+<span class="err">agg-sw02(config-if)# vpc 101</span>
+<span class="err">agg-sw02(config-if)# switchport mode fex-fabric</span>
+<span class="err">agg-sw02(config-if)# fex associate 101</span>
 </pre></div>
 
 
@@ -225,29 +220,29 @@
 
 <h3>Distributing Config Changes</h3>
 <p>To keep changes consistent between the pair of aggregation switches, make sure that changes are configured using the CFS profile configured ealier rather than in standard config mode:</p>
-<div class="highlight"><pre><span></span><span class="nv">agg</span><span class="o">-</span><span class="nv">sw01</span># <span class="nv">config</span> <span class="nv">sync</span>
-<span class="nv">agg</span><span class="o">-</span><span class="nv">sw01</span><span class="ss">(</span><span class="nv">config</span><span class="o">-</span><span class="nv">sync</span><span class="ss">)</span># <span class="nv">switch</span><span class="o">-</span><span class="nv">profile</span> <span class="nv">PROFILE</span>
-<span class="nv">agg</span><span class="o">-</span><span class="nv">sw01</span><span class="ss">(</span><span class="nv">config</span><span class="o">-</span><span class="nv">sync</span><span class="o">-</span><span class="nv">sp</span><span class="ss">)</span># <span class="nv">interface</span> <span class="nv">e101</span><span class="o">/</span><span class="mi">1</span><span class="o">/</span><span class="mi">1</span>
-<span class="nv">agg</span><span class="o">-</span><span class="nv">sw01</span><span class="ss">(</span><span class="nv">config</span><span class="o">-</span><span class="nv">sync</span><span class="o">-</span><span class="nv">sp</span><span class="o">-</span><span class="k">if</span><span class="ss">)</span># <span class="nv">desc</span> <span class="nv">Server1</span>
-<span class="nv">agg</span><span class="o">-</span><span class="nv">sw01</span><span class="ss">(</span><span class="nv">config</span><span class="o">-</span><span class="nv">sync</span><span class="o">-</span><span class="nv">sp</span><span class="o">-</span><span class="k">if</span><span class="ss">)</span># <span class="nv">switchport</span> <span class="nv">mode</span> <span class="nv">access</span>
-<span class="nv">agg</span><span class="o">-</span><span class="nv">sw01</span><span class="ss">(</span><span class="nv">config</span><span class="o">-</span><span class="nv">sync</span><span class="o">-</span><span class="nv">sp</span><span class="o">-</span><span class="k">if</span><span class="ss">)</span># <span class="nv">switchport</span> <span class="nv">access</span> <span class="nv">vlan</span> <span class="mi">55</span>
-<span class="nv">agg</span><span class="o">-</span><span class="nv">sw01</span><span class="ss">(</span><span class="nv">config</span><span class="o">-</span><span class="nv">sync</span><span class="o">-</span><span class="nv">sp</span><span class="o">-</span><span class="k">if</span><span class="ss">)</span># <span class="nv">no</span> <span class="nv">shutdown</span>
-<span class="nv">agg</span><span class="o">-</span><span class="nv">sw01</span><span class="ss">(</span><span class="nv">config</span><span class="o">-</span><span class="nv">sync</span><span class="o">-</span><span class="nv">sp</span><span class="o">-</span><span class="k">if</span><span class="ss">)</span># <span class="k">exit</span>
+<div class="highlight"><pre><span></span><span class="err">agg-sw01# config sync</span>
+<span class="err">agg-sw01(config-sync)# switch-profile PROFILE</span>
+<span class="err">agg-sw01(config-sync-sp)# interface e101/1/1</span>
+<span class="err">agg-sw01(config-sync-sp-if)# desc Server1</span>
+<span class="err">agg-sw01(config-sync-sp-if)# switchport mode access</span>
+<span class="err">agg-sw01(config-sync-sp-if)# switchport access vlan 55</span>
+<span class="err">agg-sw01(config-sync-sp-if)# no shutdown</span>
+<span class="err">agg-sw01(config-sync-sp-if)# exit</span>
 </pre></div>
 
 
 <p>The configuration has not taken effect yet, but before the configuration is configured, it should be verified to make sure there are not inconsistencies:</p>
-<div class="highlight"><pre><span></span><span class="n">agg</span><span class="o">-</span><span class="n">sw01</span><span class="p">(</span><span class="n">config</span><span class="o">-</span><span class="n">sync</span><span class="o">-</span><span class="n">sp</span><span class="p">)</span><span class="o">#</span> <span class="n">verify</span>
-<span class="n">Verification</span> <span class="n">Successful</span>
+<div class="highlight"><pre><span></span><span class="err">agg-sw01(config-sync-sp)# verify</span>
+<span class="err">Verification Successful</span>
 </pre></div>
 
 
 <p>If the verification is not successful, then some troubleshooting steps will need to be taken. Otherwise, it is time to commit the changes.</p>
-<div class="highlight"><pre><span></span><span class="nv">agg</span><span class="o">-</span><span class="nv">sw01</span><span class="ss">(</span><span class="nv">config</span><span class="o">-</span><span class="nv">sync</span><span class="o">-</span><span class="nv">sp</span><span class="ss">)</span># <span class="nv">commit</span>
-<span class="nv">Verification</span> <span class="nv">successful</span>...
-<span class="nv">Proceeding</span> <span class="nv">to</span> <span class="nv">apply</span> <span class="nv">configuration</span>. <span class="nv">This</span> <span class="nv">might</span> <span class="nv">take</span> <span class="nv">a</span> <span class="k">while</span> <span class="nv">depending</span> <span class="nv">on</span> <span class="nv">amount</span> <span class="nv">of</span> <span class="nv">configuration</span> <span class="nv">in</span> <span class="nv">buffer</span>.
-<span class="nv">Please</span> <span class="nv">avoid</span> <span class="nv">other</span> <span class="nv">configuration</span> <span class="nv">changes</span> <span class="nv">during</span> <span class="nv">this</span> <span class="nv">time</span>.
-<span class="nv">Commit</span> <span class="nv">Successful</span>
+<div class="highlight"><pre><span></span><span class="err">agg-sw01(config-sync-sp)# commit</span>
+<span class="err">Verification successful...</span>
+<span class="err">Proceeding to apply configuration. This might take a while depending on amount of configuration in buffer.</span>
+<span class="err">Please avoid other configuration changes during this time.</span>
+<span class="err">Commit Successful</span>
 </pre></div>
   </div>
   <div class="tag-cloud">
