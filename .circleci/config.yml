@@ -3,7 +3,7 @@ version: 2.1
 executors:
   pelican-executor:
     docker:
-      - image: circleci/python:3.6
+      - image: circleci/python:3.7
     environment:
       LOCALE: en_US.utf8
 
