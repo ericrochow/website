@@ -64,17 +64,17 @@ LINKS = (
 SOCIAL = (
     ("globe", "https://ericroc.how"),
     ("envelope", "mailto:ericrochow@gmail.com"),
-    ("fas fa-rss", "https://ericroc.how"),
-    ("fab fa-linkedin", "https://www.linkedin.com/in/erochow/"),
-    ("fab fa-github", "https://github.com/ericrochow"),
-    # ("reddit fa-lg", "#"),
-    ("fab fa-twitter", "https://twitter.com/eric_rochow"),
-    ("fab fa-lastfm", "https://www.last.fm/user/ericrochow"),
+    ("rss", "https://ericroc.how"),
+    ("linkedin", "https://www.linkedin.com/in/erochow/"),
+    ("github", "https://github.com/ericrochow"),
+    # ("reddit", "#"),
+    ("twitter", "https://twitter.com/eric_rochow"),
+    ("lastfm", "https://www.last.fm/user/ericrochow"),
     (
-        "fab fa-spotify",
+        "spotify",
         "https://open.spotify.com/user/ericrochow?si=KEmxAAk8QZy31L82MMge4g",
     ),
-    ("fas fa-book", "https://www.goodreads.com/user/show/18841479-eric-rochow"),
+    ("book", "https://www.goodreads.com/user/show/18841479-eric-rochow"),
 )
 
 MAIN_MENU = True
