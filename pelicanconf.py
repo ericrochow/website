@@ -95,6 +95,7 @@ TWITTER_USERNAME = "eric_rochow"
 # )
 
 # TEMPLATE_PAGES = {"templates/goodreads.html": "pages/read-with-me.html"}
+TEMPLATE_PAGES = {}
 TEMPLATE_EXTENSIONS = [".html", ".j2"]
 THEME_TEMPLATES_OVERRIDES = ["content/templates/"]
 READERS = {"html": None}
