@@ -62,9 +62,8 @@ LINKS = (
 
 # Social widget
 SOCIAL = (
-    # ("globe fa-lg", "https://ericroc.how"),
-    ("fas fa-globe", "https://ericroc.how"),
-    ("fas envelope-o", "mailto:ericrochow@gmail.com"),
+    ("globe", "https://ericroc.how"),
+    ("envelope", "mailto:ericrochow@gmail.com"),
     ("fas fa-rss", "https://ericroc.how"),
     ("fab fa-linkedin", "https://www.linkedin.com/in/erochow/"),
     ("fab fa-github", "https://github.com/ericrochow"),
