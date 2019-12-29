@@ -29,6 +29,7 @@ TRANSLATION_FEED_ATOM = None
 AUTHOR_FEED_ATOM = None
 AUTHOR_FEED_RSS = None
 THEME = "themes/Flex"
+USE_LESS = True
 
 PLUGIN_PATHS = ["plugins/"]
 PLUGINS = [
