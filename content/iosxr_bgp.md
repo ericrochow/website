@@ -1,6 +1,6 @@
 Title: BGP in IOS-XR
 Date: 2019-09-06 14:34
-Category: Networking
+Category: Network
 Tags: iox-xr, bgp, cli
 Authors: Eric Rochow
 Summary: A basic how-to to get up-and-running with BGP on IOS-XR
