@@ -3,7 +3,7 @@ Date: 2019-09-06 14:34
 Category: Intro
 Tags: intro
 Authors: Eric Rochow
-Summary: Intro Post
+Summary: Hello! Welcome to my site!
 Pin: true
 
 Hi! My name is Eric. But you probably knew that already or your wouldn't be here. Or maybe my SEO is just that good. Anyway!

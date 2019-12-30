@@ -1,9 +1,9 @@
-Title: Post Template
+Title: BGP in IOS-XR
 Date: 2019-09-06 14:34
-Category: Template
-Tags: template
+Category: Networking
+Tags: iox-xr, bgp, cli
 Authors: Eric Rochow
-Summary: Just a template for future use
+Summary: A basic how-to to get up-and-running with BGP on IOS-XR
 
 # BGP
 
@@ -20,7 +20,7 @@ Summary: Just a template for future use
    RP/0/0/CPU0:router(config-bgp-nbr)# remote-as 65533
    RP/0/0/CPU0:router(config-bgp-nbr)# update-source Looback0
    RP/0/0/CPU0:router(config-bgp-nbr)# address-family ipv4 unicast
-   RP/0/0/CPU0:router(config-bgp-nbr-af)# route-policy pass-all in 
+   RP/0/0/CPU0:router(config-bgp-nbr-af)# route-policy pass-all in
    RP/0/0/CPU0:router(config-bgp-nbr-af)# route-policy pass-all out
 
 * Commit the configuration

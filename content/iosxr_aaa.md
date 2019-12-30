@@ -1,9 +1,9 @@
-Title: Post Template
+Title: AAA on IOX-XR
 Date: 2019-09-06 14:34
-Category: Template
-Tags: template
+Category: Network
+Tags: ios-xr, authentication, cli
 Authors: Eric Rochow
-Summary: Just a template for future use
+Summary: A quick primer on how to configure authentication on IOS-XR
 
 # AAA
 
@@ -28,7 +28,7 @@ If the pre-defined user groups do not suffice, it is possible to configure custo
          description $description
          taskgroup $taskgroup
          inherit usergroup $groupname
-         
+
 #### Define a new user
 
         username $user
