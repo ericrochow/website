@@ -16,8 +16,7 @@ commands:
       - run:
           name: "Pull Submodules"
           command: |
-            git submodule init
-            git submodule update --remote
+            git submodule update --init --recursive
       - restore_cache:
           key: pelican-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
       - run: head -71 plugins/goodreads_activity/goodreads_activity.py | tail -1
