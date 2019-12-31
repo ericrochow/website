@@ -30,13 +30,14 @@ AUTHOR_FEED_ATOM = None
 AUTHOR_FEED_RSS = None
 THEME = "themes/Flex"
 USE_LESS = True
+SUMMARY_MAX_LENGTH = 280
 
 PLUGIN_PATHS = ["plugins/"]
 PLUGINS = [
     "liquid_tags",
-    # "pin_to_top",
+    "pin_to_top",
     # "related_posts",
-    # "similar_posts",
+    "similar_posts",
     # "pelican-githubprojects",
     # "video_privacy_enhancer",
     # "jinja2.ext.i18n",
