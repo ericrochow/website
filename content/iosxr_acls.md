@@ -1,9 +1,8 @@
-Title: Post Template
+Title: IOS-XR ACLs
 Date: 2019-09-06 14:34
-Category: Template
-Tags: template
+Category: Network
+Tags: network, acl, ios-xr, network
 Authors: Eric Rochow
-Summary: Just a template for future use
 
 # ACLs
 

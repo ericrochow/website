@@ -1,7 +1,7 @@
 Title: VRF on IOS
 Date: 2019-09-06 14:34
 Category: Network
-Tags: network, ios, vrf
+Tags: network, ios, vrf, cli
 Authors: Eric Rochow
 Summary: Brief Summary of VRFs on IOS
 

@@ -1,9 +1,8 @@
-Title: Post Template
+Title: OSPF in IOS-XR
 Date: 2019-09-06 14:34
-Category: Template
-Tags: template
+Category: Network
+Tags: ospf, routing, ios-xr, network, cli
 Authors: Eric Rochow
-Summary: Just a template for future use
 
 # OSPF
 ****
