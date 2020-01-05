@@ -1,0 +1,380 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="index, follow" />
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet/less" type="text/css" href="https://ericroc.how/theme/stylesheet/style.less">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.5.1/less.min.js" type="text/javascript"></script>
+
+  <link rel="stylesheet" type="text/css" href="https://ericroc.how/theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="https://ericroc.how/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="https://ericroc.how/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="https://ericroc.how/theme/font-awesome/css/solid.css">
+  <!--<link rel="stylesheet" type="text/css" href="https://ericroc.how/theme/font-awesome/css/all.css">-->
+
+
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-135617138-1', 'auto');
+  ga('send', 'pageview');
+</script>
+<!-- End Google Analytics -->
+
+<meta name="author" content="Eric Rochow" />
+<meta name="description" content="Getting Started with Route Policies in IOS-XR" />
+<meta name="keywords" content="network, iosxr, policy">
+
+<meta property="og:site_name" content="Eric Rochow"/>
+<meta property="og:title" content="IOS-XR Route Policies"/>
+<meta property="og:description" content="Getting Started with Route Policies in IOS-XR"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="https://ericroc.how/ios-xr-route-policies.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2019-09-06 14:34:00-04:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://ericroc.how/author/eric-rochow.html">
+<meta property="article:section" content="Network"/>
+<meta property="article:tag" content="network"/>
+<meta property="article:tag" content="iosxr"/>
+<meta property="article:tag" content="policy"/>
+<meta property="og:image" content="https://ericroc.how/images/face.png">
+
+  <title>Eric Rochow &ndash; IOS-XR Route Policies</title>
+
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="https://ericroc.how">
+        <img src="https://ericroc.how/images/face.png" alt="Eric Rochow" title="Eric Rochow">
+      </a>
+      <h1><a href="https://ericroc.how">Eric Rochow</a></h1>
+
+
+      <nav>
+        <ul class="list">
+          <li><a href="https://ericroc.how/pages/about-me.html#about-me">About Me</a></li>
+          <li><a href="https://ericroc.how/pages/read-with-me.html#read-with-me">Read With Me</a></li>
+
+          <li><a href="http://resume.ericroc.how" target="_blank">Resume</a></li>
+        </ul>
+      </nav>
+
+      <ul class="social">
+          <li>
+            <a  class="sc-globe" href="https://ericroc.how" target="_blank">
+            <i class="fas fa-globe">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-envelope" href="mailto:ericrochow@gmail.com" target="_blank">
+            <i class="fas fa-envelope">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-rss" href="https://ericroc.how" target="_blank">
+            <i class="fas fa-rss">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-linkedin" href="https://www.linkedin.com/in/erochow/" target="_blank">
+            <i class="fab fa-linkedin">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-github" href="https://github.com/ericrochow" target="_blank">
+            <i class="fab fa-github">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-twitter" href="https://twitter.com/eric_rochow" target="_blank">
+            <i class="fab fa-twitter">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-lastfm" href="https://www.last.fm/user/ericrochow" target="_blank">
+            <i class="fab fa-lastfm">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-spotify" href="https://open.spotify.com/user/ericrochow?si=KEmxAAk8QZy31L82MMge4g" target="_blank">
+            <i class="fab fa-spotify">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-book" href="https://www.goodreads.com/user/show/18841479-eric-rochow" target="_blank">
+            <i class="fas fa-book">
+            </i>
+          </a></li>
+      </ul>
+    </div>
+
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href="https://ericroc.how">    Home
+</a>
+
+      <a href="/archives.html">Archives</a>
+      <a href="/categories.html">Categories</a>
+      <a href="/tags.html">Tags</a>
+
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="ios-xr-route-policies">IOS-XR Route Policies</h1>
+    <p>
+          Posted on Fri 06 September 2019 in <a href="https://ericroc.how/category/network.html">Network</a>
+
+
+    </p>
+  </header>
+
+
+  <div>
+    <h1>Route Policy Language</h1>
+<h2>Overview</h2>
+<p>In IOS, routes can be imported, exported, and manipulated through the use of route-maps. IOS-XR does not have a route-map feature; instead they have a more powerful equivalent call route policy language (RPL). Like route-maps, route-policies operate sequentially; however they add the ability to invoke or reference other route-policies (think functions invoking other functions).</p>
+<p>One important note about route policies is that they are manditory for all BGP peers, even if it is a 'pass-all' RPL.</p>
+<h2>Configuration</h2>
+<h3>Basic 'Pass-all' RPL</h3>
+<p>At a minimum, the following is required to add to BGP sessions to allow importing and exporting routes:</p>
+<p>RP/0/0/CPU0:router(config)# route-policy pass-all
+   RP/0/0/CPU0:router(config-rpl)# pass
+   RP/0/0/CPU0:router(config-rpl)# end-policy
+   RP/0/0/CPU0:router(config)# commit</p>
+<h3>Editing Existing RPLs</h3>
+<p>If an attempt is made to edit an existing RPL in the same way, the following warning will be displayed:</p>
+<p>RP/0/0/CPU0:router(config)# route-policy pass-all
+   % WARNING: Policy object route-policy test' exists! Reconfiguring it via CLI will replace current definition. Use 'abort to cancel.</p>
+<p>What does this mean? Let's attempt to add a drop after the existing <code>pass</code> statement:</p>
+<p>RP/0/0/CPU0:router(config-rpl)# pass
+   RP/0/0/CPU0:router(config-rpl)# end-policy
+   RP/0/0/CPU0:router(config)# commit</p>
+<p>Now let's take a look to see what happened:</p>
+<p>RP/0/0/CPU0:router(config)#show run route-policy pass-all
+   route-policy pass-all
+     drop
+   end-policy</p>
+<p>The configuration was completely replaced! Luckily there is a way to get around this:</p>
+<p>RP/0/0/CPU0:router#edit route-policy pass-all vim</p>
+<p>Since IOS-XR is running on top of linux, Cisco exposes the text editors emacs, nano, and vim to directly edit the content of RPLs. After the saving and quitting, a prompt for a commit will pop up. If 'yes' is entered, IOS-XR will parse through the changes, look for errors, then attmpt to merge the changes into the committed configuration.</p>
+<p>The problem with using a text editor to edit the RPL is that it now becomes subject to typos. Assume the existing <code>drop</code> is replaced with <code>dorp</code> (simple typo). After saving::</p>
+<p>Proceed with commit (yes/no/cancel)? [cancel]: yes
+   Parsing.
+   42 bytes parsed in 1 sec (41)bytes/sec</p>
+<p>% Syntax/Authorization errors in one or more commands.!! SYNTAX/AUTHORIZATION ERRORS: This configuration failed due to
+   !! one or more of the following reasons:
+   !!  - the entered commands do not exist,
+   !!  - the entered commands have errors in their syntax,
+   !!  - the software packages containing the commands are not active,
+   !!  - the current user is not a member of a task-group that has
+   !!    permissions to use the commands.</p>
+<div class="highlight"><pre><span></span><span class="err"> dorp</span>
+</pre></div>
+
+
+<p>end-policy</p>
+<p>It notices that the syntax is incorrect (in this case does not recognize <code>dorp</code> as a valid command), and refuses to commit the change. Once <code>dorp</code> is replaced with <code>pass</code> (the command we want in the first place), it will be much happier. Simply edit the text then save and IOS-XR will prompt a commit:</p>
+<p>Proceed with commit (yes/no/cancel)? [cancel]: yes
+   Parsing.
+   42 bytes parsed in 1 sec (41)bytes/sec
+   Committing.
+   Prepared commit in 0 sec</p>
+<p>1 items committed in 1 sec (0)items/sec
+   Updating.
+   Updated Commit database in 1 sec</p>
+<h3>More Complex RPLs</h3>
+<p>More complex RPLs can be created using an if...then syntax. Here is an example:</p>
+<p>route-policy complex
+     if as-path originates-from '911'  then
+       pass
+     endif
+   end-policy</p>
+<p>It is also possible to chain together multiple if statements with the <code>elseif</code> and <code>else</code> statements. Here is an example:</p>
+<p>route-policy more-complex
+     if as-path neighbor-is '111'  then
+       set med 111
+     elseif local-preference eq 911 then
+       set local-preference +89
+     else
+       pass
+     endif
+   end-policy</p>
+<h2>RPL Elements</h2>
+<h3>Actions</h3>
+<p>Every route policy requires a ticket for the route to be accepted or dropped. This ticket can be generated using one or more of the following actions:</p>
+<h4>Pass</h4>
+<ul>
+<li>Prefix is allowed if not later dropped</li>
+<li>Pass grants a ticket to defeat the implied default <code>drop</code></li>
+<li>Execution of the RPL continues after a <code>pass</code></li>
+</ul>
+<h4>Set</h4>
+<ul>
+<li>Changes a value</li>
+<li>Values can be set more than once</li>
+<li>Prefix is allowed if not later dropped</li>
+<li>Execution continues after set</li>
+</ul>
+<h4>Done</h4>
+<ul>
+<li>Prefix is allowed</li>
+<li>Execution is ended</li>
+</ul>
+<h4>Drop</h4>
+<ul>
+<li>Prefix is discarded</li>
+<li>Explicit <code>drop</code> stops policy execution</li>
+<li>Every RPL ends with an implicit default <code>drop</code> if the policy runs to the end without generating a ticket.</li>
+</ul>
+<h3>Comparison Operators</h3>
+<p>The following comparison operators are supported:</p>
+<ul>
+<li>eq - equal to (numeric equality)</li>
+<li>is - exact match</li>
+<li>gt - greater than or equal to</li>
+<li>le - less than or equal to</li>
+</ul>
+<h3>Boolean Operators</h3>
+<p>The following boolean operators are supported (in order of precedence):</p>
+<ul>
+<li>NOT - The following statement is false</li>
+<li>AND - All of the following statements are true</li>
+<li>OR - One or more of the following statements are true</li>
+</ul>
+<p>Parenthesis are also supported to override order of operations and/or to add clarity.</p>
+<p>Example 1:</p>
+<p>if med eq 10 and not destination in (192.0.2.0/24) or community is (65551:666) then</p>
+<p>Example2:</p>
+<p>if med eq 10 and (not destination in (192.0.2.0/24) or community is (65551:666)) then</p>
+<p>In example 1, <code>not destination in (192.0.2.0/24)</code> will be processed first, followed <code>med eq 10</code>, and finally <code>community is (65551:666)</code>. Example 2 is the same as example 2 except for the addition of some parenthasis. In example 2 <code>not destination in (192.0.2.0/24)</code> will still be processed first, but the addition of the parenthasis will now cause <code>community is (65551:666)</code> to be processed before <code>med eq 10</code>.</p>
+<h3>Parameters</h3>
+<p>It is possible to create a policy that accepts parameters to be stored as variables used later in the policy when called by another policy. Consider the following example::</p>
+<p>route-policy set-values ($med, $weight)
+     set med $med
+     set weight $weight
+   end-policy</p>
+<p>route-policy call-set-values
+     apply set-values (10, 30)
+   end-policy</p>
+<p>In this example, the policy <code>call-set-values</code> passes the values <code>10</code> and <code>30</code> to the <code>set-values</code> policy as the med and weight, respectively. This allows policies to be reused similar to reusing functions.</p>
+<h2>Sets</h2>
+<p>IOS-XR replaces aspath-lists, community-lists, and prefix-lists with as-path-sets, community-sets, and prefix-sets. These lists can be created inline or as named sets.</p>
+<h3>Inline vs Named Sets</h3>
+<h4>Inline</h4>
+<p>Inline sets are configured directly in the policy. This makes them slightly more performant when compared to named sets; however they can become unruly with a large number of entries. Example of an inline set::</p>
+<p>route-policy inline-sets
+     if as-path in (ios-regex '_64496$', ios-regex '_64511$', ios-regex '_65551$') then
+       pass
+     else
+       drop
+     endif
+   end-policy</p>
+<h4>Named sets</h4>
+<p>Named sets can take slightly longer to execute; however they are much more managable with a large number of entries. Examples of named as-path-sets::</p>
+<p>as-path-set lw
+     ios-regex '_64496$',
+     ios-regex '_64511$',
+     ios-regex '_65551$',
+   end-set</p>
+<p>as-path-set lw
+     ios-regex '_(64496|64511|65551)$'
+   end-set</p>
+<h3>Set Types</h3>
+<h4>as-path-sets</h4>
+<p>AS-path-sets can be used to match based on the contents of the AS path in BGP similar to aspath-lists in IOS. Matches can be made based on regex (either DFA-style or IOS-style), AS path lenth, origin AS, neighbor AS, unique length (ignoring prepends and duplicates), and transit AS.</p>
+<p>The following is an example of an as-path-set that will match if all of the following are met:</p>
+<ul>
+<li>The AS-path length is less than or equal to 18 AS hops</li>
+<li>The route originates from AS 911</li>
+<li>The route is advertised by AS 111</li>
+</ul>
+<p>as-path-set example
+     length le 18,
+     originates-from '911',
+     neighbor-is '111',</p>
+<h4>community-sets</h4>
+<p>Community-sets can be used to match on BGP communities similar to community-lists in IOS; they allow for matching in RPLs based on explitly listed communities or well-known communities. The supported well-known communities are:</p>
+<ul>
+<li>accept-own (0xFFFF0001</li>
+<li>internet (0:0)</li>
+<li>no-export (65535:65281)</li>
+<li>no-advertise (65535:65282)</li>
+<li>local-as (65535:65283)</li>
+</ul>
+<p>Examples:</p>
+<p>community-set example
+     accept-own
+     65551:666
+     internet
+   end set</p>
+<p>community-set just-say-no
+     no-advertise
+     no-export</p>
+<h4>prefix-sets</h4>
+<p>Prefix-sets are used to match on prefixes advertised or received via BGP similar to prefix-lists in IOS. Unlike in IOS, separate prefix-sets are not required for IPv4 and IPv6. The following is an example of a prefix-set that will match on all LW IPv6 prefixes with a shorter than a /48, and on an exact match for IPv4 addresses:</p>
+<p>prefix-set my-org
+     2001:DB8::/32,
+     192.0.2.0/24,
+     198.51.100.0/24,
+     203.0.113.0/24,
+   end-set</p>
+<h2>Usable attachpoints for RPL</h2>
+<p><img alt="IOS-XR RPL Attachpoints" src="images/iosxr_rpl_attachpoints.png"></p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://ericroc.how/tag/network.html">network</a>
+      <a href="https://ericroc.how/tag/iosxr.html">iosxr</a>
+      <a href="https://ericroc.how/tag/policy.html">policy</a>
+    </p>
+  </div>
+
+
+
+
+
+</article>
+
+    <footer>
+<p>&copy; Eric Rochow 2020</p>
+    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Eric Rochow ",
+  "url" : "https://ericroc.how",
+  "image": "https://ericroc.how/images/face.png",
+  "description": ""
+}
+</script>
+
+</body>
+</html>

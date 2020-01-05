@@ -36,25 +36,25 @@
 <!-- End Google Analytics -->
 
 <meta name="author" content="Eric Rochow" />
-<meta name="description" content="Obscure commands for my future reference" />
-<meta name="keywords" content="network, nx-os, cli">
+<meta name="description" content="A quick primer on how to configure authentication on IOS-XR" />
+<meta name="keywords" content="ios-xr, authentication, cli">
 
 <meta property="og:site_name" content="Eric Rochow"/>
-<meta property="og:title" content="Obscure NX-OS Commands"/>
-<meta property="og:description" content="Obscure commands for my future reference"/>
+<meta property="og:title" content="AAA on IOX-XR"/>
+<meta property="og:description" content="A quick primer on how to configure authentication on IOS-XR"/>
 <meta property="og:locale" content="en_US"/>
-<meta property="og:url" content="https://ericroc.how/obscure-nx-os-commands.html"/>
+<meta property="og:url" content="https://ericroc.how/aaa-on-iox-xr.html"/>
 <meta property="og:type" content="article"/>
-<meta property="article:published_time" content="2017-04-28 13:05:00-04:00"/>
+<meta property="article:published_time" content="2019-09-06 14:34:00-04:00"/>
 <meta property="article:modified_time" content=""/>
 <meta property="article:author" content="https://ericroc.how/author/eric-rochow.html">
 <meta property="article:section" content="Network"/>
-<meta property="article:tag" content="network"/>
-<meta property="article:tag" content="nx-os"/>
+<meta property="article:tag" content="ios-xr"/>
+<meta property="article:tag" content="authentication"/>
 <meta property="article:tag" content="cli"/>
 <meta property="og:image" content="https://ericroc.how/images/face.png">
 
-  <title>Eric Rochow &ndash; Obscure NX-OS Commands</title>
+  <title>Eric Rochow &ndash; AAA on IOX-XR</title>
 
 </head>
 <body>
@@ -142,9 +142,9 @@
 <article class="single">
   <header>
       
-    <h1 id="obscure-nx-os-commands">Obscure NX-OS Commands</h1>
+    <h1 id="aaa-on-iox-xr">AAA on IOX-XR</h1>
     <p>
-          Posted on Fri 28 April 2017 in <a href="https://ericroc.how/category/network.html">Network</a>
+          Posted on Fri 06 September 2019 in <a href="https://ericroc.how/category/network.html">Network</a>
 
 
     </p>
@@ -152,34 +152,93 @@
 
 
   <div>
-    <h1>Obscure Commands</h1>
-<h2>STP</h2>
-<p>Find the total number of STP Virtual Ports currently in use:</p>
-<div class="highlight"><pre><span></span><span class="err">router# show spanning-tree internal info global | grep -a 3 &quot;STP Port Count Summary&quot;</span>
-<span class="err">------- STP Port Count Summary ---------------</span>
-<span class="err">Total stp_ports*instances:      498</span>
-<span class="err">Total ports*vlans        :    41799</span>
-<span class="err">Total phy_ports*vlans    :    42051</span>
+    <h1>AAA</h1>
+<h2>Authentication Methods</h2>
+<h3>Local</h3>
+<p>NOTE: Local users and groups are stored in a local database and not in the running configuration so they will not show up in <code>show run</code> output.</p>
+<h4>Define a new task group</h4>
+<div class="highlight"><pre><span></span><span class="err">    taskgroup $groupname</span>
+<span class="err">     description $description</span>
+<span class="err">     inherit taskgroup $taskgroup</span>
+<span class="err">     task $permission $taskname</span>
 </pre></div>
 
 
-<h2>TCAM</h2>
-<h3>FIB Exception State</h3>
-<div class="highlight"><pre><span></span><span class="err">router# show system internal forwarding route summary [module #]</span>
+<h4>Define a new user group</h4>
+<p>If the pre-defined user groups do not suffice, it is possible to configure customized user groups more more granularity with permissions:</p>
+<div class="highlight"><pre><span></span><span class="err">    usergroup $groupname </span>
+<span class="err">     description $description</span>
+<span class="err">     taskgroup $taskgroup</span>
+<span class="err">     inherit usergroup $groupname</span>
 </pre></div>
 
 
-<h2>RAID</h2>
-<div class="highlight"><pre><span></span><span class="err">router# show system internal raid</span>
+<h4>Define a new user</h4>
+<div class="highlight"><pre><span></span><span class="err">    username $user</span>
+<span class="err">     group $groupname</span>
+<span class="err">     secret 0 $plaintext_password</span>
 </pre></div>
 
 
-<p>This command does not tab complete nor question mark complete. It must also be typed out completely.</p>
+<h3>RADIUS</h3>
+<h4>Configure servers</h4>
+<div class="highlight"><pre><span></span><span class="err">    radius source-interface $interface vrf default</span>
+<span class="err">    radius-server host $server1_ip auth-port 1812 acct-port 1813 </span>
+<span class="err">     key 7 $secret_key</span>
+<span class="err">    !</span>
+<span class="err">    radius-server host $server2_ip auth-port 1812 acct-port 1813</span>
+<span class="err">     key 7 $secret_key</span>
+<span class="err">    !</span>
+<span class="err">    radius-server timeout 20</span>
+<span class="err">    radius-server deadtime 5</span>
+<span class="err">    radius-server dead-criteria time 8</span>
+<span class="err">    radius-server dead-criteria tries 3</span>
+</pre></div>
+
+
+<h4>Configure AAA</h4>
+<div class="highlight"><pre><span></span><span class="err">    aaa accounting exec default start-stop group $server-group</span>
+<span class="err">    aaa accounting system default start-stop group $server-group</span>
+<span class="err">    aaa group server radius $server-group </span>
+<span class="err">     server $server1_ip auth-port 1812 acct-port 1813 </span>
+<span class="err">     server $server2_ip auth-port 1812 acct-port 1813</span>
+<span class="err">     deadtime 10 </span>
+<span class="err">     source-interface $interface</span>
+<span class="err">    !</span>
+<span class="err">    aaa authentication login default local group $server-group</span>
+</pre></div>
+
+
+<h3>TACACS+</h3>
+<div class="highlight"><pre><span></span><span class="err">    aaa group server tacacs+ $groupname</span>
+<span class="err">     server $server1_ip</span>
+<span class="err">     server $server2_ip</span>
+<span class="err">    aaa authentication login default local group $server-group</span>
+<span class="err">    aaa authorization commands default local tacacs+</span>
+<span class="err">    aaa accounting exec default start-stop group $server-group</span>
+<span class="err">    aaa accounting system default start-stop group $server-group</span>
+</pre></div>
+
+
+<h2>Activate AAA</h2>
+<h3>SSH</h3>
+<p>If a AAA group besides 'default' is used (e.g. aaa authentication login my-list), then the list will need to be added to the appropriate lines:</p>
+<div class="highlight"><pre><span></span><span class="err">    line default</span>
+<span class="err">     authorization commands default</span>
+<span class="err">     authorization exec default</span>
+</pre></div>
+
+
+<h3>Console</h3>
+<div class="highlight"><pre><span></span><span class="err">    line console</span>
+<span class="err">     authorization commands default</span>
+<span class="err">     authorization exec default</span>
+</pre></div>
   </div>
   <div class="tag-cloud">
     <p>
-      <a href="https://ericroc.how/tag/network.html">network</a>
-      <a href="https://ericroc.how/tag/nx-os.html">nx-os</a>
+      <a href="https://ericroc.how/tag/ios-xr.html">ios-xr</a>
+      <a href="https://ericroc.how/tag/authentication.html">authentication</a>
       <a href="https://ericroc.how/tag/cli.html">cli</a>
     </p>
   </div>
