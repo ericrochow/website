@@ -213,6 +213,68 @@ I have a LOT of network-related notes that I have accumulated over the years - s
 </article>
 <article>
   <header>
+    <h2><a href="https://ericroc.how/ios-xr-acls.html#ios-xr-acls">IOS-XR ACLs</a></h2>
+    <p>
+          Posted on Fri 06 September 2019 in <a href="https://ericroc.how/category/network.html">Network</a>
+
+
+          &#8226;     Tagged with
+
+              <a href="https://ericroc.how/tag/network.html">network</a>,              <a href="https://ericroc.how/tag/acl.html">acl</a>,              <a href="https://ericroc.how/tag/ios-xr.html">ios-xr</a>
+    </p>
+  </header>
+  <div>
+      <h1>ACLs</h1>
+<h2>Configure</h2>
+<h3>IPv4</h3>
+<h4>Create ACL</h4>
+<p>IPv4 ACL configuration in IOS XR is pretty similar to IOS::</p>
+<div class="highlight"><pre><span></span><span class="err">RP/0/0/CPU0:router(config)#ipv4 access-list TEST</span>
+<span class="err">RP/0/0/CPU0:router(config-ipv4-acl)#remark FIRST</span>
+<span class="err">RP/0/0/CPU0:router(config-ipv4-acl)#permit icmp any any echo</span>
+<span class="err">RP/0/0/CPU0:router(config-ipv4-acl)#permit icmp any any echo-reply </span>
+<span class="err">RP/0/0/CPU0:router(config-ipv4-acl)#permit icmp any any ttl-exceeded </span>
+<span class="err">RP/0/0/CPU0:router(config-ipv4-acl)#permit icmp any any unreachable  </span>
+<span class="err">RP/0/0/CPU0:router(config-ipv4-acl)#permit icmp any any packet-too-big </span>
+<span class="err">RP/0/0/CPU0:router(config-ipv4-acl)#deny icmp any any </span>
+<span class="err">RP/0/0/CPU0:router(config-ipv4-acl)#exit</span>
+<span class="err">RP/0/0/CPU0:router(config)#commit</span>
+</pre></div>
+
+
+<h4>Apply ACL</h4>
+<p>The ACL can then be applied to an interface with the following::</p>
+<div class="highlight"><pre><span></span><span class="err">RP/0/0/CPU0:router(config)#interface g0/0/0/0</span>
+<span class="err">RP/0/0/CPU0:router(config-if)#ipv4 access-group TEST ingress</span>
+</pre></div>
+
+
+<h4>Implicit Entries</h4>
+<p>Every IPv4  ACL in IOS XR has the following implicit statement as its last match entry::</p>
+<div class="highlight"><pre><span></span><span class="err">deny ipv4 any any</span>
+</pre></div>
+
+
+<p>The ACL must have at least one (1) explicit entry for the implicit <code>deny ipv4 any any</code> statement to take effect.</p>
+<h3>IPv6</h3>
+<h4>Create ACL</h4>
+<p>IPv6 ACL configuration in IOS XR is pretty similar to IOS::</p>
+<div class="highlight"><pre><span></span><span class="err">RP/0/0/CPU0:router(config)#ipv6 access-list TEST6</span>
+<span class="err">RP/0/0/CPU0:router(config-ipv6-acl)#remark FIRST!</span>
+<span class="err">RP/0/0/CPU0:router(config-ipv6-acl)#permit icmp any any echo</span>
+<span class="err">RP/0/0/CPU0:router(config-ipv6-acl)#permit icmp any any echo-reply </span>
+<span class="err">RP/0/0/CPU0:router(config-ipv6-acl)#permit icmp any any ttl        </span>
+<span class="err">RP/0/0/CPU0:router(config-ipv6-acl)#permit icmp any any ttl-exceeded </span>
+<span class="err">RP/0/0/CPU0:router(config-ipv6-acl)#permit icmp any any unreachable  </span>
+<span class="err">RP/0/0/CPU0 …</span></pre></div>
+        <br>
+        <a class="btn" href="https://ericroc.how/ios-xr-acls.html#ios-xr-acls">    Continue reading
+</a>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
     <h2><a href="https://ericroc.how/ios-xr-licensing.html#ios-xr-licensing">IOS-XR Licensing</a></h2>
     <p>
           Posted on Fri 06 September 2019 in <a href="https://ericroc.how/category/network.html">Network</a>
@@ -253,6 +315,59 @@ I have a LOT of network-related notes that I have accumulated over the years - s
 </article>
 <article>
   <header>
+    <h2><a href="https://ericroc.how/ospf-in-ios-xr.html#ospf-in-ios-xr">OSPF in IOS-XR</a></h2>
+    <p>
+          Posted on Fri 06 September 2019 in <a href="https://ericroc.how/category/network.html">Network</a>
+
+
+          &#8226;     Tagged with
+
+              <a href="https://ericroc.how/tag/ospf.html">ospf</a>,              <a href="https://ericroc.how/tag/routing.html">routing</a>,              <a href="https://ericroc.how/tag/ios-xr.html">ios-xr</a>,              <a href="https://ericroc.how/tag/network.html">network</a>,              <a href="https://ericroc.how/tag/cli.html">cli</a>
+    </p>
+  </header>
+  <div>
+      <h1>OSPF</h1>
+<hr>
+<p>OSPF configuration in IOS-XR is very similar to IOS.</p>
+<p>RP/0/0/CPU0:router(config)#router ospf 1
+   RP/0/0/CPU0:router(config-ospf)#router-id 172.31.0.2
+   RP/0/0/CPU0:router(config-ospf)#area 0
+   RP/0/0/CPU0:router(config-ospf-ar)#interface Loopback0
+   RP/0/0/CPU0:router(config-ospf-ar-if)#exit
+   RP/0/0/CPU0:router(config-ospf-ar)#interface GigabitEthernet0/0/0/0
+   RP/0/0/CPU0:router(config-ospf-ar-if)#network point-to-point
+   RP/0/0/CPU0:router(config-ospf-ar-if)#exit
+   RP/0/0/CPU0:router(config-ospf-ar)#interface GigabitEthernet0/0/0/1
+   RP/0/0/CPU0:router(config-ospf-ar-if)#network point-to-point
+   RP/0/0/CPU0:router(config-ospf-ar-if)#exit
+   RP/0/0/CPU0:router(config-ospf-ar)#interface GigabitEthernet0/0/0/2
+   RP/0/0/CPU0:router(config-ospf-ar-if)#network point-to-point
+   RP/0/0/CPU0:router(config-ospf-ar-if)#exit</p>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
+    <h2><a href="https://ericroc.how/vrf-on-ios.html#vrf-on-ios">VRF on IOS</a></h2>
+    <p>
+          Posted on Fri 06 September 2019 in <a href="https://ericroc.how/category/network.html">Network</a>
+
+
+          &#8226;     Tagged with
+
+              <a href="https://ericroc.how/tag/network.html">network</a>,              <a href="https://ericroc.how/tag/ios.html">ios</a>,              <a href="https://ericroc.how/tag/vrf.html">vrf</a>,              <a href="https://ericroc.how/tag/cli.html">cli</a>
+    </p>
+  </header>
+  <div>
+      <p>Brief Summary of VRFs on IOS</p>
+        <br>
+        <a class="btn" href="https://ericroc.how/vrf-on-ios.html#vrf-on-ios">    Continue reading
+</a>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
     <h2><a href="https://ericroc.how/obscure-nx-os-commands.html#obscure-nx-os-commands">Obscure NX-OS Commands</a></h2>
     <p>
           Posted on Fri 28 April 2017 in <a href="https://ericroc.how/category/network.html">Network</a>
@@ -267,66 +382,6 @@ I have a LOT of network-related notes that I have accumulated over the years - s
       <p>Obscure commands for my future reference</p>
         <br>
         <a class="btn" href="https://ericroc.how/obscure-nx-os-commands.html#obscure-nx-os-commands">    Continue reading
-</a>
-  </div>
-  <hr />
-</article>
-<article>
-  <header>
-    <h2><a href="https://ericroc.how/nx-os-upgrades.html#nx-os-upgrades">NX-OS Upgrades</a></h2>
-    <p>
-          Posted on Fri 24 March 2017 in <a href="https://ericroc.how/category/network.html">Network</a>
-
-
-          &#8226;     Tagged with
-
-              <a href="https://ericroc.how/tag/network.html">network</a>,              <a href="https://ericroc.how/tag/nx-os.html">nx-os</a>,              <a href="https://ericroc.how/tag/upgrade.html">upgrade</a>
-    </p>
-  </header>
-  <div>
-      <p>Upgrade Procedures for Nexus devices</p>
-        <br>
-        <a class="btn" href="https://ericroc.how/nx-os-upgrades.html#nx-os-upgrades">    Continue reading
-</a>
-  </div>
-  <hr />
-</article>
-<article>
-  <header>
-    <h2><a href="https://ericroc.how/cisco-fabric-services.html#cisco-fabric-services">Cisco Fabric Services</a></h2>
-    <p>
-          Posted on Fri 24 February 2017 in <a href="https://ericroc.how/category/network.html">Network</a>
-
-
-          &#8226;     Tagged with
-
-              <a href="https://ericroc.how/tag/network.html">network</a>,              <a href="https://ericroc.how/tag/nx-os.html">nx-os</a>
-    </p>
-  </header>
-  <div>
-      <p>Overview of Cisco Fabric Services</p>
-        <br>
-        <a class="btn" href="https://ericroc.how/cisco-fabric-services.html#cisco-fabric-services">    Continue reading
-</a>
-  </div>
-  <hr />
-</article>
-<article>
-  <header>
-    <h2><a href="https://ericroc.how/fabric-extender-fex.html#fabric-extender-fex">Fabric Extender (FEX)</a></h2>
-    <p>
-          Posted on Fri 24 February 2017 in <a href="https://ericroc.how/category/network.html">Network</a>
-
-
-          &#8226;     Tagged with
-
-              <a href="https://ericroc.how/tag/network.html">network</a>,              <a href="https://ericroc.how/tag/nx-os.html">nx-os</a>,              <a href="https://ericroc.how/tag/fex.html">fex</a>
-    </p>
-  </header>
-  <div>
-      <p>An overview of fabric extenders</p>
-        <br>
-        <a class="btn" href="https://ericroc.how/fabric-extender-fex.html#fabric-extender-fex">    Continue reading
 </a>
   </div>
 </article>

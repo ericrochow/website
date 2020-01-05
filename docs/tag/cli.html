@@ -195,6 +195,59 @@
 </article>
 <article>
   <header>
+    <h2><a href="https://ericroc.how/ospf-in-ios-xr.html#ospf-in-ios-xr">OSPF in IOS-XR</a></h2>
+    <p>
+          Posted on Fri 06 September 2019 in <a href="https://ericroc.how/category/network.html">Network</a>
+
+
+          &#8226;     Tagged with
+
+              <a href="https://ericroc.how/tag/ospf.html">ospf</a>,              <a href="https://ericroc.how/tag/routing.html">routing</a>,              <a href="https://ericroc.how/tag/ios-xr.html">ios-xr</a>,              <a href="https://ericroc.how/tag/network.html">network</a>,              <a href="https://ericroc.how/tag/cli.html">cli</a>
+    </p>
+  </header>
+  <div>
+      <h1>OSPF</h1>
+<hr>
+<p>OSPF configuration in IOS-XR is very similar to IOS.</p>
+<p>RP/0/0/CPU0:router(config)#router ospf 1
+   RP/0/0/CPU0:router(config-ospf)#router-id 172.31.0.2
+   RP/0/0/CPU0:router(config-ospf)#area 0
+   RP/0/0/CPU0:router(config-ospf-ar)#interface Loopback0
+   RP/0/0/CPU0:router(config-ospf-ar-if)#exit
+   RP/0/0/CPU0:router(config-ospf-ar)#interface GigabitEthernet0/0/0/0
+   RP/0/0/CPU0:router(config-ospf-ar-if)#network point-to-point
+   RP/0/0/CPU0:router(config-ospf-ar-if)#exit
+   RP/0/0/CPU0:router(config-ospf-ar)#interface GigabitEthernet0/0/0/1
+   RP/0/0/CPU0:router(config-ospf-ar-if)#network point-to-point
+   RP/0/0/CPU0:router(config-ospf-ar-if)#exit
+   RP/0/0/CPU0:router(config-ospf-ar)#interface GigabitEthernet0/0/0/2
+   RP/0/0/CPU0:router(config-ospf-ar-if)#network point-to-point
+   RP/0/0/CPU0:router(config-ospf-ar-if)#exit</p>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
+    <h2><a href="https://ericroc.how/vrf-on-ios.html#vrf-on-ios">VRF on IOS</a></h2>
+    <p>
+          Posted on Fri 06 September 2019 in <a href="https://ericroc.how/category/network.html">Network</a>
+
+
+          &#8226;     Tagged with
+
+              <a href="https://ericroc.how/tag/network.html">network</a>,              <a href="https://ericroc.how/tag/ios.html">ios</a>,              <a href="https://ericroc.how/tag/vrf.html">vrf</a>,              <a href="https://ericroc.how/tag/cli.html">cli</a>
+    </p>
+  </header>
+  <div>
+      <p>Brief Summary of VRFs on IOS</p>
+        <br>
+        <a class="btn" href="https://ericroc.how/vrf-on-ios.html#vrf-on-ios">    Continue reading
+</a>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
     <h2><a href="https://ericroc.how/obscure-nx-os-commands.html#obscure-nx-os-commands">Obscure NX-OS Commands</a></h2>
     <p>
           Posted on Fri 28 April 2017 in <a href="https://ericroc.how/category/network.html">Network</a>
