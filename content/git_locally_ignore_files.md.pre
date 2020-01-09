@@ -1,0 +1,7 @@
+
+
+There may be cases where you want to locally ignore a file or directory that is normally tracked by git. An example of this may be built docs. If you add the object to ``.gitignore``, the ignore will be pushed to the remote repo. To ignore a file or directory, add the file/directory to ``.git/info/exclude`` with the same syntax as .gitignore.
+
+For example, to ignore the ``docs/`` directory you can do the following:
+
+    echo "docs/" | tee -a .git/info/exclude
