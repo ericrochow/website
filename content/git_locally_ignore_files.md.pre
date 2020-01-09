@@ -1,7 +1,23 @@
-
+Title: VRF on IOS
+Date: 2020-01-09 08:25
+Category: Git
+Tags: git, cli
+Authors: Eric Rochow
 
 There may be cases where you want to locally ignore a file or directory that is normally tracked by git. An example of this may be built docs. If you add the object to ``.gitignore``, the ignore will be pushed to the remote repo. To ignore a file or directory, add the file/directory to ``.git/info/exclude`` with the same syntax as .gitignore.
 
 For example, to ignore the ``docs/`` directory you can do the following:
 
-    echo "docs/" | tee -a .git/info/exclude
+    # echo "docs/" | tee -a .git/info/exclude
+
+Now we can test to make sure the ignore works:
+
+    # touch docs/test
+    # git status
+    On branch master
+    Your branch is ahead of 'origin/master' by 1 commit.
+      (use "git push" to publish your local commits)
+
+      nothing to commit, working tree clean
+
+Success!
