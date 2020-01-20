@@ -28,9 +28,9 @@ ghp-import = "*"
 markup = "*"
 invoke = "*"
 feedparser = "*"
+gensim = "*"
 
 [requires]
 
 [pipenv]
 allow_prereleases = true
-gensim = "*"
