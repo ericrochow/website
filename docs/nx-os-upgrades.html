@@ -10,12 +10,14 @@
 
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
-    <link rel="stylesheet" type="text/css" href="https://ericroc.how/theme/stylesheet/style.min.css">
+    <link rel="stylesheet/less" type="text/css" href="https://ericroc.how/theme/stylesheet/style.less">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.5.1/less.min.js" type="text/javascript"></script>
 
   <link rel="stylesheet" type="text/css" href="https://ericroc.how/theme/pygments/github.min.css">
   <link rel="stylesheet" type="text/css" href="https://ericroc.how/theme/font-awesome/css/fontawesome.css">
   <link rel="stylesheet" type="text/css" href="https://ericroc.how/theme/font-awesome/css/brands.css">
   <link rel="stylesheet" type="text/css" href="https://ericroc.how/theme/font-awesome/css/solid.css">
+  <!--<link rel="stylesheet" type="text/css" href="https://ericroc.how/theme/font-awesome/css/all.css">-->
 
 
 
@@ -75,53 +77,48 @@
 
       <ul class="social">
           <li>
-            <a  class="sc-globe fa-lg" href="#" target="_blank">
-            <i class="fab fa-globe fa-lg">
+            <a  class="sc-globe" href="https://ericroc.how" target="_blank">
+            <i class="fas fa-globe">
             </i>
           </a></li>
           <li>
-            <a  class="sc-envelope-o fa-lg" href="mailto:ericrochow@gmail.com" target="_blank">
-            <i class="fab fa-envelope-o fa-lg">
+            <a  class="sc-envelope" href="mailto:ericrochow@gmail.com" target="_blank">
+            <i class="fas fa-envelope">
             </i>
           </a></li>
           <li>
-            <a  class="sc-rss fa-lg" href="#" target="_blank">
-            <i class="fab fa-rss fa-lg">
+            <a  class="sc-rss" href="https://ericroc.how" target="_blank">
+            <i class="fas fa-rss">
             </i>
           </a></li>
           <li>
-            <a  class="sc-linkedin fa-lg" href="https://www.linkedin.com/in/erochow/" target="_blank">
-            <i class="fab fa-linkedin fa-lg">
+            <a  class="sc-linkedin" href="https://www.linkedin.com/in/erochow/" target="_blank">
+            <i class="fab fa-linkedin">
             </i>
           </a></li>
           <li>
-            <a  class="sc-github fa-lg" href="https://github.com/ericrochow" target="_blank">
-            <i class="fab fa-github fa-lg">
+            <a  class="sc-github" href="https://github.com/ericrochow" target="_blank">
+            <i class="fab fa-github">
             </i>
           </a></li>
           <li>
-            <a  class="sc-reddit fa-lg" href="#" target="_blank">
-            <i class="fab fa-reddit fa-lg">
+            <a  class="sc-twitter" href="https://twitter.com/eric_rochow" target="_blank">
+            <i class="fab fa-twitter">
             </i>
           </a></li>
           <li>
-            <a  class="sc-twitter fa-lg" href="https://twitter.com/eric_rochow" target="_blank">
-            <i class="fab fa-twitter fa-lg">
+            <a  class="sc-lastfm" href="https://www.last.fm/user/ericrochow" target="_blank">
+            <i class="fab fa-lastfm">
             </i>
           </a></li>
           <li>
-            <a  class="sc-lastfm fa-lg" href="https://www.last.fm/user/ericrochow" target="_blank">
-            <i class="fab fa-lastfm fa-lg">
+            <a  class="sc-spotify" href="https://open.spotify.com/user/ericrochow?si=KEmxAAk8QZy31L82MMge4g" target="_blank">
+            <i class="fab fa-spotify">
             </i>
           </a></li>
           <li>
-            <a  class="sc-spotify fa-lg" href="https://open.spotify.com/user/ericrochow?si=KEmxAAk8QZy31L82MMge4g" target="_blank">
-            <i class="fab fa-spotify fa-lg">
-            </i>
-          </a></li>
-          <li>
-            <a  class="sc-book fa-lg" href="https://www.goodreads.com/user/show/18841479-eric-rochow" target="_blank">
-            <i class="fab fa-book fa-lg">
+            <a  class="sc-book" href="https://www.goodreads.com/user/show/18841479-eric-rochow" target="_blank">
+            <i class="fas fa-book">
             </i>
           </a></li>
       </ul>
@@ -157,28 +154,28 @@
   <div>
     <h1>Nexus 3k/9k Upgrades</h1>
 <p>Upgrades from NX-OS 6 to 7 require an incremental upgrade due to BIOS incompatibilities. First install a compatible version of 6 that allows standalone BIOS upgrades:</p>
-<div class="highlight"><pre><span></span><span class="n">copy</span><span class="w"> </span><span class="nl">scp</span><span class="p">:</span><span class="o">//</span><span class="k">user</span><span class="nv">@server</span><span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">n3000</span><span class="o">-</span><span class="n">uk9</span><span class="mf">.6.0.2</span><span class="p">.</span><span class="n">U6</span><span class="mf">.9</span><span class="p">.</span><span class="n">bin</span><span class="w"> </span><span class="nl">bootflash</span><span class="p">:</span><span class="w"> </span><span class="n">vrf</span><span class="w"> </span><span class="k">default</span><span class="w"></span>
-<span class="n">copy</span><span class="w"> </span><span class="nl">scp</span><span class="p">:</span><span class="o">//</span><span class="k">user</span><span class="nv">@server</span><span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">n3000</span><span class="o">-</span><span class="n">uk9</span><span class="o">-</span><span class="n">kickstart</span><span class="mf">.6.0.2</span><span class="p">.</span><span class="n">U6</span><span class="mf">.9</span><span class="p">.</span><span class="n">bin</span><span class="w"> </span><span class="nl">bootflash</span><span class="p">:</span><span class="w"> </span><span class="n">vrf</span><span class="w"> </span><span class="k">default</span><span class="w"></span>
-<span class="n">install</span><span class="w"> </span><span class="ow">all</span><span class="w"> </span><span class="n">kickstart</span><span class="w"> </span><span class="nl">bootflash</span><span class="p">:</span><span class="o">///</span><span class="n">n3000</span><span class="o">-</span><span class="n">uk9</span><span class="o">-</span><span class="n">kickstart</span><span class="mf">.6.0.2</span><span class="p">.</span><span class="n">U6</span><span class="mf">.9</span><span class="p">.</span><span class="n">bin</span><span class="w"> </span><span class="k">system</span><span class="w"> </span><span class="nl">bootflash</span><span class="p">:</span><span class="n">n3000</span><span class="o">-</span><span class="n">uk9</span><span class="mf">.6.0.2</span><span class="p">.</span><span class="n">U6</span><span class="mf">.9</span><span class="p">.</span><span class="n">bin</span><span class="w"></span>
+<div class="highlight"><pre><span></span><span class="err">copy scp://user@server/root/n3000-uk9.6.0.2.U6.9.bin bootflash: vrf default</span>
+<span class="err">copy scp://user@server/root/n3000-uk9-kickstart.6.0.2.U6.9.bin bootflash: vrf default</span>
+<span class="err">install all kickstart bootflash:///n3000-uk9-kickstart.6.0.2.U6.9.bin system bootflash:n3000-uk9.6.0.2.U6.9.bin</span>
 </pre></div>
 
 
 <p>This will take a long time and require a reboot. After the reboot, delete the old image to make room for the new images:</p>
-<div class="highlight"><pre><span></span><span class="k">delete</span> <span class="n">bootflash</span><span class="p">:</span><span class="o">///</span><span class="n">n3000</span><span class="o">-</span><span class="n">uk9</span><span class="o">-</span><span class="n">kickstart</span><span class="p">.</span><span class="mi">6</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">2</span><span class="p">.</span><span class="n">U3</span><span class="p">.</span><span class="mi">1</span><span class="p">.</span><span class="n">bin</span>
-<span class="k">delete</span> <span class="n">bootflash</span><span class="p">:</span><span class="o">///</span><span class="n">n3000</span><span class="o">-</span><span class="n">uk9</span><span class="p">.</span><span class="mi">6</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">2</span><span class="p">.</span><span class="n">U3</span><span class="p">.</span><span class="mi">1</span><span class="p">.</span><span class="n">bin</span>
+<div class="highlight"><pre><span></span><span class="err">delete bootflash:///n3000-uk9-kickstart.6.0.2.U3.1.bin</span>
+<span class="err">delete bootflash:///n3000-uk9.6.0.2.U3.1.bin</span>
 </pre></div>
 
 
 <p>Now it's time to install the BIOS upgrade to enable the upgrade to 7:</p>
-<div class="highlight"><pre><span></span><span class="n">copy</span><span class="w"> </span><span class="nl">scp</span><span class="p">:</span><span class="o">//</span><span class="k">user</span><span class="nv">@server</span><span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">nxos</span><span class="o">-</span><span class="n">n3kbios</span><span class="p">.</span><span class="n">bin</span><span class="w"> </span><span class="nl">bootflash</span><span class="p">:</span><span class="w"> </span><span class="n">vrf</span><span class="w"> </span><span class="k">default</span><span class="w"></span>
-<span class="n">install</span><span class="w"> </span><span class="ow">all</span><span class="w"> </span><span class="n">nxos</span><span class="w"> </span><span class="nl">bootflash</span><span class="p">:</span><span class="o">///</span><span class="n">nxos</span><span class="o">-</span><span class="n">n3kbios</span><span class="p">.</span><span class="n">bin</span><span class="w"> </span><span class="n">bios</span><span class="w"></span>
+<div class="highlight"><pre><span></span><span class="err">copy scp://user@server/root/nxos-n3kbios.bin bootflash: vrf default</span>
+<span class="err">install all nxos bootflash:///nxos-n3kbios.bin bios</span>
 </pre></div>
 
 
 <p>It will say that a reboot is required, but it's not. Delete the BIOS bin file and do the final upgrade:</p>
-<div class="highlight"><pre><span></span><span class="k">delete</span><span class="w"> </span><span class="nl">bootflash</span><span class="p">:</span><span class="o">///</span><span class="n">nxos</span><span class="o">-</span><span class="n">n3kbios</span><span class="p">.</span><span class="n">bin</span><span class="w"></span>
-<span class="n">copy</span><span class="w"> </span><span class="nl">scp</span><span class="p">:</span><span class="o">//</span><span class="k">user</span><span class="nv">@server</span><span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">nxos</span><span class="mf">.7.0.3</span><span class="p">.</span><span class="n">I4</span><span class="mf">.4</span><span class="p">.</span><span class="n">bin</span><span class="w"> </span><span class="nl">bootflash</span><span class="p">:</span><span class="w"> </span><span class="n">vrf</span><span class="w"> </span><span class="k">default</span><span class="w"></span>
-<span class="n">install</span><span class="w"> </span><span class="ow">all</span><span class="w"> </span><span class="n">nxos</span><span class="w"> </span><span class="nl">bootflash</span><span class="p">:</span><span class="o">///</span><span class="n">nxos</span><span class="mf">.7.0.3</span><span class="p">.</span><span class="n">I4</span><span class="mf">.4</span><span class="p">.</span><span class="n">bin</span><span class="w"></span>
+<div class="highlight"><pre><span></span><span class="err">delete bootflash:///nxos-n3kbios.bin</span>
+<span class="err">copy scp://user@server/root/nxos.7.0.3.I4.4.bin bootflash: vrf default</span>
+<span class="err">install all nxos bootflash:///nxos.7.0.3.I4.4.bin</span>
 </pre></div>
 
 
@@ -200,7 +197,7 @@
 </article>
 
     <footer>
-<p>&copy; Eric Rochow 2019</p>
+<p>&copy; Eric Rochow 2020</p>
     </footer>
   </main>
 

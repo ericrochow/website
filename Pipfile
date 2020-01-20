@@ -21,16 +21,16 @@ flake8-comprehensions = "*"
 ipython = "*"
 
 [packages]
+arrow = "*"
 markdown = "*"
 pelican = "*"
 ghp-import = "*"
 markup = "*"
 invoke = "*"
 feedparser = "*"
-arrow = "*"
 
 [requires]
-python_version = "3.6"
 
 [pipenv]
 allow_prereleases = true
+gensim = "*"

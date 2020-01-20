@@ -10,12 +10,14 @@
 
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
-    <link rel="stylesheet" type="text/css" href="https://ericroc.how/theme/stylesheet/style.min.css">
+    <link rel="stylesheet/less" type="text/css" href="https://ericroc.how/theme/stylesheet/style.less">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.5.1/less.min.js" type="text/javascript"></script>
 
   <link rel="stylesheet" type="text/css" href="https://ericroc.how/theme/pygments/github.min.css">
   <link rel="stylesheet" type="text/css" href="https://ericroc.how/theme/font-awesome/css/fontawesome.css">
   <link rel="stylesheet" type="text/css" href="https://ericroc.how/theme/font-awesome/css/brands.css">
   <link rel="stylesheet" type="text/css" href="https://ericroc.how/theme/font-awesome/css/solid.css">
+  <!--<link rel="stylesheet" type="text/css" href="https://ericroc.how/theme/font-awesome/css/all.css">-->
 
 
 
@@ -74,53 +76,48 @@
 
       <ul class="social">
           <li>
-            <a  class="sc-globe fa-lg" href="#" target="_blank">
-            <i class="fab fa-globe fa-lg">
+            <a  class="sc-globe" href="https://ericroc.how" target="_blank">
+            <i class="fas fa-globe">
             </i>
           </a></li>
           <li>
-            <a  class="sc-envelope-o fa-lg" href="mailto:ericrochow@gmail.com" target="_blank">
-            <i class="fab fa-envelope-o fa-lg">
+            <a  class="sc-envelope" href="mailto:ericrochow@gmail.com" target="_blank">
+            <i class="fas fa-envelope">
             </i>
           </a></li>
           <li>
-            <a  class="sc-rss fa-lg" href="#" target="_blank">
-            <i class="fab fa-rss fa-lg">
+            <a  class="sc-rss" href="https://ericroc.how" target="_blank">
+            <i class="fas fa-rss">
             </i>
           </a></li>
           <li>
-            <a  class="sc-linkedin fa-lg" href="https://www.linkedin.com/in/erochow/" target="_blank">
-            <i class="fab fa-linkedin fa-lg">
+            <a  class="sc-linkedin" href="https://www.linkedin.com/in/erochow/" target="_blank">
+            <i class="fab fa-linkedin">
             </i>
           </a></li>
           <li>
-            <a  class="sc-github fa-lg" href="https://github.com/ericrochow" target="_blank">
-            <i class="fab fa-github fa-lg">
+            <a  class="sc-github" href="https://github.com/ericrochow" target="_blank">
+            <i class="fab fa-github">
             </i>
           </a></li>
           <li>
-            <a  class="sc-reddit fa-lg" href="#" target="_blank">
-            <i class="fab fa-reddit fa-lg">
+            <a  class="sc-twitter" href="https://twitter.com/eric_rochow" target="_blank">
+            <i class="fab fa-twitter">
             </i>
           </a></li>
           <li>
-            <a  class="sc-twitter fa-lg" href="https://twitter.com/eric_rochow" target="_blank">
-            <i class="fab fa-twitter fa-lg">
+            <a  class="sc-lastfm" href="https://www.last.fm/user/ericrochow" target="_blank">
+            <i class="fab fa-lastfm">
             </i>
           </a></li>
           <li>
-            <a  class="sc-lastfm fa-lg" href="https://www.last.fm/user/ericrochow" target="_blank">
-            <i class="fab fa-lastfm fa-lg">
+            <a  class="sc-spotify" href="https://open.spotify.com/user/ericrochow?si=KEmxAAk8QZy31L82MMge4g" target="_blank">
+            <i class="fab fa-spotify">
             </i>
           </a></li>
           <li>
-            <a  class="sc-spotify fa-lg" href="https://open.spotify.com/user/ericrochow?si=KEmxAAk8QZy31L82MMge4g" target="_blank">
-            <i class="fab fa-spotify fa-lg">
-            </i>
-          </a></li>
-          <li>
-            <a  class="sc-book fa-lg" href="https://www.goodreads.com/user/show/18841479-eric-rochow" target="_blank">
-            <i class="fab fa-book fa-lg">
+            <a  class="sc-book" href="https://www.goodreads.com/user/show/18841479-eric-rochow" target="_blank">
+            <i class="fas fa-book">
             </i>
           </a></li>
       </ul>
@@ -273,85 +270,85 @@
 <h2>Configuring CFS Distribution</h2>
 <h3>Enabling CFS By Application</h3>
 <p>Callhome:</p>
-<div class="highlight"><pre><span></span><span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">#</span> <span class="n">callhome</span>
-<span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="o">-</span><span class="n">callhome</span><span class="p">)</span><span class="o">#</span> <span class="n">distribute</span>
+<div class="highlight"><pre><span></span><span class="err">switch1(config)# callhome</span>
+<span class="err">switch1(config-callhome)# distribute</span>
 </pre></div>
 
 
 <p>Device Alias:</p>
-<div class="highlight"><pre><span></span><span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">#</span> <span class="n">device</span><span class="o">-</span><span class="k">alias</span> <span class="n">distribute</span>
+<div class="highlight"><pre><span></span><span class="err">switch1(config)# device-alias distribute</span>
 </pre></div>
 
 
 <p>DPVM:</p>
-<div class="highlight"><pre><span></span><span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">#</span> <span class="n">dpvm</span> <span class="n">distribute</span>
+<div class="highlight"><pre><span></span><span class="err">switch1(config)# dpvm distribute</span>
 </pre></div>
 
 
 <p>Fibre Channel Domain:</p>
-<div class="highlight"><pre><span></span><span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">#</span> <span class="n">fcdomain</span> <span class="n">distribute</span>
+<div class="highlight"><pre><span></span><span class="err">switch1(config)# fcdomain distribute</span>
 </pre></div>
 
 
 <p>Fibre Channel Port Security:</p>
-<div class="highlight"><pre><span></span><span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">#</span> <span class="n">fc</span><span class="o">-</span><span class="n">port</span><span class="o">-</span><span class="k">security</span> <span class="n">distribute</span>
+<div class="highlight"><pre><span></span><span class="err">switch1(config)# fc-port-security distribute</span>
 </pre></div>
 
 
 <p>Fibre Channel Timers:</p>
-<div class="highlight"><pre><span></span><span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">#</span> <span class="n">fctimer</span> <span class="n">distribute</span>
+<div class="highlight"><pre><span></span><span class="err">switch1(config)# fctimer distribute</span>
 </pre></div>
 
 
 <p>Inter-VSAN Routing:</p>
-<div class="highlight"><pre><span></span><span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">#</span> <span class="n">ivr</span> <span class="n">distribute</span>
+<div class="highlight"><pre><span></span><span class="err">switch1(config)# ivr distribute</span>
 </pre></div>
 
 
 <p>NTP:</p>
-<div class="highlight"><pre><span></span><span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">#</span> <span class="n">ntp</span> <span class="n">distribute</span>
+<div class="highlight"><pre><span></span><span class="err">switch1(config)# ntp distribute</span>
 </pre></div>
 
 
 <p>RADIUS:</p>
-<div class="highlight"><pre><span></span><span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">#</span> <span class="n">radius</span> <span class="n">distribute</span>
+<div class="highlight"><pre><span></span><span class="err">switch1(config)# radius distribute</span>
 </pre></div>
 
 
 <p>RSCN:</p>
-<div class="highlight"><pre><span></span><span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">#</span> <span class="n">rscn</span> <span class="n">distribute</span>
+<div class="highlight"><pre><span></span><span class="err">switch1(config)# rscn distribute</span>
 </pre></div>
 
 
 <p>TACACS+:</p>
-<div class="highlight"><pre><span></span><span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">#</span> <span class="n">tacacs</span><span class="o">+</span> <span class="n">distribute</span>
+<div class="highlight"><pre><span></span><span class="err">switch1(config)# tacacs+ distribute</span>
 </pre></div>
 
 
 <p>User Roles:</p>
-<div class="highlight"><pre><span></span><span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">#</span> <span class="k">role</span> <span class="n">distribute</span>
+<div class="highlight"><pre><span></span><span class="err">switch1(config)# role distribute</span>
 </pre></div>
 
 
 <h3>Specify CFS Distribution Mode</h3>
 <p>CFSoE:</p>
-<div class="highlight"><pre><span></span><span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">#</span> <span class="n">cfs</span> <span class="n">eth</span> <span class="n">distribute</span>
+<div class="highlight"><pre><span></span><span class="err">switch1(config)# cfs eth distribute</span>
 </pre></div>
 
 
 <p>CFSoIP:</p>
-<div class="highlight"><pre><span></span><span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">#</span> <span class="n">cfs</span> <span class="n">ipv4</span> <span class="n">distribute</span>
+<div class="highlight"><pre><span></span><span class="err">switch1(config)# cfs ipv4 distribute</span>
 </pre></div>
 
 
 <h3>Configure an IP Multicast Address (CFSoIP)</h3>
 <p>The default multicast address for CFSoIP is 239.255.70.83. To change user another multicast address (e.g. 225.0.1.1):</p>
-<div class="highlight"><pre><span></span><span class="nv">switch1</span><span class="ss">(</span><span class="nv">config</span><span class="ss">)</span># <span class="nv">no</span> <span class="nv">cfs</span> <span class="nv">ipvr</span> <span class="nv">distribute</span>
-<span class="nv">switch1</span><span class="ss">(</span><span class="nv">config</span><span class="ss">)</span># <span class="nv">cfs</span> <span class="nv">ipv4</span> <span class="nv">mcast</span><span class="o">-</span><span class="nv">address</span> <span class="mi">225</span>.<span class="mi">0</span>.<span class="mi">1</span>.<span class="mi">1</span>
-<span class="nv">Distribution</span> <span class="nv">over</span> <span class="nv">this</span> <span class="nv">IP</span> <span class="nv">type</span> <span class="nv">will</span> <span class="nv">be</span> <span class="nv">affected</span>
-<span class="nv">Change</span> <span class="nv">multicast</span> <span class="nv">address</span> <span class="k">for</span> <span class="nv">CFS</span><span class="o">-</span><span class="nv">IP</span> ?
-<span class="nv">Are</span> <span class="nv">you</span> <span class="nv">sure</span>? <span class="ss">(</span><span class="nv">y</span><span class="o">/</span><span class="nv">n</span><span class="ss">)</span> [<span class="nv">n</span>] <span class="nv">y</span>
-<span class="nv">cfs</span> <span class="nv">ipv4</span> <span class="nv">distribute</span>
+<div class="highlight"><pre><span></span><span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="err">#</span><span class="w"> </span><span class="k">no</span><span class="w"> </span><span class="n">cfs</span><span class="w"> </span><span class="n">ipvr</span><span class="w"> </span><span class="n">distribute</span><span class="w"></span>
+<span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="err">#</span><span class="w"> </span><span class="n">cfs</span><span class="w"> </span><span class="n">ipv4</span><span class="w"> </span><span class="n">mcast</span><span class="o">-</span><span class="n">address</span><span class="w"> </span><span class="mf">225.0.1.1</span><span class="w"></span>
+<span class="n">Distribution</span><span class="w"> </span><span class="k">over</span><span class="w"> </span><span class="n">this</span><span class="w"> </span><span class="n">IP</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="n">will</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">affected</span><span class="w"></span>
+<span class="n">Change</span><span class="w"> </span><span class="n">multicast</span><span class="w"> </span><span class="n">address</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">CFS</span><span class="o">-</span><span class="n">IP</span><span class="w"> </span><span class="vm">?</span><span class="w"></span>
+<span class="k">Are</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">sure</span><span class="vm">?</span><span class="w"> </span><span class="p">(</span><span class="n">y</span><span class="o">/</span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="o">[</span><span class="n">n</span><span class="o">]</span><span class="w"> </span><span class="n">y</span><span class="w"></span>
+<span class="n">cfs</span><span class="w"> </span><span class="n">ipv4</span><span class="w"> </span><span class="n">distribute</span><span class="w"></span>
 </pre></div>
 
 
@@ -359,35 +356,35 @@
 <h3>Configuring CFS Regions</h3>
 <h4>Creating a CFS Region</h4>
 <p>To configure the switch for Call Home in region 4:</p>
-<div class="highlight"><pre><span></span><span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">#</span> <span class="n">cfs</span> <span class="n">region</span> <span class="mi">4</span>
-<span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="o">-</span><span class="n">cfs</span><span class="o">-</span><span class="n">region</span><span class="p">)</span><span class="o">#</span> <span class="n">callhome</span>
+<div class="highlight"><pre><span></span><span class="err">switch1(config)# cfs region 4</span>
+<span class="err">switch1(config-cfs-region)# callhome</span>
 </pre></div>
 
 
 <h4>Moving an Application to a Different Region</h4>
 <p>To move the previously configured Call Home application to region 2:</p>
-<div class="highlight"><pre><span></span><span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">#</span> <span class="n">cfs</span> <span class="n">region</span> <span class="mi">2</span>
-<span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="o">-</span><span class="n">cfs</span><span class="o">-</span><span class="n">region</span><span class="p">)</span><span class="o">#</span> <span class="n">callhome</span>
+<div class="highlight"><pre><span></span><span class="err">switch1(config)# cfs region 2</span>
+<span class="err">switch1(config-cfs-region)# callhome</span>
 </pre></div>
 
 
 <h4>Removing an Application from a Region</h4>
 <p>To remove Call Home from region 2:</p>
-<div class="highlight"><pre><span></span><span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">#</span> <span class="n">cfs</span> <span class="n">region</span> <span class="mi">2</span>
-<span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="o">-</span><span class="n">cfs</span><span class="o">-</span><span class="n">region</span><span class="p">)</span><span class="o">#</span> <span class="k">no</span> <span class="n">callhome</span>
+<div class="highlight"><pre><span></span><span class="err">switch1(config)# cfs region 2</span>
+<span class="err">switch1(config-cfs-region)# no callhome</span>
 </pre></div>
 
 
 <h4>Deleting a CFS Region</h4>
 <p>To delete CFS region 2:</p>
-<div class="highlight"><pre><span></span><span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">#</span> <span class="k">no</span> <span class="n">cfs</span> <span class="n">region</span> <span class="mi">2</span>
+<div class="highlight"><pre><span></span><span class="err">switch1(config)# no cfs region 2</span>
 </pre></div>
 
 
 <h3>Creating and Distributing a CFS Configuration</h3>
 <h3>Clearing a Locked Session</h3>
 <p>To clear an open session for NTP:</p>
-<div class="highlight"><pre><span></span><span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">#</span> <span class="n">clear</span> <span class="n">ntp</span> <span class="k">session</span>
+<div class="highlight"><pre><span></span><span class="err">switch1(config)# clear ntp session</span>
 </pre></div>
 
 
@@ -401,43 +398,43 @@
 
 
 <h3>Disabling CFS Globally</h3>
-<div class="highlight"><pre><span></span><span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">#</span> <span class="k">no</span> <span class="n">cfs</span> <span class="n">distribute</span>
+<div class="highlight"><pre><span></span><span class="err">switch1(config)# no cfs distribute</span>
 </pre></div>
 
 
 <h2>Troubleshooting CFS Distribution</h2>
 <p>Display status of CFS distribution on the device and IP distribution information:</p>
-<div class="highlight"><pre><span></span><span class="nv">switch1</span># <span class="k">show</span> <span class="nv">cfs</span> <span class="nv">status</span>
+<div class="highlight"><pre><span></span><span class="err">switch1# show cfs status</span>
 </pre></div>
 
 
 <p>Display all applications that are currently CFS-enabled:</p>
-<div class="highlight"><pre><span></span><span class="nv">switch1</span># <span class="k">show</span> <span class="nv">cfs</span> <span class="nv">application</span>
+<div class="highlight"><pre><span></span><span class="err">switch1# show cfs application</span>
 </pre></div>
 
 
 <p>Display CFS distribution status for a specified application (e.g. NTP):</p>
-<div class="highlight"><pre><span></span><span class="nv">switch1</span># <span class="k">show</span> <span class="nv">ntp</span> <span class="nv">status</span>
+<div class="highlight"><pre><span></span><span class="err">switch1# show ntp status</span>
 </pre></div>
 
 
 <p>Display active locks:</p>
-<div class="highlight"><pre><span></span><span class="nv">switch1</span># <span class="k">show</span> <span class="nv">cfs</span> <span class="nv">lock</span>
+<div class="highlight"><pre><span></span><span class="err">switch1# show cfs lock</span>
 </pre></div>
 
 
 <p>Display all CFS peers in the physical fabric:</p>
-<div class="highlight"><pre><span></span><span class="nv">switch1</span># <span class="k">show</span> <span class="nv">cfs</span> <span class="nv">peers</span>
+<div class="highlight"><pre><span></span><span class="err">switch1# show cfs peers</span>
 </pre></div>
 
 
 <p>Display all applications with peers and region information:</p>
-<div class="highlight"><pre><span></span><span class="nv">switch1</span># <span class="k">show</span> <span class="nv">cfs</span> <span class="nv">regions</span>
+<div class="highlight"><pre><span></span><span class="err">switch1# show cfs regions</span>
 </pre></div>
 
 
 <p>Display merge status for a given application (e.g. NTP):</p>
-<div class="highlight"><pre><span></span><span class="nv">switch1</span># <span class="k">show</span> <span class="nv">cfs</span> <span class="nv">merge</span> <span class="nv">status</span> <span class="nv">name</span> <span class="nv">ntp</span>
+<div class="highlight"><pre><span></span><span class="err">switch1# show cfs merge status name ntp</span>
 </pre></div>
   </div>
   <div class="tag-cloud">
@@ -454,7 +451,7 @@
 </article>
 
     <footer>
-<p>&copy; Eric Rochow 2019</p>
+<p>&copy; Eric Rochow 2020</p>
     </footer>
   </main>
 

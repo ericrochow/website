@@ -47,17 +47,19 @@ TRANSLATION_FEED_ATOM = None
 AUTHOR_FEED_ATOM = None
 AUTHOR_FEED_RSS = None
 THEME = "themes/Flex"
+USE_LESS = True
+SUMMARY_MAX_LENGTH = 280
 
 PLUGIN_PATHS = ["plugins/"]
 PLUGINS = [
     "liquid_tags",
-    # "pin_to_top",
+    "pin_to_top",
     # "related_posts",
-    # "similar_posts",
+    "similar_posts",
     # "pelican-githubprojects",
     # "video_privacy_enhancer",
     # "jinja2.ext.i18n",
-    "goodreads_activity",
+    # "goodreads_activity",
 ]
 # JINJA_ENVIRONMENT = []
 
@@ -80,19 +82,19 @@ LINKS = (
 
 # Social widget
 SOCIAL = (
-    ("globe fa-lg", "#"),
-    ("envelope-o fa-lg", "mailto:ericrochow@gmail.com"),
-    ("rss fa-lg", "#"),
-    ("linkedin fa-lg", "https://www.linkedin.com/in/erochow/"),
-    ("github fa-lg", "https://github.com/ericrochow"),
-    ("reddit fa-lg", "#"),
-    ("twitter fa-lg", "https://twitter.com/eric_rochow"),
-    ("lastfm fa-lg", "https://www.last.fm/user/ericrochow"),
+    ("globe", "https://ericroc.how"),
+    ("envelope", "mailto:ericrochow@gmail.com"),
+    ("rss", "https://ericroc.how"),
+    ("linkedin", "https://www.linkedin.com/in/erochow/"),
+    ("github", "https://github.com/ericrochow"),
+    # ("reddit", "#"),
+    ("twitter", "https://twitter.com/eric_rochow"),
+    ("lastfm", "https://www.last.fm/user/ericrochow"),
     (
-        "spotify fa-lg",
+        "spotify",
         "https://open.spotify.com/user/ericrochow?si=KEmxAAk8QZy31L82MMge4g",
     ),
-    ("book fa-lg", "https://www.goodreads.com/user/show/18841479-eric-rochow"),
+    ("book", "https://www.goodreads.com/user/show/18841479-eric-rochow"),
 )
 
 MAIN_MENU = True
@@ -107,15 +109,11 @@ GITHUB_URL = "https://github.com/ericrochow"
 GITHUB_USERNAME = "ericrochow"
 TWITTER_USERNAME = "eric_rochow"
 # GOODREADS_ACTIVITY_FEED = (
-# "https://www.goodreads.com/review/list_rss/18841479?key="
-# "KyT3ziOY47qSj-aDbM-SDOa3uJn9UkKP6osSP-O42Dd1G4RL"
+    # "https://www.goodreads.com/review/list_rss/18841479?key="
+    # "KyT3ziOY47qSj-aDbM-SDOa3uJn9UkKP6osSP-O42Dd1G4RL&shelf=read"
 # )
-GOODREADS_ACTIVITY_FEED = (
-    "https://www.goodreads.com/review/list_rss/18841479?key="
-    "KyT3ziOY47qSj-aDbM-SDOa3uJn9UkKP6osSP-O42Dd1G4RL&shelf=read"
-)
 
-TEMPLATE_PAGES = {"templates/goodreads.html": "pages/read-with-me.html"}
+# TEMPLATE_PAGES = {"templates/goodreads.html": "pages/read-with-me.html"}
 TEMPLATE_EXTENSIONS = [".html", ".j2"]
 THEME_TEMPLATES_OVERRIDES = ["content/templates/"]
 READERS = {"html": None}

@@ -3,7 +3,7 @@ version: 2.1
 executors:
   pelican-executor:
     docker:
-      - image: circleci/python:3.6
+      - image: circleci/python:3.7
     environment:
       LOCALE: en_US.utf8
 
@@ -12,12 +12,11 @@ commands:
     steps:
       - checkout
       - run: sudo chown -R circleci.circleci /usr/local/bin
-      - run: sudo chown -R circleci.circleci /usr/local/lib/python3.6/site-packages
+      - run: sudo chown -R circleci.circleci /usr/local/lib/python3.7/site-packages
       - run:
           name: "Pull Submodules"
           command: |
-            git submodule init
-            git submodule update --remote
+            git submodule update --init --recursive
       - restore_cache:
           key: pelican-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
       - run:
@@ -51,6 +50,7 @@ commands:
             git config credential.helper "cache --timeout=120"
             git config user.email "ericroc.how@gmail.com"
             git config user.name "DeployTron 9000"
+            git add docs/*
             git commit -am "circleci content push [skip ci]"
             git push -q https://${DOCS_GITHUB_TOKEN}@github.com/ericrochow/website.git master
 
