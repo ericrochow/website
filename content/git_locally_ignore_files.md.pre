@@ -10,13 +10,16 @@ For example, to ignore the ``docs/`` directory you can do the following:
 
     # echo "docs/" | tee -a .git/info/exclude
 
+If the `docs/` directory is already being tracked by git, you will need to update the index to apply the ignore:
+
+    # git update-index --assume-unchanged docs/
+
 Now we can test to make sure the ignore works:
 
-    # touch docs/test
+    # touch docs/test.html
     # git status
-    On branch master
-    Your branch is ahead of 'origin/master' by 1 commit.
-      (use "git push" to publish your local commits)
+      On branch master
+      Your branch is up to date with 'origin/master'.
 
       nothing to commit, working tree clean
 
