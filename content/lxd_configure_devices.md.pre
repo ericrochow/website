@@ -13,11 +13,11 @@ Some use cases for containers depend on passing devices through from the host sy
 
 ### NIC
 
-Mounting a NIC device on the container allows a host system network interface (physical or logical) to the container. [See here for more detail](/networking_in_lxd.html). **NOTE!** Mounting the NIC to the container will cause the interface to disappear from the host system as it now "belongs" to the container. Make sure before you do this that nothing on your host system is utilizing the device intended to be mounted!
+Mounting a NIC device on the container allows a host system network interface (physical or logical) to the container. [See here for more detail](/lxd_networking.html). **NOTE!** Mounting the NIC to the container will cause the interface to disappear from the host system as it now "belongs" to the container. Make sure before you do this that nothing on your host system is utilizing the device intended to be mounted!
 
 #### Command
 
-    lxc config device add $ctr_name $dev_name nic parent=$parent_iface_name 
+    lxc config device add $ctr_name $dev_name nic parent=$parent_iface_name
 
 #### Example
 
@@ -107,7 +107,7 @@ The `gpu` device type passes a graphic card through to the container in the even
 
 #### Command
 
-    lxc config device add $ctr_name $dev_name gpu 
+    lxc config device add $ctr_name $dev_name gpu
 
 #### Example
 
