@@ -135,6 +135,57 @@
 
 <article>
   <header>
+    <h2><a href="https://ericroc.how/mounting-devices-in-lxd.html#mounting-devices-in-lxd">Mounting Devices in LXD</a></h2>
+    <p>
+          Posted on Sat 25 January 2020 in <a href="https://ericroc.how/category/containers.html">Containers</a>
+
+
+          &#8226;     Tagged with
+
+              <a href="https://ericroc.how/tag/containers.html">containers</a>,              <a href="https://ericroc.how/tag/lxd.html">lxd</a>,              <a href="https://ericroc.how/tag/linux.html">linux</a>
+    </p>
+  </header>
+  <div>
+      <h1>Working with Devices in LXD</h1>
+<p>Some use cases for containers depend on passing devices through from the host system into the container. This can allow you to do anything from mount you home directory to passing through a USB device.</p>
+<h2>Adding Devices in LXD</h2>
+<h3>NIC</h3>
+<p>Mounting a NIC device on the container allows a host system network interface (physical or logical) to the container. <a href="/lxd_networking.html">See here for more detail</a>. <strong>NOTE!</strong> Mounting the NIC to the container will cause the interface to disappear from the host system as it now "belongs" to the container. Make sure before you do this that nothing on your host system is utilizing the device intended to be mounted!</p>
+<h4>Command</h4>
+<div class="highlight"><pre><span></span><span class="err">lxc config device add $ctr_name $dev_name nic parent=$parent_iface_name</span>
+</pre></div>
+
+
+<h4>Example</h4>
+<div class="highlight"><pre><span></span><span class="err">lxc config device add app1 eth99 nic parent=enp3s0</span>
+</pre></div>
+
+
+<p>The above will take the network interface <code>enp3s0</code> from the host system and attach it to the container <code>app1</code> as network interface <code>eth99</code>.</p>
+<p><a href="#markdown-header-apply-configuration-changes-to-container">Apply the configuration to the container</a></p>
+<h3>Disk</h3>
+<p>The <code>disk</code> device type is probably the most straightforward of the device types and the one I most often use. This allows a directory on the host system to also be mounted in the container itself to either share between containers or to maintain state in the example of an ephemeral container.</p>
+<h4>Command</h4>
+<div class="highlight"><pre><span></span><span class="err">lxc config device add $ctr_name $dev_name disk source=/path/to/host/dir path=/path/to/ctr/mount/point</span>
+</pre></div>
+
+
+<p><a href="#markdown-header-apply-configuration-changes-to-container">Apply the configuration to the container</a></p>
+<h4>Example</h4>
+<p>To mount a home drive from the host system to the container named app1:</p>
+<div class="highlight"><pre><span></span><span class="err">lxc config device add app1 home_directory disk source=/home/eric path=/home/ubuntu</span>
+</pre></div>
+
+
+<p>This creates a <code>disk</code> device named <code>home_directory</code> and attaches it to the …</p>
+        <br>
+        <a class="btn" href="https://ericroc.how/mounting-devices-in-lxd.html#mounting-devices-in-lxd">    Continue reading
+</a>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
     <h2><a href="https://ericroc.how/aaa-on-iox-xr.html#aaa-on-iox-xr">AAA on IOX-XR</a></h2>
     <p>
           Posted on Fri 06 September 2019 in <a href="https://ericroc.how/category/network.html">Network</a>
@@ -316,6 +367,43 @@ I have a LOT of network-related notes that I have accumulated over the years - s
 </article>
 <article>
   <header>
+    <h2><a href="https://ericroc.how/lxd-networking.html#lxd-networking">LXD Networking</a></h2>
+    <p>
+          Posted on Fri 06 September 2019 in <a href="https://ericroc.how/category/containers.html">Containers</a>
+
+
+          &#8226;     Tagged with
+
+              <a href="https://ericroc.how/tag/lxd.html">lxd</a>,              <a href="https://ericroc.how/tag/containers.html">containers</a>,              <a href="https://ericroc.how/tag/linux.html">linux</a>,              <a href="https://ericroc.how/tag/networking.html">networking</a>
+    </p>
+  </header>
+  <div>
+      <h1>LXD Networking</h1>
+<p>Starting in LXD 2.3 there has been quite a bit of network functionality exposed to the operator. As before 2.3 there is the default <code>lxdbr0</code> bridge created when LXD is installed on the host system, but several other options exist.</p>
+<h2>LXD Bridges</h2>
+<h3>Using the Default LXD Bridge</h3>
+<p>First things first, let's go over the default bidge and what it gives you. Out of the box, any new containers will be attached to this bridge and the host system will be configured to NAT oubound connections using the default IP address of the host system via iptables MASQUERADE rules. IP addresses will be assigned to new containers using a built-in DHCP server using the range provided during the LXD init process. If you're looking to keep things simple, just stick with the default bridge.</p>
+<h3>Creating a Custom LXD Bridge</h3>
+<p>If for some reason the default bridge does not suffice (e.g. the network namespaces need to be segregated, differing requirements for addressing or NAT behavior, etc), it is possible to create a new bridge. There are a few different options for configuring a bridge.</p>
+<p>To create an autoconfigured bridge named lxdbr1337:</p>
+<div class="highlight"><pre><span></span><span class="err">root@host# lxc network create lxdbr1337</span>
+</pre></div>
+
+
+<p>To configure the bridge by hand:</p>
+<div class="highlight"><pre><span></span><span class="err">root@host# lxc network create lxdbr1337 ipv6.address=none ipv4.address=10.13.37.1/24 ipv4.nat=true</span>
+</pre></div>
+
+
+<p>This will create a new bridge call <code>lxdbr1337</code> with IPv6 disabled and an IPv4 address of 10.13.31.1, will create MASQUERADE rules in iptables to NAT outbound traffic. The built-in DHCP server will hand out addresses to containers attached to the bridge from the range 10.13.37.0/24 (i.e. 10 …</p>
+        <br>
+        <a class="btn" href="https://ericroc.how/lxd-networking.html#lxd-networking">    Continue reading
+</a>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
     <h2><a href="https://ericroc.how/ospf-in-ios-xr.html#ospf-in-ios-xr">OSPF in IOS-XR</a></h2>
     <p>
           Posted on Fri 06 September 2019 in <a href="https://ericroc.how/category/network.html">Network</a>
@@ -344,46 +432,6 @@ I have a LOT of network-related notes that I have accumulated over the years - s
    RP/0/0/CPU0:router(config-ospf-ar)#interface GigabitEthernet0/0/0/2
    RP/0/0/CPU0:router(config-ospf-ar-if)#network point-to-point
    RP/0/0/CPU0:router(config-ospf-ar-if)#exit</p>
-  </div>
-  <hr />
-</article>
-<article>
-  <header>
-    <h2><a href="https://ericroc.how/vrf-on-ios.html#vrf-on-ios">VRF on IOS</a></h2>
-    <p>
-          Posted on Fri 06 September 2019 in <a href="https://ericroc.how/category/network.html">Network</a>
-
-
-          &#8226;     Tagged with
-
-              <a href="https://ericroc.how/tag/network.html">network</a>,              <a href="https://ericroc.how/tag/ios.html">ios</a>,              <a href="https://ericroc.how/tag/vrf.html">vrf</a>,              <a href="https://ericroc.how/tag/cli.html">cli</a>
-    </p>
-  </header>
-  <div>
-      <p>Brief Summary of VRFs on IOS</p>
-        <br>
-        <a class="btn" href="https://ericroc.how/vrf-on-ios.html#vrf-on-ios">    Continue reading
-</a>
-  </div>
-  <hr />
-</article>
-<article>
-  <header>
-    <h2><a href="https://ericroc.how/obscure-nx-os-commands.html#obscure-nx-os-commands">Obscure NX-OS Commands</a></h2>
-    <p>
-          Posted on Fri 28 April 2017 in <a href="https://ericroc.how/category/network.html">Network</a>
-
-
-          &#8226;     Tagged with
-
-              <a href="https://ericroc.how/tag/network.html">network</a>,              <a href="https://ericroc.how/tag/nx-os.html">nx-os</a>,              <a href="https://ericroc.how/tag/cli.html">cli</a>
-    </p>
-  </header>
-  <div>
-      <p>Obscure commands for my future reference</p>
-        <br>
-        <a class="btn" href="https://ericroc.how/obscure-nx-os-commands.html#obscure-nx-os-commands">    Continue reading
-</a>
   </div>
 </article>
 

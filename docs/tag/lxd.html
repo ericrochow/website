@@ -45,7 +45,8 @@
 <meta property="og:url" content="https://ericroc.how"/>
 <meta property="og:image" content="https://ericroc.how/images/face.png">
 
-  <title>Eric Rochow</title>
+  <title>Eric Rochow &ndash;     Tag lxd
+</title>
 
 </head>
 <body>
@@ -134,25 +135,6 @@
 
 <article>
   <header>
-    <h2><a href="https://ericroc.how/hi-there.html#hi-there">Hi there!</a></h2>
-    <p>
-          Posted on Fri 06 September 2019 in <a href="https://ericroc.how/category/intro.html">Intro</a>
-
-
-          &#8226;     Tagged with
-
-              <a href="https://ericroc.how/tag/intro.html">intro</a>
-    </p>
-  </header>
-  <div>
-      <p>Hi! My name is Eric. But you probably knew that already or your wouldn't be here. Or maybe my SEO is just that good. Anyway!
-I have a LOT of network-related notes that I have accumulated over the years - some from hands-on experience, some from novel lab excersizes, and some that are re-hashes from other documentation our on the Internet. The problem is that some of these are old enough that I don't rightly remember which are which. So! If it seems like I have infringed on someone else's work (especially if it is your own!) PLEASE let me know so I can remove the content or at the very least provide appropriate attribution.</p>
-<p>That is all. Thank you for your time.</p>
-  </div>
-  <hr />
-</article>
-<article>
-  <header>
     <h2><a href="https://ericroc.how/mounting-devices-in-lxd.html#mounting-devices-in-lxd">Mounting Devices in LXD</a></h2>
     <p>
           Posted on Sat 25 January 2020 in <a href="https://ericroc.how/category/containers.html">Containers</a>
@@ -204,168 +186,6 @@ I have a LOT of network-related notes that I have accumulated over the years - s
 </article>
 <article>
   <header>
-    <h2><a href="https://ericroc.how/aaa-on-iox-xr.html#aaa-on-iox-xr">AAA on IOX-XR</a></h2>
-    <p>
-          Posted on Fri 06 September 2019 in <a href="https://ericroc.how/category/network.html">Network</a>
-
-
-          &#8226;     Tagged with
-
-              <a href="https://ericroc.how/tag/ios-xr.html">ios-xr</a>,              <a href="https://ericroc.how/tag/authentication.html">authentication</a>,              <a href="https://ericroc.how/tag/cli.html">cli</a>
-    </p>
-  </header>
-  <div>
-      <p>A quick primer on how to configure authentication on IOS-XR</p>
-        <br>
-        <a class="btn" href="https://ericroc.how/aaa-on-iox-xr.html#aaa-on-iox-xr">    Continue reading
-</a>
-  </div>
-  <hr />
-</article>
-<article>
-  <header>
-    <h2><a href="https://ericroc.how/bgp-in-ios-xr.html#bgp-in-ios-xr">BGP in IOS-XR</a></h2>
-    <p>
-          Posted on Fri 06 September 2019 in <a href="https://ericroc.how/category/network.html">Network</a>
-
-
-          &#8226;     Tagged with
-
-              <a href="https://ericroc.how/tag/iox-xr.html">iox-xr</a>,              <a href="https://ericroc.how/tag/bgp.html">bgp</a>,              <a href="https://ericroc.how/tag/cli.html">cli</a>
-    </p>
-  </header>
-  <div>
-      <p>A basic how-to to get up-and-running with BGP on IOS-XR</p>
-        <br>
-        <a class="btn" href="https://ericroc.how/bgp-in-ios-xr.html#bgp-in-ios-xr">    Continue reading
-</a>
-  </div>
-  <hr />
-</article>
-<article>
-  <header>
-    <h2><a href="https://ericroc.how/fabricpath.html#fabricpath">FabricPath</a></h2>
-    <p>
-          Posted on Fri 06 September 2019 in <a href="https://ericroc.how/category/network.html">Network</a>
-
-
-          &#8226;     Tagged with
-
-              <a href="https://ericroc.how/tag/network.html">network</a>,              <a href="https://ericroc.how/tag/nx-os.html">nx-os</a>,              <a href="https://ericroc.how/tag/fabricpath.html">fabricpath</a>,              <a href="https://ericroc.how/tag/reference.html">reference</a>
-    </p>
-  </header>
-  <div>
-      <p>Overview of the FabricPath protocol</p>
-        <br>
-        <a class="btn" href="https://ericroc.how/fabricpath.html#fabricpath">    Continue reading
-</a>
-  </div>
-  <hr />
-</article>
-<article>
-  <header>
-    <h2><a href="https://ericroc.how/ios-xr-acls.html#ios-xr-acls">IOS-XR ACLs</a></h2>
-    <p>
-          Posted on Fri 06 September 2019 in <a href="https://ericroc.how/category/network.html">Network</a>
-
-
-          &#8226;     Tagged with
-
-              <a href="https://ericroc.how/tag/network.html">network</a>,              <a href="https://ericroc.how/tag/acl.html">acl</a>,              <a href="https://ericroc.how/tag/ios-xr.html">ios-xr</a>
-    </p>
-  </header>
-  <div>
-      <h1>ACLs</h1>
-<h2>Configure</h2>
-<h3>IPv4</h3>
-<h4>Create ACL</h4>
-<p>IPv4 ACL configuration in IOS XR is pretty similar to IOS::</p>
-<div class="highlight"><pre><span></span><span class="err">RP/0/0/CPU0:router(config)#ipv4 access-list TEST</span>
-<span class="err">RP/0/0/CPU0:router(config-ipv4-acl)#remark FIRST</span>
-<span class="err">RP/0/0/CPU0:router(config-ipv4-acl)#permit icmp any any echo</span>
-<span class="err">RP/0/0/CPU0:router(config-ipv4-acl)#permit icmp any any echo-reply </span>
-<span class="err">RP/0/0/CPU0:router(config-ipv4-acl)#permit icmp any any ttl-exceeded </span>
-<span class="err">RP/0/0/CPU0:router(config-ipv4-acl)#permit icmp any any unreachable  </span>
-<span class="err">RP/0/0/CPU0:router(config-ipv4-acl)#permit icmp any any packet-too-big </span>
-<span class="err">RP/0/0/CPU0:router(config-ipv4-acl)#deny icmp any any </span>
-<span class="err">RP/0/0/CPU0:router(config-ipv4-acl)#exit</span>
-<span class="err">RP/0/0/CPU0:router(config)#commit</span>
-</pre></div>
-
-
-<h4>Apply ACL</h4>
-<p>The ACL can then be applied to an interface with the following::</p>
-<div class="highlight"><pre><span></span><span class="err">RP/0/0/CPU0:router(config)#interface g0/0/0/0</span>
-<span class="err">RP/0/0/CPU0:router(config-if)#ipv4 access-group TEST ingress</span>
-</pre></div>
-
-
-<h4>Implicit Entries</h4>
-<p>Every IPv4  ACL in IOS XR has the following implicit statement as its last match entry::</p>
-<div class="highlight"><pre><span></span><span class="err">deny ipv4 any any</span>
-</pre></div>
-
-
-<p>The ACL must have at least one (1) explicit entry for the implicit <code>deny ipv4 any any</code> statement to take effect.</p>
-<h3>IPv6</h3>
-<h4>Create ACL</h4>
-<p>IPv6 ACL configuration in IOS XR is pretty similar to IOS::</p>
-<div class="highlight"><pre><span></span><span class="err">RP/0/0/CPU0:router(config)#ipv6 access-list TEST6</span>
-<span class="err">RP/0/0/CPU0:router(config-ipv6-acl)#remark FIRST!</span>
-<span class="err">RP/0/0/CPU0:router(config-ipv6-acl)#permit icmp any any echo</span>
-<span class="err">RP/0/0/CPU0:router(config-ipv6-acl)#permit icmp any any echo-reply </span>
-<span class="err">RP/0/0/CPU0:router(config-ipv6-acl)#permit icmp any any ttl        </span>
-<span class="err">RP/0/0/CPU0:router(config-ipv6-acl)#permit icmp any any ttl-exceeded </span>
-<span class="err">RP/0/0/CPU0:router(config-ipv6-acl)#permit icmp any any unreachable  </span>
-<span class="err">RP/0/0/CPU0 …</span></pre></div>
-        <br>
-        <a class="btn" href="https://ericroc.how/ios-xr-acls.html#ios-xr-acls">    Continue reading
-</a>
-  </div>
-  <hr />
-</article>
-<article>
-  <header>
-    <h2><a href="https://ericroc.how/ios-xr-licensing.html#ios-xr-licensing">IOS-XR Licensing</a></h2>
-    <p>
-          Posted on Fri 06 September 2019 in <a href="https://ericroc.how/category/network.html">Network</a>
-
-
-          &#8226;     Tagged with
-
-              <a href="https://ericroc.how/tag/network.html">network</a>,              <a href="https://ericroc.how/tag/ios-xr.html">ios-xr</a>,              <a href="https://ericroc.how/tag/cli.html">cli</a>
-    </p>
-  </header>
-  <div>
-      <p>Basic information on installing and applying licenses</p>
-        <br>
-        <a class="btn" href="https://ericroc.how/ios-xr-licensing.html#ios-xr-licensing">    Continue reading
-</a>
-  </div>
-  <hr />
-</article>
-<article>
-  <header>
-    <h2><a href="https://ericroc.how/ios-xr-route-policies.html#ios-xr-route-policies">IOS-XR Route Policies</a></h2>
-    <p>
-          Posted on Fri 06 September 2019 in <a href="https://ericroc.how/category/network.html">Network</a>
-
-
-          &#8226;     Tagged with
-
-              <a href="https://ericroc.how/tag/network.html">network</a>,              <a href="https://ericroc.how/tag/iosxr.html">iosxr</a>,              <a href="https://ericroc.how/tag/policy.html">policy</a>
-    </p>
-  </header>
-  <div>
-      <p>Getting Started with Route Policies in IOS-XR</p>
-        <br>
-        <a class="btn" href="https://ericroc.how/ios-xr-route-policies.html#ios-xr-route-policies">    Continue reading
-</a>
-  </div>
-  <hr />
-</article>
-<article>
-  <header>
     <h2><a href="https://ericroc.how/lxd-networking.html#lxd-networking">LXD Networking</a></h2>
     <p>
           Posted on Fri 06 September 2019 in <a href="https://ericroc.how/category/containers.html">Containers</a>
@@ -399,46 +219,9 @@ I have a LOT of network-related notes that I have accumulated over the years - s
         <a class="btn" href="https://ericroc.how/lxd-networking.html#lxd-networking">    Continue reading
 </a>
   </div>
-  <hr />
-</article>
-<article>
-  <header>
-    <h2><a href="https://ericroc.how/ospf-in-ios-xr.html#ospf-in-ios-xr">OSPF in IOS-XR</a></h2>
-    <p>
-          Posted on Fri 06 September 2019 in <a href="https://ericroc.how/category/network.html">Network</a>
-
-
-          &#8226;     Tagged with
-
-              <a href="https://ericroc.how/tag/ospf.html">ospf</a>,              <a href="https://ericroc.how/tag/routing.html">routing</a>,              <a href="https://ericroc.how/tag/ios-xr.html">ios-xr</a>,              <a href="https://ericroc.how/tag/network.html">network</a>,              <a href="https://ericroc.how/tag/cli.html">cli</a>
-    </p>
-  </header>
-  <div>
-      <h1>OSPF</h1>
-<hr>
-<p>OSPF configuration in IOS-XR is very similar to IOS.</p>
-<p>RP/0/0/CPU0:router(config)#router ospf 1
-   RP/0/0/CPU0:router(config-ospf)#router-id 172.31.0.2
-   RP/0/0/CPU0:router(config-ospf)#area 0
-   RP/0/0/CPU0:router(config-ospf-ar)#interface Loopback0
-   RP/0/0/CPU0:router(config-ospf-ar-if)#exit
-   RP/0/0/CPU0:router(config-ospf-ar)#interface GigabitEthernet0/0/0/0
-   RP/0/0/CPU0:router(config-ospf-ar-if)#network point-to-point
-   RP/0/0/CPU0:router(config-ospf-ar-if)#exit
-   RP/0/0/CPU0:router(config-ospf-ar)#interface GigabitEthernet0/0/0/1
-   RP/0/0/CPU0:router(config-ospf-ar-if)#network point-to-point
-   RP/0/0/CPU0:router(config-ospf-ar-if)#exit
-   RP/0/0/CPU0:router(config-ospf-ar)#interface GigabitEthernet0/0/0/2
-   RP/0/0/CPU0:router(config-ospf-ar-if)#network point-to-point
-   RP/0/0/CPU0:router(config-ospf-ar-if)#exit</p>
-  </div>
 </article>
 
   <div class="pagination">
-    <a class="btn float-left" href="https://ericroc.how/index2.html">
-      <i class="fa fa-angle-left"></i>     Older Posts
-
-    </a>
   </div>
 
 

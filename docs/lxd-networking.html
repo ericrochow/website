@@ -1,0 +1,448 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="index, follow" />
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet/less" type="text/css" href="https://ericroc.how/theme/stylesheet/style.less">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.5.1/less.min.js" type="text/javascript"></script>
+
+  <link rel="stylesheet" type="text/css" href="https://ericroc.how/theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="https://ericroc.how/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="https://ericroc.how/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="https://ericroc.how/theme/font-awesome/css/solid.css">
+  <!--<link rel="stylesheet" type="text/css" href="https://ericroc.how/theme/font-awesome/css/all.css">-->
+
+
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-135617138-1', 'auto');
+  ga('send', 'pageview');
+</script>
+<!-- End Google Analytics -->
+
+<meta name="author" content="Eric Rochow" />
+<meta name="description" content="LXD Networking Starting in LXD 2.3 there has been quite a bit of network functionality exposed to the operator. As before 2.3 there is the default lxdbr0 bridge created when LXD is installed on the host system, but several other options exist. LXD Bridges Using the Default LXD Bridge First things first, let&#39;s go over the default bidge and what it gives you. Out of the box, any new containers will be attached to this bridge and the host system will be configured to NAT oubound connections using the default IP address of the host system via iptables MASQUERADE rules. IP addresses will be assigned to new containers using a built-in DHCP server using the range provided during the LXD init process. If you&#39;re looking to keep things simple, just stick with the default bridge. Creating a Custom LXD Bridge If for some reason the default bridge does not suffice (e.g. the network namespaces need to be segregated, differing requirements for addressing or NAT behavior, etc), it is possible to create a new bridge. There are a few different options for configuring a bridge. To create an autoconfigured bridge named lxdbr1337: root@host# lxc network create lxdbr1337 To configure the bridge by hand: root@host# lxc network create lxdbr1337 ipv6.address=none ipv4.address=10.13.37.1/24 ipv4.nat=true This will create a new bridge call lxdbr1337 with IPv6 disabled and an IPv4 address of 10.13.31.1, will create MASQUERADE rules in iptables to NAT outbound traffic. The built-in DHCP server will hand out addresses to containers attached to the bridge from the range 10.13.37.0/24 (i.e. 10 …" />
+<meta name="keywords" content="lxd, containers, linux, networking">
+
+<meta property="og:site_name" content="Eric Rochow"/>
+<meta property="og:title" content="LXD Networking"/>
+<meta property="og:description" content="LXD Networking Starting in LXD 2.3 there has been quite a bit of network functionality exposed to the operator. As before 2.3 there is the default lxdbr0 bridge created when LXD is installed on the host system, but several other options exist. LXD Bridges Using the Default LXD Bridge First things first, let&#39;s go over the default bidge and what it gives you. Out of the box, any new containers will be attached to this bridge and the host system will be configured to NAT oubound connections using the default IP address of the host system via iptables MASQUERADE rules. IP addresses will be assigned to new containers using a built-in DHCP server using the range provided during the LXD init process. If you&#39;re looking to keep things simple, just stick with the default bridge. Creating a Custom LXD Bridge If for some reason the default bridge does not suffice (e.g. the network namespaces need to be segregated, differing requirements for addressing or NAT behavior, etc), it is possible to create a new bridge. There are a few different options for configuring a bridge. To create an autoconfigured bridge named lxdbr1337: root@host# lxc network create lxdbr1337 To configure the bridge by hand: root@host# lxc network create lxdbr1337 ipv6.address=none ipv4.address=10.13.37.1/24 ipv4.nat=true This will create a new bridge call lxdbr1337 with IPv6 disabled and an IPv4 address of 10.13.31.1, will create MASQUERADE rules in iptables to NAT outbound traffic. The built-in DHCP server will hand out addresses to containers attached to the bridge from the range 10.13.37.0/24 (i.e. 10 …"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="https://ericroc.how/lxd-networking.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2019-09-06 14:34:00-04:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://ericroc.how/author/eric-rochow.html">
+<meta property="article:section" content="Containers"/>
+<meta property="article:tag" content="lxd"/>
+<meta property="article:tag" content="containers"/>
+<meta property="article:tag" content="linux"/>
+<meta property="article:tag" content="networking"/>
+<meta property="og:image" content="https://ericroc.how/images/face.png">
+
+  <title>Eric Rochow &ndash; LXD Networking</title>
+
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="https://ericroc.how">
+        <img src="https://ericroc.how/images/face.png" alt="Eric Rochow" title="Eric Rochow">
+      </a>
+      <h1><a href="https://ericroc.how">Eric Rochow</a></h1>
+
+
+      <nav>
+        <ul class="list">
+          <li><a href="https://ericroc.how/pages/about-me.html#about-me">About Me</a></li>
+          <li><a href="https://ericroc.how/pages/read-with-me.html#read-with-me">Read With Me</a></li>
+
+          <li><a href="http://resume.ericroc.how" target="_blank">Resume</a></li>
+        </ul>
+      </nav>
+
+      <ul class="social">
+          <li>
+            <a  class="sc-globe" href="https://ericroc.how" target="_blank">
+            <i class="fas fa-globe">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-envelope" href="mailto:ericrochow@gmail.com" target="_blank">
+            <i class="fas fa-envelope">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-rss" href="https://ericroc.how" target="_blank">
+            <i class="fas fa-rss">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-linkedin" href="https://www.linkedin.com/in/erochow/" target="_blank">
+            <i class="fab fa-linkedin">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-github" href="https://github.com/ericrochow" target="_blank">
+            <i class="fab fa-github">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-twitter" href="https://twitter.com/eric_rochow" target="_blank">
+            <i class="fab fa-twitter">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-lastfm" href="https://www.last.fm/user/ericrochow" target="_blank">
+            <i class="fab fa-lastfm">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-spotify" href="https://open.spotify.com/user/ericrochow?si=KEmxAAk8QZy31L82MMge4g" target="_blank">
+            <i class="fab fa-spotify">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-book" href="https://www.goodreads.com/user/show/18841479-eric-rochow" target="_blank">
+            <i class="fas fa-book">
+            </i>
+          </a></li>
+      </ul>
+    </div>
+
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href="https://ericroc.how">    Home
+</a>
+
+      <a href="/archives.html">Archives</a>
+      <a href="/categories.html">Categories</a>
+      <a href="/tags.html">Tags</a>
+
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="lxd-networking">LXD Networking</h1>
+    <p>
+          Posted on Fri 06 September 2019 in <a href="https://ericroc.how/category/containers.html">Containers</a>
+
+
+    </p>
+  </header>
+
+
+  <div>
+    <h1>LXD Networking</h1>
+<p>Starting in LXD 2.3 there has been quite a bit of network functionality exposed to the operator. As before 2.3 there is the default <code>lxdbr0</code> bridge created when LXD is installed on the host system, but several other options exist.</p>
+<h2>LXD Bridges</h2>
+<h3>Using the Default LXD Bridge</h3>
+<p>First things first, let's go over the default bidge and what it gives you. Out of the box, any new containers will be attached to this bridge and the host system will be configured to NAT oubound connections using the default IP address of the host system via iptables MASQUERADE rules. IP addresses will be assigned to new containers using a built-in DHCP server using the range provided during the LXD init process. If you're looking to keep things simple, just stick with the default bridge.</p>
+<h3>Creating a Custom LXD Bridge</h3>
+<p>If for some reason the default bridge does not suffice (e.g. the network namespaces need to be segregated, differing requirements for addressing or NAT behavior, etc), it is possible to create a new bridge. There are a few different options for configuring a bridge.</p>
+<p>To create an autoconfigured bridge named lxdbr1337:</p>
+<div class="highlight"><pre><span></span><span class="err">root@host# lxc network create lxdbr1337</span>
+</pre></div>
+
+
+<p>To configure the bridge by hand:</p>
+<div class="highlight"><pre><span></span><span class="err">root@host# lxc network create lxdbr1337 ipv6.address=none ipv4.address=10.13.37.1/24 ipv4.nat=true</span>
+</pre></div>
+
+
+<p>This will create a new bridge call <code>lxdbr1337</code> with IPv6 disabled and an IPv4 address of 10.13.31.1, will create MASQUERADE rules in iptables to NAT outbound traffic. The built-in DHCP server will hand out addresses to containers attached to the bridge from the range 10.13.37.0/24 (i.e. 10.13.31.2 - 254).</p>
+<h3>Attach to a Bridge</h3>
+<p>So now we have an LXD bridge or two; how do we use it?</p>
+<p>Let's attach the container <code>app1</code>'s eth0 to the host's bridge lxdbr1337:</p>
+<div class="highlight"><pre><span></span><span class="err">root@host# lxc network attach lxdbr1337 app1 eth0</span>
+</pre></div>
+
+
+<p>Now let's restart the container to apply the new configuration and verify the bridge configuration on app1:</p>
+<div class="highlight"><pre><span></span><span class="err">root@host# lxc restart app1</span>
+<span class="err">root@host# lxc info app1</span>
+<span class="err">... snip</span>
+<span class="c">devices:</span>
+<span class="c">  eth0:</span>
+<span class="c">    ipv4.address: 10.13.37.224</span>
+<span class="c">    nictype: bridged</span>
+<span class="c">    parent: lxdbr1337</span>
+<span class="c">    type: nic</span>
+<span class="err">... snip</span>
+</pre></div>
+
+
+<p>YAHTZEE</p>
+<h3>Set Static IP</h3>
+<p>Now we have a new bridge and we have successfully attached a container to that bridge. The container successfully pulled an IP address from the DHCP pool and we should be able to NAT out to the Internet. What if we want to make 100% sure that the IP address never changes? This is where static IP addresses come in. One thing to note about static IP addresses on devices connected to an LXD bridge is that they are not actually static IP addresses; they are DHCP reservations. This has a few benefits:</p>
+<ul>
+<li>It avoids IP address conflicts as the DHCP server is aware the IP address is in use</li>
+<li>It allows the DHCP server to pass additional options to the container (e.g. gateway, DNS, NTP, etc values).</li>
+</ul>
+<p>Let's add a "static" IP address to the container <code>app1</code>'s eth0 interface:</p>
+<div class="highlight"><pre><span></span><span class="err">root@host# lxc config device set app1 eth0 ipv4.address 10.13.37.66</span>
+</pre></div>
+
+
+<p>Time to restart and verify the change:</p>
+<div class="highlight"><pre><span></span><span class="err">root@host# lxc restart app1</span>
+<span class="err">root@host# lxc info app1</span>
+<span class="err">... snip</span>
+<span class="c">devices:</span>
+<span class="c">  eth0:</span>
+<span class="c">    ipv4.address: 10.13.37.66</span>
+<span class="c">    nictype: bridged</span>
+<span class="c">    parent: lxdbr1337</span>
+<span class="c">    type: nic</span>
+<span class="err">... snip</span>
+</pre></div>
+
+
+<p>This also works for IPv6 with the <code>ipv6.address</code> flag, but our bridge has IPv6 disabled.</p>
+<h3>Port Security</h3>
+<p>There may be scenarios where there need to be security measures in place to avoid MAC address spoofing or to avoid forwarding traffic for other containers (e.g. nesting containers). The following will accomplish that:</p>
+<div class="highlight"><pre><span></span><span class="err">root@host# lxc config device set app1 eth0 security.mac_filtering true</span>
+</pre></div>
+
+
+<h3>DNS</h3>
+<p>LXD runs a DNS server on the bridge, which allows the domain to be set via the <code>dns.domain</code> network property, and supports 3 different modes (via <code>dns.mode</code>):</p>
+<ul>
+<li>"managed" - one DNS record per container, matching its name and known IP addresses. This record cannot alter this record through DHCP.</li>
+<li>"dynamic" - containers can self-register through DHCP; the current hostname during DHCP negotiation is the domain name</li>
+<li>"none" - simple recursive DNS server with no local DNS records</li>
+</ul>
+<p>The default mode is "managed"## External Briding</p>
+<p>It's possible for the container to participate in the host's LAN as well using bridges outside the control of LXD, but at the expense of losing control of networking for the host through LXD itself. This means that things like DHCP, NAT, etc will also need to be handled external to LXD.</p>
+<h3>Bridging with bridgeutils</h3>
+<p>Let's start with the most basic option using bridgeutils. Bridgeutils creates an internal switch on the host and attaches the configured hosted containers and the configured physical interface. There are a lot of other options, but they are not explicitly germain to the topic at hand. Let's start by crating a new bridge:</p>
+<div class="highlight"><pre><span></span><span class="err">root@host# brctl addbr lanbr</span>
+</pre></div>
+
+
+<p>You've probably already deduced that we have created a new bridge named <code>lanbr</code>. Let's verify that:</p>
+<div class="highlight"><pre><span></span><span class="err">root@host# brctl show</span>
+<span class="err">bridge name     bridge id               STP enabled     interfaces</span>
+<span class="err">lanbr           8000.000000000000       no</span>
+</pre></div>
+
+
+<p>Nice! There aren't any physical or logical interfaces attached to the bridge yet, so it's just chillin there waiting for some friends. Let's give him a physical friend:</p>
+<div class="highlight"><pre><span></span><span class="err">root@host# brctl addif lanbr enp4s0f0</span>
+</pre></div>
+
+
+<p>This adds the physical interface <code>enp4s0f0</code> to the bridge. Don't believe me? See for yourself:</p>
+<div class="highlight"><pre><span></span><span class="err">root@host# brctl show lanbr</span>
+<span class="err">bridge name     bridge id               STP enabled     interfaces</span>
+<span class="err">lanbr           8000.00e0814cbc1c       no              enp4s0f0</span>
+</pre></div>
+
+
+<p>Now we're getting somewhere. We still don't have any containers attached though. The default profile to which the container was attached uses the lxdbr0 interface, so we will need to override that inherited bridge for the eth0 interface on the container. Let's do that now:</p>
+<div class="highlight"><pre><span></span><span class="err">root@host# lxc config device override app1 eth0 parent=lanbr</span>
+</pre></div>
+
+
+<p>Let's see what we're looking at now:</p>
+<div class="highlight"><pre><span></span><span class="err">root@host# lxc config device show app1</span>
+<span class="c">eth0:</span>
+<span class="c">  nictype: bridged</span>
+<span class="c">  parent: lanbr</span>
+<span class="c">  type: nic</span>
+<span class="err">root@host# brctl show lanbr</span>
+<span class="err">bridge name     bridge id               STP enabled     interfaces</span>
+<span class="err">lanbr           8000.00e0814cbc1c       no              enp4s0f0</span>
+<span class="err">                                                    vethce92439e</span>
+</pre></div>
+
+
+<p>Awesome! So to recap, we have now created our bridge <code>lanbr</code> using the brctl interface to bridgeutils, added a physical interface to the bridge, then added a container to the bridge. There are a ton of other options available through bridgeutils like VLAN tagging, loop avoidance through STP, and more, but that goes way outside the scope of this discussion. Poke around and see what you can do!</p>
+<h3>Bridging with macvlan</h3>
+<p>Say you don't need all the fancy knobs associated with bridgeutils and just want your containers to be able to interact directly with the LAN without worry of a layer 2 loop. Enter macvlan. Macvlan creates a trivial bridge and attach subinterfaces to that bridge. Subinterfaces use the naming convention of subint@int: e.g. <code>updog@enp3s0</code>, where <code>updog</code> is an arbitrary interface name and <code>enp3s0</code> is the parent interface to which the bridge is bound.</p>
+<div class="highlight"><pre><span></span><span class="err">root@host# lxc config device set app1 eth0 nictype=macvlan</span>
+<span class="err">root@host# lxc config device set app1 eth0 parent=enp4s0f0</span>
+<span class="err">root@host# lxc config device show app1</span>
+<span class="c">eth0:</span>
+<span class="c">  nictype: macvlan</span>
+<span class="c">  parent: enp4s0f0</span>
+<span class="c">  type: nic</span>
+</pre></div>
+
+
+<p>Restart the container and you'll be in business. There are a points of clarification that need to be made about macvlan to avoid pulling your hair out:</p>
+<ul>
+<li>Containers will not be able to communicate directly with the host via the physical interface to which the macsubinterface is bound
+This means that if a container is using the hosts physical enp3s0 as a macvlan parent, the container will be limited in the ways in which the container can interact with the host; you will need a second physical interface up and running.</li>
+<li>Containers attached to a physical interface using macvlan share the fate of that interface.
+If there are 10 containers on a host all using the same parent interface and that interface goes down, the entire bridge goes down. You may expect that inter-container traffic to continue uninterupted, but that bridging is performed by hairpinning traffic through the physical interface. Kind of hard to do when the interface is down!</li>
+</ul>
+<h3>Bridging with openvswitch</h3>
+<p>Another option to provide host bridging is openvswitch. openvswitch is a virtual switch that comes with a whole host of nerd knobs you can tweak to your heart's content. You can even go buck wild by attaching vswitches from multiple hosts to an SDN controller (read: openflow). For this sake of brevity we will stick to creating a bridge and adding our container to the bridge tagged for a specified vlan.</p>
+<h4>Configuration</h4>
+<div class="highlight"><pre><span></span><span class="err">root@host# ovs-vsctl add-br ctr-bridge</span>
+<span class="err">root@host# ovs-vsctl add-port ctr-bridge enp4s0f1</span>
+<span class="err">root@host# ovs-vsctl add-br vlan409 ctr-bridge 409</span>
+<span class="err">root@host# lxc config device override app1 eth0 parent=vlan409</span>
+</pre></div>
+
+
+<h4>Explanation</h4>
+<p>Here we've created a bridge called <code>ctr-bridge</code> and assigned host interface <code>enp4s0f1</code> to the bridge. Next we've created a dummy bridge called <code>vlan409</code> that is tied to the parent bridge <code>ctr-bridge</code> and is tagged for, you guessed it, vlan 409. By attaching <code>enp4s0f1</code> to the parent bridge, it will act as a VLAN trunk as 802.1q behavior is the default in ovs vsiwtches. Any other devices also connected to the <code>vlan409</code> bridge will also be tagged as vlan 409.</p>
+<h2>Tunnelling</h2>
+<p>At this point we've configured bridging a few different ways. Let's say we have configured additional hosts and we containers on those hosts to be able to talk to each other without any bridging to the external network or NAT-ing using an LXD bridge. This is where tunelling comes into play. If you've worked with networking in any way int the past... oh, say 10 years... it's probably safe to assume you've heard of overlay networking. This is overlay networking. BUZZWORDS!</p>
+<h3>GRE Tunnelling</h3>
+<p>Generic Routing Encapsulation (GRE) provides a method to allow two networks to talk to each other that would not be able to otherwise. GRE takes the packet to be transmitted and wraps it inside a new header (i.e. encapsulates it) specifying the local router (in this case our local LXD host) as the source and the remote router (i.e. our remote LXD host) as the destination. When the GRE packet is received, it is decapsulated and routed as usual. This is very similar to VPNs, but it should be noted that GRE does <em>NOT</em> encrypt the payload like true VPNs (ipsec, openvpn, sslvpn, etc). If multiple hosts are participating via GRE, each endpoint will need to be configured on every other host.</p>
+<h4>Configuration</h4>
+<p>On host1:</p>
+<div class="highlight"><pre><span></span><span class="err">root@host1# lxc network set br0 tunnel.host2.protocol gre</span>
+<span class="err">root@host1# lxc network set br0 tunnel.host2.id 10</span>
+<span class="err">root@host1# lxc network set br0 tunnel.local 11.11.11.11</span>
+<span class="err">root@host1# lxc network set br0 tunnel.remote 99.99.99.99</span>
+</pre></div>
+
+
+<p>On host2:</p>
+<div class="highlight"><pre><span></span><span class="err">root@host2# lxc network set br0 tunnel.host1.protocol gre</span>
+<span class="err">root@host2# lxc network set br0 tunnel.host1.id 10</span>
+<span class="err">root@host2# lxc network set br0 tunnel.local 99.99.99.99</span>
+<span class="err">root@host2# lxc network set br0 tunnel.remote 11.11.11.11</span>
+</pre></div>
+
+
+<h4>Explanation</h4>
+<p>On each host we're configuring the parameters for the other side along with the local IP address. This will allow the two hosts to understand the routing and be able to properly return the traffic.</p>
+<h3>VXLAN Overlays</h3>
+<p>While GRE allows two networks to communicate where end-to-end communication wouldn't otherwise be possible, VXLAN instead allows those two networks to act as a single network. This means that a container on one host could use the other host as a gateway, or containers could be moved between the hosts without needing to change their IP addresses. This is a huge win when it comes to trying to cluster LXD hosts. There are two options when it comes to VXLAN networking in LXD: unicast and multicast. Unicast is going to look a lot like the GRE configuration above - we will explicitly define each endpoint. There is also an option to use multicast. The benefit of using multicast is that it will work without specifying each individual endpoint with one major caveat: they ALL have to be on the same layer 2 network. If you have a host in one datacenter and a host in another datacenter, multicast is not going to work (unless there are some major layer 2 shenanigans going on between datacenters).</p>
+<h4>Unicast</h4>
+<p>If the hosts do not have L2 connectivity between them, it is possible to create the tunnel in unicast mode.</p>
+<p>On host1:</p>
+<div class="highlight"><pre><span></span><span class="err">root@host1# lxc network set br0 tunnel.host2.protocol vxlan</span>
+<span class="err">root@host1# lxc network set br0 tunnel.host2.id 10</span>
+<span class="err">root@host1# lxc network set br0 tunnel.local 11.11.11.11</span>
+<span class="err">root@host1# lxc network set br0 tunnel.remote 99.99.99.99</span>
+</pre></div>
+
+
+<p>On host2:</p>
+<div class="highlight"><pre><span></span><span class="err">root@host2# lxc network set br0 tunnel.host1.protocol=vxlan tunnel.host1.id=10 tunnel.host1.local=99.99.99.99 tunnel.host2.remote=11.11.11.11</span>
+<span class="err">root@host2# lxc network attach-profile br0 default eth0</span>
+</pre></div>
+
+
+<h4>Multicast</h4>
+<p>In this example, we can configure host1 to route all of the traffic and allow containers to communicate between hosts, then configure host2 to tunnel all traffic to host1. Since this is multicast, it is dependent on L2 connectivity between the hosts.</p>
+<p>First create the bridge on host1:</p>
+<div class="highlight"><pre><span></span><span class="err">root@host1# lxc network create br0 tunnel.lan.protocol=vxlan</span>
+</pre></div>
+
+
+<p>Now attach the bridge to eth0 in the default profile:</p>
+<div class="highlight"><pre><span></span><span class="err">root@host1# lxc network attach-profile br0 default eth0</span>
+</pre></div>
+
+
+<p>Then create the bridge on host2:</p>
+<div class="highlight"><pre><span></span><span class="err">root@host2# lxc network create br0 tunnel.lan.protocol=vxlan ipv4.address=none ipv4.address=none tunnel.lan.protocol=vxlan</span>
+</pre></div>
+
+
+<p>Attach the bridge to eth0 in the default profile:</p>
+<div class="highlight"><pre><span></span><span class="err">root@host2# lxc network attach-profile br0 default eth0</span>
+</pre></div>
+
+
+<h3>Fan Networking</h3>
+<p>Fan networking is another overly option. Without going into too much detail, a fan consists of an underlay network with a /16. The hosts in the underlay network pull IP addresss from the /16 and each provide a /24 from the same /8 network. For example, the fan may use an underlay network <code>172.21.0.0/15</code> and the overlay network <code>10.0.0.0/8</code>. The hosts are assigned addresses from the /16, so lets say host1 has the address 172.21.3.15 and host2 has the address 172.21.5.20. <code>host1</code> will then assign containers addresses from the range <code>10.3.15.0/24</code> and <code>host2</code> will assign containers the range from <code>10.5.20.0/24</code>. Notice the lower two octets of the underlay address are used as the second and third octets for the hosts range. Containers can move around to different hosts, but traffic will always route out through the original host. There's a lot to unpack when it comes to fan networking and we're only going to cover the basics, so if you're interested in learning more about fan networking, I would suggest giving <a href="https://wiki.ubuntu.com/FanNetworking">the fan networking docs</a> a read.</p>
+<h4>Configuration</h4>
+<p>First we need to create the fan on our hosts:</p>
+<div class="highlight"><pre><span></span><span class="n">root</span><span class="nv">@host1</span><span class="err">#</span><span class="w"> </span><span class="n">fanctl</span><span class="w"> </span><span class="n">up</span><span class="w"> </span><span class="o">-</span><span class="n">o</span><span class="w"> </span><span class="mf">10.0.0.0</span><span class="o">/</span><span class="mi">8</span><span class="w"> </span><span class="o">-</span><span class="n">u</span><span class="w"> </span><span class="mf">172.21.3.5</span><span class="o">/</span><span class="mi">16</span><span class="w"></span>
+
+<span class="n">root</span><span class="nv">@host2</span><span class="err">#</span><span class="w"> </span><span class="n">fanctl</span><span class="w"> </span><span class="n">up</span><span class="w"> </span><span class="o">-</span><span class="n">o</span><span class="w"> </span><span class="mf">10.0.0.0</span><span class="o">/</span><span class="mi">8</span><span class="w"> </span><span class="o">-</span><span class="n">u</span><span class="w"> </span><span class="mf">172.21.5.20</span><span class="o">/</span><span class="mi">16</span><span class="w"></span>
+</pre></div>
+
+
+<p>Now lets verify the fans are configured:</p>
+<div class="highlight"><pre><span></span><span class="n">root</span><span class="nv">@host1</span><span class="err">#</span><span class="w"> </span><span class="n">fanctl</span><span class="w"> </span><span class="n">show</span><span class="w"></span>
+<span class="n">Bridge</span><span class="w">           </span><span class="n">Underlay</span><span class="w">             </span><span class="k">Overlay</span><span class="w">              </span><span class="n">Flags</span><span class="w"></span>
+<span class="n">fan</span><span class="o">-</span><span class="mi">10</span><span class="w">           </span><span class="mf">172.21.3.5</span><span class="o">/</span><span class="mi">16</span><span class="w">        </span><span class="mf">10.0.0.0</span><span class="o">/</span><span class="mi">8</span><span class="w"></span>
+
+
+<span class="n">root</span><span class="nv">@host2</span><span class="w"></span>
+<span class="n">Bridge</span><span class="w">           </span><span class="n">Underlay</span><span class="w">             </span><span class="k">Overlay</span><span class="w">              </span><span class="n">Flags</span><span class="w"></span>
+<span class="n">fan</span><span class="o">-</span><span class="mi">10</span><span class="w">           </span><span class="mf">17.21.5.20</span><span class="o">/</span><span class="mi">16</span><span class="w">        </span><span class="mf">10.0.0.0</span><span class="o">/</span><span class="mi">8</span><span class="w"></span>
+</pre></div>
+
+
+<p>Now that we have the fan interfaces defined we can update our default bridge to use the fans to overlay:</p>
+<div class="highlight"><pre><span></span><span class="n">root</span><span class="nv">@host1</span><span class="err">#</span><span class="w"> </span><span class="n">lxc</span><span class="w"> </span><span class="n">profile</span><span class="w"> </span><span class="n">device</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="n">eth0</span><span class="w"> </span><span class="n">parent</span><span class="o">=</span><span class="n">fan</span><span class="o">-</span><span class="mi">10</span><span class="w"></span>
+<span class="n">root</span><span class="nv">@host1</span><span class="err">#</span><span class="w"> </span><span class="n">lxc</span><span class="w"> </span><span class="n">profile</span><span class="w"> </span><span class="n">device</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="n">eth0</span><span class="w"> </span><span class="n">mtu</span><span class="o">=</span><span class="mi">1498</span><span class="w"></span>
+
+<span class="n">root</span><span class="nv">@host2</span><span class="err">#</span><span class="w"> </span><span class="n">lxc</span><span class="w"> </span><span class="n">profile</span><span class="w"> </span><span class="n">device</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="n">eth0</span><span class="w"> </span><span class="n">parent</span><span class="o">=</span><span class="n">fan</span><span class="o">-</span><span class="mi">10</span><span class="w"></span>
+<span class="n">root</span><span class="nv">@host2</span><span class="err">#</span><span class="w"> </span><span class="n">lxc</span><span class="w"> </span><span class="n">profile</span><span class="w"> </span><span class="n">device</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="n">eth0</span><span class="w"> </span><span class="n">mtu</span><span class="o">=</span><span class="mi">1498</span><span class="w"></span>
+</pre></div>
+
+
+<h4>Explanation</h4>
+<p>On each host we have created a fan bridge with <code>10.0.0.0/8</code> as the overlay network and <code>172.21.0.0/16</code> as the underlay network. This makes the asusmption that both hosts have interfaces configured with addresses from the same /16 and that they are on the same layer 2 network segment. Once the fan has been verified, the parent device for the containers <code>eth0</code> can be set to the newly-created fan bridge and lower the MTU to account for encapsulation overhead (to prevent unnecessary fragmentation).</p>
+<h2>vSwitches and controlers</h2>
+<h3>openvswitch</h3>
+<h4>Configuration</h4>
+<h4>Explanation</h4>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://ericroc.how/tag/lxd.html">lxd</a>
+      <a href="https://ericroc.how/tag/containers.html">containers</a>
+      <a href="https://ericroc.how/tag/linux.html">linux</a>
+      <a href="https://ericroc.how/tag/networking.html">networking</a>
+    </p>
+  </div>
+
+
+
+
+
+</article>
+
+    <footer>
+<p>&copy; Eric Rochow 2020</p>
+    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Eric Rochow ",
+  "url" : "https://ericroc.how",
+  "image": "https://ericroc.how/images/face.png",
+  "description": ""
+}
+</script>
+
+</body>
+</html>
