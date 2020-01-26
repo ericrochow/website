@@ -147,37 +147,7 @@
   </header>
   <div>
       <h1>Working with Devices in LXD</h1>
-<p>Some use cases for containers depend on passing devices through from the host system into the container. This can allow you to do anything from mount you home directory to passing through a USB device.</p>
-<h2>Adding Devices in LXD</h2>
-<h3>NIC</h3>
-<p>Mounting a NIC device on the container allows a host system network interface (physical or logical) to the container. <a href="/lxd_networking.html">See here for more detail</a>. <strong>NOTE!</strong> Mounting the NIC to the container will cause the interface to disappear from the host system as it now "belongs" to the container. Make sure before you do this that nothing on your host system is utilizing the device intended to be mounted!</p>
-<h4>Command</h4>
-<div class="highlight"><pre><span></span><span class="err">lxc config device add $ctr_name $dev_name nic parent=$parent_iface_name</span>
-</pre></div>
-
-
-<h4>Example</h4>
-<div class="highlight"><pre><span></span><span class="err">lxc config device add app1 eth99 nic parent=enp3s0</span>
-</pre></div>
-
-
-<p>The above will take the network interface <code>enp3s0</code> from the host system and attach it to the container <code>app1</code> as network interface <code>eth99</code>.</p>
-<p><a href="#markdown-header-apply-configuration-changes-to-container">Apply the configuration to the container</a></p>
-<h3>Disk</h3>
-<p>The <code>disk</code> device type is probably the most straightforward of the device types and the one I most often use. This allows a directory on the host system to also be mounted in the container itself to either share between containers or to maintain state in the example of an ephemeral container.</p>
-<h4>Command</h4>
-<div class="highlight"><pre><span></span><span class="err">lxc config device add $ctr_name $dev_name disk source=/path/to/host/dir path=/path/to/ctr/mount/point</span>
-</pre></div>
-
-
-<p><a href="#markdown-header-apply-configuration-changes-to-container">Apply the configuration to the container</a></p>
-<h4>Example</h4>
-<p>To mount a home drive from the host system to the container named app1:</p>
-<div class="highlight"><pre><span></span><span class="err">lxc config device add app1 home_directory disk source=/home/eric path=/home/ubuntu</span>
-</pre></div>
-
-
-<p>This creates a <code>disk</code> device named <code>home_directory</code> and attaches it to the …</p>
+<p>Some use cases for containers depend on passing devices through from the host system into …</p>
         <br>
         <a class="btn" href="https://ericroc.how/mounting-devices-in-lxd.html#mounting-devices-in-lxd">    Continue reading
 </a>
@@ -257,9 +227,10 @@
     </p>
   </header>
   <div>
-      <p>Hi! My name is Eric. But you probably knew that already or your wouldn't be here. Or maybe my SEO is just that good. Anyway!
-I have a LOT of network-related notes that I have accumulated over the years - some from hands-on experience, some from novel lab excersizes, and some that are re-hashes from other documentation our on the Internet. The problem is that some of these are old enough that I don't rightly remember which are which. So! If it seems like I have infringed on someone else's work (especially if it is your own!) PLEASE let me know so I can remove the content or at the very least provide appropriate attribution.</p>
-<p>That is all. Thank you for your time.</p>
+      <p>Hi! My name is Eric. But you probably knew that already or your wouldn't be here. Or maybe my SEO …</p>
+        <br>
+        <a class="btn" href="https://ericroc.how/hi-there.html#hi-there">    Continue reading
+</a>
   </div>
   <hr />
 </article>
@@ -281,44 +252,7 @@ I have a LOT of network-related notes that I have accumulated over the years - s
 <h3>IPv4</h3>
 <h4>Create ACL</h4>
 <p>IPv4 ACL configuration in IOS XR is pretty similar to IOS::</p>
-<div class="highlight"><pre><span></span><span class="err">RP/0/0/CPU0:router(config)#ipv4 access-list TEST</span>
-<span class="err">RP/0/0/CPU0:router(config-ipv4-acl)#remark FIRST</span>
-<span class="err">RP/0/0/CPU0:router(config-ipv4-acl)#permit icmp any any echo</span>
-<span class="err">RP/0/0/CPU0:router(config-ipv4-acl)#permit icmp any any echo-reply </span>
-<span class="err">RP/0/0/CPU0:router(config-ipv4-acl)#permit icmp any any ttl-exceeded </span>
-<span class="err">RP/0/0/CPU0:router(config-ipv4-acl)#permit icmp any any unreachable  </span>
-<span class="err">RP/0/0/CPU0:router(config-ipv4-acl)#permit icmp any any packet-too-big </span>
-<span class="err">RP/0/0/CPU0:router(config-ipv4-acl)#deny icmp any any </span>
-<span class="err">RP/0/0/CPU0:router(config-ipv4-acl)#exit</span>
-<span class="err">RP/0/0/CPU0:router(config)#commit</span>
-</pre></div>
-
-
-<h4>Apply ACL</h4>
-<p>The ACL can then be applied to an interface with the following::</p>
-<div class="highlight"><pre><span></span><span class="err">RP/0/0/CPU0:router(config)#interface g0/0/0/0</span>
-<span class="err">RP/0/0/CPU0:router(config-if)#ipv4 access-group TEST ingress</span>
-</pre></div>
-
-
-<h4>Implicit Entries</h4>
-<p>Every IPv4  ACL in IOS XR has the following implicit statement as its last match entry::</p>
-<div class="highlight"><pre><span></span><span class="err">deny ipv4 any any</span>
-</pre></div>
-
-
-<p>The ACL must have at least one (1) explicit entry for the implicit <code>deny ipv4 any any</code> statement to take effect.</p>
-<h3>IPv6</h3>
-<h4>Create ACL</h4>
-<p>IPv6 ACL configuration in IOS XR is pretty similar to IOS::</p>
-<div class="highlight"><pre><span></span><span class="err">RP/0/0/CPU0:router(config)#ipv6 access-list TEST6</span>
-<span class="err">RP/0/0/CPU0:router(config-ipv6-acl)#remark FIRST!</span>
-<span class="err">RP/0/0/CPU0:router(config-ipv6-acl)#permit icmp any any echo</span>
-<span class="err">RP/0/0/CPU0:router(config-ipv6-acl)#permit icmp any any echo-reply </span>
-<span class="err">RP/0/0/CPU0:router(config-ipv6-acl)#permit icmp any any ttl        </span>
-<span class="err">RP/0/0/CPU0:router(config-ipv6-acl)#permit icmp any any ttl-exceeded </span>
-<span class="err">RP/0/0/CPU0:router(config-ipv6-acl)#permit icmp any any unreachable  </span>
-<span class="err">RP/0/0/CPU0 …</span></pre></div>
+<div class="highlight"><pre><span></span><span class="err">RP/0/0/CPU0 …</span></pre></div>
         <br>
         <a class="btn" href="https://ericroc.how/ios-xr-acls.html#ios-xr-acls">    Continue reading
 </a>
@@ -379,23 +313,7 @@ I have a LOT of network-related notes that I have accumulated over the years - s
   </header>
   <div>
       <h1>LXD Networking</h1>
-<p>Starting in LXD 2.3 there has been quite a bit of network functionality exposed to the operator. As before 2.3 there is the default <code>lxdbr0</code> bridge created when LXD is installed on the host system, but several other options exist.</p>
-<h2>LXD Bridges</h2>
-<h3>Using the Default LXD Bridge</h3>
-<p>First things first, let's go over the default bidge and what it gives you. Out of the box, any new containers will be attached to this bridge and the host system will be configured to NAT oubound connections using the default IP address of the host system via iptables MASQUERADE rules. IP addresses will be assigned to new containers using a built-in DHCP server using the range provided during the LXD init process. If you're looking to keep things simple, just stick with the default bridge.</p>
-<h3>Creating a Custom LXD Bridge</h3>
-<p>If for some reason the default bridge does not suffice (e.g. the network namespaces need to be segregated, differing requirements for addressing or NAT behavior, etc), it is possible to create a new bridge. There are a few different options for configuring a bridge.</p>
-<p>To create an autoconfigured bridge named lxdbr1337:</p>
-<div class="highlight"><pre><span></span><span class="err">root@host# lxc network create lxdbr1337</span>
-</pre></div>
-
-
-<p>To configure the bridge by hand:</p>
-<div class="highlight"><pre><span></span><span class="err">root@host# lxc network create lxdbr1337 ipv6.address=none ipv4.address=10.13.37.1/24 ipv4.nat=true</span>
-</pre></div>
-
-
-<p>This will create a new bridge call <code>lxdbr1337</code> with IPv6 disabled and an IPv4 address of 10.13.31.1, will create MASQUERADE rules in iptables to NAT outbound traffic. The built-in DHCP server will hand out addresses to containers attached to the bridge from the range 10.13.37.0/24 (i.e. 10 …</p>
+<p>Starting in LXD 2.3 there has been quite a bit of network functionality exposed to the operator …</p>
         <br>
         <a class="btn" href="https://ericroc.how/lxd-networking.html#lxd-networking">    Continue reading
 </a>
@@ -419,19 +337,10 @@ I have a LOT of network-related notes that I have accumulated over the years - s
 <hr>
 <p>OSPF configuration in IOS-XR is very similar to IOS.</p>
 <p>RP/0/0/CPU0:router(config)#router ospf 1
-   RP/0/0/CPU0:router(config-ospf)#router-id 172.31.0.2
-   RP/0/0/CPU0:router(config-ospf)#area 0
-   RP/0/0/CPU0:router(config-ospf-ar)#interface Loopback0
-   RP/0/0/CPU0:router(config-ospf-ar-if)#exit
-   RP/0/0/CPU0:router(config-ospf-ar)#interface GigabitEthernet0/0/0/0
-   RP/0/0/CPU0:router(config-ospf-ar-if)#network point-to-point
-   RP/0/0/CPU0:router(config-ospf-ar-if)#exit
-   RP/0/0/CPU0:router(config-ospf-ar)#interface GigabitEthernet0/0/0/1
-   RP/0/0/CPU0:router(config-ospf-ar-if)#network point-to-point
-   RP/0/0/CPU0:router(config-ospf-ar-if)#exit
-   RP/0/0/CPU0:router(config-ospf-ar)#interface GigabitEthernet0/0/0/2
-   RP/0/0/CPU0:router(config-ospf-ar-if)#network point-to-point
-   RP/0/0/CPU0:router(config-ospf-ar-if)#exit</p>
+   RP …</p>
+        <br>
+        <a class="btn" href="https://ericroc.how/ospf-in-ios-xr.html#ospf-in-ios-xr">    Continue reading
+</a>
   </div>
 </article>
 

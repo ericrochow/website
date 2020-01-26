@@ -171,44 +171,7 @@
 <h3>IPv4</h3>
 <h4>Create ACL</h4>
 <p>IPv4 ACL configuration in IOS XR is pretty similar to IOS::</p>
-<div class="highlight"><pre><span></span><span class="err">RP/0/0/CPU0:router(config)#ipv4 access-list TEST</span>
-<span class="err">RP/0/0/CPU0:router(config-ipv4-acl)#remark FIRST</span>
-<span class="err">RP/0/0/CPU0:router(config-ipv4-acl)#permit icmp any any echo</span>
-<span class="err">RP/0/0/CPU0:router(config-ipv4-acl)#permit icmp any any echo-reply </span>
-<span class="err">RP/0/0/CPU0:router(config-ipv4-acl)#permit icmp any any ttl-exceeded </span>
-<span class="err">RP/0/0/CPU0:router(config-ipv4-acl)#permit icmp any any unreachable  </span>
-<span class="err">RP/0/0/CPU0:router(config-ipv4-acl)#permit icmp any any packet-too-big </span>
-<span class="err">RP/0/0/CPU0:router(config-ipv4-acl)#deny icmp any any </span>
-<span class="err">RP/0/0/CPU0:router(config-ipv4-acl)#exit</span>
-<span class="err">RP/0/0/CPU0:router(config)#commit</span>
-</pre></div>
-
-
-<h4>Apply ACL</h4>
-<p>The ACL can then be applied to an interface with the following::</p>
-<div class="highlight"><pre><span></span><span class="err">RP/0/0/CPU0:router(config)#interface g0/0/0/0</span>
-<span class="err">RP/0/0/CPU0:router(config-if)#ipv4 access-group TEST ingress</span>
-</pre></div>
-
-
-<h4>Implicit Entries</h4>
-<p>Every IPv4  ACL in IOS XR has the following implicit statement as its last match entry::</p>
-<div class="highlight"><pre><span></span><span class="err">deny ipv4 any any</span>
-</pre></div>
-
-
-<p>The ACL must have at least one (1) explicit entry for the implicit <code>deny ipv4 any any</code> statement to take effect.</p>
-<h3>IPv6</h3>
-<h4>Create ACL</h4>
-<p>IPv6 ACL configuration in IOS XR is pretty similar to IOS::</p>
-<div class="highlight"><pre><span></span><span class="err">RP/0/0/CPU0:router(config)#ipv6 access-list TEST6</span>
-<span class="err">RP/0/0/CPU0:router(config-ipv6-acl)#remark FIRST!</span>
-<span class="err">RP/0/0/CPU0:router(config-ipv6-acl)#permit icmp any any echo</span>
-<span class="err">RP/0/0/CPU0:router(config-ipv6-acl)#permit icmp any any echo-reply </span>
-<span class="err">RP/0/0/CPU0:router(config-ipv6-acl)#permit icmp any any ttl        </span>
-<span class="err">RP/0/0/CPU0:router(config-ipv6-acl)#permit icmp any any ttl-exceeded </span>
-<span class="err">RP/0/0/CPU0:router(config-ipv6-acl)#permit icmp any any unreachable  </span>
-<span class="err">RP/0/0/CPU0 …</span></pre></div>
+<div class="highlight"><pre><span></span><span class="err">RP/0/0/CPU0 …</span></pre></div>
         <br>
         <a class="btn" href="https://ericroc.how/ios-xr-acls.html#ios-xr-acls">    Continue reading
 </a>
@@ -272,19 +235,10 @@
 <hr>
 <p>OSPF configuration in IOS-XR is very similar to IOS.</p>
 <p>RP/0/0/CPU0:router(config)#router ospf 1
-   RP/0/0/CPU0:router(config-ospf)#router-id 172.31.0.2
-   RP/0/0/CPU0:router(config-ospf)#area 0
-   RP/0/0/CPU0:router(config-ospf-ar)#interface Loopback0
-   RP/0/0/CPU0:router(config-ospf-ar-if)#exit
-   RP/0/0/CPU0:router(config-ospf-ar)#interface GigabitEthernet0/0/0/0
-   RP/0/0/CPU0:router(config-ospf-ar-if)#network point-to-point
-   RP/0/0/CPU0:router(config-ospf-ar-if)#exit
-   RP/0/0/CPU0:router(config-ospf-ar)#interface GigabitEthernet0/0/0/1
-   RP/0/0/CPU0:router(config-ospf-ar-if)#network point-to-point
-   RP/0/0/CPU0:router(config-ospf-ar-if)#exit
-   RP/0/0/CPU0:router(config-ospf-ar)#interface GigabitEthernet0/0/0/2
-   RP/0/0/CPU0:router(config-ospf-ar-if)#network point-to-point
-   RP/0/0/CPU0:router(config-ospf-ar-if)#exit</p>
+   RP …</p>
+        <br>
+        <a class="btn" href="https://ericroc.how/ospf-in-ios-xr.html#ospf-in-ios-xr">    Continue reading
+</a>
   </div>
   <hr />
 </article>
