@@ -3,7 +3,6 @@ Date: 2019-09-06 14:34
 Category: Containers
 Tags: lxd, containers, linux, networking
 Authors: Eric Rochow
-Summary: Just a template for future use
 
 # LXD Networking
 
@@ -99,7 +98,7 @@ The default mode is "managed"## External Briding
 
 It's possible for the container to participate in the host's LAN as well using bridges outside the control of LXD, but at the expense of losing control of networking for the host through LXD itself. This means that things like DHCP, NAT, etc will also need to be handled external to LXD.
 
-### Bridging with ridgeutils
+### Bridging with bridgeutils
 
 Let's start with the most basic option using bridgeutils. Bridgeutils creates an internal switch on the host and attaches the configured hosted containers and the configured physical interface. There are a lot of other options, but they are not explicitly germain to the topic at hand. Let's start by crating a new bridge:
 
@@ -158,6 +157,21 @@ Restart the container and you'll be in business. There are a points of clarifica
 This means that if a container is using the hosts physical enp3s0 as a macvlan parent, the container will be limited in the ways in which the container can interact with the host; you will need a second physical interface up and running.
 * Containers attached to a physical interface using macvlan share the fate of that interface.
 If there are 10 containers on a host all using the same parent interface and that interface goes down, the entire bridge goes down. You may expect that inter-container traffic to continue uninterupted, but that bridging is performed by hairpinning traffic through the physical interface. Kind of hard to do when the interface is down!
+
+### Bridging with openvswitch
+
+Another option to provide host bridging is openvswitch. openvswitch is a virtual switch that comes with a whole host of nerd knobs you can tweak to your heart's content. You can even go buck wild by attaching vswitches from multiple hosts to an SDN controller (read: openflow). For this sake of brevity we will stick to creating a bridge and adding our container to the bridge tagged for a specified vlan.
+
+#### Configuration
+
+    root@host# ovs-vsctl add-br ctr-bridge
+    root@host# ovs-vsctl add-port ctr-bridge enp4s0f1
+    root@host# ovs-vsctl add-br vlan409 ctr-bridge 409
+    root@host# lxc config device override app1 eth0 parent=vlan409
+
+#### Explanation
+
+Here we've created a bridge called `ctr-bridge` and assigned host interface `enp4s0f1` to the bridge. Next we've created a dummy bridge called `vlan409` that is tied to the parent bridge `ctr-bridge` and is tagged for, you guessed it, vlan 409. By attaching `enp4s0f1` to the parent bridge, it will act as a VLAN trunk as 802.1q behavior is the default in ovs vsiwtches. Any other devices also connected to the `vlan409` bridge will also be tagged as vlan 409.
 
 ## Tunnelling
 
@@ -228,7 +242,53 @@ Attach the bridge to eth0 in the default profile:
     root@host2# lxc network attach-profile br0 default eth0
 
 
-## Fan Networking
+### Fan Networking
 
-https://linuxcontainers.org/lxd/docs/master/networks
-https://wiki.ubuntu.com/FanNetworking
+Fan networking is another overly option. Without going into too much detail, a fan consists of an underlay network with a /16. The hosts in the underlay network pull IP addresss from the /16 and each provide a /24 from the same /8 network. For example, the fan may use an underlay network `172.21.0.0/15` and the overlay network `10.0.0.0/8`. The hosts are assigned addresses from the /16, so lets say host1 has the address 172.21.3.15 and host2 has the address 172.21.5.20. `host1` will then assign containers addresses from the range `10.3.15.0/24` and `host2` will assign containers the range from `10.5.20.0/24`. Notice the lower two octets of the underlay address are used as the second and third octets for the hosts range. Containers can move around to different hosts, but traffic will always route out through the original host. There's a lot to unpack when it comes to fan networking and we're only going to cover the basics, so if you're interested in learning more about fan networking, I would suggest giving [the fan networking docs](https://wiki.ubuntu.com/FanNetworking) a read.
+
+#### Configuration
+
+First we need to create the fan on our hosts:
+
+    root@host1# fanctl up -o 10.0.0.0/8 -u 172.21.3.5/16
+
+    root@host2# fanctl up -o 10.0.0.0/8 -u 172.21.5.20/16
+
+Now lets verify the fans are configured:
+
+    root@host1# fanctl show
+    Bridge           Underlay             Overlay              Flags
+    fan-10           172.21.3.5/16        10.0.0.0/8
+
+
+    root@host2
+    Bridge           Underlay             Overlay              Flags
+    fan-10           17.21.5.20/16        10.0.0.0/8
+
+Now that we have the fan interfaces defined we can update our default bridge to use the fans to overlay:
+
+    root@host1# lxc profile device set default eth0 parent=fan-10
+    root@host1# lxc profile device set default eth0 mtu=1498
+
+    root@host2# lxc profile device set default eth0 parent=fan-10
+    root@host2# lxc profile device set default eth0 mtu=1498
+
+#### Explanation
+
+On each host we have created a fan bridge with `10.0.0.0/8` as the overlay network and `172.21.0.0/16` as the underlay network. This makes the asusmption that both hosts have interfaces configured with addresses from the same /16 and that they are on the same layer 2 network segment. Once the fan has been verified, the parent device for the containers `eth0` can be set to the newly-created fan bridge and lower the MTU to account for encapsulation overhead (to prevent unnecessary fragmentation).
+
+
+## vSwitches and controlers
+
+
+### openvswitch
+
+
+
+
+#### Configuration
+
+
+
+
+#### Explanation

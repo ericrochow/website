@@ -25,6 +25,8 @@ Mounting a NIC device on the container allows a host system network interface (p
 
 The above will take the network interface `enp3s0` from the host system and attach it to the container `app1` as network interface `eth99`.
 
+[Apply the configuration to the container](#markdown-header-apply-configuration-changes-to-container)
+
 ### Disk
 
 The `disk` device type is probably the most straightforward of the device types and the one I most often use. This allows a directory on the host system to also be mounted in the container itself to either share between containers or to maintain state in the example of an ephemeral container.
@@ -43,6 +45,7 @@ To mount a home drive from the host system to the container named app1:
 
 This creates a `disk` device named `home_directory` and attaches it to the container `app1`. The host system directory `/home/eric` is now available within `app1` as `/home/ubuntu`.
 
+[Apply the configuration to the container](#markdown-header-apply-configuration-changes-to-container)
 
 ### UNIX Char
 
@@ -58,6 +61,8 @@ The `unix-char` device type allows a "character" device to be attached to the co
 
 The above will take `tty42` from the host system and pass it through to the container `app1` as `/dev/tty1`. Does it make sense to do that? Probably not, but you do you. It's your life. LIVE IT TO THE MAX!
 
+[Apply the configuration to the container](#markdown-header-apply-configuration-changes-to-container)
+
 ### UNIX Block
 
 The `unix-block` device type is similar to `disk`, but rather than sharing a directory, this is passing a block device to the container. The important distinction here is that the device is a volume rather than a directory within the volume. The device is added to the `/dev` directory on the container to be mounted within the container as appropriate.
@@ -71,6 +76,8 @@ The `unix-block` device type is similar to `disk`, but rather than sharing a dir
     lxc config device add app1 sdc5 unix-block source=/dev/sdc5 path=/dev/sda1
 
 The above will take the unmounted volume `/dev/sdc5` on the host system and add to the `app1` container as `/dev/sda1`.
+
+[Apply the configuration to the container](#markdown-header-apply-configuration-changes-to-container)
 
 ### USB
 
@@ -101,22 +108,34 @@ Not a lot that would make sense to pass through to a container, but let's say fo
 
 This creates a device called `xbox` and attaches to the container `app1` if the product has the vendor_id `045e` and the product_id `028e`. These vaules are pulled from the ID in the above `lsusb` output where the number before the colon is the vendor and the number following the colon is the product.
 
+[Apply the configuration to the container](#markdown-header-apply-configuration-changes-to-container)
+
 ### GPU
 
 The `gpu` device type passes a graphic card through to the container in the event that some heavy computation is required (think cryptocurrency mining or participating in SETI or folding@home).
 
 #### Command
 
-    lxc config device add $ctr_name $dev_name gpu
+    lxc config device add $ctr_name $dev_name gpu vendorid=$vendorid productid=$productid
 
 #### Example
 
-### Infiniband (LOL)
+Let's start by finding the vendor and product IDs of the GPU we want to pass through:
 
-#### Command
+    root@host# lspci -nn | grep -i vga
+    0f:00.0 VGA compatible controller [0300]: NVIDIA Corporation GF100GL [Quadro 4000] [10de:06dd] (rev a3)
 
+Now let's configure attach the physical device to the container:
 
-#### Example
+    root@host# lxc config device add app1 quadro gpu vendorid=10de productid=06dd
+
+This creates a device called `quadro` and attaches to the container `app1`. I identifies the physical device via the vendor ID `10de` (NVIDIA) and the productid `06dd`.
+
+[Apply the configuration to the container](#markdown-header-apply-configuration-changes-to-container)
+
+### Infiniband
+
+If you have a use-case for connecting infiniband devices to containers, you're probably smarter than me so I won't bother trying to mansplain.
 
 ### Proxy
 
