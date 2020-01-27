@@ -36,12 +36,12 @@
 <!-- End Google Analytics -->
 
 <meta name="author" content="Eric Rochow" />
-<meta name="description" content="LXD Networking Starting in LXD 2.3 there has been quite a bit of network functionality exposed to the operator …" />
+<meta name="description" content="Starting in LXD 2.3 there has been quite a bit of network functionality exposed to the operator. As before …" />
 <meta name="keywords" content="lxd, containers, linux, networking">
 
 <meta property="og:site_name" content="Eric Rochow"/>
 <meta property="og:title" content="LXD Networking"/>
-<meta property="og:description" content="LXD Networking Starting in LXD 2.3 there has been quite a bit of network functionality exposed to the operator …"/>
+<meta property="og:description" content="Starting in LXD 2.3 there has been quite a bit of network functionality exposed to the operator. As before …"/>
 <meta property="og:locale" content="en_US"/>
 <meta property="og:url" content="https://ericroc.how/lxd-networking.html"/>
 <meta property="og:type" content="article"/>
@@ -153,8 +153,7 @@
 
 
   <div>
-    <h1>LXD Networking</h1>
-<p>Starting in LXD 2.3 there has been quite a bit of network functionality exposed to the operator. As before 2.3 there is the default <code>lxdbr0</code> bridge created when LXD is installed on the host system, but several other options exist.</p>
+    <p>Starting in LXD 2.3 there has been quite a bit of network functionality exposed to the operator. As before 2.3 there is the default <code>lxdbr0</code> bridge created when LXD is installed on the host system, but several other options exist.</p>
 <h2>LXD Bridges</h2>
 <h3>Using the Default LXD Bridge</h3>
 <p>First things first, let's go over the default bidge and what it gives you. Out of the box, any new containers will be attached to this bridge and the host system will be configured to NAT oubound connections using the default IP address of the host system via iptables MASQUERADE rules. IP addresses will be assigned to new containers using a built-in DHCP server using the range provided during the LXD init process. If you're looking to keep things simple, just stick with the default bridge.</p>
