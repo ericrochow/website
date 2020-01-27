@@ -5,15 +5,13 @@ Tags: containers, lxd, linux
 Authors: Eric Rochow
 
 
-# Working with Devices in LXD
-
 Some use cases for containers depend on passing devices through from the host system into the container. This can allow you to do anything from mount you home directory to passing through a USB device.
 
 ## Adding Devices in LXD
 
 ### NIC
 
-Mounting a NIC device on the container allows a host system network interface (physical or logical) to the container. [See here for more detail](/lxd_networking.html). **NOTE!** Mounting the NIC to the container will cause the interface to disappear from the host system as it now "belongs" to the container. Make sure before you do this that nothing on your host system is utilizing the device intended to be mounted!
+Mounting a NIC device on the container allows a host system network interface (physical or logical) to the container. [See here for more detail](/lxd-networking.html). **NOTE!** Mounting the NIC to the container will cause the interface to disappear from the host system as it now "belongs" to the container. Make sure before you do this that nothing on your host system is utilizing the device intended to be mounted!
 
 #### Command
 

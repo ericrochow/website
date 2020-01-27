@@ -4,8 +4,6 @@ Category: Containers
 Tags: lxd, containers, linux, networking
 Authors: Eric Rochow
 
-# LXD Networking
-
 Starting in LXD 2.3 there has been quite a bit of network functionality exposed to the operator. As before 2.3 there is the default `lxdbr0` bridge created when LXD is installed on the host system, but several other options exist.
 
 
