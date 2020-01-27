@@ -147,23 +147,7 @@
   </header>
   <div>
       <h1>LXD Networking</h1>
-<p>Starting in LXD 2.3 there has been quite a bit of network functionality exposed to the operator. As before 2.3 there is the default <code>lxdbr0</code> bridge created when LXD is installed on the host system, but several other options exist.</p>
-<h2>LXD Bridges</h2>
-<h3>Using the Default LXD Bridge</h3>
-<p>First things first, let's go over the default bidge and what it gives you. Out of the box, any new containers will be attached to this bridge and the host system will be configured to NAT oubound connections using the default IP address of the host system via iptables MASQUERADE rules. IP addresses will be assigned to new containers using a built-in DHCP server using the range provided during the LXD init process. If you're looking to keep things simple, just stick with the default bridge.</p>
-<h3>Creating a Custom LXD Bridge</h3>
-<p>If for some reason the default bridge does not suffice (e.g. the network namespaces need to be segregated, differing requirements for addressing or NAT behavior, etc), it is possible to create a new bridge. There are a few different options for configuring a bridge.</p>
-<p>To create an autoconfigured bridge named lxdbr1337:</p>
-<div class="highlight"><pre><span></span><span class="err">root@host# lxc network create lxdbr1337</span>
-</pre></div>
-
-
-<p>To configure the bridge by hand:</p>
-<div class="highlight"><pre><span></span><span class="err">root@host# lxc network create lxdbr1337 ipv6.address=none ipv4.address=10.13.37.1/24 ipv4.nat=true</span>
-</pre></div>
-
-
-<p>This will create a new bridge call <code>lxdbr1337</code> with IPv6 disabled and an IPv4 address of 10.13.31.1, will create MASQUERADE rules in iptables to NAT outbound traffic. The built-in DHCP server will hand out addresses to containers attached to the bridge from the range 10.13.37.0/24 (i.e. 10 …</p>
+<p>Starting in LXD 2.3 there has been quite a bit of network functionality exposed to the operator …</p>
         <br>
         <a class="btn" href="https://ericroc.how/lxd-networking.html#lxd-networking">    Continue reading
 </a>
