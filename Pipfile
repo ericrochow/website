@@ -29,6 +29,7 @@ markup = "*"
 invoke = "*"
 feedparser = "*"
 gensim = "*"
+typogrify = "*"
 
 [requires]
 
