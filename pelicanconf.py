@@ -8,7 +8,7 @@ from datetime import datetime
 import arrow
 
 AUTHOR = "Eric Rochow"
-SITEURL = "https://www.ericroc.how"
+SITEURL = "https://ericroc.how"
 SITENAME = AUTHOR
 SITETITLE = AUTHOR
 # SITESUBTITLE = ""
@@ -82,9 +82,9 @@ LINKS = (
 
 # Social widget
 SOCIAL = (
-    ("globe", "https://www.ericroc.how"),
+    ("globe", "https://ericroc.how"),
     ("envelope", "mailto:ericrochow@gmail.com"),
-    ("rss", "https://www.ericroc.how"),
+    ("rss", "https://ericroc.how"),
     ("linkedin", "https://www.linkedin.com/in/erochow/"),
     ("github", "https://github.com/ericrochow"),
     # ("reddit", "#"),
