@@ -52,7 +52,7 @@ commands:
             git config user.name "DeployTron 9000"
             git add docs/*
             git commit -am "circleci content push [skip ci]"
-            git push -q https://${DOCS_GITHUB_TOKEN}@github.com/ericrochow/website.git master
+            git push -q https://${DOCS_GITHUB_TOKEN}@github.com/ericrochow/website.git main
 
 jobs:
   build:
