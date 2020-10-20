@@ -157,7 +157,7 @@
 <h3>IPv4</h3>
 <h4>Create ACL</h4>
 <p>IPv4 ACL configuration in IOS XR is pretty similar to IOS::</p>
-<div class="highlight"><pre><span></span><span class="err">RP/0/0/CPU0:router(config)#ipv4 access-list TEST</span>
+<div class="highlight"><pre><span></span><code><span class="err">RP/0/0/CPU0:router(config)#ipv4 access-list TEST</span>
 <span class="err">RP/0/0/CPU0:router(config-ipv4-acl)#remark FIRST</span>
 <span class="err">RP/0/0/CPU0:router(config-ipv4-acl)#permit icmp any any echo</span>
 <span class="err">RP/0/0/CPU0:router(config-ipv4-acl)#permit icmp any any echo-reply </span>
@@ -167,27 +167,24 @@
 <span class="err">RP/0/0/CPU0:router(config-ipv4-acl)#deny icmp any any </span>
 <span class="err">RP/0/0/CPU0:router(config-ipv4-acl)#exit</span>
 <span class="err">RP/0/0/CPU0:router(config)#commit</span>
-</pre></div>
-
+</code></pre></div>
 
 <h4>Apply ACL</h4>
 <p>The ACL can then be applied to an interface with the following::</p>
-<div class="highlight"><pre><span></span><span class="err">RP/0/0/CPU0:router(config)#interface g0/0/0/0</span>
+<div class="highlight"><pre><span></span><code><span class="err">RP/0/0/CPU0:router(config)#interface g0/0/0/0</span>
 <span class="err">RP/0/0/CPU0:router(config-if)#ipv4 access-group TEST ingress</span>
-</pre></div>
-
+</code></pre></div>
 
 <h4>Implicit Entries</h4>
 <p>Every IPv4  ACL in IOS XR has the following implicit statement as its last match entry::</p>
-<div class="highlight"><pre><span></span><span class="err">deny ipv4 any any</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="err">deny ipv4 any any</span>
+</code></pre></div>
 
 <p>The ACL must have at least one (1) explicit entry for the implicit <code>deny ipv4 any any</code> statement to take effect.</p>
 <h3>IPv6</h3>
 <h4>Create ACL</h4>
 <p>IPv6 ACL configuration in IOS XR is pretty similar to IOS::</p>
-<div class="highlight"><pre><span></span><span class="err">RP/0/0/CPU0:router(config)#ipv6 access-list TEST6</span>
+<div class="highlight"><pre><span></span><code><span class="err">RP/0/0/CPU0:router(config)#ipv6 access-list TEST6</span>
 <span class="err">RP/0/0/CPU0:router(config-ipv6-acl)#remark FIRST!</span>
 <span class="err">RP/0/0/CPU0:router(config-ipv6-acl)#permit icmp any any echo</span>
 <span class="err">RP/0/0/CPU0:router(config-ipv6-acl)#permit icmp any any echo-reply </span>
@@ -196,30 +193,27 @@
 <span class="err">RP/0/0/CPU0:router(config-ipv6-acl)#permit icmp any any unreachable  </span>
 <span class="err">RP/0/0/CPU0:router(config-ipv6-acl)#permit icmp any any packet-too-big </span>
 <span class="err">RP/0/0/CPU0:router(config-ipv6-acl)#deny icmp any any</span>
-</pre></div>
-
+</code></pre></div>
 
 <h4>Apply ACL</h4>
 <p>The ACL can then be applied to an interface with the following::</p>
-<div class="highlight"><pre><span></span><span class="err">RP/0/0/CPU0:router(config)#interface g0/0/0/0</span>
+<div class="highlight"><pre><span></span><code><span class="err">RP/0/0/CPU0:router(config)#interface g0/0/0/0</span>
 <span class="err">RP/0/0/CPU0:router(config-if)#ipv4 access-group TEST6 egress</span>
-</pre></div>
-
+</code></pre></div>
 
 <h4>Implicit Entries</h4>
 <p>Every IPv6 ACL in IOS XR has the folling implicit statements as its last match entries::</p>
-<div class="highlight"><pre><span></span><span class="err">permit icmp any any nd-na</span>
+<div class="highlight"><pre><span></span><code><span class="err">permit icmp any any nd-na</span>
 <span class="err">permit icmp any any nd-ns</span>
 <span class="err">deny ipv6 any any</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>The first two entries allow for ICMPv6 neighbor discovery by default. The ACL must have at least one (1) explicit entry for the implicit <code>deny ipv6 any any</code> statement to take effect.</p>
 <h2>Hardware Counters</h2>
 <p>Hardware counters are disabled by default for IPv4. They can be enabled per-interface and per-ACL using the following::</p>
-<div class="highlight"><pre><span></span><span class="err">RP/0/0/CPU0:router(config)#interface *interface-name*</span>
+<div class="highlight"><pre><span></span><code><span class="err">RP/0/0/CPU0:router(config)#interface *interface-name*</span>
 <span class="err">RP/0/0/CPU0:router(config-if)#ipv4 access-group *acl-name* { ingress | egress } hardware-count</span>
-</pre></div>
+</code></pre></div>
   </div>
   <div class="tag-cloud">
     <p>

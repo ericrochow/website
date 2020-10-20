@@ -154,30 +154,26 @@
   <div>
     <h1>Nexus 3k/9k Upgrades</h1>
 <p>Upgrades from NX-OS 6 to 7 require an incremental upgrade due to BIOS incompatibilities. First install a compatible version of 6 that allows standalone BIOS upgrades:</p>
-<div class="highlight"><pre><span></span><span class="err">copy scp://user@server/root/n3000-uk9.6.0.2.U6.9.bin bootflash: vrf default</span>
+<div class="highlight"><pre><span></span><code><span class="err">copy scp://user@server/root/n3000-uk9.6.0.2.U6.9.bin bootflash: vrf default</span>
 <span class="err">copy scp://user@server/root/n3000-uk9-kickstart.6.0.2.U6.9.bin bootflash: vrf default</span>
 <span class="err">install all kickstart bootflash:///n3000-uk9-kickstart.6.0.2.U6.9.bin system bootflash:n3000-uk9.6.0.2.U6.9.bin</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>This will take a long time and require a reboot. After the reboot, delete the old image to make room for the new images:</p>
-<div class="highlight"><pre><span></span><span class="err">delete bootflash:///n3000-uk9-kickstart.6.0.2.U3.1.bin</span>
+<div class="highlight"><pre><span></span><code><span class="err">delete bootflash:///n3000-uk9-kickstart.6.0.2.U3.1.bin</span>
 <span class="err">delete bootflash:///n3000-uk9.6.0.2.U3.1.bin</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>Now it's time to install the BIOS upgrade to enable the upgrade to 7:</p>
-<div class="highlight"><pre><span></span><span class="err">copy scp://user@server/root/nxos-n3kbios.bin bootflash: vrf default</span>
+<div class="highlight"><pre><span></span><code><span class="err">copy scp://user@server/root/nxos-n3kbios.bin bootflash: vrf default</span>
 <span class="err">install all nxos bootflash:///nxos-n3kbios.bin bios</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>It will say that a reboot is required, but it's not. Delete the BIOS bin file and do the final upgrade:</p>
-<div class="highlight"><pre><span></span><span class="err">delete bootflash:///nxos-n3kbios.bin</span>
+<div class="highlight"><pre><span></span><code><span class="err">delete bootflash:///nxos-n3kbios.bin</span>
 <span class="err">copy scp://user@server/root/nxos.7.0.3.I4.4.bin bootflash: vrf default</span>
 <span class="err">install all nxos bootflash:///nxos.7.0.3.I4.4.bin</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>After the reboot, you will be on 7. You will not need to jump through all these hoops for future upgrades.</p>
 <h1>Nexus 7k Upgrades</h1>

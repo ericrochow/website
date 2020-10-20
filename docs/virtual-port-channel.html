@@ -183,24 +183,22 @@
 </ul>
 <h2>Basic Step-by-step Configuration</h2>
 <p>First, enable the vPC feature on both switches:</p>
-<div class="highlight"><pre><span></span><span class="err">switch1(config)# feature vpc</span>
+<div class="highlight"><pre><span></span><code><span class="err">switch1(config)# feature vpc</span>
 <span class="err">switch1(config)# feature lacp</span>
 <span class="err">switch2(config)# feature vpc</span>
 <span class="err">switch2(config)# feature lacp</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>Now, create the peer-keepalive port. At this point, we have a decision - we can either use the management port on the supervisor or we can use a port-channel between the vPC switches. For more info, see "Important Design Considerations". For this example, we are going to use the management ports:</p>
-<div class="highlight"><pre><span></span><span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">#</span> <span class="n">interface</span> <span class="n">mgmt0</span>
+<div class="highlight"><pre><span></span><code><span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">#</span> <span class="n">interface</span> <span class="n">mgmt0</span>
 <span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="o">-</span><span class="k">if</span><span class="p">)</span><span class="o">#</span> <span class="n">ip</span> <span class="n">address</span> <span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="o">/</span><span class="mi">24</span>
 
 <span class="n">switch2</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">#</span> <span class="n">interface</span> <span class="n">mgmt0</span>
 <span class="n">switch2</span><span class="p">(</span><span class="n">config</span><span class="o">-</span><span class="k">if</span><span class="p">)</span><span class="o">#</span> <span class="n">ip</span> <span class="n">address</span> <span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="p">.</span><span class="mi">2</span><span class="o">/</span><span class="mi">24</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>Next create the vPC domain each switch:</p>
-<div class="highlight"><pre><span></span><span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">#</span> <span class="n">vpc</span> <span class="k">domain</span> <span class="mi">1</span>
+<div class="highlight"><pre><span></span><code><span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">#</span> <span class="n">vpc</span> <span class="k">domain</span> <span class="mi">1</span>
 <span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="o">-</span><span class="n">vpc</span><span class="o">-</span><span class="k">domain</span><span class="p">)</span><span class="o">#</span> <span class="n">ip</span> <span class="n">arp</span> <span class="n">synchronize</span>
 <span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="o">-</span><span class="n">vpc</span><span class="o">-</span><span class="k">domain</span><span class="p">)</span><span class="o">#</span> <span class="n">ipv6</span> <span class="n">nd</span> <span class="n">synchronize</span>
 <span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="o">-</span><span class="n">vpc</span><span class="o">-</span><span class="k">domain</span><span class="p">)</span><span class="o">#</span> <span class="n">peer</span><span class="o">-</span><span class="n">keepalive</span> <span class="n">destination</span> <span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="p">.</span><span class="mi">2</span> <span class="k">source</span> <span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span>
@@ -209,12 +207,11 @@
 <span class="n">switch2</span><span class="p">(</span><span class="n">config</span><span class="o">-</span><span class="n">vpc</span><span class="o">-</span><span class="k">domain</span><span class="p">)</span><span class="o">#</span> <span class="n">ip</span> <span class="n">arp</span> <span class="n">synchronize</span>
 <span class="n">switch2</span><span class="p">(</span><span class="n">config</span><span class="o">-</span><span class="n">vpc</span><span class="o">-</span><span class="k">domain</span><span class="p">)</span><span class="o">#</span> <span class="n">ipv6</span> <span class="n">nd</span> <span class="n">synchronize</span>
 <span class="n">switch2</span><span class="p">(</span><span class="n">config</span><span class="o">-</span><span class="n">vpc</span><span class="o">-</span><span class="k">domain</span><span class="p">)</span><span class="o">#</span> <span class="n">peer</span><span class="o">-</span><span class="n">keepalive</span> <span class="n">destination</span> <span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span> <span class="k">source</span> <span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="p">.</span><span class="mi">2</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>Note that the <code>peer-keepalive</code> configuration defaults to using the management VRF. If not using the management port, the VRF must be specified by appending <code>vrf default</code> after the source (or substituting the actual VRF name if you specified a vPC keepalive VRF).</p>
 <p>Time to create the peer link:</p>
-<div class="highlight"><pre><span></span><span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">#</span> <span class="n">interface</span> <span class="n">po1</span>
+<div class="highlight"><pre><span></span><code><span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">#</span> <span class="n">interface</span> <span class="n">po1</span>
 <span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="o">-</span><span class="k">if</span><span class="p">)</span><span class="o">#</span> <span class="n">switchport</span>
 <span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="o">-</span><span class="k">if</span><span class="p">)</span><span class="o">#</span> <span class="n">switchport</span> <span class="k">mode</span> <span class="n">trunk</span>
 <span class="n">switch</span><span class="p">(</span><span class="n">config</span><span class="o">-</span><span class="k">if</span><span class="p">)</span><span class="o">#</span> <span class="n">vpc</span> <span class="n">peer</span><span class="o">-</span><span class="n">link</span>
@@ -223,23 +220,21 @@
 <span class="n">switch2</span><span class="p">(</span><span class="n">config</span><span class="o">-</span><span class="k">if</span><span class="p">)</span><span class="o">#</span> <span class="n">switchport</span>
 <span class="n">switch2</span><span class="p">(</span><span class="n">config</span><span class="o">-</span><span class="k">if</span><span class="p">)</span><span class="o">#</span> <span class="n">switchport</span> <span class="k">mode</span> <span class="n">trunk</span>
 <span class="n">switch2</span><span class="p">(</span><span class="n">config</span><span class="o">-</span><span class="k">if</span><span class="p">)</span><span class="o">#</span> <span class="n">vpc</span> <span class="n">peer</span><span class="o">-</span><span class="n">link</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>And now we can configure the switches as peer switches and peer gateways:</p>
-<div class="highlight"><pre><span></span><span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">#</span> <span class="n">vpc</span> <span class="k">domain</span> <span class="mi">1</span>
+<div class="highlight"><pre><span></span><code><span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">#</span> <span class="n">vpc</span> <span class="k">domain</span> <span class="mi">1</span>
 <span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="o">-</span><span class="n">vpc</span><span class="o">-</span><span class="k">domain</span><span class="p">)</span><span class="o">#</span> <span class="n">peer</span><span class="o">-</span><span class="n">switch</span>
 <span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="o">-</span><span class="n">vpc</span><span class="o">-</span><span class="k">domain</span><span class="p">)</span><span class="o">#</span> <span class="n">peer</span><span class="o">-</span><span class="n">gateway</span>
 
 <span class="n">switch2</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">#</span> <span class="n">vpc</span> <span class="k">domain</span> <span class="mi">1</span>
 <span class="n">switch2</span><span class="p">(</span><span class="n">config</span><span class="o">-</span><span class="n">vpc</span><span class="o">-</span><span class="k">domain</span><span class="p">)</span><span class="o">#</span> <span class="n">peer</span><span class="o">-</span><span class="n">switch</span>
 <span class="n">switch2</span><span class="p">(</span><span class="n">config</span><span class="o">-</span><span class="n">vpc</span><span class="o">-</span><span class="k">domain</span><span class="p">)</span><span class="o">#</span> <span class="n">peer</span><span class="o">-</span><span class="n">gateway</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>The <code>peer-gateway</code> feature will allow both switches to forward traffic without having it cross the the peer-link regardless of the switch's HSRP role (i.e. it creates "Active/Active" HSRP). The <code>peer-switch</code> feature ensures that all BPDUs sent by the switch to vPC members will be identical to the peer switch's BPDUs so the vPC member sees the upstream switches as a single switch. </p>
 <p>Last, create the port channel by adding the port(s) to it on each switch and specifying a vPC ID:</p>
-<div class="highlight"><pre><span></span><span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">#</span> <span class="n">interface</span> <span class="n">ethernet</span> <span class="mi">1</span><span class="o">/</span><span class="mi">1</span>
+<div class="highlight"><pre><span></span><code><span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">#</span> <span class="n">interface</span> <span class="n">ethernet</span> <span class="mi">1</span><span class="o">/</span><span class="mi">1</span>
 <span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="o">-</span><span class="k">if</span><span class="p">)</span><span class="o">#</span> <span class="n">switchport</span>
 <span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="o">-</span><span class="k">if</span><span class="p">)</span><span class="o">#</span> <span class="n">switchport</span> <span class="k">mode</span> <span class="n">trunk</span>
 <span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="o">-</span><span class="k">if</span><span class="p">)</span><span class="o">#</span> <span class="n">channel</span><span class="o">-</span><span class="k">group</span> <span class="mi">100</span> <span class="k">mode</span> <span class="n">active</span>
@@ -254,11 +249,10 @@
 <span class="n">switch2</span><span class="p">(</span><span class="n">config</span><span class="o">-</span><span class="k">if</span><span class="p">)</span><span class="o">#</span> <span class="n">exit</span>
 <span class="n">switch2</span><span class="p">(</span><span class="n">config</span><span class="o">-</span><span class="k">if</span><span class="p">)</span> <span class="n">interface</span> <span class="n">po100</span>
 <span class="n">switch2</span><span class="p">(</span><span class="n">config</span><span class="o">-</span><span class="k">if</span><span class="p">)</span><span class="o">#</span> <span class="n">vpc</span> <span class="mi">100</span>
-</pre></div>
-
+</code></pre></div>
 
 <h2>All Together Now</h2>
-<div class="highlight"><pre><span></span><span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">#</span> <span class="n">feature</span> <span class="n">vpc</span>
+<div class="highlight"><pre><span></span><code><span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">#</span> <span class="n">feature</span> <span class="n">vpc</span>
 <span class="n">feature</span> <span class="n">lacp</span>
 <span class="n">interface</span> <span class="n">mgmt0</span>
 <span class="n">ip</span> <span class="n">address</span> <span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="o">/</span><span class="mi">24</span>
@@ -289,13 +283,12 @@
 <span class="n">vpc</span> <span class="k">domain</span> <span class="mi">1</span>
 <span class="n">peer</span><span class="o">-</span><span class="n">switch</span>
 <span class="n">peer</span><span class="o">-</span><span class="n">gateway</span>
-</pre></div>
-
+</code></pre></div>
 
 <h2>Advanced vPC Configuration</h2>
 <h3>Peer Keepalive on Port Channel</h3>
 <p>If you decide to use a non-management port, the vPC peer-keepalive can be configured on a port-channel like so:</p>
-<div class="highlight"><pre><span></span><span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">#</span> <span class="n">interface</span> <span class="n">po1</span>
+<div class="highlight"><pre><span></span><code><span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">#</span> <span class="n">interface</span> <span class="n">po1</span>
 <span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="o">-</span><span class="k">if</span><span class="p">)</span><span class="o">#</span> <span class="n">vrf</span> <span class="n">member</span> <span class="n">peer</span><span class="o">-</span><span class="n">keepalive</span>
 <span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="o">-</span><span class="k">if</span><span class="p">)</span><span class="o">#</span> <span class="n">ip</span> <span class="n">address</span> <span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="o">/</span><span class="mi">24</span>
 <span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="o">-</span><span class="k">if</span><span class="p">)</span><span class="o">#</span> <span class="n">exit</span>
@@ -308,29 +301,26 @@
 <span class="n">switch2</span><span class="p">(</span><span class="n">config</span><span class="o">-</span><span class="k">if</span><span class="p">)</span><span class="o">#</span> <span class="n">exit</span>
 <span class="n">switch2</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">#</span> <span class="n">vpc</span> <span class="k">domain</span> <span class="mi">1</span>
 <span class="n">switch2</span><span class="p">(</span><span class="n">config</span><span class="o">-</span><span class="n">vpc</span><span class="o">-</span><span class="k">domain</span><span class="p">)</span><span class="o">#</span> <span class="n">peer</span><span class="o">-</span><span class="n">keepalive</span> <span class="n">destination</span> <span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span> <span class="k">source</span> <span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="p">.</span><span class="mi">2</span> <span class="n">vrf</span> <span class="n">peer</span><span class="o">-</span><span class="n">keepalive</span>
-</pre></div>
-
+</code></pre></div>
 
 <h3>vPC Role Priorities</h3>
 <p>It is possible to define a primary and secondary role for vPC by applying a (non-preemptive) priority value. Since vPC is a layer 2 technology, the lower priority wins. </p>
-<div class="highlight"><pre><span></span><span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">#</span> <span class="n">vpc</span> <span class="k">domain</span> <span class="mi">1</span>
+<div class="highlight"><pre><span></span><code><span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">#</span> <span class="n">vpc</span> <span class="k">domain</span> <span class="mi">1</span>
 <span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="o">-</span><span class="n">vpc</span><span class="o">-</span><span class="k">domain</span><span class="p">)</span><span class="o">#</span> <span class="k">role</span> <span class="n">priority</span> <span class="mi">100</span>
 
 <span class="n">switch2</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">#</span> <span class="n">vpc</span> <span class="k">domain</span> <span class="mi">1</span>
 <span class="n">switch2</span><span class="p">(</span><span class="n">config</span><span class="o">-</span><span class="n">vpc</span><span class="o">-</span><span class="k">domain</span><span class="p">)</span><span class="o">#</span> <span class="k">role</span> <span class="n">priority</span> <span class="mi">120</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>It is a good idea to configure the vPC primary device to be the same as the STP root unless the <code>peer-switch</code> command is used, in which case both devices will use the same spanning-tree priority and this recommendation does not apply.</p>
 <h3>vPC System Priorities</h3>
 <p>When configuring a vPC using LACP, the vPC system priority can be confgured to ensure that the vPC devices act as the primary devices in LACP:</p>
-<div class="highlight"><pre><span></span><span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">#</span> <span class="n">vpc</span> <span class="k">domain</span> <span class="mi">1</span>
+<div class="highlight"><pre><span></span><code><span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">#</span> <span class="n">vpc</span> <span class="k">domain</span> <span class="mi">1</span>
 <span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="o">-</span><span class="n">vpc</span><span class="o">-</span><span class="k">domain</span><span class="p">)</span><span class="o">#</span> <span class="k">system</span><span class="o">-</span><span class="n">priority</span> <span class="mi">4000</span>
 
 <span class="n">switch2</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">#</span> <span class="n">vpc</span> <span class="k">domain</span> <span class="mi">1</span>
 <span class="n">switch2</span><span class="p">(</span><span class="n">config</span><span class="o">-</span><span class="n">vpc</span><span class="o">-</span><span class="k">domain</span><span class="p">)</span><span class="o">#</span> <span class="k">system</span><span class="o">-</span><span class="n">priority</span> <span class="mi">4000</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>When manually configuring the system priority, make sure to set both devices are set to the exact same priority.</p>
 <h2>Important Design Considerations</h2>

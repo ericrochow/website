@@ -156,7 +156,7 @@
 <h2>32-bit IOS-XR</h2>
 <h3>Add a Perpetual License</h3>
 <p>On the chassis, find the appropriate license info. NOTE: You must be in <code>admin</code> mode to run this command:</p>
-<div class="highlight"><pre><span></span><span class="n">RP</span><span class="o">/</span><span class="mi">0</span><span class="o">/</span><span class="n">RSP0</span><span class="o">/</span><span class="n">CPU0</span><span class="p">:</span><span class="n">router</span><span class="o">#</span><span class="k">admin</span>
+<div class="highlight"><pre><span></span><code><span class="n">RP</span><span class="o">/</span><span class="mi">0</span><span class="o">/</span><span class="n">RSP0</span><span class="o">/</span><span class="n">CPU0</span><span class="p">:</span><span class="n">router</span><span class="o">#</span><span class="k">admin</span>
 <span class="n">Thu</span> <span class="n">Mar</span> <span class="mi">23</span> <span class="mi">09</span><span class="p">:</span><span class="mi">30</span><span class="p">:</span><span class="mi">21</span><span class="p">.</span><span class="mi">857</span> <span class="n">UTC</span>
 <span class="n">RP</span><span class="o">/</span><span class="mi">0</span><span class="o">/</span><span class="n">RSP0</span><span class="o">/</span><span class="n">CPU0</span><span class="p">:</span><span class="n">router</span><span class="p">(</span><span class="k">admin</span><span class="p">)</span><span class="o">#</span><span class="k">show</span> <span class="n">license</span> <span class="n">udi</span>
 <span class="n">Thu</span> <span class="n">Mar</span> <span class="mi">23</span> <span class="mi">09</span><span class="p">:</span><span class="mi">30</span><span class="p">:</span><span class="mi">25</span><span class="p">.</span><span class="mi">285</span> <span class="n">UTC</span>
@@ -165,24 +165,22 @@
   <span class="n">PID</span>         <span class="p">:</span> <span class="n">ASR</span><span class="o">-</span><span class="mi">9904</span><span class="o">-</span><span class="n">AC</span>
   <span class="n">S</span><span class="o">/</span><span class="n">N</span>         <span class="p">:</span> <span class="n">FOXXXXXXXXX</span>
   <span class="k">Operation</span> <span class="n">ID</span><span class="p">:</span> <span class="mi">0</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>The PID and SN are needed to redeem the PAK.</p>
 <p>SCP the file to the router.</p>
 <p>Add the license (still in admin mode):</p>
-<div class="highlight"><pre><span></span><span class="n">RP</span><span class="o">/</span><span class="mi">0</span><span class="o">/</span><span class="n">RSP0</span><span class="o">/</span><span class="n">CPU0</span><span class="p">:</span><span class="n">router</span><span class="p">(</span><span class="k">admin</span><span class="p">)</span><span class="o">#</span><span class="n">license</span> <span class="k">add</span> <span class="n">disk0a</span><span class="p">:</span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">FOXXXXXXXXX_20170323113900442</span><span class="p">.</span><span class="n">lic</span>
+<div class="highlight"><pre><span></span><code><span class="n">RP</span><span class="o">/</span><span class="mi">0</span><span class="o">/</span><span class="n">RSP0</span><span class="o">/</span><span class="n">CPU0</span><span class="p">:</span><span class="n">router</span><span class="p">(</span><span class="k">admin</span><span class="p">)</span><span class="o">#</span><span class="n">license</span> <span class="k">add</span> <span class="n">disk0a</span><span class="p">:</span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">FOXXXXXXXXX_20170323113900442</span><span class="p">.</span><span class="n">lic</span>
 <span class="n">Thu</span> <span class="n">Mar</span> <span class="mi">23</span> <span class="mi">09</span><span class="p">:</span><span class="mi">41</span><span class="p">:</span><span class="mi">34</span><span class="p">.</span><span class="mi">745</span> <span class="n">UTC</span>
 
 <span class="n">Info</span><span class="p">:</span> <span class="n">License</span> <span class="k">add</span> <span class="n">successful</span> <span class="k">for</span> <span class="n">feature</span><span class="p">(</span><span class="n">s</span><span class="p">):</span> <span class="ss">&quot;A9K-200G-IVRF&quot;</span>
 
 <span class="n">License</span> <span class="n">command</span> <span class="ss">&quot;license add disk0a:/usr/FOXXXXXXXXX_20170323113900442.lic sdr  Owner &quot;</span> <span class="n">completed</span> <span class="n">successfully</span><span class="p">.</span>
-</pre></div>
-
+</code></pre></div>
 
 <h3>Apply a Perpetual License</h3>
 <p>Verify the license is available:</p>
-<div class="highlight"><pre><span></span><span class="n">RP</span><span class="o">/</span><span class="mi">0</span><span class="o">/</span><span class="n">RSP0</span><span class="o">/</span><span class="n">CPU0</span><span class="p">:</span><span class="n">router</span><span class="o">#</span><span class="k">show</span> <span class="n">license</span> <span class="n">available</span>
+<div class="highlight"><pre><span></span><code><span class="n">RP</span><span class="o">/</span><span class="mi">0</span><span class="o">/</span><span class="n">RSP0</span><span class="o">/</span><span class="n">CPU0</span><span class="p">:</span><span class="n">router</span><span class="o">#</span><span class="k">show</span> <span class="n">license</span> <span class="n">available</span>
 <span class="n">Thu</span> <span class="n">Mar</span> <span class="mi">23</span> <span class="mi">09</span><span class="p">:</span><span class="mi">51</span><span class="p">:</span><span class="mi">27</span><span class="p">.</span><span class="mi">512</span> <span class="n">UTC</span>
 
 <span class="n">FeatureID</span><span class="p">:</span> <span class="n">A9K</span><span class="o">-</span><span class="mi">200</span><span class="k">G</span><span class="o">-</span><span class="n">IVRF</span> <span class="p">(</span><span class="n">Slot</span> <span class="n">based</span><span class="p">,</span> <span class="n">Permanent</span><span class="p">)</span>
@@ -191,24 +189,21 @@
     <span class="n">Pool</span><span class="p">:</span> <span class="k">Owner</span>
       <span class="n">Total</span> <span class="n">licenses</span> <span class="k">in</span> <span class="n">pool</span><span class="p">:</span> <span class="mi">1</span>
       <span class="n">Status</span><span class="p">:</span> <span class="n">Available</span>    <span class="mi">1</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>If this license is slot-based (and it is in this case), find the slot number for the card:</p>
-<div class="highlight"><pre><span></span><span class="err">RP/0/RSP0/CPU0:router#show inventory</span>
+<div class="highlight"><pre><span></span><code><span class="err">RP/0/RSP0/CPU0:router#show inventory</span>
 <span class="err">Thu Mar 23 09:50:35.761 UTC</span>
 <span class="err">....</span>
 <span class="c">NAME: &quot;module 0/0/CPU0&quot;, DESCR: &quot;200G Modular Linecard, Packet Transport Optimized&quot;</span>
 <span class="c">PID: A9K-MOD200-TR, VID: V01, SN: FOC2035NWJV</span>
 <span class="err">....</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>In this case we know that we need 0/0/CPU0.</p>
 <p>Drop into admin mode and apply the license to the slot:</p>
-<div class="highlight"><pre><span></span><span class="err">RP/0/RSP0/CPU0:router(admin-config)#license A9K-200G-IVRF location 0/0/CPU0</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="err">RP/0/RSP0/CPU0:router(admin-config)#license A9K-200G-IVRF location 0/0/CPU0</span>
+</code></pre></div>
 
 <p>Commit the change.</p>
 <p>NOTE: The license will not show active until 5 interfaces have been configured in separate VRFs. If fewer than five VRFs will be used, configuring dummy VRFs and rolling the configuration back will suffice.</p>

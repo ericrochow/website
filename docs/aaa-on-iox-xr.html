@@ -157,32 +157,29 @@
 <h3>Local</h3>
 <p>NOTE: Local users and groups are stored in a local database and not in the running configuration so they will not show up in <code>show run</code> output.</p>
 <h4>Define a new task group</h4>
-<div class="highlight"><pre><span></span><span class="err">    taskgroup $groupname</span>
+<div class="highlight"><pre><span></span><code><span class="err">    taskgroup $groupname</span>
 <span class="err">     description $description</span>
 <span class="err">     inherit taskgroup $taskgroup</span>
 <span class="err">     task $permission $taskname</span>
-</pre></div>
-
+</code></pre></div>
 
 <h4>Define a new user group</h4>
 <p>If the pre-defined user groups do not suffice, it is possible to configure customized user groups more more granularity with permissions:</p>
-<div class="highlight"><pre><span></span><span class="err">    usergroup $groupname </span>
+<div class="highlight"><pre><span></span><code><span class="err">    usergroup $groupname </span>
 <span class="err">     description $description</span>
 <span class="err">     taskgroup $taskgroup</span>
 <span class="err">     inherit usergroup $groupname</span>
-</pre></div>
-
+</code></pre></div>
 
 <h4>Define a new user</h4>
-<div class="highlight"><pre><span></span><span class="err">    username $user</span>
+<div class="highlight"><pre><span></span><code><span class="err">    username $user</span>
 <span class="err">     group $groupname</span>
 <span class="err">     secret 0 $plaintext_password</span>
-</pre></div>
-
+</code></pre></div>
 
 <h3>RADIUS</h3>
 <h4>Configure servers</h4>
-<div class="highlight"><pre><span></span><span class="err">    radius source-interface $interface vrf default</span>
+<div class="highlight"><pre><span></span><code><span class="err">    radius source-interface $interface vrf default</span>
 <span class="err">    radius-server host $server1_ip auth-port 1812 acct-port 1813 </span>
 <span class="err">     key 7 $secret_key</span>
 <span class="err">    !</span>
@@ -193,11 +190,10 @@
 <span class="err">    radius-server deadtime 5</span>
 <span class="err">    radius-server dead-criteria time 8</span>
 <span class="err">    radius-server dead-criteria tries 3</span>
-</pre></div>
-
+</code></pre></div>
 
 <h4>Configure AAA</h4>
-<div class="highlight"><pre><span></span><span class="err">    aaa accounting exec default start-stop group $server-group</span>
+<div class="highlight"><pre><span></span><code><span class="err">    aaa accounting exec default start-stop group $server-group</span>
 <span class="err">    aaa accounting system default start-stop group $server-group</span>
 <span class="err">    aaa group server radius $server-group </span>
 <span class="err">     server $server1_ip auth-port 1812 acct-port 1813 </span>
@@ -206,34 +202,31 @@
 <span class="err">     source-interface $interface</span>
 <span class="err">    !</span>
 <span class="err">    aaa authentication login default local group $server-group</span>
-</pre></div>
-
+</code></pre></div>
 
 <h3>TACACS+</h3>
-<div class="highlight"><pre><span></span><span class="err">    aaa group server tacacs+ $groupname</span>
+<div class="highlight"><pre><span></span><code><span class="err">    aaa group server tacacs+ $groupname</span>
 <span class="err">     server $server1_ip</span>
 <span class="err">     server $server2_ip</span>
 <span class="err">    aaa authentication login default local group $server-group</span>
 <span class="err">    aaa authorization commands default local tacacs+</span>
 <span class="err">    aaa accounting exec default start-stop group $server-group</span>
 <span class="err">    aaa accounting system default start-stop group $server-group</span>
-</pre></div>
-
+</code></pre></div>
 
 <h2>Activate AAA</h2>
 <h3>SSH</h3>
 <p>If a AAA group besides 'default' is used (e.g. aaa authentication login my-list), then the list will need to be added to the appropriate lines:</p>
-<div class="highlight"><pre><span></span><span class="err">    line default</span>
+<div class="highlight"><pre><span></span><code><span class="err">    line default</span>
 <span class="err">     authorization commands default</span>
 <span class="err">     authorization exec default</span>
-</pre></div>
-
+</code></pre></div>
 
 <h3>Console</h3>
-<div class="highlight"><pre><span></span><span class="err">    line console</span>
+<div class="highlight"><pre><span></span><code><span class="err">    line console</span>
 <span class="err">     authorization commands default</span>
 <span class="err">     authorization exec default</span>
-</pre></div>
+</code></pre></div>
   </div>
   <div class="tag-cloud">
     <p>

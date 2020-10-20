@@ -270,172 +270,144 @@
 <h2>Configuring CFS Distribution</h2>
 <h3>Enabling CFS By Application</h3>
 <p>Callhome:</p>
-<div class="highlight"><pre><span></span><span class="err">switch1(config)# callhome</span>
+<div class="highlight"><pre><span></span><code><span class="err">switch1(config)# callhome</span>
 <span class="err">switch1(config-callhome)# distribute</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>Device Alias:</p>
-<div class="highlight"><pre><span></span><span class="err">switch1(config)# device-alias distribute</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="err">switch1(config)# device-alias distribute</span>
+</code></pre></div>
 
 <p>DPVM:</p>
-<div class="highlight"><pre><span></span><span class="err">switch1(config)# dpvm distribute</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="err">switch1(config)# dpvm distribute</span>
+</code></pre></div>
 
 <p>Fibre Channel Domain:</p>
-<div class="highlight"><pre><span></span><span class="err">switch1(config)# fcdomain distribute</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="err">switch1(config)# fcdomain distribute</span>
+</code></pre></div>
 
 <p>Fibre Channel Port Security:</p>
-<div class="highlight"><pre><span></span><span class="err">switch1(config)# fc-port-security distribute</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="err">switch1(config)# fc-port-security distribute</span>
+</code></pre></div>
 
 <p>Fibre Channel Timers:</p>
-<div class="highlight"><pre><span></span><span class="err">switch1(config)# fctimer distribute</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="err">switch1(config)# fctimer distribute</span>
+</code></pre></div>
 
 <p>Inter-VSAN Routing:</p>
-<div class="highlight"><pre><span></span><span class="err">switch1(config)# ivr distribute</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="err">switch1(config)# ivr distribute</span>
+</code></pre></div>
 
 <p>NTP:</p>
-<div class="highlight"><pre><span></span><span class="err">switch1(config)# ntp distribute</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="err">switch1(config)# ntp distribute</span>
+</code></pre></div>
 
 <p>RADIUS:</p>
-<div class="highlight"><pre><span></span><span class="err">switch1(config)# radius distribute</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="err">switch1(config)# radius distribute</span>
+</code></pre></div>
 
 <p>RSCN:</p>
-<div class="highlight"><pre><span></span><span class="err">switch1(config)# rscn distribute</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="err">switch1(config)# rscn distribute</span>
+</code></pre></div>
 
 <p>TACACS+:</p>
-<div class="highlight"><pre><span></span><span class="err">switch1(config)# tacacs+ distribute</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="err">switch1(config)# tacacs+ distribute</span>
+</code></pre></div>
 
 <p>User Roles:</p>
-<div class="highlight"><pre><span></span><span class="err">switch1(config)# role distribute</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="err">switch1(config)# role distribute</span>
+</code></pre></div>
 
 <h3>Specify CFS Distribution Mode</h3>
 <p>CFSoE:</p>
-<div class="highlight"><pre><span></span><span class="err">switch1(config)# cfs eth distribute</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="err">switch1(config)# cfs eth distribute</span>
+</code></pre></div>
 
 <p>CFSoIP:</p>
-<div class="highlight"><pre><span></span><span class="err">switch1(config)# cfs ipv4 distribute</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="err">switch1(config)# cfs ipv4 distribute</span>
+</code></pre></div>
 
 <h3>Configure an IP Multicast Address (CFSoIP)</h3>
 <p>The default multicast address for CFSoIP is 239.255.70.83. To change user another multicast address (e.g. 225.0.1.1):</p>
-<div class="highlight"><pre><span></span><span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="err">#</span><span class="w"> </span><span class="k">no</span><span class="w"> </span><span class="n">cfs</span><span class="w"> </span><span class="n">ipvr</span><span class="w"> </span><span class="n">distribute</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="err">#</span><span class="w"> </span><span class="k">no</span><span class="w"> </span><span class="n">cfs</span><span class="w"> </span><span class="n">ipvr</span><span class="w"> </span><span class="n">distribute</span><span class="w"></span>
 <span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="err">#</span><span class="w"> </span><span class="n">cfs</span><span class="w"> </span><span class="n">ipv4</span><span class="w"> </span><span class="n">mcast</span><span class="o">-</span><span class="n">address</span><span class="w"> </span><span class="mf">225.0.1.1</span><span class="w"></span>
 <span class="n">Distribution</span><span class="w"> </span><span class="k">over</span><span class="w"> </span><span class="n">this</span><span class="w"> </span><span class="n">IP</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="n">will</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">affected</span><span class="w"></span>
 <span class="n">Change</span><span class="w"> </span><span class="n">multicast</span><span class="w"> </span><span class="n">address</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">CFS</span><span class="o">-</span><span class="n">IP</span><span class="w"> </span><span class="vm">?</span><span class="w"></span>
 <span class="k">Are</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">sure</span><span class="vm">?</span><span class="w"> </span><span class="p">(</span><span class="n">y</span><span class="o">/</span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="o">[</span><span class="n">n</span><span class="o">]</span><span class="w"> </span><span class="n">y</span><span class="w"></span>
 <span class="n">cfs</span><span class="w"> </span><span class="n">ipv4</span><span class="w"> </span><span class="n">distribute</span><span class="w"></span>
-</pre></div>
-
+</code></pre></div>
 
 <p>Note that CFSoIP must be disabled globally before the multicast address can be changed.</p>
 <h3>Configuring CFS Regions</h3>
 <h4>Creating a CFS Region</h4>
 <p>To configure the switch for Call Home in region 4:</p>
-<div class="highlight"><pre><span></span><span class="err">switch1(config)# cfs region 4</span>
+<div class="highlight"><pre><span></span><code><span class="err">switch1(config)# cfs region 4</span>
 <span class="err">switch1(config-cfs-region)# callhome</span>
-</pre></div>
-
+</code></pre></div>
 
 <h4>Moving an Application to a Different Region</h4>
 <p>To move the previously configured Call Home application to region 2:</p>
-<div class="highlight"><pre><span></span><span class="err">switch1(config)# cfs region 2</span>
+<div class="highlight"><pre><span></span><code><span class="err">switch1(config)# cfs region 2</span>
 <span class="err">switch1(config-cfs-region)# callhome</span>
-</pre></div>
-
+</code></pre></div>
 
 <h4>Removing an Application from a Region</h4>
 <p>To remove Call Home from region 2:</p>
-<div class="highlight"><pre><span></span><span class="err">switch1(config)# cfs region 2</span>
+<div class="highlight"><pre><span></span><code><span class="err">switch1(config)# cfs region 2</span>
 <span class="err">switch1(config-cfs-region)# no callhome</span>
-</pre></div>
-
+</code></pre></div>
 
 <h4>Deleting a CFS Region</h4>
 <p>To delete CFS region 2:</p>
-<div class="highlight"><pre><span></span><span class="err">switch1(config)# no cfs region 2</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="err">switch1(config)# no cfs region 2</span>
+</code></pre></div>
 
 <h3>Creating and Distributing a CFS Configuration</h3>
 <h3>Clearing a Locked Session</h3>
 <p>To clear an open session for NTP:</p>
-<div class="highlight"><pre><span></span><span class="err">switch1(config)# clear ntp session</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="err">switch1(config)# clear ntp session</span>
+</code></pre></div>
 
 <h3>Discarding a Configuration</h3>
 <p>To discard any configuration changes and release the lock for ntp:</p>
-<div class="highlight"><pre><span></span><span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="err">#</span><span class="w"> </span><span class="n">ntp</span><span class="w"> </span><span class="n">abort</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="n">switch1</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="err">#</span><span class="w"> </span><span class="n">ntp</span><span class="w"> </span><span class="n">abort</span><span class="w"></span>
 <span class="n">This</span><span class="w"> </span><span class="n">will</span><span class="w"> </span><span class="n">prevent</span><span class="w"> </span><span class="n">CFS</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">distributing</span><span class="w"> </span><span class="n">the</span><span class="w"> </span>
 <span class="n">configuration</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">other</span><span class="w"> </span><span class="n">switches</span><span class="p">.</span><span class="w"></span>
 <span class="k">Are</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">sure</span><span class="vm">?</span><span class="w"> </span><span class="p">(</span><span class="n">y</span><span class="o">/</span><span class="n">n</span><span class="p">)</span><span class="w">  </span><span class="o">[</span><span class="n">n</span><span class="o">]</span><span class="w"> </span><span class="n">y</span><span class="w"></span>
-</pre></div>
-
+</code></pre></div>
 
 <h3>Disabling CFS Globally</h3>
-<div class="highlight"><pre><span></span><span class="err">switch1(config)# no cfs distribute</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="err">switch1(config)# no cfs distribute</span>
+</code></pre></div>
 
 <h2>Troubleshooting CFS Distribution</h2>
 <p>Display status of CFS distribution on the device and IP distribution information:</p>
-<div class="highlight"><pre><span></span><span class="err">switch1# show cfs status</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="err">switch1# show cfs status</span>
+</code></pre></div>
 
 <p>Display all applications that are currently CFS-enabled:</p>
-<div class="highlight"><pre><span></span><span class="err">switch1# show cfs application</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="err">switch1# show cfs application</span>
+</code></pre></div>
 
 <p>Display CFS distribution status for a specified application (e.g. NTP):</p>
-<div class="highlight"><pre><span></span><span class="err">switch1# show ntp status</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="err">switch1# show ntp status</span>
+</code></pre></div>
 
 <p>Display active locks:</p>
-<div class="highlight"><pre><span></span><span class="err">switch1# show cfs lock</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="err">switch1# show cfs lock</span>
+</code></pre></div>
 
 <p>Display all CFS peers in the physical fabric:</p>
-<div class="highlight"><pre><span></span><span class="err">switch1# show cfs peers</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="err">switch1# show cfs peers</span>
+</code></pre></div>
 
 <p>Display all applications with peers and region information:</p>
-<div class="highlight"><pre><span></span><span class="err">switch1# show cfs regions</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="err">switch1# show cfs regions</span>
+</code></pre></div>
 
 <p>Display merge status for a given application (e.g. NTP):</p>
-<div class="highlight"><pre><span></span><span class="err">switch1# show cfs merge status name ntp</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="err">switch1# show cfs merge status name ntp</span>
+</code></pre></div>
   </div>
   <div class="tag-cloud">
     <p>

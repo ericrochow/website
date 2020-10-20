@@ -155,24 +155,21 @@
     <h1>Obscure Commands</h1>
 <h2>STP</h2>
 <p>Find the total number of STP Virtual Ports currently in use:</p>
-<div class="highlight"><pre><span></span><span class="err">router# show spanning-tree internal info global | grep -a 3 &quot;STP Port Count Summary&quot;</span>
+<div class="highlight"><pre><span></span><code><span class="err">router# show spanning-tree internal info global | grep -a 3 &quot;STP Port Count Summary&quot;</span>
 <span class="err">------- STP Port Count Summary ---------------</span>
 <span class="err">Total stp_ports*instances:      498</span>
 <span class="err">Total ports*vlans        :    41799</span>
 <span class="err">Total phy_ports*vlans    :    42051</span>
-</pre></div>
-
+</code></pre></div>
 
 <h2>TCAM</h2>
 <h3>FIB Exception State</h3>
-<div class="highlight"><pre><span></span><span class="err">router# show system internal forwarding route summary [module #]</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="err">router# show system internal forwarding route summary [module #]</span>
+</code></pre></div>
 
 <h2>RAID</h2>
-<div class="highlight"><pre><span></span><span class="err">router# show system internal raid</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="err">router# show system internal raid</span>
+</code></pre></div>
 
 <p>This command does not tab complete nor question mark complete. It must also be typed out completely.</p>
   </div>

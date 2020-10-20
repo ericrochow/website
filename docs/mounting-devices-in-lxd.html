@@ -157,71 +157,62 @@
 <h3>NIC</h3>
 <p>Mounting a NIC device on the container allows a host system network interface (physical or logical) to the container. <a href="/lxd-networking.html">See here for more detail</a>. <strong>NOTE!</strong> Mounting the NIC to the container will cause the interface to disappear from the host system as it now "belongs" to the container. Make sure before you do this that nothing on your host system is utilizing the device intended to be mounted!</p>
 <h4>Command</h4>
-<div class="highlight"><pre><span></span><span class="err">lxc config device add $ctr_name $dev_name nic parent=$parent_iface_name</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="err">lxc config device add $ctr_name $dev_name nic parent=$parent_iface_name</span>
+</code></pre></div>
 
 <h4>Example</h4>
-<div class="highlight"><pre><span></span><span class="err">lxc config device add app1 eth99 nic parent=enp3s0</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="err">lxc config device add app1 eth99 nic parent=enp3s0</span>
+</code></pre></div>
 
 <p>The above will take the network interface <code>enp3s0</code> from the host system and attach it to the container <code>app1</code> as network interface <code>eth99</code>.</p>
 <p><a href="#markdown-header-apply-configuration-changes-to-container">Apply the configuration to the container</a></p>
 <h3>Disk</h3>
 <p>The <code>disk</code> device type is probably the most straightforward of the device types and the one I most often use. This allows a directory on the host system to also be mounted in the container itself to either share between containers or to maintain state in the example of an ephemeral container.</p>
 <h4>Command</h4>
-<div class="highlight"><pre><span></span><span class="err">lxc config device add $ctr_name $dev_name disk source=/path/to/host/dir path=/path/to/ctr/mount/point</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="err">lxc config device add $ctr_name $dev_name disk source=/path/to/host/dir path=/path/to/ctr/mount/point</span>
+</code></pre></div>
 
 <p><a href="#markdown-header-apply-configuration-changes-to-container">Apply the configuration to the container</a></p>
 <h4>Example</h4>
 <p>To mount a home drive from the host system to the container named app1:</p>
-<div class="highlight"><pre><span></span><span class="err">lxc config device add app1 home_directory disk source=/home/eric path=/home/ubuntu</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="err">lxc config device add app1 home_directory disk source=/home/eric path=/home/ubuntu</span>
+</code></pre></div>
 
 <p>This creates a <code>disk</code> device named <code>home_directory</code> and attaches it to the container <code>app1</code>. The host system directory <code>/home/eric</code> is now available within <code>app1</code> as <code>/home/ubuntu</code>.</p>
 <p><a href="#markdown-header-apply-configuration-changes-to-container">Apply the configuration to the container</a></p>
 <h3>UNIX Char</h3>
 <p>The <code>unix-char</code> device type allows a "character" device to be attached to the container. Character devices are devices that convey data character-by-character rather than block-by-block. Examples of these types of devices are printers, keyboards, terminals, sound cards, etc. I can't think of a use case for any of these, but that doesn't mean there isn't one.</p>
 <h4>Command</h4>
-<div class="highlight"><pre><span></span><span class="err">lxc config device add $ctr_name $dev_name unix-char source=/path/to/host/device path=/path/to/container/device</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="err">lxc config device add $ctr_name $dev_name unix-char source=/path/to/host/device path=/path/to/container/device</span>
+</code></pre></div>
 
 <h4>Example</h4>
-<div class="highlight"><pre><span></span><span class="err">lxc config device add app1 tty42 source=/dev/tty42 path=/dev/tty1</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="err">lxc config device add app1 tty42 source=/dev/tty42 path=/dev/tty1</span>
+</code></pre></div>
 
 <p>The above will take <code>tty42</code> from the host system and pass it through to the container <code>app1</code> as <code>/dev/tty1</code>. Does it make sense to do that? Probably not, but you do you. It's your life. LIVE IT TO THE MAX!</p>
 <p><a href="#markdown-header-apply-configuration-changes-to-container">Apply the configuration to the container</a></p>
 <h3>UNIX Block</h3>
 <p>The <code>unix-block</code> device type is similar to <code>disk</code>, but rather than sharing a directory, this is passing a block device to the container. The important distinction here is that the device is a volume rather than a directory within the volume. The device is added to the <code>/dev</code> directory on the container to be mounted within the container as appropriate.</p>
 <h4>Command</h4>
-<div class="highlight"><pre><span></span><span class="err">lxc config device add $ctr_name $dev_name unix-block source=/path/to/host/device path=/path/to/container/device</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="err">lxc config device add $ctr_name $dev_name unix-block source=/path/to/host/device path=/path/to/container/device</span>
+</code></pre></div>
 
 <h4>Example</h4>
-<div class="highlight"><pre><span></span><span class="err">lxc config device add app1 sdc5 unix-block source=/dev/sdc5 path=/dev/sda1</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="err">lxc config device add app1 sdc5 unix-block source=/dev/sdc5 path=/dev/sda1</span>
+</code></pre></div>
 
 <p>The above will take the unmounted volume <code>/dev/sdc5</code> on the host system and add to the <code>app1</code> container as <code>/dev/sda1</code>.</p>
 <p><a href="#markdown-header-apply-configuration-changes-to-container">Apply the configuration to the container</a></p>
 <h3>USB</h3>
 <p>The <code>usb</code> device type is pretty self-explanitory: it takes a physical USB device and passes it through to the container rather than using it locally on the host system. The neat thing about <code>usb</code> devices is that they support hotplugging by default; if the device is removed and reattached at a later point, the device will automatically be attached to the container. Neat! <strong>NOTE!</strong> If the USB device uses a kernel driver, it will be more efficient to locate the device added in <code>/dev</code> and attach it as a <a href="#markdown-header-unix-block">unix-block</a> or <a href="#markdown-header-unix-char">unix-char</a> device as appropriate.</p>
 <h4>Commmand</h4>
-<div class="highlight"><pre><span></span><span class="err">lxc config device add $ctr_name $dev_name usb vendor_id=$vendorid product_id=$productid</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="err">lxc config device add $ctr_name $dev_name usb vendor_id=$vendorid product_id=$productid</span>
+</code></pre></div>
 
 <h4>Example</h4>
 <p>Before looking at an example command, we're going to have to do some homework to look up values to pass to the command. To find the appropriate values, let's take a look at what USB devices I have plugged in at the moment:</p>
-<div class="highlight"><pre><span></span><span class="err">host# lsusb</span>
+<div class="highlight"><pre><span></span><code><span class="err">host# lsusb</span>
 <span class="err">Bus 007 Device 001: ID 1d6b:0001 Linux Foundation 1.1 root hub</span>
 <span class="err">Bus 002 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub</span>
 <span class="err">Bus 006 Device 001: ID 1d6b:0001 Linux Foundation 1.1 root hub</span>
@@ -231,34 +222,29 @@
 <span class="err">Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub</span>
 <span class="err">Bus 004 Device 001: ID 1d6b:0001 Linux Foundation 1.1 root hub</span>
 <span class="err">Bus 003 Device 001: ID 1d6b:0001 Linux Foundation 1.1 root hub</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>Not a lot that would make sense to pass through to a container, but let's say for some reason I want to pass my XBOX controller through to the container. The command would look something like this:</p>
-<div class="highlight"><pre><span></span><span class="err">lxc config device add app1 xbox usb vendor_id=045e product_id=028e</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="err">lxc config device add app1 xbox usb vendor_id=045e product_id=028e</span>
+</code></pre></div>
 
 <p>This creates a device called <code>xbox</code> and attaches to the container <code>app1</code> if the product has the vendor_id <code>045e</code> and the product_id <code>028e</code>. These vaules are pulled from the ID in the above <code>lsusb</code> output where the number before the colon is the vendor and the number following the colon is the product.</p>
 <p><a href="#markdown-header-apply-configuration-changes-to-container">Apply the configuration to the container</a></p>
 <h3>GPU</h3>
 <p>The <code>gpu</code> device type passes a graphic card through to the container in the event that some heavy computation is required (think cryptocurrency mining or participating in SETI or folding@home).</p>
 <h4>Command</h4>
-<div class="highlight"><pre><span></span><span class="err">lxc config device add $ctr_name $dev_name gpu vendorid=$vendorid productid=$productid</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="err">lxc config device add $ctr_name $dev_name gpu vendorid=$vendorid productid=$productid</span>
+</code></pre></div>
 
 <h4>Example</h4>
 <p>Let's start by finding the vendor and product IDs of the GPU we want to pass through:</p>
-<div class="highlight"><pre><span></span><span class="err">root@host# lspci -nn | grep -i vga</span>
+<div class="highlight"><pre><span></span><code><span class="err">root@host# lspci -nn | grep -i vga</span>
 <span class="c">0f:00.0 VGA compatible controller [0300]: NVIDIA Corporation GF100GL [Quadro 4000] [10de:06dd] (rev a3)</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>Now let's configure attach the physical device to the container:</p>
-<div class="highlight"><pre><span></span><span class="err">root@host# lxc config device add app1 quadro gpu vendorid=10de productid=06dd</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="err">root@host# lxc config device add app1 quadro gpu vendorid=10de productid=06dd</span>
+</code></pre></div>
 
 <p>This creates a device called <code>quadro</code> and attaches to the container <code>app1</code>. I identifies the physical device via the vendor ID <code>10de</code> (NVIDIA) and the productid <code>06dd</code>.</p>
 <p><a href="#markdown-header-apply-configuration-changes-to-container">Apply the configuration to the container</a></p>
@@ -267,38 +253,33 @@
 <h3>Proxy</h3>
 <p>Proxy devices are a neat option to allow the container to bind to a port on the host systems. For example, if a container is running NGINX but the LXD server is using the built-in bridge, the container can bind the host system's port 80/443 directly to 80/443 on the container itself. Prior to the addition of the proxy device type, this type of setup required manually configuring iptables to perform a destination NAT to re-write the IP header; this feature will actually bind to the IP and port rather than mangle the incoming packet. This is a feature that has been available in Docker for a long time and is a welcome addition.</p>
 <h4>Command</h4>
-<div class="highlight"><pre><span></span><span class="err">lxc config device add $ctr_name $devname proxy connect=$host_ip:$host_port listen=$ctr_ip:$ctr_port</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="err">lxc config device add $ctr_name $devname proxy connect=$host_ip:$host_port listen=$ctr_ip:$ctr_port</span>
+</code></pre></div>
 
 <h4>Example</h4>
-<div class="highlight"><pre><span></span><span class="err">lxc config device add nxing1 tcp_443 proxy connect=0.0.0.0:443 listen=0.0.0.0:443</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="err">lxc config device add nxing1 tcp_443 proxy connect=0.0.0.0:443 listen=0.0.0.0:443</span>
+</code></pre></div>
 
 <p>The above example adds a proxy device named <code>tcp_443</code> to the container <code>nginx1</code>. The container is listening on all ports to TCP port 443, and binds to all IP addresses on the host system.</p>
 <p>This can be verified with the following:</p>
-<div class="highlight"><pre><span></span><span class="err">host# sudo ss state listening sport = :443</span>
+<div class="highlight"><pre><span></span><code><span class="err">host# sudo ss state listening sport = :443</span>
 <span class="err">Netid              Recv-Q               Send-Q                               Local Address:Port                                Peer Address:Port</span>
 <span class="err">tcp                0                    128                                               *:443                                           *:*</span>
-</pre></div>
-
+</code></pre></div>
 
 <p><a href="#markdown-header-apply-configuration-changes-to-container">Apply the configuration to the container</a></p>
 <h2>Removing Devices from a Container</h2>
-<div class="highlight"><pre><span></span><span class="err">lxc config device remove $ctr_name $devname</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="err">lxc config device remove $ctr_name $devname</span>
+</code></pre></div>
 
 <p><a href="#markdown-header-apply-configuration-changes-to-container">Apply the configuration to the container</a></p>
 <h2>Verifying Device Configuration for a Container</h2>
-<div class="highlight"><pre><span></span><span class="err">lxc config device show $ctr_name</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="err">lxc config device show $ctr_name</span>
+</code></pre></div>
 
 <h2>Apply Configuration Changes to Container</h2>
-<div class="highlight"><pre><span></span><span class="err">lxc restart $ctr_name</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="err">lxc restart $ctr_name</span>
+</code></pre></div>
   </div>
   <div class="tag-cloud">
     <p>
