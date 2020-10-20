@@ -8,7 +8,7 @@ from datetime import datetime
 import arrow
 
 AUTHOR = "Eric Rochow"
-SITEURL = "https://ericroc.how"
+SITEURL = "https://www.ericroc.how"
 SITENAME = AUTHOR
 SITETITLE = AUTHOR
 # SITESUBTITLE = ""
@@ -82,18 +82,15 @@ LINKS = (
 
 # Social widget
 SOCIAL = (
-    ("globe", "https://ericroc.how"),
+    ("globe", "https://www.ericroc.how"),
     ("envelope", "mailto:ericrochow@gmail.com"),
-    ("rss", "https://ericroc.how"),
+    ("rss", "https://www.ericroc.how"),
     ("linkedin", "https://www.linkedin.com/in/erochow/"),
     ("github", "https://github.com/ericrochow"),
     # ("reddit", "#"),
     ("twitter", "https://twitter.com/eric_rochow"),
     ("lastfm", "https://www.last.fm/user/ericrochow"),
-    (
-        "spotify",
-        "https://open.spotify.com/user/ericrochow?si=KEmxAAk8QZy31L82MMge4g",
-    ),
+    ("spotify", "https://open.spotify.com/user/ericrochow?si=KEmxAAk8QZy31L82MMge4g",),
     ("book", "https://www.goodreads.com/user/show/18841479-eric-rochow"),
 )
 
@@ -109,8 +106,8 @@ GITHUB_URL = "https://github.com/ericrochow"
 GITHUB_USERNAME = "ericrochow"
 TWITTER_USERNAME = "eric_rochow"
 # GOODREADS_ACTIVITY_FEED = (
-    # "https://www.goodreads.com/review/list_rss/18841479?key="
-    # "KyT3ziOY47qSj-aDbM-SDOa3uJn9UkKP6osSP-O42Dd1G4RL&shelf=read"
+# "https://www.goodreads.com/review/list_rss/18841479?key="
+# "KyT3ziOY47qSj-aDbM-SDOa3uJn9UkKP6osSP-O42Dd1G4RL&shelf=read"
 # )
 
 # TEMPLATE_PAGES = {"templates/goodreads.html": "pages/read-with-me.html"}
