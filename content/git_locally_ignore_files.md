@@ -1,4 +1,4 @@
-Title: VRF on IOS
+Title: Local .gitignore
 Date: 2020-01-09 08:25
 Category: Git
 Tags: git, cli
