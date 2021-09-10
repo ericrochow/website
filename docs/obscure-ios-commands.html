@@ -35,18 +35,26 @@
 </script>
 <!-- End Google Analytics -->
 
-    <meta name="author" content="Eric Rochow" />
-    <meta name="description" content="" />
+<meta name="author" content="Eric Rochow" />
+<meta name="description" content="Random/niche IOS commands I occasionally need but can never remember" />
+<meta name="keywords" content="network, ios, cli">
+
 <meta property="og:site_name" content="Eric Rochow"/>
-<meta property="og:type" content="blog"/>
-<meta property="og:title" content="Eric Rochow"/>
-<meta property="og:description" content=""/>
+<meta property="og:title" content="Obscure IOS Commands"/>
+<meta property="og:description" content="Random/niche IOS commands I occasionally need but can never remember"/>
 <meta property="og:locale" content="en_US"/>
-<meta property="og:url" content="https://ericroc.how"/>
+<meta property="og:url" content="https://ericroc.how/obscure-ios-commands.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2019-09-06 14:34:00-04:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://ericroc.how/author/eric-rochow.html">
+<meta property="article:section" content="Network"/>
+<meta property="article:tag" content="network"/>
+<meta property="article:tag" content="ios"/>
+<meta property="article:tag" content="cli"/>
 <meta property="og:image" content="https://ericroc.how/images/face.png">
 
-  <title>Eric Rochow &ndash;     Archives
-</title>
+  <title>Eric Rochow &ndash; Obscure IOS Commands</title>
 
 </head>
 <body>
@@ -133,57 +141,46 @@
 
 <article class="single">
   <header>
-    <h1>    Archives
-</h1>
+      
+    <h1 id="obscure-ios-commands">Obscure IOS Commands</h1>
+    <p>
+          Posted on Fri 06 September 2019 in <a href="https://ericroc.how/category/network.html">Network</a>
+
+
+    </p>
   </header>
+
+
   <div>
-    <dl>
-      <dt>Sat 25 January 2020</dt>
-      <dd><a href="https://ericroc.how/mounting-devices-in-lxd.html">Mounting Devices in LXD</a></dd>
-      <dt>Wed 22 January 2020</dt>
-      <dd><a href="https://ericroc.how/encrypting-secrets-with-ansible-vault.html">Encrypting secrets with Ansible Vault</a></dd>
-      <dt>Thu 09 January 2020</dt>
-      <dd><a href="https://ericroc.how/local-gitignore.html">Local .gitignore</a></dd>
-      <dt>Sat 12 October 2019</dt>
-      <dd><a href="https://ericroc.how/openssh-command-reference.html">OpenSSH Command Reference</a></dd>
-      <dt>Fri 06 September 2019</dt>
-      <dd><a href="https://ericroc.how/aaa-on-iox-xr.html">AAA on IOX-XR</a></dd>
-      <dt>Fri 06 September 2019</dt>
-      <dd><a href="https://ericroc.how/bgp-in-ios-xr.html">BGP in IOS-XR</a></dd>
-      <dt>Fri 06 September 2019</dt>
-      <dd><a href="https://ericroc.how/fabricpath.html">FabricPath</a></dd>
-      <dt>Fri 06 September 2019</dt>
-      <dd><a href="https://ericroc.how/hi-there.html">Hi there!</a></dd>
-      <dt>Fri 06 September 2019</dt>
-      <dd><a href="https://ericroc.how/ios-xr-acls.html">IOS-XR ACLs</a></dd>
-      <dt>Fri 06 September 2019</dt>
-      <dd><a href="https://ericroc.how/ios-xr-licensing.html">IOS-XR Licensing</a></dd>
-      <dt>Fri 06 September 2019</dt>
-      <dd><a href="https://ericroc.how/ios-xr-route-policies.html">IOS-XR Route Policies</a></dd>
-      <dt>Fri 06 September 2019</dt>
-      <dd><a href="https://ericroc.how/lxd-networking.html">LXD Networking</a></dd>
-      <dt>Fri 06 September 2019</dt>
-      <dd><a href="https://ericroc.how/obscure-ios-commands.html">Obscure IOS Commands</a></dd>
-      <dt>Fri 06 September 2019</dt>
-      <dd><a href="https://ericroc.how/ospf-in-ios-xr.html">OSPF in IOS-XR</a></dd>
-      <dt>Fri 06 September 2019</dt>
-      <dd><a href="https://ericroc.how/vrf-on-ios.html">VRF on IOS</a></dd>
-      <dt>Fri 28 April 2017</dt>
-      <dd><a href="https://ericroc.how/obscure-nx-os-commands.html">Obscure NX-OS Commands</a></dd>
-      <dt>Fri 24 March 2017</dt>
-      <dd><a href="https://ericroc.how/nx-os-upgrades.html">NX-OS Upgrades</a></dd>
-      <dt>Fri 24 February 2017</dt>
-      <dd><a href="https://ericroc.how/cisco-fabric-services.html">Cisco Fabric Services</a></dd>
-      <dt>Fri 24 February 2017</dt>
-      <dd><a href="https://ericroc.how/fabric-extender-fex.html">Fabric Extender (FEX)</a></dd>
-      <dt>Fri 24 February 2017</dt>
-      <dd><a href="https://ericroc.how/nx-os-licensing.html">NX-OS Licensing</a></dd>
-      <dt>Fri 24 February 2017</dt>
-      <dd><a href="https://ericroc.how/virtual-port-channel.html">Virtual Port-Channel</a></dd>
-      <dt>Thu 01 January 1970</dt>
-      <dd><a href="https://ericroc.how/hello-world.html">Hello World</a></dd>
-    </dl>
+    <h1>TCAM</h1>
+<h2>Forwarding Resources</h2>
+<div class="highlight"><pre><span></span><code><span class="err">show platform hardware capacity forwarding</span>
+</code></pre></div>
+
+<h2>Total TCAM Usage</h2>
+<div class="highlight"><pre><span></span><code><span class="err">show platform hardware cef maximum-routes</span>
+</code></pre></div>
+
+<h2>Fib Exception Status</h2>
+<div class="highlight"><pre><span></span><code><span class="err">show mls cef exception status</span>
+</code></pre></div>
+
+<p>OR</p>
+<div class="highlight"><pre><span></span><code><span class="err">show platform hardware cef exception status</span>
+</code></pre></div>
   </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://ericroc.how/tag/network.html">network</a>
+      <a href="https://ericroc.how/tag/ios.html">ios</a>
+      <a href="https://ericroc.how/tag/cli.html">cli</a>
+    </p>
+  </div>
+
+
+
+
+
 </article>
 
     <footer>
