@@ -35,18 +35,25 @@
 </script>
 <!-- End Google Analytics -->
 
-    <meta name="author" content="Eric Rochow" />
-    <meta name="description" content="" />
+<meta name="author" content="Eric Rochow" />
+<meta name="description" content="There may be cases where you want to locally ignore a file or directory that is normally tracked by git …" />
+<meta name="keywords" content="git, cli">
+
 <meta property="og:site_name" content="Eric Rochow"/>
-<meta property="og:type" content="blog"/>
-<meta property="og:title" content="Eric Rochow"/>
-<meta property="og:description" content=""/>
+<meta property="og:title" content="Local .gitignore"/>
+<meta property="og:description" content="There may be cases where you want to locally ignore a file or directory that is normally tracked by git …"/>
 <meta property="og:locale" content="en_US"/>
-<meta property="og:url" content="https://ericroc.how"/>
+<meta property="og:url" content="https://ericroc.how/local-gitignore.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2020-01-09 08:25:00-05:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://ericroc.how/author/eric-rochow.html">
+<meta property="article:section" content="Git"/>
+<meta property="article:tag" content="git"/>
+<meta property="article:tag" content="cli"/>
 <meta property="og:image" content="https://ericroc.how/images/face.png">
 
-  <title>Eric Rochow &ndash;     Tag linux
-</title>
+  <title>Eric Rochow &ndash; Local .gitignore</title>
 
 </head>
 <body>
@@ -131,73 +138,50 @@
 
     </nav>
 
-
-
-<article>
+<article class="single">
   <header>
-    <h2><a href="https://ericroc.how/mounting-devices-in-lxd.html#mounting-devices-in-lxd">Mounting Devices in LXD</a></h2>
+      
+    <h1 id="local-gitignore">Local .gitignore</h1>
     <p>
-          Posted on Sat 25 January 2020 in <a href="https://ericroc.how/category/containers.html">Containers</a>
+          Posted on Thu 09 January 2020 in <a href="https://ericroc.how/category/git.html">Git</a>
 
 
-          &#8226;     Tagged with
-
-              <a href="https://ericroc.how/tag/containers.html">containers</a>,              <a href="https://ericroc.how/tag/lxd.html">lxd</a>,              <a href="https://ericroc.how/tag/linux.html">linux</a>
     </p>
   </header>
+
+
   <div>
-      <p>Some use cases for containers depend on passing devices through from the host system into the container. This can allow …</p>
-        <br>
-        <a class="btn" href="https://ericroc.how/mounting-devices-in-lxd.html#mounting-devices-in-lxd">    Continue reading
-</a>
+    <p>There may be cases where you want to locally ignore a file or directory that is normally tracked by git. An example of this may be built docs. If you add the object to <code>.gitignore</code>, the ignore will be pushed to the remote repo. To ignore a file or directory, add the file/directory to <code>.git/info/exclude</code> with the same syntax as .gitignore.</p>
+<p>For example, to ignore the <code>docs/</code> directory you can do the following:</p>
+<div class="highlight"><pre><span></span><code><span class="err"># echo &quot;docs/&quot; | tee -a .git/info/exclude</span>
+</code></pre></div>
+
+<p>If the <code>docs/</code> directory is already being tracked by git, you will need to update the index to apply the ignore:</p>
+<div class="highlight"><pre><span></span><code><span class="err"># git update-index --assume-unchanged docs/</span>
+</code></pre></div>
+
+<p>Now we can test to make sure the ignore works:</p>
+<div class="highlight"><pre><span></span><code><span class="err"># touch docs/test.html</span>
+<span class="err"># git status</span>
+<span class="err">  On branch master</span>
+<span class="err">  Your branch is up to date with &#39;origin/master&#39;.</span>
+<span class="err">   nothing to commit, working tree clean</span>
+</code></pre></div>
+
+<p>Success!</p>
   </div>
-  <hr />
-</article>
-<article>
-  <header>
-    <h2><a href="https://ericroc.how/openssh-command-reference.html#openssh-command-reference">OpenSSH Command Reference</a></h2>
+  <div class="tag-cloud">
     <p>
-          Posted on Sat 12 October 2019 in <a href="https://ericroc.how/category/linux.html">Linux</a>
-
-
-          &#8226;     Tagged with
-
-              <a href="https://ericroc.how/tag/linux.html">linux</a>,              <a href="https://ericroc.how/tag/ssh.html">ssh</a>,              <a href="https://ericroc.how/tag/cli.html">cli</a>
+      <a href="https://ericroc.how/tag/git.html">git</a>
+      <a href="https://ericroc.how/tag/cli.html">cli</a>
     </p>
-  </header>
-  <div>
-      <p>A list of commands I need on a regular basis but infrequently enough not to commit to memory</p>
-        <br>
-        <a class="btn" href="https://ericroc.how/openssh-command-reference.html#openssh-command-reference">    Continue reading
-</a>
   </div>
-  <hr />
+
+
+
+
+
 </article>
-<article>
-  <header>
-    <h2><a href="https://ericroc.how/lxd-networking.html#lxd-networking">LXD Networking</a></h2>
-    <p>
-          Posted on Fri 06 September 2019 in <a href="https://ericroc.how/category/containers.html">Containers</a>
-
-
-          &#8226;     Tagged with
-
-              <a href="https://ericroc.how/tag/lxd.html">lxd</a>,              <a href="https://ericroc.how/tag/containers.html">containers</a>,              <a href="https://ericroc.how/tag/linux.html">linux</a>,              <a href="https://ericroc.how/tag/networking.html">networking</a>
-    </p>
-  </header>
-  <div>
-      <p>Starting in LXD 2.3 there has been quite a bit of network functionality exposed to the operator. As before …</p>
-        <br>
-        <a class="btn" href="https://ericroc.how/lxd-networking.html#lxd-networking">    Continue reading
-</a>
-  </div>
-</article>
-
-  <div class="pagination">
-  </div>
-
-
-
 
     <footer>
 <p>&copy; Eric Rochow 2021</p>
