@@ -155,20 +155,20 @@
     <h1>Obscure Commands</h1>
 <h2>STP</h2>
 <p>Find the total number of STP Virtual Ports currently in use:</p>
-<div class="highlight"><pre><span></span><code><span class="err">router# show spanning-tree internal info global | grep -a 3 &quot;STP Port Count Summary&quot;</span>
-<span class="err">------- STP Port Count Summary ---------------</span>
-<span class="err">Total stp_ports*instances:      498</span>
-<span class="err">Total ports*vlans        :    41799</span>
-<span class="err">Total phy_ports*vlans    :    42051</span>
+<div class="highlight"><pre><span></span><code><span class="nv">router</span># <span class="k">show</span> <span class="nv">spanning</span><span class="o">-</span><span class="nv">tree</span> <span class="nv">internal</span> <span class="nv">info</span> <span class="nv">global</span> <span class="o">|</span> <span class="nv">grep</span> <span class="o">-</span><span class="nv">a</span> <span class="mi">3</span> <span class="s2">&quot;</span><span class="s">STP Port Count Summary</span><span class="s2">&quot;</span>
+<span class="o">-------</span> <span class="nv">STP</span> <span class="nv">Port</span> <span class="nv">Count</span> <span class="nv">Summary</span> <span class="o">---------------</span>
+<span class="nv">Total</span> <span class="nv">stp_ports</span><span class="o">*</span><span class="nv">instances</span>:      <span class="mi">498</span>
+<span class="nv">Total</span> <span class="nv">ports</span><span class="o">*</span><span class="nv">vlans</span>        :    <span class="mi">41799</span>
+<span class="nv">Total</span> <span class="nv">phy_ports</span><span class="o">*</span><span class="nv">vlans</span>    :    <span class="mi">42051</span>
 </code></pre></div>
 
 <h2>TCAM</h2>
 <h3>FIB Exception State</h3>
-<div class="highlight"><pre><span></span><code><span class="err">router# show system internal forwarding route summary [module #]</span>
+<div class="highlight"><pre><span></span><code><span class="nv">router</span># <span class="k">show</span> <span class="nv">system</span> <span class="nv">internal</span> <span class="nv">forwarding</span> <span class="nv">route</span> <span class="nv">summary</span> [<span class="nv">module</span> #]
 </code></pre></div>
 
 <h2>RAID</h2>
-<div class="highlight"><pre><span></span><code><span class="err">router# show system internal raid</span>
+<div class="highlight"><pre><span></span><code><span class="nv">router</span># <span class="k">show</span> <span class="nv">system</span> <span class="nv">internal</span> <span class="nv">raid</span>
 </code></pre></div>
 
 <p>This command does not tab complete nor question mark complete. It must also be typed out completely.</p>
@@ -188,7 +188,7 @@
 </article>
 
     <footer>
-<p>&copy; Eric Rochow 2021</p>
+<p>&copy; Eric Rochow 2022</p>
     </footer>
   </main>
 

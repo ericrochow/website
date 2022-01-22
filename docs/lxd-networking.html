@@ -160,31 +160,31 @@
 <h3>Creating a Custom LXD Bridge</h3>
 <p>If for some reason the default bridge does not suffice (e.g. the network namespaces need to be segregated, differing requirements for addressing or NAT behavior, etc), it is possible to create a new bridge. There are a few different options for configuring a bridge.</p>
 <p>To create an autoconfigured bridge named lxdbr1337:</p>
-<div class="highlight"><pre><span></span><code><span class="err">root@host# lxc network create lxdbr1337</span>
+<div class="highlight"><pre><span></span><code><span class="n">root</span><span class="nv">@host</span><span class="err">#</span><span class="w"> </span><span class="n">lxc</span><span class="w"> </span><span class="n">network</span><span class="w"> </span><span class="k">create</span><span class="w"> </span><span class="n">lxdbr1337</span><span class="w"></span>
 </code></pre></div>
 
 <p>To configure the bridge by hand:</p>
-<div class="highlight"><pre><span></span><code><span class="err">root@host# lxc network create lxdbr1337 ipv6.address=none ipv4.address=10.13.37.1/24 ipv4.nat=true</span>
+<div class="highlight"><pre><span></span><code><span class="n">root</span><span class="nv">@host</span><span class="err">#</span><span class="w"> </span><span class="n">lxc</span><span class="w"> </span><span class="n">network</span><span class="w"> </span><span class="k">create</span><span class="w"> </span><span class="n">lxdbr1337</span><span class="w"> </span><span class="n">ipv6</span><span class="p">.</span><span class="n">address</span><span class="o">=</span><span class="k">none</span><span class="w"> </span><span class="n">ipv4</span><span class="p">.</span><span class="n">address</span><span class="o">=</span><span class="mf">10.13.37.1</span><span class="o">/</span><span class="mi">24</span><span class="w"> </span><span class="n">ipv4</span><span class="p">.</span><span class="n">nat</span><span class="o">=</span><span class="k">true</span><span class="w"></span>
 </code></pre></div>
 
 <p>This will create a new bridge call <code>lxdbr1337</code> with IPv6 disabled and an IPv4 address of 10.13.31.1, will create MASQUERADE rules in iptables to NAT outbound traffic. The built-in DHCP server will hand out addresses to containers attached to the bridge from the range 10.13.37.0/24 (i.e. 10.13.31.2 - 254).</p>
 <h3>Attach to a Bridge</h3>
 <p>So now we have an LXD bridge or two; how do we use it?</p>
 <p>Let's attach the container <code>app1</code>'s eth0 to the host's bridge lxdbr1337:</p>
-<div class="highlight"><pre><span></span><code><span class="err">root@host# lxc network attach lxdbr1337 app1 eth0</span>
+<div class="highlight"><pre><span></span><code><span class="n">root</span><span class="nv">@host</span><span class="err">#</span><span class="w"> </span><span class="n">lxc</span><span class="w"> </span><span class="n">network</span><span class="w"> </span><span class="n">attach</span><span class="w"> </span><span class="n">lxdbr1337</span><span class="w"> </span><span class="n">app1</span><span class="w"> </span><span class="n">eth0</span><span class="w"></span>
 </code></pre></div>
 
 <p>Now let's restart the container to apply the new configuration and verify the bridge configuration on app1:</p>
-<div class="highlight"><pre><span></span><code><span class="err">root@host# lxc restart app1</span>
-<span class="err">root@host# lxc info app1</span>
-<span class="err">... snip</span>
-<span class="c">devices:</span>
-<span class="c">  eth0:</span>
-<span class="c">    ipv4.address: 10.13.37.224</span>
-<span class="c">    nictype: bridged</span>
-<span class="c">    parent: lxdbr1337</span>
-<span class="c">    type: nic</span>
-<span class="err">... snip</span>
+<div class="highlight"><pre><span></span><code><span class="n">root</span><span class="nv">@host</span><span class="err">#</span><span class="w"> </span><span class="n">lxc</span><span class="w"> </span><span class="n">restart</span><span class="w"> </span><span class="n">app1</span><span class="w"></span>
+<span class="n">root</span><span class="nv">@host</span><span class="err">#</span><span class="w"> </span><span class="n">lxc</span><span class="w"> </span><span class="n">info</span><span class="w"> </span><span class="n">app1</span><span class="w"></span>
+<span class="p">...</span><span class="w"> </span><span class="n">snip</span><span class="w"></span>
+<span class="nl">devices</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nl">eth0</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="n">ipv4</span><span class="p">.</span><span class="nl">address</span><span class="p">:</span><span class="w"> </span><span class="mf">10.13.37.224</span><span class="w"></span>
+<span class="w">    </span><span class="nl">nictype</span><span class="p">:</span><span class="w"> </span><span class="n">bridged</span><span class="w"></span>
+<span class="w">    </span><span class="nl">parent</span><span class="p">:</span><span class="w"> </span><span class="n">lxdbr1337</span><span class="w"></span>
+<span class="w">    </span><span class="nl">type</span><span class="p">:</span><span class="w"> </span><span class="n">nic</span><span class="w"></span>
+<span class="p">...</span><span class="w"> </span><span class="n">snip</span><span class="w"></span>
 </code></pre></div>
 
 <p>YAHTZEE</p>
@@ -195,26 +195,26 @@
 <li>It allows the DHCP server to pass additional options to the container (e.g. gateway, DNS, NTP, etc values).</li>
 </ul>
 <p>Let's add a "static" IP address to the container <code>app1</code>'s eth0 interface:</p>
-<div class="highlight"><pre><span></span><code><span class="err">root@host# lxc config device set app1 eth0 ipv4.address 10.13.37.66</span>
+<div class="highlight"><pre><span></span><code><span class="n">root</span><span class="nv">@host</span><span class="err">#</span><span class="w"> </span><span class="n">lxc</span><span class="w"> </span><span class="n">config</span><span class="w"> </span><span class="n">device</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="n">app1</span><span class="w"> </span><span class="n">eth0</span><span class="w"> </span><span class="n">ipv4</span><span class="p">.</span><span class="n">address</span><span class="w"> </span><span class="mf">10.13.37.66</span><span class="w"></span>
 </code></pre></div>
 
 <p>Time to restart and verify the change:</p>
-<div class="highlight"><pre><span></span><code><span class="err">root@host# lxc restart app1</span>
-<span class="err">root@host# lxc info app1</span>
-<span class="err">... snip</span>
-<span class="c">devices:</span>
-<span class="c">  eth0:</span>
-<span class="c">    ipv4.address: 10.13.37.66</span>
-<span class="c">    nictype: bridged</span>
-<span class="c">    parent: lxdbr1337</span>
-<span class="c">    type: nic</span>
-<span class="err">... snip</span>
+<div class="highlight"><pre><span></span><code><span class="n">root</span><span class="nv">@host</span><span class="err">#</span><span class="w"> </span><span class="n">lxc</span><span class="w"> </span><span class="n">restart</span><span class="w"> </span><span class="n">app1</span><span class="w"></span>
+<span class="n">root</span><span class="nv">@host</span><span class="err">#</span><span class="w"> </span><span class="n">lxc</span><span class="w"> </span><span class="n">info</span><span class="w"> </span><span class="n">app1</span><span class="w"></span>
+<span class="p">...</span><span class="w"> </span><span class="n">snip</span><span class="w"></span>
+<span class="nl">devices</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nl">eth0</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="n">ipv4</span><span class="p">.</span><span class="nl">address</span><span class="p">:</span><span class="w"> </span><span class="mf">10.13.37.66</span><span class="w"></span>
+<span class="w">    </span><span class="nl">nictype</span><span class="p">:</span><span class="w"> </span><span class="n">bridged</span><span class="w"></span>
+<span class="w">    </span><span class="nl">parent</span><span class="p">:</span><span class="w"> </span><span class="n">lxdbr1337</span><span class="w"></span>
+<span class="w">    </span><span class="nl">type</span><span class="p">:</span><span class="w"> </span><span class="n">nic</span><span class="w"></span>
+<span class="p">...</span><span class="w"> </span><span class="n">snip</span><span class="w"></span>
 </code></pre></div>
 
 <p>This also works for IPv6 with the <code>ipv6.address</code> flag, but our bridge has IPv6 disabled.</p>
 <h3>Port Security</h3>
 <p>There may be scenarios where there need to be security measures in place to avoid MAC address spoofing or to avoid forwarding traffic for other containers (e.g. nesting containers). The following will accomplish that:</p>
-<div class="highlight"><pre><span></span><code><span class="err">root@host# lxc config device set app1 eth0 security.mac_filtering true</span>
+<div class="highlight"><pre><span></span><code><span class="n">root</span><span class="nv">@host</span><span class="err">#</span><span class="w"> </span><span class="n">lxc</span><span class="w"> </span><span class="n">config</span><span class="w"> </span><span class="n">device</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="n">app1</span><span class="w"> </span><span class="n">eth0</span><span class="w"> </span><span class="n">security</span><span class="p">.</span><span class="n">mac_filtering</span><span class="w"> </span><span class="k">true</span><span class="w"></span>
 </code></pre></div>
 
 <h3>DNS</h3>
@@ -228,51 +228,51 @@
 <p>It's possible for the container to participate in the host's LAN as well using bridges outside the control of LXD, but at the expense of losing control of networking for the host through LXD itself. This means that things like DHCP, NAT, etc will also need to be handled external to LXD.</p>
 <h3>Bridging with bridgeutils</h3>
 <p>Let's start with the most basic option using bridgeutils. Bridgeutils creates an internal switch on the host and attaches the configured hosted containers and the configured physical interface. There are a lot of other options, but they are not explicitly germain to the topic at hand. Let's start by crating a new bridge:</p>
-<div class="highlight"><pre><span></span><code><span class="err">root@host# brctl addbr lanbr</span>
+<div class="highlight"><pre><span></span><code><span class="n">root</span><span class="nv">@host</span><span class="err">#</span><span class="w"> </span><span class="n">brctl</span><span class="w"> </span><span class="n">addbr</span><span class="w"> </span><span class="n">lanbr</span><span class="w"></span>
 </code></pre></div>
 
 <p>You've probably already deduced that we have created a new bridge named <code>lanbr</code>. Let's verify that:</p>
-<div class="highlight"><pre><span></span><code><span class="err">root@host# brctl show</span>
-<span class="err">bridge name     bridge id               STP enabled     interfaces</span>
-<span class="err">lanbr           8000.000000000000       no</span>
+<div class="highlight"><pre><span></span><code><span class="n">root</span><span class="nv">@host</span><span class="err">#</span><span class="w"> </span><span class="n">brctl</span><span class="w"> </span><span class="n">show</span><span class="w"></span>
+<span class="n">bridge</span><span class="w"> </span><span class="n">name</span><span class="w">     </span><span class="n">bridge</span><span class="w"> </span><span class="n">id</span><span class="w">               </span><span class="n">STP</span><span class="w"> </span><span class="n">enabled</span><span class="w">     </span><span class="n">interfaces</span><span class="w"></span>
+<span class="n">lanbr</span><span class="w">           </span><span class="mf">8000.000000000000</span><span class="w">       </span><span class="k">no</span><span class="w"></span>
 </code></pre></div>
 
 <p>Nice! There aren't any physical or logical interfaces attached to the bridge yet, so it's just chillin there waiting for some friends. Let's give him a physical friend:</p>
-<div class="highlight"><pre><span></span><code><span class="err">root@host# brctl addif lanbr enp4s0f0</span>
+<div class="highlight"><pre><span></span><code><span class="n">root</span><span class="nv">@host</span><span class="err">#</span><span class="w"> </span><span class="n">brctl</span><span class="w"> </span><span class="n">addif</span><span class="w"> </span><span class="n">lanbr</span><span class="w"> </span><span class="n">enp4s0f0</span><span class="w"></span>
 </code></pre></div>
 
 <p>This adds the physical interface <code>enp4s0f0</code> to the bridge. Don't believe me? See for yourself:</p>
-<div class="highlight"><pre><span></span><code><span class="err">root@host# brctl show lanbr</span>
-<span class="err">bridge name     bridge id               STP enabled     interfaces</span>
-<span class="err">lanbr           8000.00e0814cbc1c       no              enp4s0f0</span>
+<div class="highlight"><pre><span></span><code><span class="n">root</span><span class="nv">@host</span><span class="err">#</span><span class="w"> </span><span class="n">brctl</span><span class="w"> </span><span class="n">show</span><span class="w"> </span><span class="n">lanbr</span><span class="w"></span>
+<span class="n">bridge</span><span class="w"> </span><span class="n">name</span><span class="w">     </span><span class="n">bridge</span><span class="w"> </span><span class="n">id</span><span class="w">               </span><span class="n">STP</span><span class="w"> </span><span class="n">enabled</span><span class="w">     </span><span class="n">interfaces</span><span class="w"></span>
+<span class="n">lanbr</span><span class="w">           </span><span class="mf">8000.00e0814</span><span class="n">cbc1c</span><span class="w">       </span><span class="k">no</span><span class="w">              </span><span class="n">enp4s0f0</span><span class="w"></span>
 </code></pre></div>
 
 <p>Now we're getting somewhere. We still don't have any containers attached though. The default profile to which the container was attached uses the lxdbr0 interface, so we will need to override that inherited bridge for the eth0 interface on the container. Let's do that now:</p>
-<div class="highlight"><pre><span></span><code><span class="err">root@host# lxc config device override app1 eth0 parent=lanbr</span>
+<div class="highlight"><pre><span></span><code><span class="n">root</span><span class="nv">@host</span><span class="err">#</span><span class="w"> </span><span class="n">lxc</span><span class="w"> </span><span class="n">config</span><span class="w"> </span><span class="n">device</span><span class="w"> </span><span class="n">override</span><span class="w"> </span><span class="n">app1</span><span class="w"> </span><span class="n">eth0</span><span class="w"> </span><span class="n">parent</span><span class="o">=</span><span class="n">lanbr</span><span class="w"></span>
 </code></pre></div>
 
 <p>Let's see what we're looking at now:</p>
-<div class="highlight"><pre><span></span><code><span class="err">root@host# lxc config device show app1</span>
-<span class="c">eth0:</span>
-<span class="c">  nictype: bridged</span>
-<span class="c">  parent: lanbr</span>
-<span class="c">  type: nic</span>
-<span class="err">root@host# brctl show lanbr</span>
-<span class="err">bridge name     bridge id               STP enabled     interfaces</span>
-<span class="err">lanbr           8000.00e0814cbc1c       no              enp4s0f0</span>
-<span class="err">                                                    vethce92439e</span>
+<div class="highlight"><pre><span></span><code><span class="n">root</span><span class="nv">@host</span><span class="err">#</span><span class="w"> </span><span class="n">lxc</span><span class="w"> </span><span class="n">config</span><span class="w"> </span><span class="n">device</span><span class="w"> </span><span class="n">show</span><span class="w"> </span><span class="n">app1</span><span class="w"></span>
+<span class="nl">eth0</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nl">nictype</span><span class="p">:</span><span class="w"> </span><span class="n">bridged</span><span class="w"></span>
+<span class="w">  </span><span class="nl">parent</span><span class="p">:</span><span class="w"> </span><span class="n">lanbr</span><span class="w"></span>
+<span class="w">  </span><span class="nl">type</span><span class="p">:</span><span class="w"> </span><span class="n">nic</span><span class="w"></span>
+<span class="n">root</span><span class="nv">@host</span><span class="err">#</span><span class="w"> </span><span class="n">brctl</span><span class="w"> </span><span class="n">show</span><span class="w"> </span><span class="n">lanbr</span><span class="w"></span>
+<span class="n">bridge</span><span class="w"> </span><span class="n">name</span><span class="w">     </span><span class="n">bridge</span><span class="w"> </span><span class="n">id</span><span class="w">               </span><span class="n">STP</span><span class="w"> </span><span class="n">enabled</span><span class="w">     </span><span class="n">interfaces</span><span class="w"></span>
+<span class="n">lanbr</span><span class="w">           </span><span class="mf">8000.00e0814</span><span class="n">cbc1c</span><span class="w">       </span><span class="k">no</span><span class="w">              </span><span class="n">enp4s0f0</span><span class="w"></span>
+<span class="w">                                                    </span><span class="n">vethce92439e</span><span class="w"></span>
 </code></pre></div>
 
 <p>Awesome! So to recap, we have now created our bridge <code>lanbr</code> using the brctl interface to bridgeutils, added a physical interface to the bridge, then added a container to the bridge. There are a ton of other options available through bridgeutils like VLAN tagging, loop avoidance through STP, and more, but that goes way outside the scope of this discussion. Poke around and see what you can do!</p>
 <h3>Bridging with macvlan</h3>
 <p>Say you don't need all the fancy knobs associated with bridgeutils and just want your containers to be able to interact directly with the LAN without worry of a layer 2 loop. Enter macvlan. Macvlan creates a trivial bridge and attach subinterfaces to that bridge. Subinterfaces use the naming convention of subint@int: e.g. <code>updog@enp3s0</code>, where <code>updog</code> is an arbitrary interface name and <code>enp3s0</code> is the parent interface to which the bridge is bound.</p>
-<div class="highlight"><pre><span></span><code><span class="err">root@host# lxc config device set app1 eth0 nictype=macvlan</span>
-<span class="err">root@host# lxc config device set app1 eth0 parent=enp4s0f0</span>
-<span class="err">root@host# lxc config device show app1</span>
-<span class="c">eth0:</span>
-<span class="c">  nictype: macvlan</span>
-<span class="c">  parent: enp4s0f0</span>
-<span class="c">  type: nic</span>
+<div class="highlight"><pre><span></span><code><span class="n">root</span><span class="nv">@host</span><span class="err">#</span><span class="w"> </span><span class="n">lxc</span><span class="w"> </span><span class="n">config</span><span class="w"> </span><span class="n">device</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="n">app1</span><span class="w"> </span><span class="n">eth0</span><span class="w"> </span><span class="n">nictype</span><span class="o">=</span><span class="n">macvlan</span><span class="w"></span>
+<span class="n">root</span><span class="nv">@host</span><span class="err">#</span><span class="w"> </span><span class="n">lxc</span><span class="w"> </span><span class="n">config</span><span class="w"> </span><span class="n">device</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="n">app1</span><span class="w"> </span><span class="n">eth0</span><span class="w"> </span><span class="n">parent</span><span class="o">=</span><span class="n">enp4s0f0</span><span class="w"></span>
+<span class="n">root</span><span class="nv">@host</span><span class="err">#</span><span class="w"> </span><span class="n">lxc</span><span class="w"> </span><span class="n">config</span><span class="w"> </span><span class="n">device</span><span class="w"> </span><span class="n">show</span><span class="w"> </span><span class="n">app1</span><span class="w"></span>
+<span class="nl">eth0</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nl">nictype</span><span class="p">:</span><span class="w"> </span><span class="n">macvlan</span><span class="w"></span>
+<span class="w">  </span><span class="nl">parent</span><span class="p">:</span><span class="w"> </span><span class="n">enp4s0f0</span><span class="w"></span>
+<span class="w">  </span><span class="nl">type</span><span class="p">:</span><span class="w"> </span><span class="n">nic</span><span class="w"></span>
 </code></pre></div>
 
 <p>Restart the container and you'll be in business. There are a points of clarification that need to be made about macvlan to avoid pulling your hair out:</p>
@@ -285,10 +285,10 @@ If there are 10 containers on a host all using the same parent interface and tha
 <h3>Bridging with openvswitch</h3>
 <p>Another option to provide host bridging is openvswitch. openvswitch is a virtual switch that comes with a whole host of nerd knobs you can tweak to your heart's content. You can even go buck wild by attaching vswitches from multiple hosts to an SDN controller (read: openflow). For this sake of brevity we will stick to creating a bridge and adding our container to the bridge tagged for a specified vlan.</p>
 <h4>Configuration</h4>
-<div class="highlight"><pre><span></span><code><span class="err">root@host# ovs-vsctl add-br ctr-bridge</span>
-<span class="err">root@host# ovs-vsctl add-port ctr-bridge enp4s0f1</span>
-<span class="err">root@host# ovs-vsctl add-br vlan409 ctr-bridge 409</span>
-<span class="err">root@host# lxc config device override app1 eth0 parent=vlan409</span>
+<div class="highlight"><pre><span></span><code><span class="n">root</span><span class="nv">@host</span><span class="err">#</span><span class="w"> </span><span class="n">ovs</span><span class="o">-</span><span class="n">vsctl</span><span class="w"> </span><span class="k">add</span><span class="o">-</span><span class="n">br</span><span class="w"> </span><span class="n">ctr</span><span class="o">-</span><span class="n">bridge</span><span class="w"></span>
+<span class="n">root</span><span class="nv">@host</span><span class="err">#</span><span class="w"> </span><span class="n">ovs</span><span class="o">-</span><span class="n">vsctl</span><span class="w"> </span><span class="k">add</span><span class="o">-</span><span class="n">port</span><span class="w"> </span><span class="n">ctr</span><span class="o">-</span><span class="n">bridge</span><span class="w"> </span><span class="n">enp4s0f1</span><span class="w"></span>
+<span class="n">root</span><span class="nv">@host</span><span class="err">#</span><span class="w"> </span><span class="n">ovs</span><span class="o">-</span><span class="n">vsctl</span><span class="w"> </span><span class="k">add</span><span class="o">-</span><span class="n">br</span><span class="w"> </span><span class="n">vlan409</span><span class="w"> </span><span class="n">ctr</span><span class="o">-</span><span class="n">bridge</span><span class="w"> </span><span class="mi">409</span><span class="w"></span>
+<span class="n">root</span><span class="nv">@host</span><span class="err">#</span><span class="w"> </span><span class="n">lxc</span><span class="w"> </span><span class="n">config</span><span class="w"> </span><span class="n">device</span><span class="w"> </span><span class="n">override</span><span class="w"> </span><span class="n">app1</span><span class="w"> </span><span class="n">eth0</span><span class="w"> </span><span class="n">parent</span><span class="o">=</span><span class="n">vlan409</span><span class="w"></span>
 </code></pre></div>
 
 <h4>Explanation</h4>
@@ -299,17 +299,17 @@ If there are 10 containers on a host all using the same parent interface and tha
 <p>Generic Routing Encapsulation (GRE) provides a method to allow two networks to talk to each other that would not be able to otherwise. GRE takes the packet to be transmitted and wraps it inside a new header (i.e. encapsulates it) specifying the local router (in this case our local LXD host) as the source and the remote router (i.e. our remote LXD host) as the destination. When the GRE packet is received, it is decapsulated and routed as usual. This is very similar to VPNs, but it should be noted that GRE does <em>NOT</em> encrypt the payload like true VPNs (ipsec, openvpn, sslvpn, etc). If multiple hosts are participating via GRE, each endpoint will need to be configured on every other host.</p>
 <h4>Configuration</h4>
 <p>On host1:</p>
-<div class="highlight"><pre><span></span><code><span class="err">root@host1# lxc network set br0 tunnel.host2.protocol gre</span>
-<span class="err">root@host1# lxc network set br0 tunnel.host2.id 10</span>
-<span class="err">root@host1# lxc network set br0 tunnel.local 11.11.11.11</span>
-<span class="err">root@host1# lxc network set br0 tunnel.remote 99.99.99.99</span>
+<div class="highlight"><pre><span></span><code><span class="n">root</span><span class="nv">@host1</span><span class="err">#</span><span class="w"> </span><span class="n">lxc</span><span class="w"> </span><span class="n">network</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="n">br0</span><span class="w"> </span><span class="n">tunnel</span><span class="p">.</span><span class="n">host2</span><span class="p">.</span><span class="n">protocol</span><span class="w"> </span><span class="n">gre</span><span class="w"></span>
+<span class="n">root</span><span class="nv">@host1</span><span class="err">#</span><span class="w"> </span><span class="n">lxc</span><span class="w"> </span><span class="n">network</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="n">br0</span><span class="w"> </span><span class="n">tunnel</span><span class="p">.</span><span class="n">host2</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="mi">10</span><span class="w"></span>
+<span class="n">root</span><span class="nv">@host1</span><span class="err">#</span><span class="w"> </span><span class="n">lxc</span><span class="w"> </span><span class="n">network</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="n">br0</span><span class="w"> </span><span class="n">tunnel</span><span class="p">.</span><span class="k">local</span><span class="w"> </span><span class="mf">11.11.11.11</span><span class="w"></span>
+<span class="n">root</span><span class="nv">@host1</span><span class="err">#</span><span class="w"> </span><span class="n">lxc</span><span class="w"> </span><span class="n">network</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="n">br0</span><span class="w"> </span><span class="n">tunnel</span><span class="p">.</span><span class="n">remote</span><span class="w"> </span><span class="mf">99.99.99.99</span><span class="w"></span>
 </code></pre></div>
 
 <p>On host2:</p>
-<div class="highlight"><pre><span></span><code><span class="err">root@host2# lxc network set br0 tunnel.host1.protocol gre</span>
-<span class="err">root@host2# lxc network set br0 tunnel.host1.id 10</span>
-<span class="err">root@host2# lxc network set br0 tunnel.local 99.99.99.99</span>
-<span class="err">root@host2# lxc network set br0 tunnel.remote 11.11.11.11</span>
+<div class="highlight"><pre><span></span><code><span class="n">root</span><span class="nv">@host2</span><span class="err">#</span><span class="w"> </span><span class="n">lxc</span><span class="w"> </span><span class="n">network</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="n">br0</span><span class="w"> </span><span class="n">tunnel</span><span class="p">.</span><span class="n">host1</span><span class="p">.</span><span class="n">protocol</span><span class="w"> </span><span class="n">gre</span><span class="w"></span>
+<span class="n">root</span><span class="nv">@host2</span><span class="err">#</span><span class="w"> </span><span class="n">lxc</span><span class="w"> </span><span class="n">network</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="n">br0</span><span class="w"> </span><span class="n">tunnel</span><span class="p">.</span><span class="n">host1</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="mi">10</span><span class="w"></span>
+<span class="n">root</span><span class="nv">@host2</span><span class="err">#</span><span class="w"> </span><span class="n">lxc</span><span class="w"> </span><span class="n">network</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="n">br0</span><span class="w"> </span><span class="n">tunnel</span><span class="p">.</span><span class="k">local</span><span class="w"> </span><span class="mf">99.99.99.99</span><span class="w"></span>
+<span class="n">root</span><span class="nv">@host2</span><span class="err">#</span><span class="w"> </span><span class="n">lxc</span><span class="w"> </span><span class="n">network</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="n">br0</span><span class="w"> </span><span class="n">tunnel</span><span class="p">.</span><span class="n">remote</span><span class="w"> </span><span class="mf">11.11.11.11</span><span class="w"></span>
 </code></pre></div>
 
 <h4>Explanation</h4>
@@ -319,33 +319,33 @@ If there are 10 containers on a host all using the same parent interface and tha
 <h4>Unicast</h4>
 <p>If the hosts do not have L2 connectivity between them, it is possible to create the tunnel in unicast mode.</p>
 <p>On host1:</p>
-<div class="highlight"><pre><span></span><code><span class="err">root@host1# lxc network set br0 tunnel.host2.protocol vxlan</span>
-<span class="err">root@host1# lxc network set br0 tunnel.host2.id 10</span>
-<span class="err">root@host1# lxc network set br0 tunnel.local 11.11.11.11</span>
-<span class="err">root@host1# lxc network set br0 tunnel.remote 99.99.99.99</span>
+<div class="highlight"><pre><span></span><code><span class="n">root</span><span class="nv">@host1</span><span class="err">#</span><span class="w"> </span><span class="n">lxc</span><span class="w"> </span><span class="n">network</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="n">br0</span><span class="w"> </span><span class="n">tunnel</span><span class="p">.</span><span class="n">host2</span><span class="p">.</span><span class="n">protocol</span><span class="w"> </span><span class="n">vxlan</span><span class="w"></span>
+<span class="n">root</span><span class="nv">@host1</span><span class="err">#</span><span class="w"> </span><span class="n">lxc</span><span class="w"> </span><span class="n">network</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="n">br0</span><span class="w"> </span><span class="n">tunnel</span><span class="p">.</span><span class="n">host2</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="mi">10</span><span class="w"></span>
+<span class="n">root</span><span class="nv">@host1</span><span class="err">#</span><span class="w"> </span><span class="n">lxc</span><span class="w"> </span><span class="n">network</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="n">br0</span><span class="w"> </span><span class="n">tunnel</span><span class="p">.</span><span class="k">local</span><span class="w"> </span><span class="mf">11.11.11.11</span><span class="w"></span>
+<span class="n">root</span><span class="nv">@host1</span><span class="err">#</span><span class="w"> </span><span class="n">lxc</span><span class="w"> </span><span class="n">network</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="n">br0</span><span class="w"> </span><span class="n">tunnel</span><span class="p">.</span><span class="n">remote</span><span class="w"> </span><span class="mf">99.99.99.99</span><span class="w"></span>
 </code></pre></div>
 
 <p>On host2:</p>
-<div class="highlight"><pre><span></span><code><span class="err">root@host2# lxc network set br0 tunnel.host1.protocol=vxlan tunnel.host1.id=10 tunnel.host1.local=99.99.99.99 tunnel.host2.remote=11.11.11.11</span>
-<span class="err">root@host2# lxc network attach-profile br0 default eth0</span>
+<div class="highlight"><pre><span></span><code><span class="n">root</span><span class="nv">@host2</span><span class="err">#</span><span class="w"> </span><span class="n">lxc</span><span class="w"> </span><span class="n">network</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="n">br0</span><span class="w"> </span><span class="n">tunnel</span><span class="p">.</span><span class="n">host1</span><span class="p">.</span><span class="n">protocol</span><span class="o">=</span><span class="n">vxlan</span><span class="w"> </span><span class="n">tunnel</span><span class="p">.</span><span class="n">host1</span><span class="p">.</span><span class="n">id</span><span class="o">=</span><span class="mi">10</span><span class="w"> </span><span class="n">tunnel</span><span class="p">.</span><span class="n">host1</span><span class="p">.</span><span class="k">local</span><span class="o">=</span><span class="mf">99.99.99.99</span><span class="w"> </span><span class="n">tunnel</span><span class="p">.</span><span class="n">host2</span><span class="p">.</span><span class="n">remote</span><span class="o">=</span><span class="mf">11.11.11.11</span><span class="w"></span>
+<span class="n">root</span><span class="nv">@host2</span><span class="err">#</span><span class="w"> </span><span class="n">lxc</span><span class="w"> </span><span class="n">network</span><span class="w"> </span><span class="n">attach</span><span class="o">-</span><span class="n">profile</span><span class="w"> </span><span class="n">br0</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="n">eth0</span><span class="w"></span>
 </code></pre></div>
 
 <h4>Multicast</h4>
 <p>In this example, we can configure host1 to route all of the traffic and allow containers to communicate between hosts, then configure host2 to tunnel all traffic to host1. Since this is multicast, it is dependent on L2 connectivity between the hosts.</p>
 <p>First create the bridge on host1:</p>
-<div class="highlight"><pre><span></span><code><span class="err">root@host1# lxc network create br0 tunnel.lan.protocol=vxlan</span>
+<div class="highlight"><pre><span></span><code><span class="n">root</span><span class="nv">@host1</span><span class="err">#</span><span class="w"> </span><span class="n">lxc</span><span class="w"> </span><span class="n">network</span><span class="w"> </span><span class="k">create</span><span class="w"> </span><span class="n">br0</span><span class="w"> </span><span class="n">tunnel</span><span class="p">.</span><span class="n">lan</span><span class="p">.</span><span class="n">protocol</span><span class="o">=</span><span class="n">vxlan</span><span class="w"></span>
 </code></pre></div>
 
 <p>Now attach the bridge to eth0 in the default profile:</p>
-<div class="highlight"><pre><span></span><code><span class="err">root@host1# lxc network attach-profile br0 default eth0</span>
+<div class="highlight"><pre><span></span><code><span class="n">root</span><span class="nv">@host1</span><span class="err">#</span><span class="w"> </span><span class="n">lxc</span><span class="w"> </span><span class="n">network</span><span class="w"> </span><span class="n">attach</span><span class="o">-</span><span class="n">profile</span><span class="w"> </span><span class="n">br0</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="n">eth0</span><span class="w"></span>
 </code></pre></div>
 
 <p>Then create the bridge on host2:</p>
-<div class="highlight"><pre><span></span><code><span class="err">root@host2# lxc network create br0 tunnel.lan.protocol=vxlan ipv4.address=none ipv4.address=none tunnel.lan.protocol=vxlan</span>
+<div class="highlight"><pre><span></span><code><span class="n">root</span><span class="nv">@host2</span><span class="err">#</span><span class="w"> </span><span class="n">lxc</span><span class="w"> </span><span class="n">network</span><span class="w"> </span><span class="k">create</span><span class="w"> </span><span class="n">br0</span><span class="w"> </span><span class="n">tunnel</span><span class="p">.</span><span class="n">lan</span><span class="p">.</span><span class="n">protocol</span><span class="o">=</span><span class="n">vxlan</span><span class="w"> </span><span class="n">ipv4</span><span class="p">.</span><span class="n">address</span><span class="o">=</span><span class="k">none</span><span class="w"> </span><span class="n">ipv4</span><span class="p">.</span><span class="n">address</span><span class="o">=</span><span class="k">none</span><span class="w"> </span><span class="n">tunnel</span><span class="p">.</span><span class="n">lan</span><span class="p">.</span><span class="n">protocol</span><span class="o">=</span><span class="n">vxlan</span><span class="w"></span>
 </code></pre></div>
 
 <p>Attach the bridge to eth0 in the default profile:</p>
-<div class="highlight"><pre><span></span><code><span class="err">root@host2# lxc network attach-profile br0 default eth0</span>
+<div class="highlight"><pre><span></span><code><span class="n">root</span><span class="nv">@host2</span><span class="err">#</span><span class="w"> </span><span class="n">lxc</span><span class="w"> </span><span class="n">network</span><span class="w"> </span><span class="n">attach</span><span class="o">-</span><span class="n">profile</span><span class="w"> </span><span class="n">br0</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="n">eth0</span><span class="w"></span>
 </code></pre></div>
 
 <h3>Fan Networking</h3>
@@ -399,7 +399,7 @@ If there are 10 containers on a host all using the same parent interface and tha
 </article>
 
     <footer>
-<p>&copy; Eric Rochow 2021</p>
+<p>&copy; Eric Rochow 2022</p>
     </footer>
   </main>
 

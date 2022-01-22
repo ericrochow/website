@@ -157,62 +157,62 @@
 <h3>IPv4</h3>
 <h4>Create ACL</h4>
 <p>IPv4 ACL configuration in IOS XR is pretty similar to IOS::</p>
-<div class="highlight"><pre><span></span><code><span class="err">RP/0/0/CPU0:router(config)#ipv4 access-list TEST</span>
-<span class="err">RP/0/0/CPU0:router(config-ipv4-acl)#remark FIRST</span>
-<span class="err">RP/0/0/CPU0:router(config-ipv4-acl)#permit icmp any any echo</span>
-<span class="err">RP/0/0/CPU0:router(config-ipv4-acl)#permit icmp any any echo-reply </span>
-<span class="err">RP/0/0/CPU0:router(config-ipv4-acl)#permit icmp any any ttl-exceeded </span>
-<span class="err">RP/0/0/CPU0:router(config-ipv4-acl)#permit icmp any any unreachable  </span>
-<span class="err">RP/0/0/CPU0:router(config-ipv4-acl)#permit icmp any any packet-too-big </span>
-<span class="err">RP/0/0/CPU0:router(config-ipv4-acl)#deny icmp any any </span>
-<span class="err">RP/0/0/CPU0:router(config-ipv4-acl)#exit</span>
-<span class="err">RP/0/0/CPU0:router(config)#commit</span>
+<div class="highlight"><pre><span></span><code><span class="nv">RP</span><span class="o">/</span><span class="mi">0</span><span class="o">/</span><span class="mi">0</span><span class="o">/</span><span class="nv">CPU0</span>:<span class="nv">router</span><span class="ss">(</span><span class="nv">config</span><span class="ss">)</span>#<span class="nv">ipv4</span> <span class="nv">access</span><span class="o">-</span><span class="nv">list</span> <span class="nv">TEST</span>
+<span class="nv">RP</span><span class="o">/</span><span class="mi">0</span><span class="o">/</span><span class="mi">0</span><span class="o">/</span><span class="nv">CPU0</span>:<span class="nv">router</span><span class="ss">(</span><span class="nv">config</span><span class="o">-</span><span class="nv">ipv4</span><span class="o">-</span><span class="nv">acl</span><span class="ss">)</span>#<span class="nv">remark</span> <span class="nv">FIRST</span>
+<span class="nv">RP</span><span class="o">/</span><span class="mi">0</span><span class="o">/</span><span class="mi">0</span><span class="o">/</span><span class="nv">CPU0</span>:<span class="nv">router</span><span class="ss">(</span><span class="nv">config</span><span class="o">-</span><span class="nv">ipv4</span><span class="o">-</span><span class="nv">acl</span><span class="ss">)</span>#<span class="nv">permit</span> <span class="nv">icmp</span> <span class="nv">any</span> <span class="nv">any</span> <span class="nv">echo</span>
+<span class="nv">RP</span><span class="o">/</span><span class="mi">0</span><span class="o">/</span><span class="mi">0</span><span class="o">/</span><span class="nv">CPU0</span>:<span class="nv">router</span><span class="ss">(</span><span class="nv">config</span><span class="o">-</span><span class="nv">ipv4</span><span class="o">-</span><span class="nv">acl</span><span class="ss">)</span>#<span class="nv">permit</span> <span class="nv">icmp</span> <span class="nv">any</span> <span class="nv">any</span> <span class="nv">echo</span><span class="o">-</span><span class="nv">reply</span> 
+<span class="nv">RP</span><span class="o">/</span><span class="mi">0</span><span class="o">/</span><span class="mi">0</span><span class="o">/</span><span class="nv">CPU0</span>:<span class="nv">router</span><span class="ss">(</span><span class="nv">config</span><span class="o">-</span><span class="nv">ipv4</span><span class="o">-</span><span class="nv">acl</span><span class="ss">)</span>#<span class="nv">permit</span> <span class="nv">icmp</span> <span class="nv">any</span> <span class="nv">any</span> <span class="nv">ttl</span><span class="o">-</span><span class="nv">exceeded</span> 
+<span class="nv">RP</span><span class="o">/</span><span class="mi">0</span><span class="o">/</span><span class="mi">0</span><span class="o">/</span><span class="nv">CPU0</span>:<span class="nv">router</span><span class="ss">(</span><span class="nv">config</span><span class="o">-</span><span class="nv">ipv4</span><span class="o">-</span><span class="nv">acl</span><span class="ss">)</span>#<span class="nv">permit</span> <span class="nv">icmp</span> <span class="nv">any</span> <span class="nv">any</span> <span class="nv">unreachable</span>  
+<span class="nv">RP</span><span class="o">/</span><span class="mi">0</span><span class="o">/</span><span class="mi">0</span><span class="o">/</span><span class="nv">CPU0</span>:<span class="nv">router</span><span class="ss">(</span><span class="nv">config</span><span class="o">-</span><span class="nv">ipv4</span><span class="o">-</span><span class="nv">acl</span><span class="ss">)</span>#<span class="nv">permit</span> <span class="nv">icmp</span> <span class="nv">any</span> <span class="nv">any</span> <span class="nv">packet</span><span class="o">-</span><span class="nv">too</span><span class="o">-</span><span class="nv">big</span> 
+<span class="nv">RP</span><span class="o">/</span><span class="mi">0</span><span class="o">/</span><span class="mi">0</span><span class="o">/</span><span class="nv">CPU0</span>:<span class="nv">router</span><span class="ss">(</span><span class="nv">config</span><span class="o">-</span><span class="nv">ipv4</span><span class="o">-</span><span class="nv">acl</span><span class="ss">)</span>#<span class="nv">deny</span> <span class="nv">icmp</span> <span class="nv">any</span> <span class="nv">any</span> 
+<span class="nv">RP</span><span class="o">/</span><span class="mi">0</span><span class="o">/</span><span class="mi">0</span><span class="o">/</span><span class="nv">CPU0</span>:<span class="nv">router</span><span class="ss">(</span><span class="nv">config</span><span class="o">-</span><span class="nv">ipv4</span><span class="o">-</span><span class="nv">acl</span><span class="ss">)</span>#<span class="k">exit</span>
+<span class="nv">RP</span><span class="o">/</span><span class="mi">0</span><span class="o">/</span><span class="mi">0</span><span class="o">/</span><span class="nv">CPU0</span>:<span class="nv">router</span><span class="ss">(</span><span class="nv">config</span><span class="ss">)</span>#<span class="nv">commit</span>
 </code></pre></div>
 
 <h4>Apply ACL</h4>
 <p>The ACL can then be applied to an interface with the following::</p>
-<div class="highlight"><pre><span></span><code><span class="err">RP/0/0/CPU0:router(config)#interface g0/0/0/0</span>
-<span class="err">RP/0/0/CPU0:router(config-if)#ipv4 access-group TEST ingress</span>
+<div class="highlight"><pre><span></span><code><span class="nv">RP</span><span class="o">/</span><span class="mi">0</span><span class="o">/</span><span class="mi">0</span><span class="o">/</span><span class="nv">CPU0</span>:<span class="nv">router</span><span class="ss">(</span><span class="nv">config</span><span class="ss">)</span>#<span class="nv">interface</span> <span class="nv">g0</span><span class="o">/</span><span class="mi">0</span><span class="o">/</span><span class="mi">0</span><span class="o">/</span><span class="mi">0</span>
+<span class="nv">RP</span><span class="o">/</span><span class="mi">0</span><span class="o">/</span><span class="mi">0</span><span class="o">/</span><span class="nv">CPU0</span>:<span class="nv">router</span><span class="ss">(</span><span class="nv">config</span><span class="o">-</span><span class="k">if</span><span class="ss">)</span>#<span class="nv">ipv4</span> <span class="nv">access</span><span class="o">-</span><span class="nv">group</span> <span class="nv">TEST</span> <span class="nv">ingress</span>
 </code></pre></div>
 
 <h4>Implicit Entries</h4>
 <p>Every IPv4  ACL in IOS XR has the following implicit statement as its last match entry::</p>
-<div class="highlight"><pre><span></span><code><span class="err">deny ipv4 any any</span>
+<div class="highlight"><pre><span></span><code>deny ipv4 any any
 </code></pre></div>
 
 <p>The ACL must have at least one (1) explicit entry for the implicit <code>deny ipv4 any any</code> statement to take effect.</p>
 <h3>IPv6</h3>
 <h4>Create ACL</h4>
 <p>IPv6 ACL configuration in IOS XR is pretty similar to IOS::</p>
-<div class="highlight"><pre><span></span><code><span class="err">RP/0/0/CPU0:router(config)#ipv6 access-list TEST6</span>
-<span class="err">RP/0/0/CPU0:router(config-ipv6-acl)#remark FIRST!</span>
-<span class="err">RP/0/0/CPU0:router(config-ipv6-acl)#permit icmp any any echo</span>
-<span class="err">RP/0/0/CPU0:router(config-ipv6-acl)#permit icmp any any echo-reply </span>
-<span class="err">RP/0/0/CPU0:router(config-ipv6-acl)#permit icmp any any ttl        </span>
-<span class="err">RP/0/0/CPU0:router(config-ipv6-acl)#permit icmp any any ttl-exceeded </span>
-<span class="err">RP/0/0/CPU0:router(config-ipv6-acl)#permit icmp any any unreachable  </span>
-<span class="err">RP/0/0/CPU0:router(config-ipv6-acl)#permit icmp any any packet-too-big </span>
-<span class="err">RP/0/0/CPU0:router(config-ipv6-acl)#deny icmp any any</span>
+<div class="highlight"><pre><span></span><code>RP/0/0/CPU0:router(config)#ipv6 access-list TEST6
+RP/0/0/CPU0:router(config-ipv6-acl)#remark FIRST!
+RP/0/0/CPU0:router(config-ipv6-acl)#permit icmp any any echo
+RP/0/0/CPU0:router(config-ipv6-acl)#permit icmp any any echo-reply 
+RP/0/0/CPU0:router(config-ipv6-acl)#permit icmp any any ttl        
+RP/0/0/CPU0:router(config-ipv6-acl)#permit icmp any any ttl-exceeded 
+RP/0/0/CPU0:router(config-ipv6-acl)#permit icmp any any unreachable  
+RP/0/0/CPU0:router(config-ipv6-acl)#permit icmp any any packet-too-big 
+RP/0/0/CPU0:router(config-ipv6-acl)#deny icmp any any
 </code></pre></div>
 
 <h4>Apply ACL</h4>
 <p>The ACL can then be applied to an interface with the following::</p>
-<div class="highlight"><pre><span></span><code><span class="err">RP/0/0/CPU0:router(config)#interface g0/0/0/0</span>
-<span class="err">RP/0/0/CPU0:router(config-if)#ipv4 access-group TEST6 egress</span>
+<div class="highlight"><pre><span></span><code><span class="nv">RP</span><span class="o">/</span><span class="mi">0</span><span class="o">/</span><span class="mi">0</span><span class="o">/</span><span class="nv">CPU0</span>:<span class="nv">router</span><span class="ss">(</span><span class="nv">config</span><span class="ss">)</span>#<span class="nv">interface</span> <span class="nv">g0</span><span class="o">/</span><span class="mi">0</span><span class="o">/</span><span class="mi">0</span><span class="o">/</span><span class="mi">0</span>
+<span class="nv">RP</span><span class="o">/</span><span class="mi">0</span><span class="o">/</span><span class="mi">0</span><span class="o">/</span><span class="nv">CPU0</span>:<span class="nv">router</span><span class="ss">(</span><span class="nv">config</span><span class="o">-</span><span class="k">if</span><span class="ss">)</span>#<span class="nv">ipv4</span> <span class="nv">access</span><span class="o">-</span><span class="nv">group</span> <span class="nv">TEST6</span> <span class="nv">egress</span>
 </code></pre></div>
 
 <h4>Implicit Entries</h4>
 <p>Every IPv6 ACL in IOS XR has the folling implicit statements as its last match entries::</p>
-<div class="highlight"><pre><span></span><code><span class="err">permit icmp any any nd-na</span>
-<span class="err">permit icmp any any nd-ns</span>
-<span class="err">deny ipv6 any any</span>
+<div class="highlight"><pre><span></span><code>permit icmp any any nd-na
+permit icmp any any nd-ns
+deny ipv6 any any
 </code></pre></div>
 
 <p>The first two entries allow for ICMPv6 neighbor discovery by default. The ACL must have at least one (1) explicit entry for the implicit <code>deny ipv6 any any</code> statement to take effect.</p>
 <h2>Hardware Counters</h2>
 <p>Hardware counters are disabled by default for IPv4. They can be enabled per-interface and per-ACL using the following::</p>
-<div class="highlight"><pre><span></span><code><span class="err">RP/0/0/CPU0:router(config)#interface *interface-name*</span>
-<span class="err">RP/0/0/CPU0:router(config-if)#ipv4 access-group *acl-name* { ingress | egress } hardware-count</span>
+<div class="highlight"><pre><span></span><code><span class="nv">RP</span><span class="o">/</span><span class="mi">0</span><span class="o">/</span><span class="mi">0</span><span class="o">/</span><span class="nv">CPU0</span>:<span class="nv">router</span><span class="ss">(</span><span class="nv">config</span><span class="ss">)</span>#<span class="nv">interface</span> <span class="o">*</span><span class="nv">interface</span><span class="o">-</span><span class="nv">name</span><span class="o">*</span>
+<span class="nv">RP</span><span class="o">/</span><span class="mi">0</span><span class="o">/</span><span class="mi">0</span><span class="o">/</span><span class="nv">CPU0</span>:<span class="nv">router</span><span class="ss">(</span><span class="nv">config</span><span class="o">-</span><span class="k">if</span><span class="ss">)</span>#<span class="nv">ipv4</span> <span class="nv">access</span><span class="o">-</span><span class="nv">group</span> <span class="o">*</span><span class="nv">acl</span><span class="o">-</span><span class="nv">name</span><span class="o">*</span> { <span class="nv">ingress</span> <span class="o">|</span> <span class="nv">egress</span> } <span class="nv">hardware</span><span class="o">-</span><span class="nv">count</span>
 </code></pre></div>
   </div>
   <div class="tag-cloud">
@@ -230,7 +230,7 @@
 </article>
 
     <footer>
-<p>&copy; Eric Rochow 2021</p>
+<p>&copy; Eric Rochow 2022</p>
     </footer>
   </main>
 

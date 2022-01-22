@@ -153,19 +153,19 @@
   <div>
     <p>There may be cases where you want to locally ignore a file or directory that is normally tracked by git. An example of this may be built docs. If you add the object to <code>.gitignore</code>, the ignore will be pushed to the remote repo. To ignore a file or directory, add the file/directory to <code>.git/info/exclude</code> with the same syntax as .gitignore.</p>
 <p>For example, to ignore the <code>docs/</code> directory you can do the following:</p>
-<div class="highlight"><pre><span></span><code><span class="err"># echo &quot;docs/&quot; | tee -a .git/info/exclude</span>
+<div class="highlight"><pre><span></span><code># echo &quot;docs/&quot; | tee -a .git/info/exclude
 </code></pre></div>
 
 <p>If the <code>docs/</code> directory is already being tracked by git, you will need to update the index to apply the ignore:</p>
-<div class="highlight"><pre><span></span><code><span class="err"># git update-index --assume-unchanged docs/</span>
+<div class="highlight"><pre><span></span><code># git update-index --assume-unchanged docs/
 </code></pre></div>
 
 <p>Now we can test to make sure the ignore works:</p>
-<div class="highlight"><pre><span></span><code><span class="err"># touch docs/test.html</span>
-<span class="err"># git status</span>
-<span class="err">  On branch master</span>
-<span class="err">  Your branch is up to date with &#39;origin/master&#39;.</span>
-<span class="err">   nothing to commit, working tree clean</span>
+<div class="highlight"><pre><span></span><code># touch docs/test.html
+# git status
+  On branch master
+  Your branch is up to date with &#39;origin/master&#39;.
+   nothing to commit, working tree clean
 </code></pre></div>
 
 <p>Success!</p>
@@ -184,7 +184,7 @@
 </article>
 
     <footer>
-<p>&copy; Eric Rochow 2021</p>
+<p>&copy; Eric Rochow 2022</p>
     </footer>
   </main>
 

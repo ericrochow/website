@@ -157,75 +157,75 @@
 <h3>Local</h3>
 <p>NOTE: Local users and groups are stored in a local database and not in the running configuration so they will not show up in <code>show run</code> output.</p>
 <h4>Define a new task group</h4>
-<div class="highlight"><pre><span></span><code><span class="err">    taskgroup $groupname</span>
-<span class="err">     description $description</span>
-<span class="err">     inherit taskgroup $taskgroup</span>
-<span class="err">     task $permission $taskname</span>
+<div class="highlight"><pre><span></span><code>    taskgroup $groupname
+     description $description
+     inherit taskgroup $taskgroup
+     task $permission $taskname
 </code></pre></div>
 
 <h4>Define a new user group</h4>
 <p>If the pre-defined user groups do not suffice, it is possible to configure customized user groups more more granularity with permissions:</p>
-<div class="highlight"><pre><span></span><code><span class="err">    usergroup $groupname </span>
-<span class="err">     description $description</span>
-<span class="err">     taskgroup $taskgroup</span>
-<span class="err">     inherit usergroup $groupname</span>
+<div class="highlight"><pre><span></span><code>    usergroup $groupname 
+     description $description
+     taskgroup $taskgroup
+     inherit usergroup $groupname
 </code></pre></div>
 
 <h4>Define a new user</h4>
-<div class="highlight"><pre><span></span><code><span class="err">    username $user</span>
-<span class="err">     group $groupname</span>
-<span class="err">     secret 0 $plaintext_password</span>
+<div class="highlight"><pre><span></span><code>    username $user
+     group $groupname
+     secret 0 $plaintext_password
 </code></pre></div>
 
 <h3>RADIUS</h3>
 <h4>Configure servers</h4>
-<div class="highlight"><pre><span></span><code><span class="err">    radius source-interface $interface vrf default</span>
-<span class="err">    radius-server host $server1_ip auth-port 1812 acct-port 1813 </span>
-<span class="err">     key 7 $secret_key</span>
-<span class="err">    !</span>
-<span class="err">    radius-server host $server2_ip auth-port 1812 acct-port 1813</span>
-<span class="err">     key 7 $secret_key</span>
-<span class="err">    !</span>
-<span class="err">    radius-server timeout 20</span>
-<span class="err">    radius-server deadtime 5</span>
-<span class="err">    radius-server dead-criteria time 8</span>
-<span class="err">    radius-server dead-criteria tries 3</span>
+<div class="highlight"><pre><span></span><code>    radius source-interface $interface vrf default
+    radius-server host $server1_ip auth-port 1812 acct-port 1813 
+     key 7 $secret_key
+    !
+    radius-server host $server2_ip auth-port 1812 acct-port 1813
+     key 7 $secret_key
+    !
+    radius-server timeout 20
+    radius-server deadtime 5
+    radius-server dead-criteria time 8
+    radius-server dead-criteria tries 3
 </code></pre></div>
 
 <h4>Configure AAA</h4>
-<div class="highlight"><pre><span></span><code><span class="err">    aaa accounting exec default start-stop group $server-group</span>
-<span class="err">    aaa accounting system default start-stop group $server-group</span>
-<span class="err">    aaa group server radius $server-group </span>
-<span class="err">     server $server1_ip auth-port 1812 acct-port 1813 </span>
-<span class="err">     server $server2_ip auth-port 1812 acct-port 1813</span>
-<span class="err">     deadtime 10 </span>
-<span class="err">     source-interface $interface</span>
-<span class="err">    !</span>
-<span class="err">    aaa authentication login default local group $server-group</span>
+<div class="highlight"><pre><span></span><code>    <span class="nv">aaa</span> <span class="nv">accounting</span> <span class="k">exec</span> <span class="nv">default</span> <span class="nv">start</span><span class="o">-</span><span class="nv">stop</span> <span class="nv">group</span> $<span class="nv">server</span><span class="o">-</span><span class="nv">group</span>
+    <span class="nv">aaa</span> <span class="nv">accounting</span> <span class="nv">system</span> <span class="nv">default</span> <span class="nv">start</span><span class="o">-</span><span class="nv">stop</span> <span class="nv">group</span> $<span class="nv">server</span><span class="o">-</span><span class="nv">group</span>
+    <span class="nv">aaa</span> <span class="nv">group</span> <span class="nv">server</span> <span class="nv">radius</span> $<span class="nv">server</span><span class="o">-</span><span class="nv">group</span> 
+     <span class="nv">server</span> $<span class="nv">server1_ip</span> <span class="nv">auth</span><span class="o">-</span><span class="nv">port</span> <span class="mi">1812</span> <span class="nv">acct</span><span class="o">-</span><span class="nv">port</span> <span class="mi">1813</span> 
+     <span class="nv">server</span> $<span class="nv">server2_ip</span> <span class="nv">auth</span><span class="o">-</span><span class="nv">port</span> <span class="mi">1812</span> <span class="nv">acct</span><span class="o">-</span><span class="nv">port</span> <span class="mi">1813</span>
+     <span class="nv">deadtime</span> <span class="mi">10</span> 
+     <span class="nv">source</span><span class="o">-</span><span class="nv">interface</span> $<span class="nv">interface</span>
+    <span class="o">!</span>
+    <span class="nv">aaa</span> <span class="nv">authentication</span> <span class="nv">login</span> <span class="nv">default</span> <span class="nv">local</span> <span class="nv">group</span> $<span class="nv">server</span><span class="o">-</span><span class="nv">group</span>
 </code></pre></div>
 
 <h3>TACACS+</h3>
-<div class="highlight"><pre><span></span><code><span class="err">    aaa group server tacacs+ $groupname</span>
-<span class="err">     server $server1_ip</span>
-<span class="err">     server $server2_ip</span>
-<span class="err">    aaa authentication login default local group $server-group</span>
-<span class="err">    aaa authorization commands default local tacacs+</span>
-<span class="err">    aaa accounting exec default start-stop group $server-group</span>
-<span class="err">    aaa accounting system default start-stop group $server-group</span>
+<div class="highlight"><pre><span></span><code>    <span class="nv">aaa</span> <span class="nv">group</span> <span class="nv">server</span> <span class="nv">tacacs</span><span class="o">+</span> $<span class="nv">groupname</span>
+     <span class="nv">server</span> $<span class="nv">server1_ip</span>
+     <span class="nv">server</span> $<span class="nv">server2_ip</span>
+    <span class="nv">aaa</span> <span class="nv">authentication</span> <span class="nv">login</span> <span class="nv">default</span> <span class="nv">local</span> <span class="nv">group</span> $<span class="nv">server</span><span class="o">-</span><span class="nv">group</span>
+    <span class="nv">aaa</span> <span class="nv">authorization</span> <span class="nv">commands</span> <span class="nv">default</span> <span class="nv">local</span> <span class="nv">tacacs</span><span class="o">+</span>
+    <span class="nv">aaa</span> <span class="nv">accounting</span> <span class="k">exec</span> <span class="nv">default</span> <span class="nv">start</span><span class="o">-</span><span class="nv">stop</span> <span class="nv">group</span> $<span class="nv">server</span><span class="o">-</span><span class="nv">group</span>
+    <span class="nv">aaa</span> <span class="nv">accounting</span> <span class="nv">system</span> <span class="nv">default</span> <span class="nv">start</span><span class="o">-</span><span class="nv">stop</span> <span class="nv">group</span> $<span class="nv">server</span><span class="o">-</span><span class="nv">group</span>
 </code></pre></div>
 
 <h2>Activate AAA</h2>
 <h3>SSH</h3>
 <p>If a AAA group besides 'default' is used (e.g. aaa authentication login my-list), then the list will need to be added to the appropriate lines:</p>
-<div class="highlight"><pre><span></span><code><span class="err">    line default</span>
-<span class="err">     authorization commands default</span>
-<span class="err">     authorization exec default</span>
+<div class="highlight"><pre><span></span><code>    <span class="nv">line</span> <span class="nv">default</span>
+     <span class="nv">authorization</span> <span class="nv">commands</span> <span class="nv">default</span>
+     <span class="nv">authorization</span> <span class="k">exec</span> <span class="nv">default</span>
 </code></pre></div>
 
 <h3>Console</h3>
-<div class="highlight"><pre><span></span><code><span class="err">    line console</span>
-<span class="err">     authorization commands default</span>
-<span class="err">     authorization exec default</span>
+<div class="highlight"><pre><span></span><code>    <span class="nv">line</span> <span class="nv">console</span>
+     <span class="nv">authorization</span> <span class="nv">commands</span> <span class="nv">default</span>
+     <span class="nv">authorization</span> <span class="k">exec</span> <span class="nv">default</span>
 </code></pre></div>
   </div>
   <div class="tag-cloud">
@@ -243,7 +243,7 @@
 </article>
 
     <footer>
-<p>&copy; Eric Rochow 2021</p>
+<p>&copy; Eric Rochow 2022</p>
     </footer>
   </main>
 
